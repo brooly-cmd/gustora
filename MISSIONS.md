@@ -23,7 +23,7 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** j'ai collé mon choix et DESIGN.md existe dans le dossier.
   - **Produit pour la suite :** DESIGN.md, logo.svg, l'icône.
 
-- [ ] 3. La maquette de l'accueil — MONTRE
+- [x] 3. La maquette de l'accueil — MONTRE
   - **Quoi :** l'écran d'accueil (ECRANS.md, écran 1) dessiné dans maquette.html avec mes couleurs,
     mon logo et mes effets déjà posés, et les vraies recettes de la mission 1. Rien n'est encore cliquable.
   - **Pourquoi :** comme le plan d'une maison avant de poser les briques : on change facilement.
