@@ -61,7 +61,9 @@ Code de départ : `choix-design.html` (repris de la Salle des effets, déjà aux
 | N° | Nom | Sur quel élément | Réglages |
 |---|---|---|---|
 | 3 | Carte en couches ★ (l'effet star) | Carte vedette « De saison en ce moment » (accueil) | 3 couches : fond Principale avec soleil Accent (profondeur 0,4), plat (1,3), textes et bouton (2,2). Penche au plus 9°, retour en 0,8 s. Sur iPhone : seulement au glissement horizontal du doigt (`touch-action: pan-y`). |
-| 39 | Points qui fuient | Fond de l'accueil | Grille de graines tous les 18 px, rayon 1,7 px, couleur Texte à 22 %. Sous le doigt ou la souris (rayon 70 px), elles s'écartent de 26 px et passent en Principale. Suivi doux (0,14). Animé seulement quand il est à l'écran. |
+| 78 | Courant d'épices (remplace le 39 « Points qui fuient », changé après la mission 3) | Fond de l'accueil | Bouge tout le temps : environ 1 grain pour 1 700 px² (650 au plus), 2 grains sur 3 en Principale (60 %), 1 sur 3 en Accent (80 %), traits de 2 px avec une courte traînée. Courant lent. Sous la souris ou le doigt (rayon 120 px) : tourbillon plus rapide. En pause quand l'onglet est caché. |
+| 14 | Texte qui s'écrit | Barre de recherche (accueil) | Dans la barre vide, la phrase « Chercher une recette, un ingrédient… » puis 4 noms de vraies recettes s'écrivent (55 ms par lettre), restent 2 s, s'effacent. Curseur Principale qui clignote. S'arrête dès qu'on touche la barre. |
+| 8 | Voile qui suit la direction | Raccourcis de l'accueil | Souris : un voile Principale entre par le côté d'où arrive la souris (0,45 s), texte et icône passent en couleur « sur Principale ». iPhone : le voile monte à l'appui et redescend. |
 | 2 | Carte qui penche en 3D | Cartes recette (accueil, listes, favoris) | Penche au plus 8°, retour lent en 0,7 s, ombre douce. Sur iPhone : glissement horizontal seulement. |
 | 6 | Bouton aimanté (ralenti) | Bouton « Ajouter à ma liste de courses » (écran recette) | Souris : suit à 14 % (horizontal) et 20 % (vertical), retour en 0,9 s (plus lent que dans la Salle). iPhone : s'enfonce à 94 % puis rebondit. Message « 8 ingrédients ajoutés à ta liste » qui monte en 0,35 s. |
 | 36 | Icônes qui se dessinent | Carte de France (écran Explorer) | Le contour se trace en 2,2 s quand la carte arrive à l'écran, la Bretagne et la Corse ensuite (décalées de 1 s et 1,6 s). Trait Texte de 2,2 px ; la région touchée se remplit en Principale (0,5 s). |
@@ -71,14 +73,14 @@ Code de départ : `choix-design.html` (repris de la Salle des effets, déjà aux
 
 **Les règles d'or, page par page :**
 - 1 seul effet star : le 3, sur l'accueil.
-- Accueil : 3 effets décoratifs (39, 3, 2). Écran recette : 6 (+ 2 si des cartes sont montrées).
+- Accueil : 5 effets décoratifs (78, 3, 2, 14, 8), choisis exprès après la mission 3 (au lieu de 3). Écran recette : 6 (+ 2 si des cartes sont montrées).
   Écran Explorer : 36. Le ♥ (13), les onglets (42) et le minuteur (48) sont des réactions au geste et ne comptent pas.
-- Sur tout le site, ça fait 5 types décoratifs au lieu de 3 : c'est le choix de la mission 2,
-  accepté parce qu'aucune page n'en a plus de 3. Ne pas en ajouter d'autres.
+- Sur tout le site, ça fait 7 types décoratifs. Après la mission 3, j'ai voulu un accueil plus vivant :
+  la règle « 3 par page » ne s'applique plus à l'accueil. Ne pas en ajouter d'autres sans me demander.
 
 **Pour tous les effets :**
 - Seulement `transform` et `opacity` (rapide, la batterie ne chauffe pas).
-- « Réduire les animations » activé sur l'iPhone : pas de penche, pas d'aimant, graines immobiles, carte déjà dessinée ;
+- « Réduire les animations » activé sur l'iPhone : pas de penche, pas d'aimant, grains d'épices immobiles, pas de texte qui s'écrit, carte déjà dessinée ;
   le ♥ et les onglets changent sans bouger.
 - Le défilement de la page n'est jamais bloqué par un effet.
 - Proposés mais pas retenus : 64 Forme en particules (le logo en grains d'épices), 4 Reflet brillant,

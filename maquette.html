@@ -40,7 +40,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.12}
 button,input{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--ac);outline-offset:3px}
 
-/* ---------- Effet 39 : les graines du fond ---------- */
+/* ---------- Effet 78 : le courant d'épices du fond ---------- */
 #graines{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .page{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 16px}
 
@@ -61,7 +61,13 @@ button,input{font:inherit;color:inherit}
 .search{display:flex;align-items:center;gap:10px;max-width:640px;margin-top:22px;padding:0 20px;height:58px;border-radius:99px;
   background:var(--card);border:1.5px solid color-mix(in srgb,var(--tx) 22%,transparent);box-shadow:0 6px 16px color-mix(in srgb,var(--tx) 8%,transparent)}
 .search svg{width:22px;height:22px;flex:none;fill:none;stroke:var(--tx);stroke-width:2;stroke-linecap:round}
+.champ{position:relative;flex:1;min-width:0;display:flex}
 .search input{flex:1;min-width:0;border:0;background:none;font-size:1.05rem;outline:none}
+/* Effet 14 : texte qui s'écrit (posé par-dessus le champ, les clics passent au travers) */
+.idee{position:absolute;inset:0;display:flex;align-items:center;pointer-events:none;font-size:1.05rem;color:var(--soft);white-space:nowrap;overflow:hidden}
+.idee[hidden]{display:none}
+.idee .cur{flex:none;width:2px;height:1.2em;margin-left:2px;background:var(--pr);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
 .search input::placeholder{color:var(--soft);opacity:1}
 .search:focus-within{border-color:var(--pr)}
 
@@ -92,10 +98,17 @@ button,input{font:inherit;color:inherit}
 .raccourcis li:last-child{grid-column:1/-1}
 @media (min-width:900px){ .raccourcis{grid-template-columns:1fr;grid-auto-rows:1fr} .raccourcis li:last-child{grid-column:auto} }
 .rac{width:100%;height:100%;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;cursor:pointer;text-align:left;
-  background:var(--card);border:1px solid var(--line);font:400 .98rem/1.2 var(--display)}
-.rac span{width:36px;height:36px;flex:none;border-radius:50%;background:var(--dx);display:grid;place-items:center}
-.rac svg{width:22px;height:22px;fill:none;stroke:var(--pr);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-@media (min-width:900px){ .rac{font-size:1.2rem;padding:12px 18px} .rac span{width:48px;height:48px} }
+  background:var(--card);border:1px solid var(--line);font:400 .98rem/1.2 var(--display);
+  position:relative;overflow:hidden;isolation:isolate;transition:color .3s}
+.rac .ic{width:36px;height:36px;flex:none;border-radius:50%;background:var(--dx);display:grid;place-items:center}
+.rac .ic{transition:background-color .3s}
+.rac svg{width:22px;height:22px;fill:none;stroke:var(--pr);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+/* Effet 8 : le voile entre par le côté d'où arrive la souris */
+.rac .voile{position:absolute;inset:0;z-index:-1;background:var(--pr);transform:translate(-101%,0);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.rac.on{color:var(--on)}
+.rac.on .ic{background:color-mix(in srgb,var(--on) 20%,transparent)}
+.rac.on svg{stroke:var(--on)}
+@media (min-width:900px){ .rac{font-size:1.2rem;padding:12px 18px} .rac .ic{width:48px;height:48px} }
 
 /* ---------- Cartes recette (effet 2 : carte qui penche) ---------- */
 .bloc{margin-top:clamp(30px,5vw,48px)}
@@ -164,7 +177,7 @@ button,input{font:inherit;color:inherit}
       <h1 id="phrase"></h1>
       <form class="search" role="search" onsubmit="return false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg>
-        <input id="recherche" type="search" enterkeyhint="search">
+        <span class="champ"><input id="recherche" type="search" enterkeyhint="search"><span class="idee" id="idee" aria-hidden="true" hidden><span class="t"></span><span class="cur"></span></span></span>
       </form>
     </section>
 
@@ -264,7 +277,7 @@ function vedette(r, saison){ return `<div class="vedette js-tilt" data-max="9">
 
 const RACCOURCIS = ['france','monde','frigo','budget','temps'];
 const raccourcis = () => `<ul class="raccourcis">` + A.raccourcis.map((t,i)=>
-  `<li><button class="rac" type="button"><span>${svg(RACCOURCIS[i])}</span>${t}</button></li>`).join('') + `</ul>`;
+  `<li><button class="rac" type="button"><span class="voile"></span><span class="ic">${svg(RACCOURCIS[i])}</span>${t}</button></li>`).join('') + `</ul>`;
 
 function afficher(index){
   const auj = new Date(), saison = saisonDuJour(auj);
@@ -278,7 +291,7 @@ function afficher(index){
   $('contenu').innerHTML = `<div class="duo">${vedette(star, saison)}${raccourcis()}</div>
     <section class="bloc"><h2>${A.dernieres}</h2><div class="cartes">${dernieres.map(carte).join('')}</div>
     <p class="note">${T.prixEstime}</p></section>`;
-  brancherEffets();
+  brancherEffets(); ecrireIdees(index);
 }
 
 function charger(){
@@ -301,6 +314,19 @@ function brancherEffets(){
     el.addEventListener('pointermove',move); el.addEventListener('pointerleave',reset); el.addEventListener('pointercancel',reset);
     el.addEventListener('pointerup',e=>{ if(e.pointerType!=='mouse') reset(); });
   });
+  // Effet 8 : voile qui suit la direction (souris) ; au doigt, il monte pendant l'appui
+  document.querySelectorAll('.rac').forEach(b=>{
+    const voile=b.querySelector('.voile');
+    function cote(e){ const r=b.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      return Math.abs(x)>Math.abs(y) ? (x>0?'101%,0':'-101%,0') : (y>0?'0,101%':'0,-101%'); }
+    function entrer(depuis){ voile.style.transition='none'; voile.style.transform=`translate(${depuis})`; voile.offsetWidth;
+      voile.style.transition=''; voile.style.transform='translate(0,0)'; b.classList.add('on'); }
+    function sortir(vers){ voile.style.transform=`translate(${vers})`; b.classList.remove('on'); }
+    b.addEventListener('pointerenter',e=>{ if(e.pointerType==='mouse') entrer(cote(e)); });
+    b.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse') sortir(cote(e)); });
+    b.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse') entrer('0,101%'); });
+    ['pointerup','pointercancel'].forEach(n=>b.addEventListener(n,e=>{ if(e.pointerType!=='mouse') setTimeout(()=>sortir('0,101%'),250); }));
+  });
   // Effet 13 : le ♥ fait « pop » (juste pour voir : les vrais favoris arrivent à la mission 10)
   let tm;
   document.querySelectorAll('.heart').forEach(h=>h.addEventListener('click',()=>{
@@ -313,32 +339,69 @@ function brancherEffets(){
   }));
 }
 
-/* ---------- Effet 39 : les graines du fond s'écartent sous la souris ou le doigt ---------- */
+/* ---------- Effet 78 : le courant d'épices du fond (bouge tout seul, tourbillonne sous la souris ou le doigt) ---------- */
 const cv=$('graines'), ctx=cv.getContext('2d'), P={x:-999,y:-999};
-let pts=[], W=0, H=0, raf=0, C={};
-function rgba(h,a){ const n=parseInt(h.slice(1),16); return `rgba(${n>>16},${(n>>8)&255},${n&255},${a})`; }
+let grains=[], W=0, H=0, raf=0, C={};
 function couleurs(){ const s=getComputedStyle(document.documentElement);
-  C={tx:s.getPropertyValue('--tx').trim(), pr:s.getPropertyValue('--pr').trim()}; dessiner(); }
+  C={pr:s.getPropertyValue('--pr').trim(), ac:s.getPropertyValue('--ac').trim()}; ctx.clearRect(0,0,W,H); if(reduce) immobile(); }
 function taille(){ const d=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight; cv.width=W*d; cv.height=H*d; ctx.setTransform(d,0,0,d,0,0);
-  pts=[]; for(let y=9;y<H;y+=18) for(let x=9;x<W;x+=18) pts.push({ox:x,oy:y,x,y}); dessiner(); }
-function dessiner(){ // renvoie true tant que des graines bougent encore
-  if (!C.tx) return false;
-  let bouge=false; ctx.clearRect(0,0,W,H);
-  for(const q of pts){ const dx=q.ox-P.x, dy=q.oy-P.y, d=Math.hypot(dx,dy), f=d<70?(70-d)/70:0;
-    const tx=q.ox+(d?dx/d:0)*f*26, ty=q.oy+(d?dy/d:0)*f*26; q.x+=(tx-q.x)*.14; q.y+=(ty-q.y)*.14;
-    if (Math.abs(tx-q.x)+Math.abs(ty-q.y)>.1) bouge=true;
-    ctx.fillStyle = f>0 ? rgba(C.pr,.55+f*.45) : rgba(C.tx,.22); ctx.beginPath(); ctx.arc(q.x,q.y,1.7+f*1.8,0,7); ctx.fill(); }
-  return bouge;
+  const n=Math.min(650, Math.round(W*H/1700));
+  grains=Array.from({length:n},(_,i)=>({x:Math.random()*W, y:Math.random()*H, safran:i%3===0}));
+  if (reduce) immobile(); }
+function immobile(){ // « Réduire les animations » : les grains restent posés, sans bouger
+  if (!C.pr) return; ctx.clearRect(0,0,W,H); ctx.globalAlpha=.45;
+  for(const q of grains){ ctx.fillStyle=q.safran?C.ac:C.pr; ctx.beginPath(); ctx.arc(q.x,q.y,1.4,0,7); ctx.fill(); }
+  ctx.globalAlpha=1; }
+function boucle(t){
+  // On efface un peu l'image d'avant : les grains laissent une courte traînée, comme de la poudre dans l'air.
+  ctx.globalCompositeOperation='destination-out'; ctx.fillStyle='rgba(0,0,0,.12)'; ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation='source-over';
+  const terre=new Path2D(), safran=new Path2D();
+  for(const q of grains){
+    let a=(Math.sin(q.x*.006+t*.00018)+Math.cos(q.y*.007-t*.00012))*Math.PI, v=.9;
+    const dx=q.x-P.x, dy=q.y-P.y, d=Math.hypot(dx,dy);
+    if (d<120){ a=Math.atan2(dy,dx)+Math.PI/2+.35; v=1.6+(120-d)/50; }   // le tourbillon
+    const ox=q.x, oy=q.y; q.x+=Math.cos(a)*v; q.y+=Math.sin(a)*v;
+    if (q.x<0||q.x>W||q.y<0||q.y>H){ q.x=Math.random()*W; q.y=Math.random()*H; continue; }
+    const trait=q.safran?safran:terre; trait.moveTo(ox,oy); trait.lineTo(q.x,q.y);
+  }
+  ctx.lineWidth=2; ctx.lineCap='round';
+  ctx.globalAlpha=.6; ctx.strokeStyle=C.pr; ctx.stroke(terre);
+  ctx.globalAlpha=.8; ctx.strokeStyle=C.ac; ctx.stroke(safran); ctx.globalAlpha=1;
+  raf = document.hidden ? 0 : requestAnimationFrame(boucle);
 }
-function boucle(){ raf = (dessiner() || P.x>-999) && !document.hidden ? requestAnimationFrame(boucle) : 0; }
-function reveil(){ if(!raf && !reduce) raf=requestAnimationFrame(boucle); }
-addEventListener('pointermove',e=>{ if(reduce) return; P.x=e.clientX; P.y=e.clientY; reveil(); },{passive:true});
-['pointerleave','pointercancel','blur'].forEach(n=>addEventListener(n,()=>{ P.x=P.y=-999; reveil(); }));
-document.addEventListener('pointerleave',()=>{ P.x=P.y=-999; reveil(); });
-addEventListener('pointerup',e=>{ if(e.pointerType!=='mouse'){ P.x=P.y=-999; reveil(); } });
-addEventListener('resize',taille);
+function demarrer(){ if(!raf && !reduce && !document.hidden) raf=requestAnimationFrame(boucle); }
+document.addEventListener('visibilitychange', demarrer);   // en pause quand l'onglet est caché (la batterie dit merci)
+const suivre=e=>{ P.x=e.clientX; P.y=e.clientY; };
+addEventListener('pointermove',suivre,{passive:true}); addEventListener('pointerdown',suivre,{passive:true});
+const lacher=()=>{ P.x=P.y=-999; };
+['pointercancel','blur'].forEach(n=>addEventListener(n,lacher));
+document.addEventListener('pointerleave',lacher);
+addEventListener('pointerup',e=>{ if(e.pointerType!=='mouse') lacher(); });
+// Sur iPhone, la barre d'adresse qui se cache change un peu la hauteur : on ne recommence que si l'écran change vraiment.
+addEventListener('resize',()=>{ if(Math.abs(innerWidth-W)>40 || Math.abs(innerHeight-H)>160) taille(); });
 
-taille(); appliquerTheme(); charger();
+/* ---------- Effet 14 : dans la recherche, des idées de recettes s'écrivent toutes seules ---------- */
+function ecrireIdees(index){
+  const champ=$('recherche'), ecran=$('idee'), txt=ecran.querySelector('.t');
+  if (reduce) return;
+  const idees=[A.recherche, ...index.recettes.map(r=>r.nom).sort(()=>Math.random()-.5).slice(0,4)];
+  let i=0, n=0, efface=false, tm=0, visible=true;
+  const libre=()=>!champ.value && document.activeElement!==champ;
+  function pas(){
+    clearTimeout(tm);
+    if (!visible || !libre()){ ecran.hidden=true; champ.placeholder=A.recherche; return; }
+    ecran.hidden=false; champ.placeholder='';
+    const mot=idees[i];
+    if (!efface){ txt.textContent=mot.slice(0,++n); if(n>=mot.length){ efface=true; tm=setTimeout(pas,2000); return; } tm=setTimeout(pas,55); }
+    else { txt.textContent=mot.slice(0,--n); if(n<=0){ efface=false; i=(i+1)%idees.length; tm=setTimeout(pas,350); return; } tm=setTimeout(pas,22); }
+  }
+  champ.addEventListener('focus',pas); champ.addEventListener('blur',pas); champ.addEventListener('input',pas);
+  new IntersectionObserver(es=>{ visible=es[0].isIntersecting; pas(); }).observe(champ);
+  pas();
+}
+
+taille(); appliquerTheme(); demarrer(); charger();
 </script>
 </body>
 </html>
