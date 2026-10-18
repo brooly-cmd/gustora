@@ -16,7 +16,7 @@ Coche chaque case quand la mission est réussie.
     bien : prix par personne, saison, temps, ingrédients avec quantités, étapes. Elle me donne envie.
   - **Produit pour la suite :** recettes/, ingredients.json, recettes/index.json.
 
-- [ ] 2. Le look : couleurs, logo et effets — MONTRE
+- [x] 2. Le look : couleurs, logo et effets — MONTRE
   - **Quoi :** une page choix-design.html où je choisis UNE palette, UN logo et mes effets « J'aime ».
     Ça crée DESIGN.md, logo.svg et l'icône iPhone. (Prompt dans kit-gustora.md, partie 3.)
   - **Pourquoi :** comme un essayage chez le tailleur : je montre du doigt, Claude coud.

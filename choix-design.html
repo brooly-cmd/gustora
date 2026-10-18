@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gustora · Choix du look</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Les couleurs viennent de la palette choisie (le script les pose ici). */
+:root{
+  --bg:#FBF4E8; --tx:#2E1D14; --pr:#B3472B; --ac:#E2A325; --dx:#F2E0C6; --on:#fff; --onac:#2E1D14;
+  --display:"Young Serif", Georgia, serif;
+  --body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--body);font-size:16px;line-height:1.5;transition:background .4s,color .4s;padding-bottom:120px}
+.card-bg,.pal,.logo-card,.fx{background:color-mix(in srgb,var(--bg) 55%,#fff)}
+[data-mode="nuit"] .card-bg,[data-mode="nuit"] .pal,[data-mode="nuit"] .logo-card,[data-mode="nuit"] .fx{background:color-mix(in srgb,var(--bg) 90%,#fff)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;margin:0}
+button{font-family:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.muted{color:color-mix(in srgb,var(--tx) 72%,var(--bg))}
+
+/* En-tête */
+.top{display:flex;align-items:center;gap:12px;padding:16px 0}
+.top .lg{width:40px;height:40px}
+.top b{font:400 1.5rem var(--display)}
+.top small{display:block;font-size:.8rem}
+.top .grow{flex:1}
+/* 27 Interrupteur jour / nuit */
+.sw{position:relative;width:64px;height:34px;border-radius:99px;border:2px solid color-mix(in srgb,var(--tx) 25%,transparent);background:var(--dx);cursor:pointer;padding:0;flex:none}
+.sw i{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:var(--ac);transition:transform .45s cubic-bezier(.3,1.3,.5,1),background .4s;display:grid;place-items:center;font-style:normal;font-size:14px;color:var(--onac)}
+[data-mode="nuit"] .sw i{transform:translateX(30px);background:var(--tx);color:var(--bg)}
+.intro{padding:8px 0 24px}
+.intro h1{font-size:clamp(2rem,5vw,3.2rem)}
+.intro p{max-width:62ch;margin:.6em 0 0}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding:0;list-style:none}
+.steps li{background:var(--dx);border-radius:99px;padding:6px 14px;font-weight:600;font-size:.9rem}
+
+section{padding:28px 0}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-h .n{font:800 .8rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--pr)}
+[data-mode="jour"] .sec-h .n{color:var(--tx)}
+.sec-h h2{font-size:clamp(1.6rem,3.5vw,2.2rem)}
+.sec-p{margin:0 0 18px;max-width:70ch}
+
+/* Cases « Je prends » / « Je veux » */
+.pick{display:inline-flex;align-items:center;gap:10px;font-weight:700;cursor:pointer;padding:10px 16px;border-radius:99px;border:2px solid var(--pr);user-select:none;background:transparent}
+.pick input{width:20px;height:20px;accent-color:var(--pr);margin:0}
+.pick:has(input:checked){background:var(--pr);color:var(--on)}
+
+/* ---------- 1. Palettes ---------- */
+.pals{display:grid;gap:18px}
+.pal{border-radius:22px;padding:18px;border:2px solid transparent;transition:border-color .3s}
+.pal:has(input:checked){border-color:var(--pr)}
+.pal-h{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;justify-content:space-between}
+.pal-h h3{font-size:1.5rem}
+.pal-h p{margin:2px 0 0;font-size:.95rem}
+.sw-rows{display:grid;gap:10px;margin:16px 0}
+.sw-row{display:grid;grid-template-columns:52px repeat(5,minmax(0,1fr));gap:6px;align-items:stretch}
+.sw-row>b{font-size:.8rem;align-self:center}
+.chip{border-radius:12px;padding:30px 6px 6px;font-size:.68rem;line-height:1.25;border:1px solid rgba(0,0,0,.08);overflow-wrap:anywhere}
+.chip span{display:block;font-weight:700}
+.minis{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:4px 16px;margin:14px 0 0;padding:0;list-style:none;font-size:.85rem}
+.checks li b{font-variant-numeric:tabular-nums}
+
+/* Le morceau d'écran d'accueil (sert aussi dans les démos d'effets) */
+.mini{background:var(--bg);color:var(--tx);border-radius:24px;padding:14px;display:grid;gap:12px;border:1px solid color-mix(in srgb,var(--tx) 14%,transparent);font-family:var(--body)}
+.mini .m-mode{font:700 .72rem var(--body);letter-spacing:.1em;text-transform:uppercase;opacity:.8}
+.m-head{display:flex;align-items:center;gap:8px}
+.m-head svg{width:28px;height:28px}
+.m-head b{font:400 1.2rem var(--display);flex:1}
+.m-head .msw{width:38px;height:22px;border-radius:99px;background:var(--dx);position:relative}
+.m-head .msw::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--ac)}
+.m-head .msw.n::after{left:19px;background:var(--tx)}
+.vedette{position:relative;overflow:hidden;border-radius:20px;background:var(--pr);color:var(--on);padding:16px;min-height:150px;display:grid;align-content:end;gap:6px}
+.vedette .sun{position:absolute;right:-26px;top:-26px;width:120px;height:120px;border-radius:50%;background:var(--ac)}
+.vedette .dish{position:absolute;right:14px;top:12px;font-size:2.4rem;line-height:1}
+.vedette .kick{font:700 .72rem var(--body);letter-spacing:.06em;text-transform:uppercase;position:relative}
+.vedette h4{font:400 1.25rem/1.15 var(--display);margin:0;position:relative;max-width:16ch}
+.vedette .see{justify-self:start;position:relative;border:2px solid var(--on);color:var(--on);background:transparent;border-radius:99px;padding:6px 14px;font-weight:700;font-size:.85rem;cursor:pointer}
+.badges{display:flex;flex-wrap:wrap;gap:6px;position:relative}
+.bdg{background:var(--ac);color:var(--onac);font-weight:800;font-size:.78rem;border-radius:8px;padding:2px 8px}
+.sea{background:var(--dx);color:var(--tx);font-weight:600;font-size:.78rem;border-radius:99px;padding:2px 10px}
+.rc{position:relative;display:grid;grid-template-columns:96px 1fr;border-radius:18px;overflow:hidden;background:color-mix(in srgb,var(--bg) 55%,#fff);border:1px solid color-mix(in srgb,var(--tx) 12%,transparent);color:var(--tx)}
+.mini.nuit .rc,[data-mode="nuit"] .stage .rc{background:color-mix(in srgb,var(--bg) 88%,#fff)}
+.rc .img{background:var(--dx);display:grid;place-items:center}
+.rc .img svg{width:52px;height:52px;fill:none;stroke:var(--pr);stroke-width:2;stroke-linecap:round}
+.rc .body{padding:10px 12px;display:grid;gap:3px}
+.rc h5{font:400 1.05rem/1.15 var(--display);margin:0;padding-right:30px}
+.rc .z{font-size:.82rem;font-weight:600}
+.rc .meta{font-size:.82rem;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.heart{position:absolute;right:6px;top:6px;border:0;background:none;font-size:1.5rem;line-height:1;cursor:pointer;color:color-mix(in srgb,var(--tx) 35%,transparent);padding:6px;z-index:2}
+.heart.on{color:var(--pr)}
+.heart.pop{animation:pop .35s cubic-bezier(.3,1.8,.5,1)}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.25)}100%{transform:scale(1)}}
+.btn-main{border:0;border-radius:99px;background:var(--pr);color:var(--on);font:700 1rem var(--body);padding:14px 22px;cursor:pointer;width:100%}
+.tabbar{position:relative;display:grid;grid-template-columns:repeat(5,1fr);background:color-mix(in srgb,var(--bg) 55%,#fff);border-radius:20px;padding:5px;border:1px solid color-mix(in srgb,var(--tx) 12%,transparent)}
+.mini.nuit .tabbar,[data-mode="nuit"] .stage .tabbar{background:color-mix(in srgb,var(--bg) 88%,#fff)}
+.tabbar button{position:relative;z-index:1;border:0;background:none;display:grid;justify-items:center;gap:1px;padding:6px 0;font:600 .62rem var(--body);color:color-mix(in srgb,var(--tx) 78%,var(--bg));cursor:pointer;transition:color .3s;min-width:0}
+.tabbar svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.tabbar button[aria-selected="true"]{color:var(--on)}
+.tabbar .pill{position:absolute;top:5px;bottom:5px;left:0;width:calc((100% - 10px)/5);transform:translateX(5px);border-radius:15px;background:var(--pr);transition:transform .45s cubic-bezier(.3,1.2,.5,1),width .45s}
+.tabbar .dot{position:absolute;top:2px;right:calc(50% - 18px);min-width:17px;height:17px;border-radius:99px;background:var(--ac);color:var(--onac);font:800 .62rem/17px var(--body);text-align:center;padding:0 4px}
+
+/* ---------- 2. Logos ---------- */
+.logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.logo-card{border-radius:22px;padding:18px;display:grid;gap:14px;border:2px solid transparent}
+.logo-card:has(input:checked){border-color:var(--pr)}
+.logo-card h3{font-size:1.3rem}
+.logo-big{display:grid;place-items:center;padding:10px 0}
+.logo-big svg{width:150px;height:150px}
+.logo-tests{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lt{border-radius:16px;padding:12px;display:grid;justify-items:center;gap:8px;font-size:.75rem;font-weight:600}
+.lt .row{display:flex;align-items:center;gap:12px}
+.lt .s32{width:32px;height:32px}
+.lt .s16{width:16px;height:16px}
+.ico{width:60px;height:60px;border-radius:14px;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.ico svg{width:46px;height:46px}
+
+/* ---------- 3. Effets ---------- */
+.el{margin-top:26px}
+.el>h3{font-size:1.35rem;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.el>h3::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--ac);flex:none}
+.fxs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.fx{border-radius:22px;padding:14px;display:grid;gap:10px;border:2px solid transparent;align-content:start}
+.fx:has(input:checked){border-color:var(--pr)}
+.fx-h{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.fx-h .num{font:800 .78rem var(--body);letter-spacing:.06em;text-transform:uppercase}
+.fx-h h4{font:400 1.2rem var(--display);margin:0;flex-basis:100%}
+.tag{font:700 .7rem var(--body);border-radius:99px;padding:2px 9px;background:var(--dx);color:var(--tx)}
+.tag.star{background:var(--ac);color:var(--onac)}
+.tag.love{background:var(--pr);color:var(--on)}
+.stage{position:relative;height:250px;border-radius:18px;overflow:hidden;background:var(--bg);border:1px solid color-mix(in srgb,var(--tx) 12%,transparent);display:grid;place-items:center;touch-action:pan-y}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage .over{position:absolute;left:14px;right:14px;bottom:12px;pointer-events:none;font:400 1.05rem/1.2 var(--display)}
+.stage .over small{display:block;font:600 .75rem var(--body);opacity:.8}
+.devices{display:grid;gap:2px;font-size:.85rem}
+.why{margin:0;font-size:.92rem;border-left:3px solid var(--ac);padding-left:10px}
+.replay{position:absolute;right:10px;top:10px;z-index:5;font:700 .75rem var(--body);border:0;border-radius:99px;padding:6px 11px;background:var(--tx);color:var(--bg);cursor:pointer}
+
+/* 3 Carte en couches */
+.layers{width:min(86%,330px);height:200px;border-radius:22px;position:relative;overflow:hidden;transform-style:preserve-3d;transition:transform .8s ease;touch-action:pan-y;box-shadow:0 22px 40px color-mix(in srgb,var(--tx) 30%,transparent)}
+.layers>div{position:absolute;inset:-14px;transition:transform .8s ease}
+.layers .vedette{inset:0;position:absolute;border-radius:0;min-height:0;padding:28px 30px;transition:none}
+.ly-bg{background:var(--pr)}
+.ly-bg .sun{position:absolute;right:0;top:0;width:150px;height:150px;border-radius:50%;background:var(--ac)}
+.ly-mid{display:grid;justify-items:end;align-items:start;padding:30px 34px!important;font-size:3.4rem;line-height:1}
+.ly-top{background:none!important}
+.layers .vedette{background:none}
+/* 2 & 4 Cartes recette qui penchent */
+.tilt{width:min(88%,330px);transition:transform .7s ease;transform-style:preserve-3d;touch-action:pan-y;box-shadow:0 16px 30px color-mix(in srgb,var(--tx) 20%,transparent);border-radius:18px}
+.glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.7),transparent 50%);opacity:0;transition:opacity .4s;mix-blend-mode:soft-light;z-index:3}
+.tilting .glare{opacity:1}
+/* 6 Bouton aimanté (ralenti) */
+.mag-zone{padding:36px 28px;touch-action:pan-y;width:100%;display:grid;justify-items:center;gap:12px}
+.mag{width:auto;transition:transform .9s cubic-bezier(.22,1.2,.4,1),background .3s}
+.mag:active{transform:scale(.94);transition:transform .12s}
+.toast{background:var(--tx);color:var(--bg);border-radius:12px;padding:8px 14px;font-weight:600;font-size:.88rem;opacity:0;transform:translateY(8px);transition:opacity .35s,transform .35s;pointer-events:none}
+.toast.show{opacity:1;transform:none}
+/* 13 ♥ */
+.pop-wrap{width:min(88%,330px);display:grid;gap:12px;justify-items:center}
+/* 42 Onglets */
+.tab-demo{width:min(94%,380px);display:grid;gap:14px;justify-items:center}
+.tab-demo p{margin:0;font:400 1.2rem var(--display)}
+/* 36 Carte de France */
+.fr{width:190px;height:190px;overflow:visible}
+.fr path{fill:none;stroke:var(--tx);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+.fr .bzh{fill:color-mix(in srgb,var(--pr) 0%,transparent);stroke:var(--pr);cursor:pointer;transition:fill .5s}
+.fr .bzh.on{fill:var(--pr)}
+.fr.play path{stroke-dasharray:1;animation:drawin 2.2s ease both}
+.fr.play .bzh{animation-delay:1s}
+.fr.play .cor{animation-delay:1.6s}
+@keyframes drawin{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.fr-lbl{position:absolute;left:14px;bottom:12px;font-weight:700;font-size:.9rem;background:var(--dx);border-radius:99px;padding:4px 12px;transition:opacity .4s}
+/* 48 & 202 Minuteur */
+.timer{display:grid;justify-items:center;gap:8px;text-align:center;padding:0 12px}
+.timer .stp{font:700 .75rem var(--body);letter-spacing:.08em;text-transform:uppercase;margin:0}
+.timer .txt{font:400 1.05rem/1.2 var(--display);margin:0}
+.clock{position:relative;display:grid;place-items:center}
+.clock svg{width:118px;height:118px;transform:rotate(-90deg)}
+.clock .tk{fill:none;stroke:var(--dx);stroke-width:8}
+.clock .pg{fill:none;stroke:var(--pr);stroke-width:8;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 1s linear}
+.clock .digits{position:absolute;font:800 1.5rem var(--body);font-variant-numeric:tabular-nums}
+.odo{display:flex;font:800 2.4rem var(--body);font-variant-numeric:tabular-nums;height:1.2em;line-height:1.2em;overflow:hidden}
+.odo .col{display:flex;flex-direction:column;transition:transform .7s cubic-bezier(.2,.9,.2,1)}
+.odo .sep{padding:0 2px}
+.t-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.t-btns button{border:0;border-radius:99px;padding:9px 16px;font-weight:700;cursor:pointer;background:var(--pr);color:var(--on)}
+.t-btns button.sec{background:var(--dx);color:var(--tx)}
+.done{font:400 1.3rem var(--display);color:var(--pr)}
+[data-mode="jour"] .done{color:var(--tx)}
+
+/* ---------- Barre du bas : compteur + copier ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid color-mix(in srgb,var(--tx) 15%,transparent);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.bar .in{max-width:1120px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.bar .sum{flex:1;min-width:220px;font-size:.85rem;display:grid;gap:2px}
+.bar .rules{display:flex;flex-wrap:wrap;gap:6px}
+.rule{font-weight:700;font-size:.78rem;border-radius:99px;padding:2px 10px;background:var(--dx)}
+.rule.bad{background:#B42318;color:#fff}
+.copy{border:0;border-radius:99px;background:var(--pr);color:var(--on);font:800 1rem var(--body);padding:12px 20px;cursor:pointer}
+.final{border-radius:22px;padding:18px}
+.final pre{white-space:pre-wrap;font:600 1rem/1.45 var(--body);background:var(--dx);border-radius:14px;padding:14px;margin:12px 0}
+.warns{margin:0;padding-left:20px}
+.warns li{margin:2px 0}
+
+@media (max-width:560px){
+  .sw-row{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .sw-row>b{grid-column:1/-1}
+  .chip{padding-top:24px;font-size:.62rem}
+  .stage{height:240px}
+  .bar .sum{min-width:0;flex-basis:100%}
+  .copy{flex:1}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body data-mode="jour">
+<div class="wrap">
+  <header class="top">
+    <span id="top-logo"></span>
+    <div class="grow"><b>Gustora</b><small class="muted">Choix du look · mission 2</small></div>
+    <button class="sw" id="mode" type="button" aria-label="Passer en mode nuit"><i aria-hidden="true">☀</i></button>
+  </header>
+
+  <div class="intro">
+    <h1>Essayage chez le tailleur</h1>
+    <p>Comme chez un tailleur : je t'ai préparé 3 tissus (les couleurs), 3 boutons (les logos) et mes meilleures coupes (les effets), déjà à ta taille. Tu montres du doigt, je couds.
+    Toute la page se repeint avec la palette que tu coches, et l'interrupteur en haut à droite passe en jour / nuit.</p>
+    <ol class="steps"><li>1. Coche UNE palette</li><li>2. Coche UN logo</li><li>3. Coche tes effets</li><li>4. « Copier mon choix » et colle-le-moi</li></ol>
+  </div>
+
+  <section id="couleurs">
+    <div class="sec-h"><span class="n">Partie 1</span><h2>Les couleurs</h2></div>
+    <p class="sec-p muted">Chaque palette a 5 couleurs, en jour et en nuit, montrées sur un vrai morceau de ton écran d'accueil. Sous chaque palette, je vérifie le contraste (l'écart de clarté entre le texte et son fond, comme de l'encre noire sur du papier blanc) : il faut au moins 4,5 pour bien lire.</p>
+    <div class="pals" id="pals"></div>
+  </section>
+
+  <section id="logo">
+    <div class="sec-h"><span class="n">Partie 2</span><h2>Le logo</h2></div>
+    <p class="sec-p muted">Trois logos dessinés en SVG : un dessin fait de formes (et non de petits points), qui reste net à toutes les tailles, comme un tampon qu'on peut agrandir sans flou. Il prend les couleurs de ta palette.</p>
+    <div class="logos" id="logos"></div>
+  </section>
+
+  <section id="effets">
+    <div class="sec-h"><span class="n">Partie 3</span><h2>Les effets</h2></div>
+    <p class="sec-p muted">Seulement tes « J'aime », choisis pour une cuisine chaleureuse : des effets doux et lents (0,6 à 0,9 s), pas de néon. Tes « J'adore » passent en premier.
+    Règles d'or : <b>1 effet star par page</b> et <b>3 types d'effets décoratifs au maximum</b>. Les petites réactions au toucher (♥ qui saute, onglet qui glisse, minuteur) ne comptent pas. Le compteur en bas t'avertit.</p>
+    <div id="fx"></div>
+  </section>
+
+  <section id="choix">
+    <div class="final card-bg">
+      <h2>Mon choix</h2>
+      <pre id="msg"></pre>
+      <ul class="warns" id="warns"></ul>
+      <p><button class="copy" id="copy2" type="button">Copier mon choix</button></p>
+      <p class="muted" style="margin:0;font-size:.9rem">Ensuite, colle le message dans la conversation avec Claude : j'écrirai DESIGN.md, logo.svg et les icônes.</p>
+    </div>
+  </section>
+</div>
+
+<div class="bar" role="region" aria-label="Mon choix">
+  <div class="in">
+    <div class="sum"><span id="sum"></span><span class="rules" id="rules"></span></div>
+    <button class="copy" id="copy" type="button">Copier mon choix</button>
+  </div>
+</div>
+
+<script>
+(function(){
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const $ = id => document.getElementById(id);
+const root = document.documentElement;
+
+/* ---------- Les 3 palettes : 5 couleurs, jour et nuit ---------- */
+const PALS = [
+  { nom:"Argile & Safran", conte:"Le tajine en terre cuite qui sort du four, une pincée de safran sur le papier du marché.",
+    jour:{bg:"#FBF4E8",tx:"#2E1D14",pr:"#B3472B",ac:"#E2A325",dx:"#F2E0C6"},
+    nuit:{bg:"#1D1410",tx:"#F5EADB",pr:"#E8835F",ac:"#F0B744",dx:"#3A2B21"} },
+  { nom:"Safran du souk", conte:"Les montagnes d'épices dorées du souk, le piment rouge et les sacs de toile écrue.",
+    jour:{bg:"#FFF8E8",tx:"#2B1A0B",pr:"#D9930D",ac:"#A8392B",dx:"#FBE6B4"},
+    nuit:{bg:"#1A1309",tx:"#FBEFD6",pr:"#F2B630",ac:"#EE7B63",dx:"#3B2D13"} },
+  { nom:"Zellige au couchant", conte:"Les carreaux bleu-vert des fontaines de Fès et la terracotta des murs au soleil couchant.",
+    jour:{bg:"#F7F0E3",tx:"#1C2A2B",pr:"#1E6B66",ac:"#BE4F2A",dx:"#E6DAC3"},
+    nuit:{bg:"#0F1A1B",tx:"#EFE7D7",pr:"#5BBDB2",ac:"#EE8B5F",dx:"#213230"} }
+];
+const ROLES = [["bg","Fond"],["tx","Texte"],["pr","Principale"],["ac","Accent"],["dx","Douce"]];
+
+// Contraste (formule officielle WCAG) : 1 = aucun écart, 21 = noir sur blanc.
+function lum(h){ return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0); }
+function ratio(a,b){ const x=lum(a), y=lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); }
+// Texte posé sur une couleur : on prend blanc ou la couleur de texte/fond, celle qui se lit le mieux.
+function onColor(c,p){ return ["#FFFFFF",p.tx,p.bg].sort((a,b)=>ratio(b,c)-ratio(a,c))[0]; }
+function full(p){ return {...p, on:onColor(p.pr,p), onac:onColor(p.ac,p)}; }
+function vars(p){ const f=full(p); return `--bg:${f.bg};--tx:${f.tx};--pr:${f.pr};--ac:${f.ac};--dx:${f.dx};--on:${f.on};--onac:${f.onac}`; }
+
+/* ---------- Les 3 logos (formes simples, viewBox 64 × 64) ---------- */
+// Chaque forme : d = le tracé, c = sa couleur (pr, ac, bg, tx), s = épaisseur si c'est un trait.
+const LOGOS = [
+  { nom:"La cocotte au soleil", idee:"Une cocotte de grand-mère et un soleil de safran qui se lève derrière : la cuisine qui mijote, ici et ailleurs.",
+    f:[ {c:"ac", d:"M18 30a14 14 0 0 1 28 0z"},
+        {c:"pr", d:"M8 30h48v5a17 17 0 0 1-17 17H25A17 17 0 0 1 8 35z"},
+        {c:"pr", d:"M2 32h8v6H2zM54 32h8v6h-8z"},
+        {c:"bg", d:"M13 39h38v3.4H13z"} ] },
+  { nom:"Le G-assiette", idee:"Le G de Gustora tracé comme le bord d'une assiette, avec un jaune d'œuf de safran au centre.",
+    f:[ {c:"pr", s:8, d:"M47 17A21 21 0 1 0 53 32H38"},
+        {c:"ac", d:"M32 25.5a6.5 6.5 0 1 1 0 13a6.5 6.5 0 1 1 0-13z"} ] },
+  { nom:"Le tajine", idee:"Un tajine posé sur son plat, coiffé d'un bouton de safran : le voyage et le mijoté en une seule forme.",
+    f:[ {c:"pr", d:"M11 45C13 31 22 19 32 12c10 7 19 19 21 33z"},
+        {c:"ac", d:"M15.5 35.5h33l1.6 4.5H13.9z"},
+        {c:"ac", d:"M32 4a4.5 4.5 0 1 1 0 9a4.5 4.5 0 1 1 0-9z"},
+        {c:"pr", d:"M5 47h54l-3 6.5a4 4 0 0 1-3.6 2.5H11.6A4 4 0 0 1 8 53.5z"} ] }
+];
+function logoSVG(i, cls){ const L=LOGOS[i];
+  return `<svg class="${cls||''}" viewBox="0 0 64 64" role="img" aria-label="Logo ${L.nom}">` + L.f.map(s=> s.s
+    ? `<path d="${s.d}" fill="none" stroke="var(--${s.c})" stroke-width="${s.s}" stroke-linecap="round" stroke-linejoin="round"/>`
+    : `<path d="${s.d}" fill="var(--${s.c})"/>`).join('') + `</svg>`; }
+
+/* ---------- Petits morceaux de l'écran d'accueil (réutilisés partout) ---------- */
+const ICONS = {
+  home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  explore:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  frigo:'<rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M6 10h12M9 6v2M9 13v3"/>',
+  fav:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+  courses:'<path d="M4 9h16l-1.5 10a2 2 0 0 1-2 1.7h-9a2 2 0 0 1-2-1.7zM8 9l4-6 4 6"/>'
+};
+const TABS = [["home","Accueil"],["explore","Explorer"],["frigo","Mon frigo"],["fav","Favoris"],["courses","Courses"]];
+function tabbar(id){ return `<div class="tabbar" ${id?`id="${id}"`:''} role="tablist"><span class="pill"></span>` +
+  TABS.map(([k,t],i)=>`<button type="button" role="tab" aria-selected="${i===0}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k]}</svg>${t}${k==='courses'?'<span class="dot">3</span>':''}</button>`).join('') + `</div>`; }
+const PLATE = '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="26" r="15"/><circle cx="24" cy="26" r="9"/><path d="M6 8v10a3 3 0 0 0 3 3v19M9 8v8M12 8v10a3 3 0 0 1-3 3M42 8c-3 2-4 6-4 11h4v21"/></svg>';
+function recipeCard(heartId){ return `<article class="rc"><div class="img">${PLATE}</div><div class="body">
+  <h5>Crêpes de froment</h5><span class="z">Bretagne</span>
+  <span class="meta"><span>⏱ 30 min</span><span>~2 € / pers.</span><span class="bdg">€</span></span>
+  <span class="badges"><span class="sea">Toute l'année</span></span></div>
+  <button class="heart" type="button" ${heartId?`id="${heartId}"`:''} aria-pressed="false" aria-label="Ajouter aux favoris">♥</button></article>`; }
+function vedette(){ return `<div class="vedette"><span class="sun"></span><span class="dish" aria-hidden="true">🥘</span>
+  <span class="kick">De saison en ce moment · Automne</span><h4>Couscous au poulet et aux légumes</h4>
+  <span class="badges"><span class="bdg">€€</span><span class="sea">Automne</span><span class="sea">Hiver</span></span>
+  <button class="see" type="button">Voir la recette</button></div>`; }
+function mini(p, mode, logo){ return `<div class="mini ${mode}" style="${vars(p)}">
+  <span class="m-mode">${mode==='jour'?'☀ Jour':'☾ Nuit'}</span>
+  <div class="m-head">${logoSVG(logo)}<b>Gustora</b><span class="msw ${mode==='nuit'?'n':''}"></span></div>
+  ${vedette()}${recipeCard()}<button class="btn-main" type="button">Ajouter à ma liste de courses</button>${tabbar()}</div>`; }
+
+/* ---------- Ce que tu as coché (gardé dans ce navigateur, au cas où tu recharges) ---------- */
+let S = {pal:null, logo:null, fx:[], mode: matchMedia('(prefers-color-scheme: dark)').matches ? 'nuit' : 'jour'};
+try{ Object.assign(S, JSON.parse(localStorage.getItem('gustora-choix')||'{}')); }catch(e){}
+function save(){ try{ localStorage.setItem('gustora-choix', JSON.stringify(S)); }catch(e){} }
+const P = () => PALS[S.pal ?? 0];   // sans choix, on montre la palette 1
+const LG = () => S.logo ?? 0;
+
+/* ---------- Partie 1 : dessiner les palettes ---------- */
+function drawPals(){
+  $('pals').innerHTML = PALS.map((p,i)=>{
+    const checks = ['jour','nuit'].map(m=>{ const f=full(p[m]); const r=[
+      ["Texte sur le fond", ratio(f.tx,f.bg)], ["Puce de saison (texte sur douce)", ratio(f.tx,f.dx)],
+      ["Bouton (texte sur principale)", ratio(f.on,f.pr)], ["Badge € (texte sur accent)", ratio(f.onac,f.ac)]];
+      return r.map(([t,v])=>`<li>${m==='jour'?'☀':'☾'} ${t} : <b>${v.toFixed(1).replace('.',',')}</b> ${v>=4.5?'✓':'⚠️ trop faible'}</li>`).join(''); }).join('');
+    const rows = ['jour','nuit'].map(m=>`<div class="sw-row"><b>${m==='jour'?'☀ Jour':'☾ Nuit'}</b>` +
+      ROLES.map(([k,t])=>{ const c=p[m][k]; return `<div class="chip" style="background:${c};color:${onColor(c,p[m])}"><span>${t}</span>${c}</div>`; }).join('') + `</div>`).join('');
+    return `<article class="pal"><div class="pal-h"><div><h3>${i+1}. ${p.nom}</h3><p class="muted">${p.conte}</p></div>
+      <label class="pick"><input type="radio" name="pal" value="${i}" ${S.pal===i?'checked':''}> Je prends celle-ci</label></div>
+      <div class="sw-rows">${rows}</div>
+      <div class="minis">${mini(p.jour,'jour',LG())}${mini(p.nuit,'nuit',LG())}</div>
+      <ul class="checks">${checks}</ul></article>`; }).join('');
+}
+
+/* ---------- Partie 2 : dessiner les logos ---------- */
+function drawLogos(){
+  const p=P();
+  $('logos').innerHTML = LOGOS.map((L,i)=>`<article class="logo-card"><div><h3>${i+1}. ${L.nom}</h3><p class="muted" style="margin:4px 0 0;font-size:.92rem">${L.idee}</p></div>
+    <div class="logo-big">${logoSVG(i)}</div>
+    <div class="logo-tests">${['jour','nuit'].map(m=>`<div class="lt" style="${vars(p[m])};background:var(--bg);color:var(--tx)">
+      <span>${m==='jour'?'☀ Jour':'☾ Nuit'}</span>
+      <div class="row">${logoSVG(i,'s32')}${logoSVG(i,'s16')}</div>
+      <div class="ico" style="background:var(--bg);outline:1px solid color-mix(in srgb,var(--tx) 15%,transparent)">${logoSVG(i)}</div>
+      <span>32 px · 16 px · icône iPhone</span></div>`).join('')}</div>
+    <label class="pick" style="justify-self:start"><input type="radio" name="logo" value="${i}" ${S.logo===i?'checked':''}> Je prends ce logo</label></article>`).join('');
+}
+
+/* ---------- Partie 3 : les effets ---------- */
+const ELS = [
+  ["fond","Fond de l'accueil","le fond de l'accueil"], ["vedette","Carte vedette « De saison »","la carte vedette"],
+  ["cartes","Cartes recette","les cartes recette"], ["coeur","Le ♥ favori","le ♥"],
+  ["bouton","Bouton « Ajouter à ma liste de courses »","le bouton Ajouter à ma liste de courses"],
+  ["onglets","Barre d'onglets","la barre d'onglets"], ["carte","Carte de France (écran Explorer)","la carte de France"],
+  ["minuteur","Minuteur du mode cuisine","le minuteur du mode cuisine"]
+];
+// star = effet vedette (1 par page) ; deco = effet décoratif (3 types max) ; sinon = petite réaction au geste.
+const FX = [
+  {n:64, el:"fond", nom:"Forme en particules", adore:1, star:1, deco:1,
+   pc:"ton logo en grains d'épices ; la souris l'éparpille, il se reforme", ip:"touche pour l'éparpiller, il se reforme",
+   why:"Ton « J'adore » : le logo semé en grains de safran et de paprika, qui se disperse sous la main puis se range. On sent le marché dès l'ouverture."},
+  {n:81, el:"fond", nom:"Toile élastique", adore:1, star:1, deco:1,
+   pc:"la grille se creuse sous la souris, comme un tissu", ip:"elle se creuse sous le doigt",
+   why:"Ton autre « J'adore » : une nappe de lin qu'on effleure, avec une vraie physique douce. Chaleureux, sans rien de « tech »."},
+  {n:39, el:"fond", nom:"Points qui fuient", deco:1,
+   pc:"les graines s'écartent de la souris", ip:"elles s'écartent du doigt",
+   why:"Des graines semées sur le papier crème qui s'écartent quand on passe : vivant mais calme, l'accueil reste lisible. Tu l'as noté « impératif »."},
+  {n:3, el:"vedette", nom:"Carte en couches", star:1, deco:1,
+   pc:"fond, plat et texte bougent à des vitesses différentes", ip:"pareil en glissant le doigt de gauche à droite (de haut en bas, la page défile)",
+   why:"L'effet star, réglé lent (0,8 s) : le plat de saison prend du relief, comme un plat qu'on soulève au marché pour le montrer."},
+  {n:2, el:"cartes", nom:"Carte qui penche en 3D", deco:1,
+   pc:"la carte penche doucement vers la souris (8° maximum)", ip:"glisse le doigt de gauche à droite sur la carte",
+   why:"Penche à peine et revient lentement : on a envie de toucher, sans donner le tournis quand on fait défiler 30 recettes."},
+  {n:4, el:"cartes", nom:"Reflet brillant", deco:1,
+   pc:"un reflet glisse comme la lumière sur une assiette vernie", ip:"le reflet suit le doigt",
+   why:"Une lumière de faïence émaillée sur la carte ; il va très bien avec la 2 (les deux ensemble ne font qu'un seul « relief »)."},
+  {n:13, el:"coeur", nom:"Petit « pop »",
+   pc:"clique le ♥, il saute", ip:"touche le ♥, il saute",
+   why:"Le ♥ grossit une fois puis revient : on sait que la recette est gardée, sans bruit. C'est une réaction, elle ne compte pas dans les 3."},
+  {n:6, el:"bouton", nom:"Bouton aimanté (ralenti)", adore:1, deco:1,
+   pc:"approche la souris : le bouton se laisse attirer, plus lentement que dans la Salle", ip:"il s'enfonce puis rebondit à l'appui",
+   why:"Ton « J'adore », ralenti comme tu l'as demandé : la seule action importante de la recette attire la main, comme un aimant de frigo."},
+  {n:42, el:"onglets", nom:"Onglets qui glissent",
+   pc:"clique un onglet, la pastille glisse jusqu'à lui", ip:"touche un onglet, la pastille glisse",
+   why:"On voit d'un coup d'œil où on est. C'est une réponse au geste : elle ne compte pas dans les 3."},
+  {n:36, el:"carte", nom:"Icônes qui se dessinent (la carte)", deco:1,
+   pc:"la France se dessine trait par trait ; clique la Bretagne", ip:"pareil ; touche la Bretagne",
+   why:"Comme un croquis dans un carnet de voyage : la carte se trace à l'arrivée, puis la région touchée se colore."},
+  {n:48, el:"minuteur", nom:"Chiffres qui roulent",
+   pc:"lance le minuteur : les chiffres tournent comme une minuterie mécanique", ip:"pareil au doigt",
+   why:"Les chiffres roulent comme sur une vieille minuterie de cuisine : on lit le temps de loin. C'est utile, pas décoratif."},
+  {n:202, el:"minuteur", nom:"Anneau qui se remplit",
+   pc:"lance le minuteur : l'anneau se remplit autour du temps", ip:"pareil au doigt",
+   why:"Adapté de l'« anneau de lecture » : ici il suit le minuteur. Lisible de loin, les mains pleines de farine."}
+];
+
+function stageHTML(f){
+  switch(f.n){
+    case 64: return `<div class="stage" id="st64"><canvas id="cv64"></canvas><p class="over">Les cuisines de France et du monde, dans ta poche.</p></div>`;
+    case 81: return `<div class="stage" id="st81"><canvas id="cv81"></canvas><p class="over">Les cuisines de France et du monde, dans ta poche.</p></div>`;
+    case 39: return `<div class="stage" id="st39"><canvas id="cv39"></canvas><p class="over">Les cuisines de France et du monde, dans ta poche.</p></div>`;
+    case 3: return `<div class="stage"><div class="layers js-tilt" data-max="9"><div class="ly-bg" data-depth="0.4"><span class="sun"></span></div><div class="ly-mid" data-depth="1.3" aria-hidden="true">🥘</div><div class="ly-top" data-depth="2.2">${vedette().replace('<span class="sun"></span><span class="dish" aria-hidden="true">🥘</span>','')}</div></div></div>`;
+    case 2: return `<div class="stage"><div class="tilt js-tilt" data-max="8">${recipeCard()}</div></div>`;
+    case 4: return `<div class="stage"><div class="tilt js-tilt" data-max="8" data-glare="1" style="position:relative">${recipeCard()}<div class="glare"></div></div></div>`;
+    case 13: return `<div class="stage"><div class="pop-wrap">${recipeCard('heart13')}<span class="toast" id="toast13"></span></div></div>`;
+    case 6: return `<div class="stage"><div class="mag-zone" id="mz6"><button class="btn-main mag" id="mag6" type="button">Ajouter à ma liste de courses</button><span class="toast" id="toast6">8 ingrédients ajoutés à ta liste</span></div></div>`;
+    case 42: return `<div class="stage"><div class="tab-demo">${tabbar('tabs42')}<p id="tab42">Accueil</p></div></div>`;
+    case 36: return `<div class="stage" id="st36"><button class="replay" id="re36" type="button">Rejouer</button>
+      <svg class="fr" id="fr36" viewBox="0 0 200 200" aria-label="Carte de France"><path pathLength="1" d="M72 22L104 12L118 30L148 38L172 52L166 80L158 100L168 120L160 142L172 160L142 172L118 164L100 182L78 176L58 170L52 150L60 122L54 96L52 72L64 42Z"/>
+      <path class="bzh" id="bzh36" pathLength="1" d="M52 72L54 96L32 92L10 84L12 72L36 66Z"/><path class="cor" pathLength="1" d="M184 160l5-7 4 9-2 15-6 2z"/></svg>
+      <span class="fr-lbl" id="lbl36">Touche la Bretagne</span></div>`;
+    case 48: return `<div class="stage" id="st48"></div>`;
+    case 202: return `<div class="stage" id="st202"></div>`;
+  }
+}
+function drawFx(){
+  $('fx').innerHTML = ELS.map(([k,t])=>{ const list=FX.filter(f=>f.el===k).sort((a,b)=>(b.adore||0)-(a.adore||0));
+    return `<div class="el"><h3>${t}</h3><div class="fxs">` + list.map(f=>`<article class="fx">
+      <div class="fx-h"><span class="num">Effet ${f.n}</span>${f.adore?'<span class="tag love">J\'adore</span>':''}${f.star?'<span class="tag star">★ Effet star</span>':''}<span class="tag">${f.deco?'Décoratif':'Réaction au geste (ne compte pas)'}</span><h4>${f.nom}</h4></div>
+      ${stageHTML(f)}
+      <div class="devices"><span><b>PC :</b> ${f.pc}</span><span><b>iPhone :</b> ${f.ip}</span></div>
+      <p class="why">${f.why}</p>
+      <label class="pick" style="justify-self:start"><input type="checkbox" name="fx" value="${f.n}" ${S.fx.includes(f.n)?'checked':''}> Je veux</label></article>`).join('') + `</div></div>`; }).join('');
+}
+
+/* ---------- Appliquer la palette et le mode à toute la page ---------- */
+let C = {};   // couleurs lues par les dessins sur canvas
+const listeners = [];   // les démos qui doivent se repeindre
+function applyTheme(){
+  const p = full(P()[S.mode]);
+  for (const k of ['bg','tx','pr','ac','dx','on','onac']) root.style.setProperty('--'+k, p[k]);
+  document.body.dataset.mode = S.mode;
+  $('mode').setAttribute('aria-label', S.mode==='jour' ? 'Passer en mode nuit' : 'Passer en mode jour');
+  $('mode').querySelector('i').textContent = S.mode==='jour' ? '☀' : '☾';
+  C = p;
+  $('top-logo').innerHTML = logoSVG(LG(),'lg');
+  listeners.forEach(fn=>fn());
+}
+function rgba(h,a){ const n=parseInt(h.slice(1),16); return `rgba(${n>>16},${(n>>8)&255},${n&255},${a})`; }
+
+/* ---------- Outils communs aux démos (repris de la Salle des effets) ---------- */
+function liveCanvas(stage, cv, setup, frame){ const ctx=cv.getContext('2d'); let W=0,H=0,vis=false,raf=0;
+  function size(){ const d=Math.min(devicePixelRatio||1,2); W=cv.clientWidth; H=cv.clientHeight; cv.width=W*d; cv.height=H*d; ctx.setTransform(d,0,0,d,0,0); setup(W,H); frame(ctx,W,H,0); }
+  function loop(t){ frame(ctx,W,H,t||0); if(vis&&!reduce) raf=requestAnimationFrame(loop); }
+  size(); addEventListener('resize',size); listeners.push(size);
+  new IntersectionObserver(es=>{ vis=es[0].isIntersecting; cancelAnimationFrame(raf); if(vis&&!reduce) raf=requestAnimationFrame(loop); }).observe(stage); }
+function pointerIn(stage){ const p={x:-999,y:-999,on:false};
+  stage.addEventListener('pointermove',e=>{ const r=stage.getBoundingClientRect(); p.x=e.clientX-r.left; p.y=e.clientY-r.top; p.on=true; });
+  stage.addEventListener('pointerleave',()=>{ p.on=false; p.x=p.y=-999; });
+  stage.addEventListener('pointerup',e=>{ if(e.pointerType!=='mouse'){ p.on=false; p.x=p.y=-999; } });
+  stage.addEventListener('pointercancel',()=>{ p.on=false; p.x=p.y=-999; });
+  return p; }
+function restart(el,cls){ el.classList.remove(cls); el.offsetWidth; el.classList.add(cls); }
+
+function initFx(){
+  // 64 Forme en particules : le logo choisi, fait de grains d'épices
+  (function(){ const st=$('st64'), p=pointerIn(st); let P2=[];
+    liveCanvas(st,$('cv64'),(W,H)=>{ const o=document.createElement('canvas'); o.width=W; o.height=H; const x=o.getContext('2d');
+        const s=Math.min(W,H)*.68/64; x.translate(W/2-32*s, H*.42-32*s); x.scale(s,s);
+        LOGOS[LG()].f.forEach(f=>{ if(f.c==='bg') return; const path=new Path2D(f.d); if(f.s){ x.lineWidth=f.s; x.lineCap='round'; x.lineJoin='round'; x.strokeStyle='#000'; x.stroke(path); } else { x.fillStyle='#000'; x.fill(path); } });
+        const d=x.getImageData(0,0,W,H).data, old=P2; P2=[]; let k=0;
+        for(let y=0;y<H;y+=5) for(let xx=0;xx<W;xx+=5) if(d[(y*W+xx)*4+3]>128){ const q=old[k++]; P2.push({tx:xx,ty:y,x:q?q.x:Math.random()*W,y:q?q.y:Math.random()*H,vx:0,vy:0,a:Math.random()<.3}); } },
+      (ctx,W,H)=>{ ctx.clearRect(0,0,W,H);
+        for(const q of P2){ const dx=q.x-p.x, dy=q.y-p.y, d=Math.hypot(dx,dy)||1;
+          if(d<55){ q.vx+=dx/d*2.2; q.vy+=dy/d*2.2; }
+          q.vx+=(q.tx-q.x)*.035; q.vy+=(q.ty-q.y)*.035; q.vx*=.84; q.vy*=.84; q.x+=q.vx; q.y+=q.vy;
+          ctx.fillStyle = q.a ? C.ac : C.pr; ctx.beginPath(); ctx.arc(q.x,q.y,1.7,0,7); ctx.fill(); } });
+    st.addEventListener('pointerdown',()=>P2.forEach(q=>{ q.vx+=(Math.random()-.5)*30; q.vy+=(Math.random()-.5)*30; })); })();
+
+  // 81 Toile élastique : une nappe de lin
+  (function(){ const st=$('st81'), p=pointerIn(st); let G=[], cols=0, rows=0;
+    liveCanvas(st,$('cv81'),(W,H)=>{ cols=18; rows=11; G=[]; for(let j=0;j<rows;j++) for(let i=0;i<cols;i++){ const x=i/(cols-1)*W, y=j/(rows-1)*H; G.push({ox:x,oy:y,x,y,vx:0,vy:0}); } },
+      (ctx,W,H)=>{ ctx.clearRect(0,0,W,H);
+        for(const q of G){ const dx=q.x-p.x, dy=q.y-p.y, d=Math.hypot(dx,dy)||1; if(d<80){ const f=(80-d)/80; q.vx+=dx/d*f*3; q.vy+=dy/d*f*3; }
+          q.vx+=(q.ox-q.x)*.07; q.vy+=(q.oy-q.y)*.07; q.vx*=.84; q.vy*=.84; q.x+=q.vx; q.y+=q.vy; }
+        ctx.strokeStyle=rgba(C.tx,.28); ctx.lineWidth=1;
+        for(let j=0;j<rows;j++){ ctx.beginPath(); for(let i=0;i<cols;i++){ const q=G[j*cols+i]; i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y); } ctx.stroke(); }
+        for(let i=0;i<cols;i++){ ctx.beginPath(); for(let j=0;j<rows;j++){ const q=G[j*cols+i]; j?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y); } ctx.stroke(); }
+        for(const q of G){ const m=Math.hypot(q.x-q.ox,q.y-q.oy); if(m>2){ ctx.fillStyle=m>8?C.pr:C.ac; ctx.beginPath(); ctx.arc(q.x,q.y,Math.min(4,1+m/6),0,7); ctx.fill(); } } }); })();
+
+  // 39 Points qui fuient : des graines sur le papier crème
+  (function(){ const st=$('st39'), p=pointerIn(st); let pts=[];
+    liveCanvas(st,$('cv39'),(W,H)=>{ pts=[]; for(let y=12;y<H;y+=18) for(let x=12;x<W;x+=18) pts.push({ox:x,oy:y,x,y}); },
+      (ctx,W,H)=>{ ctx.clearRect(0,0,W,H);
+        for(const q of pts){ const dx=q.ox-p.x, dy=q.oy-p.y, d=Math.hypot(dx,dy), f=d<70?(70-d)/70:0;
+          const tx=q.ox+(d?dx/d:0)*f*26, ty=q.oy+(d?dy/d:0)*f*26; q.x+=(tx-q.x)*.14; q.y+=(ty-q.y)*.14;
+          ctx.fillStyle = f>0 ? rgba(C.pr,.55+f*.45) : rgba(C.tx,.22); ctx.beginPath(); ctx.arc(q.x,q.y,1.7+f*1.8,0,7); ctx.fill(); } }); })();
+
+  // 3, 2, 4 Penche / couches / reflet : souris, ou doigt qui glisse à l'horizontale (le vertical fait défiler la page)
+  document.querySelectorAll('.js-tilt').forEach(el=>{
+    const max=+el.dataset.max||8, layers=[...el.querySelectorAll('[data-depth]')], glare=el.dataset.glare;
+    function move(e){ if (reduce) return;
+      const r=el.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      el.style.transition='transform .15s linear';
+      el.style.transform=`perspective(800px) rotateX(${(-y*max).toFixed(2)}deg) rotateY(${(x*max).toFixed(2)}deg)`;
+      layers.forEach(l=>{ const d=+l.dataset.depth; l.style.transition='transform .15s linear'; l.style.transform=`translate3d(${(x*d*12).toFixed(1)}px,${(y*d*12).toFixed(1)}px,0)`; });
+      if (glare){ el.classList.add('tilting'); el.style.setProperty('--gx',((x+.5)*100)+'%'); el.style.setProperty('--gy',((y+.5)*100)+'%'); } }
+    function reset(){ el.style.transition=''; el.style.transform=''; el.classList.remove('tilting'); layers.forEach(l=>{ l.style.transition=''; l.style.transform=''; }); }
+    el.addEventListener('pointermove',move); el.addEventListener('pointerleave',reset); el.addEventListener('pointercancel',reset);
+    el.addEventListener('pointerup',e=>{ if(e.pointerType!=='mouse') reset(); });
+  });
+
+  // 13 Petit « pop » sur le ♥
+  (function(){ const h=$('heart13'), t=$('toast13'); let tm;
+    h.addEventListener('click',()=>{ const on=!h.classList.contains('on'); h.classList.toggle('on',on); h.setAttribute('aria-pressed',String(on));
+      h.setAttribute('aria-label', on?'Retirer des favoris':'Ajouter aux favoris'); restart(h,'pop');
+      t.textContent = on ? 'Ajoutée à tes favoris' : 'Retirée de tes favoris'; t.classList.add('show'); clearTimeout(tm); tm=setTimeout(()=>t.classList.remove('show'),1800); }); })();
+
+  // 6 Bouton aimanté, ralenti (souris) ; au doigt : il s'enfonce puis rebondit
+  (function(){ const b=$('mag6'), z=$('mz6'), t=$('toast6'); let added=false, tm;
+    if (fine && !reduce){
+      z.addEventListener('pointermove',e=>{ const r=b.getBoundingClientRect(); const dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2); b.style.transform=`translate(${dx*.14}px,${dy*.2}px)`; });
+      z.addEventListener('pointerleave',()=>{ b.style.transform=''; }); }
+    b.addEventListener('click',()=>{ added=!added;
+      t.textContent = added ? '8 ingrédients ajoutés à ta liste' : 'Démo remise à zéro';
+      b.textContent = added ? 'Déjà dans ta liste · Mettre à jour les quantités' : 'Ajouter à ma liste de courses';
+      t.classList.add('show'); clearTimeout(tm); tm=setTimeout(()=>t.classList.remove('show'),2200); }); })();
+
+  // 42 Onglets qui glissent
+  (function(){ const tabs=$('tabs42'), pill=tabs.querySelector('.pill'), btns=[...tabs.querySelectorAll('button')];
+    function sel(b){ btns.forEach(x=>x.setAttribute('aria-selected',String(x===b))); pill.style.width=b.offsetWidth+'px'; pill.style.transform=`translateX(${b.offsetLeft}px)`; $('tab42').textContent=TABS[btns.indexOf(b)][1]; }
+    btns.forEach(b=>b.addEventListener('click',()=>sel(b)));
+    new ResizeObserver(()=>sel(btns.find(b=>b.getAttribute('aria-selected')==='true'))).observe(tabs); })();
+
+  // 36 La carte de France se dessine, puis la Bretagne se colore au toucher
+  (function(){ const fr=$('fr36'), bzh=$('bzh36'), lbl=$('lbl36');
+    const play=()=>{ bzh.classList.remove('on'); lbl.textContent='Touche la Bretagne'; restart(fr,'play'); };
+    new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ play(); o.disconnect(); } },{threshold:.5}).observe($('st36'));
+    $('re36').addEventListener('click',play);
+    bzh.addEventListener('click',()=>{ const on=!bzh.classList.contains('on'); bzh.classList.toggle('on',on); lbl.textContent = on ? 'Bretagne · 10 recettes' : 'Touche la Bretagne'; }); })();
+
+  // 48 et 202 : le même minuteur, avec chiffres qui roulent OU anneau qui se remplit
+  makeTimer($('st48'), 'roll'); makeTimer($('st202'), 'ring');
+}
+
+function makeTimer(st, kind){
+  const TOTAL=60;
+  st.innerHTML = `<div class="timer"><p class="stp">Étape 2 sur 6</p><p class="txt">Laisse reposer la pâte, le temps que la farine boive le lait.</p>
+    ${kind==='ring' ? `<div class="clock"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="tk" cx="20" cy="20" r="15.9"/><circle class="pg" cx="20" cy="20" r="15.9" pathLength="100"/></svg><span class="digits" aria-live="polite"></span></div>`
+                    : `<div class="odo" aria-live="polite"></div>`}
+    <div class="t-btns"></div></div>`;
+  const btns=st.querySelector('.t-btns'), odo=st.querySelector('.odo'), dig=st.querySelector('.digits'), ring=st.querySelector('.pg');
+  let left=TOTAL, run=false, iv=0, cols=[];
+  const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+  function show(){ const str=fmt(left);
+    if (odo){ if(!cols.length){ for(const ch of str){ if(ch===':'){ const s=document.createElement('span'); s.className='sep'; s.textContent=':'; odo.appendChild(s); } else { const c=document.createElement('span'); c.className='col'; for(let d=0;d<10;d++){ const s=document.createElement('span'); s.textContent=d; c.appendChild(s);} odo.appendChild(c); cols.push(c);} } }
+      odo.setAttribute('aria-label',str); [...str.replace(':','')].forEach((d,i)=>{ cols[i].style.transform=`translateY(${-d*1.2}em)`; }); }
+    if (dig) dig.textContent=str;
+    if (ring) ring.style.strokeDashoffset = 100*(left/TOTAL);
+  }
+  function buttons(){
+    if (left===0){ btns.innerHTML='<span class="done">C\'est prêt !</span> <button type="button" class="sec">Rejouer</button>'; btns.querySelector('button').onclick=stop; return; }
+    if (!run && left===TOTAL){ btns.innerHTML='<button type="button">Lancer le minuteur · 1 min</button>'; btns.querySelector('button').onclick=start; return; }
+    btns.innerHTML=`<button type="button">${run?'Pause':'Reprendre'}</button><button type="button" class="sec">Arrêter</button>`;
+    const [a,b]=btns.querySelectorAll('button'); a.onclick=run?pause:start; b.onclick=stop;
+  }
+  function tick(){ left--; show(); if(left<=0){ clearInterval(iv); run=false; bip(); buttons(); } }
+  function start(){ run=true; clearInterval(iv); iv=setInterval(tick,1000); buttons(); }
+  function pause(){ run=false; clearInterval(iv); buttons(); }
+  function stop(){ run=false; clearInterval(iv); left=TOTAL; show(); buttons(); }
+  show(); buttons();
+}
+// Petite sonnerie de fin (sans fichier son)
+function bip(){ try{ const a=new (window.AudioContext||window.webkitAudioContext)(); [0,.25,.5].forEach(t=>{ const o=a.createOscillator(), g=a.createGain(); o.frequency.value=880; o.connect(g); g.connect(a.destination); g.gain.setValueAtTime(.2,a.currentTime+t); g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t+.2); o.start(a.currentTime+t); o.stop(a.currentTime+t+.22); }); }catch(e){} }
+
+/* ---------- Compteur des règles d'or + message à copier ---------- */
+function elName(k){ return ELS.find(e=>e[0]===k)[2]; }
+function update(){
+  const chosen = FX.filter(f=>S.fx.includes(f.n));
+  const stars = chosen.filter(f=>f.star).length, deco = chosen.filter(f=>f.deco).length;
+  const warns = [];
+  if (S.pal===null) warns.push("Tu n'as pas encore coché de palette.");
+  if (S.logo===null) warns.push("Tu n'as pas encore coché de logo.");
+  if (stars>1) warns.push(`${stars} effets star sur l'accueil : garde-en un seul (règle d'or n°1).`);
+  if (deco>3) warns.push(`${deco} effets décoratifs : 3 au maximum (règle d'or n°2). Enlèves-en ${deco-3}.`);
+  const fondN = chosen.filter(f=>f.el==='fond').length;
+  if (fondN>1) warns.push(`${fondN} effets sur le fond de l'accueil : un seul fond à la fois.`);
+  const minN = chosen.filter(f=>f.el==='minuteur').length;
+  if (minN>1) warns.push("Chiffres qui roulent + anneau sur le minuteur : ça marche ensemble, c'est permis.");
+  const pal = S.pal===null ? 'palette ?' : `palette ${S.pal+1} (${PALS[S.pal].nom})`;
+  const logo = S.logo===null ? 'logo ?' : `logo ${S.logo+1} (${LOGOS[S.logo].nom})`;
+  const fx = chosen.length ? chosen.map(f=>`${f.n} sur ${elName(f.el)}`).join(', ') : 'aucun';
+  const msg = `Mon look : ${pal}, ${logo}, effets : ${fx}.`;
+  $('msg').textContent = msg;
+  $('warns').innerHTML = warns.map(w=>`<li>${w}</li>`).join('') || '<li>Tout respecte les règles d\'or ✓</li>';
+  $('sum').textContent = `${S.pal===null?'Palette ?':'Palette '+(S.pal+1)} · ${S.logo===null?'Logo ?':'Logo '+(S.logo+1)} · ${chosen.length} effet${chosen.length>1?'s':''}`;
+  $('rules').innerHTML = `<span class="rule ${stars>1?'bad':''}">★ Star : ${stars} / 1</span><span class="rule ${deco>3?'bad':''}">Décoratifs : ${deco} / 3</span>` + (fondN>1?'<span class="rule bad">2 fonds</span>':'');
+  return msg;
+}
+function copy(btn){ const msg=update();
+  const ok=()=>{ const t=btn.textContent; btn.textContent='Copié ! Colle-le à Claude'; setTimeout(()=>btn.textContent=t,2200); };
+  const fallback=()=>{ const ta=document.createElement('textarea'); ta.value=msg; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); ok(); }catch(e){ btn.textContent='Sélectionne le message et copie-le'; } ta.remove(); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(msg).then(ok, fallback); else fallback();
+}
+
+/* ---------- Démarrage ---------- */
+drawPals(); drawLogos(); drawFx(); applyTheme(); initFx(); update();
+document.addEventListener('change',e=>{ const i=e.target;
+  if (i.name==='pal'){ S.pal=+i.value; applyTheme(); drawLogos(); }
+  if (i.name==='logo'){ S.logo=+i.value; drawPals(); applyTheme(); }
+  if (i.name==='fx'){ S.fx = [...document.querySelectorAll('input[name=fx]:checked')].map(x=>+x.value); }
+  save(); update(); });
+$('mode').addEventListener('click',()=>{ S.mode = S.mode==='jour'?'nuit':'jour'; save(); applyTheme(); });
+$('copy').addEventListener('click',e=>copy(e.currentTarget));
+$('copy2').addEventListener('click',e=>copy(e.currentTarget));
+})();
+</script>
+</body>
+</html>
