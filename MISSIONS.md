@@ -32,7 +32,7 @@ Coche chaque case quand la mission est réussie.
 
 ### La base
 
-- [ ] 4. L'accueil et la liste des recettes — CONSTRUIT
+- [x] 4. L'accueil et la liste des recettes — CONSTRUIT
   - **Quoi :** index.html (écran 1) + l'écran 2 « Liste des recettes », qui lit les vraies recettes,
     + la barre d'onglets en bas, + textes.js. La recherche par nom marche.
   - **Pourquoi :** c'est la plus petite version utile : on voit les recettes et on les cherche.
