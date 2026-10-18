@@ -39,7 +39,7 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** je tape « crêpe » dans la recherche et la recette bretonne apparaît.
   - **Produit pour la suite :** index.html, style.css, recettes.js (le chargement des recettes), textes.js.
 
-- [ ] 5. La mise en ligne — EXÉCUTE
+- [x] 5. La mise en ligne — EXÉCUTE
   - **Quoi :** mettre Gustora sur GitHub Pages (dépôt « gustora », compte brooly-cmd).
   - **Pourquoi :** c'est comme ouvrir le restaurant au public : l'app a une adresse que tout le monde peut ouvrir.
   - **C'est réussi quand :** j'ouvre https://brooly-cmd.github.io/gustora/ sur mon iPhone et je vois les 10 recettes.
