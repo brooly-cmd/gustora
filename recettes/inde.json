@@ -1,0 +1,46 @@
+{
+  "zone": "Inde",
+  "recettes": [
+    {
+      "id": "inde-dal-lentilles-corail",
+      "nom": "Dal de lentilles corail",
+      "zone": "Inde",
+      "type": "Plat",
+      "personnes": 4,
+      "tempsPreparation": 15,
+      "tempsCuisson": 30,
+      "difficulte": "Facile",
+      "saisons": ["toute l'année"],
+      "prixParPersonne": 1.50,
+      "budget": "€",
+      "ingredients": [
+        { "id": "lentilles-corail", "quantite": 300, "unite": "g" },
+        { "id": "eau", "quantite": 900, "unite": "ml" },
+        { "id": "curcuma", "quantite": 1, "unite": "c. à café" },
+        { "id": "oignon", "quantite": 1, "unite": "pièce" },
+        { "id": "tomate", "quantite": 250, "unite": "g" },
+        { "id": "ail", "quantite": 3, "unite": "pièce" },
+        { "id": "gingembre-frais", "quantite": 15, "unite": "g" },
+        { "id": "cumin", "quantite": 1, "unite": "c. à café" },
+        { "id": "garam-masala", "quantite": 1, "unite": "c. à café" },
+        { "id": "piment-cayenne", "quantite": 0.5, "unite": "c. à café" },
+        { "id": "beurre", "quantite": 30, "unite": "g" },
+        { "id": "coriandre", "quantite": 0.5, "unite": "pièce" },
+        { "id": "citron-vert", "quantite": 1, "unite": "pièce" },
+        { "id": "riz-basmati", "quantite": 300, "unite": "g" },
+        { "id": "sel", "quantite": 1, "unite": "c. à café" }
+      ],
+      "etapes": [
+        { "texte": "Rince les lentilles dans une passoire sous l'eau froide jusqu'à ce que l'eau ne soit plus trouble." },
+        { "texte": "Mets-les dans une casserole avec 900 ml d'eau et le curcuma. Fais cuire à feu doux en écumant la mousse, jusqu'à ce qu'elles se défassent en purée.", "duree": 20 },
+        { "texte": "Pendant ce temps, fais cuire le riz basmati comme indiqué sur le paquet." },
+        { "texte": "Prépare le « tadka », l'huile parfumée qui donne tout son goût au dal : dans une poêle, fais fondre le beurre et fais grésiller le cumin quelques secondes, jusqu'à ce qu'il sente bon.", "duree": 1 },
+        { "texte": "Ajoute l'oignon haché et fais-le dorer, puis l'ail et le gingembre râpés, et enfin les tomates en petits dés, le garam masala et le piment. Laisse compoter.", "duree": 8 },
+        { "texte": "Verse ce mélange grésillant sur les lentilles, sale, mélange et laisse frémir encore 5 minutes. Ajoute un peu d'eau si le dal est trop épais : il doit napper la cuillère.", "duree": 5 },
+        { "texte": "Termine avec le jus du citron vert et la coriandre ciselée, et sers avec le riz." }
+      ],
+      "astuce": "En Inde, on utilise du ghee (beurre clarifié) pour le tadka. Pour une version végane, remplace simplement le beurre par de l'huile.",
+      "image": "images/inde-dal-lentilles-corail.jpg"
+    }
+  ]
+}

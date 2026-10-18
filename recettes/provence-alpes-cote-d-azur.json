@@ -1,0 +1,43 @@
+{
+  "zone": "Provence-Alpes-Côte d'Azur",
+  "recettes": [
+    {
+      "id": "provence-alpes-cote-d-azur-ratatouille",
+      "nom": "Ratatouille provençale",
+      "zone": "Provence-Alpes-Côte d'Azur",
+      "type": "Plat",
+      "personnes": 4,
+      "tempsPreparation": 30,
+      "tempsCuisson": 60,
+      "difficulte": "Facile",
+      "saisons": ["été"],
+      "prixParPersonne": 3.30,
+      "budget": "€€",
+      "ingredients": [
+        { "id": "aubergine", "quantite": 2, "unite": "pièce" },
+        { "id": "courgette", "quantite": 3, "unite": "pièce" },
+        { "id": "poivron", "quantite": 2, "unite": "pièce" },
+        { "id": "tomate", "quantite": 1000, "unite": "g" },
+        { "id": "oignon", "quantite": 2, "unite": "pièce" },
+        { "id": "ail", "quantite": 4, "unite": "pièce" },
+        { "id": "thym", "quantite": 0.5, "unite": "pièce" },
+        { "id": "laurier", "quantite": 2, "unite": "pièce" },
+        { "id": "basilic", "quantite": 0.5, "unite": "pièce" },
+        { "id": "huile-olive", "quantite": 8, "unite": "c. à soupe" },
+        { "id": "sel", "quantite": null, "unite": "au goût" },
+        { "id": "poivre", "quantite": null, "unite": "au goût" }
+      ],
+      "etapes": [
+        { "texte": "Lave tous les légumes. Coupe les aubergines, les courgettes et les poivrons en dés d'environ 2 cm. Émince les oignons et écrase l'ail." },
+        { "texte": "Plonge les tomates 30 secondes dans l'eau bouillante : la peau s'enlève alors toute seule. Pèle-les et coupe-les en morceaux." },
+        { "texte": "Dans une grande cocotte, fais dorer les aubergines dans 3 cuillères d'huile d'olive, puis réserve-les dans un plat.", "duree": 8 },
+        { "texte": "Fais pareil avec les courgettes (2 cuillères d'huile), puis avec les poivrons. Chaque légume cuit à son rythme : c'est pour ça qu'on les saisit séparément.", "duree": 10 },
+        { "texte": "Dans la même cocotte, fais fondre les oignons dans le reste d'huile, ajoute l'ail puis les tomates, le thym et le laurier." },
+        { "texte": "Remets tous les légumes, sale, poivre, couvre et laisse mijoter à feu doux en remuant de temps en temps.", "duree": 40 },
+        { "texte": "Retire le thym et le laurier, goûte, rectifie le sel et parsème de basilic ciselé juste avant de servir." }
+      ],
+      "astuce": "La ratatouille est encore meilleure le lendemain, réchauffée doucement : les saveurs ont eu le temps de se marier.",
+      "image": "images/provence-alpes-cote-d-azur-ratatouille.jpg"
+    }
+  ]
+}

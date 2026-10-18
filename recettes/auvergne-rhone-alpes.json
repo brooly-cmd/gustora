@@ -1,0 +1,40 @@
+{
+  "zone": "Auvergne-Rhône-Alpes",
+  "recettes": [
+    {
+      "id": "auvergne-rhone-alpes-salade-lyonnaise",
+      "nom": "Salade lyonnaise",
+      "zone": "Auvergne-Rhône-Alpes",
+      "type": "Entrée",
+      "personnes": 4,
+      "tempsPreparation": 20,
+      "tempsCuisson": 15,
+      "difficulte": "Moyen",
+      "saisons": ["automne", "hiver"],
+      "prixParPersonne": 1.65,
+      "budget": "€",
+      "ingredients": [
+        { "id": "frisee", "quantite": 1, "unite": "pièce" },
+        { "id": "lardons-fumes", "quantite": 200, "unite": "g" },
+        { "id": "oeuf", "quantite": 4, "unite": "pièce" },
+        { "id": "baguette", "quantite": 0.5, "unite": "pièce" },
+        { "id": "echalote", "quantite": 1, "unite": "pièce" },
+        { "id": "moutarde", "quantite": 1, "unite": "c. à soupe" },
+        { "id": "vinaigre-vin-rouge", "quantite": 4, "unite": "c. à soupe" },
+        { "id": "huile-neutre", "quantite": 5, "unite": "c. à soupe" },
+        { "id": "sel", "quantite": null, "unite": "au goût" },
+        { "id": "poivre", "quantite": null, "unite": "au goût" }
+      ],
+      "etapes": [
+        { "texte": "Lave la frisée et garde surtout le cœur, bien jaune et tendre. Essore-la soigneusement." },
+        { "texte": "Coupe le pain en petits cubes et fais-les dorer à la poêle dans 2 cuillères d'huile : ce sont tes croûtons. Réserve-les.", "duree": 5 },
+        { "texte": "Dans la même poêle, sans matière grasse, fais rissoler les lardons jusqu'à ce qu'ils soient croustillants.", "duree": 6 },
+        { "texte": "Prépare la vinaigrette dans le saladier : l'échalote hachée, la moutarde, 2 cuillères de vinaigre, le reste d'huile, du sel et du poivre." },
+        { "texte": "Porte une casserole d'eau à petits frémissements avec 2 cuillères de vinaigre. Casse un œuf dans une tasse, fais un tourbillon dans l'eau avec une cuillère et glisse l'œuf au centre. Laisse cuire, puis sors-le avec une écumoire. Recommence pour chaque œuf.", "duree": 3 },
+        { "texte": "Mélange la frisée avec la vinaigrette, ajoute les lardons chauds et les croûtons, puis pose un œuf poché sur chaque assiette. Le jaune qui coule fait office de seconde sauce !" }
+      ],
+      "astuce": "Pour réussir l'œuf poché, il faut un œuf très frais : son blanc reste groupé autour du jaune au lieu de s'éparpiller.",
+      "image": "images/auvergne-rhone-alpes-salade-lyonnaise.jpg"
+    }
+  ]
+}

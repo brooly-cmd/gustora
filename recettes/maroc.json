@@ -1,0 +1,51 @@
+{
+  "zone": "Maroc",
+  "recettes": [
+    {
+      "id": "maroc-couscous-poulet-legumes",
+      "nom": "Couscous au poulet et aux légumes",
+      "zone": "Maroc",
+      "type": "Plat",
+      "personnes": 4,
+      "tempsPreparation": 30,
+      "tempsCuisson": 75,
+      "difficulte": "Moyen",
+      "saisons": ["automne", "hiver"],
+      "prixParPersonne": 4.55,
+      "budget": "€€",
+      "ingredients": [
+        { "id": "cuisse-poulet", "quantite": 4, "unite": "pièce" },
+        { "id": "oignon", "quantite": 2, "unite": "pièce" },
+        { "id": "tomate", "quantite": 300, "unite": "g" },
+        { "id": "carotte", "quantite": 4, "unite": "pièce" },
+        { "id": "navet", "quantite": 2, "unite": "pièce" },
+        { "id": "courgette", "quantite": 2, "unite": "pièce" },
+        { "id": "potiron", "quantite": 400, "unite": "g" },
+        { "id": "chou-vert", "quantite": 0.25, "unite": "pièce" },
+        { "id": "pois-chiches", "quantite": 1, "unite": "pièce" },
+        { "id": "coriandre", "quantite": 0.5, "unite": "pièce" },
+        { "id": "persil", "quantite": 0.5, "unite": "pièce" },
+        { "id": "gingembre-moulu", "quantite": 1, "unite": "c. à café" },
+        { "id": "curcuma", "quantite": 1, "unite": "c. à café" },
+        { "id": "ras-el-hanout", "quantite": 1, "unite": "c. à café" },
+        { "id": "huile-olive", "quantite": 3, "unite": "c. à soupe" },
+        { "id": "eau", "quantite": 2000, "unite": "ml" },
+        { "id": "semoule", "quantite": 400, "unite": "g" },
+        { "id": "beurre", "quantite": 30, "unite": "g" },
+        { "id": "sel", "quantite": null, "unite": "au goût" },
+        { "id": "poivre", "quantite": null, "unite": "au goût" }
+      ],
+      "etapes": [
+        { "texte": "Dans une grande marmite, fais revenir le poulet et les oignons émincés dans l'huile d'olive avec le gingembre, le curcuma, le ras-el-hanout, du sel et du poivre.", "duree": 10 },
+        { "texte": "Ajoute les tomates coupées en morceaux et le bouquet de coriandre et de persil ficelé, puis verse 2 litres d'eau. Porte à ébullition et laisse cuire à couvert.", "duree": 20 },
+        { "texte": "Épluche les carottes et les navets, coupe-les en gros bâtonnets et ajoute-les dans le bouillon avec le chou coupé en quartiers.", "duree": 20 },
+        { "texte": "Ajoute les courgettes et le potiron en gros morceaux, ainsi que les pois chiches égouttés : ce sont les légumes les plus tendres, ils cuisent en dernier.", "duree": 25 },
+        { "texte": "Pendant ce temps, mets la semoule dans un grand plat avec une pincée de sel et 1 cuillère d'huile. Verse dessus autant de bouillon chaud que de semoule (environ 400 ml), couvre et attends qu'elle gonfle.", "duree": 5 },
+        { "texte": "Ajoute le beurre en morceaux et égrène la semoule avec une fourchette, puis du bout des doigts, pour séparer chaque grain." },
+        { "texte": "Sers la semoule en dôme, avec le poulet et les légumes par-dessus, et le bouillon à part dans un bol pour arroser à son goût. Retire le bouquet d'herbes avant de servir." }
+      ],
+      "astuce": "Au Maroc, le couscous se partage le vendredi en famille, dans un grand plat au milieu de la table. Pour une semoule encore plus légère, fais-la gonfler une deuxième fois à la vapeur au-dessus du bouillon.",
+      "image": "images/maroc-couscous-poulet-legumes.jpg"
+    }
+  ]
+}

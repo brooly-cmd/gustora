@@ -1,0 +1,37 @@
+{
+  "zone": "Italie",
+  "recettes": [
+    {
+      "id": "italie-spaghetti-carbonara",
+      "nom": "Spaghetti alla carbonara",
+      "zone": "Italie",
+      "type": "Plat",
+      "personnes": 4,
+      "tempsPreparation": 10,
+      "tempsCuisson": 15,
+      "difficulte": "Moyen",
+      "saisons": ["toute l'année"],
+      "prixParPersonne": 2.45,
+      "budget": "€€",
+      "ingredients": [
+        { "id": "spaghetti", "quantite": 400, "unite": "g" },
+        { "id": "guanciale", "quantite": 150, "unite": "g" },
+        { "id": "oeuf", "quantite": 5, "unite": "pièce" },
+        { "id": "pecorino", "quantite": 80, "unite": "g" },
+        { "id": "poivre", "quantite": 1, "unite": "c. à café" },
+        { "id": "sel", "quantite": null, "unite": "au goût" }
+      ],
+      "etapes": [
+        { "texte": "Mets une grande casserole d'eau à bouillir et sale-la légèrement (le pecorino est déjà salé)." },
+        { "texte": "Coupe le guanciale en petits bâtonnets. Fais-le fondre à feu moyen dans une grande poêle, sans matière grasse, jusqu'à ce qu'il soit doré et que son gras devienne transparent. Coupe le feu.", "duree": 8 },
+        { "texte": "Dans un bol, fouette 4 jaunes d'œufs et 1 œuf entier avec le pecorino râpé et beaucoup de poivre fraîchement moulu : tu obtiens une pâte épaisse." },
+        { "texte": "Fais cuire les spaghetti en suivant le temps du paquet moins 1 minute, pour qu'ils restent un peu fermes (al dente).", "duree": 9 },
+        { "texte": "Garde une tasse d'eau de cuisson, égoutte les pâtes et verse-les dans la poêle du guanciale, hors du feu. Mélange pour bien les enrober de gras." },
+        { "texte": "Ajoute le mélange œufs-pecorino et 2 ou 3 cuillères d'eau de cuisson, puis remue vivement : la chaleur des pâtes épaissit les œufs en une sauce crémeuse, sans les transformer en omelette." },
+        { "texte": "Sers tout de suite avec un peu de pecorino et un tour de poivre par-dessus." }
+      ],
+      "astuce": "Jamais de crème dans une vraie carbonara : le crémeux vient des jaunes d'œufs et de l'eau de cuisson. Pas de guanciale ? De la pancetta ou de la poitrine fumée feront l'affaire.",
+      "image": "images/italie-spaghetti-carbonara.jpg"
+    }
+  ]
+}

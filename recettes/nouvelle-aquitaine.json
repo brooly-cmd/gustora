@@ -1,0 +1,41 @@
+{
+  "zone": "Nouvelle-Aquitaine",
+  "recettes": [
+    {
+      "id": "nouvelle-aquitaine-poulet-basquaise",
+      "nom": "Poulet basquaise",
+      "zone": "Nouvelle-Aquitaine",
+      "type": "Plat",
+      "personnes": 4,
+      "tempsPreparation": 20,
+      "tempsCuisson": 55,
+      "difficulte": "Facile",
+      "saisons": ["été", "automne"],
+      "prixParPersonne": 3.95,
+      "budget": "€€",
+      "ingredients": [
+        { "id": "cuisse-poulet", "quantite": 4, "unite": "pièce" },
+        { "id": "poivron", "quantite": 3, "unite": "pièce" },
+        { "id": "oignon", "quantite": 2, "unite": "pièce" },
+        { "id": "ail", "quantite": 3, "unite": "pièce" },
+        { "id": "tomate", "quantite": 600, "unite": "g" },
+        { "id": "piment-espelette", "quantite": 1, "unite": "c. à café" },
+        { "id": "vin-blanc", "quantite": 150, "unite": "ml" },
+        { "id": "thym", "quantite": 0.25, "unite": "pièce" },
+        { "id": "laurier", "quantite": 1, "unite": "pièce" },
+        { "id": "huile-olive", "quantite": 3, "unite": "c. à soupe" },
+        { "id": "sel", "quantite": null, "unite": "au goût" }
+      ],
+      "etapes": [
+        { "texte": "Sale les cuisses de poulet. Dans une cocotte, fais-les dorer dans l'huile d'olive sur toutes les faces, puis sors-les.", "duree": 10 },
+        { "texte": "Coupe les poivrons en lanières (de couleurs différentes si possible) et émince les oignons. Fais-les revenir dans la cocotte jusqu'à ce qu'ils soient tendres.", "duree": 10 },
+        { "texte": "Ajoute l'ail écrasé, puis les tomates coupées en morceaux, le piment d'Espelette, le thym et le laurier." },
+        { "texte": "Verse le vin blanc et gratte le fond de la cocotte avec une cuillère en bois : ces sucs dorés, c'est le goût de la sauce." },
+        { "texte": "Remets le poulet, couvre et laisse mijoter à feu doux jusqu'à ce que la viande se détache facilement de l'os.", "duree": 35 },
+        { "texte": "Goûte la sauce : si elle est trop liquide, laisse cuire quelques minutes sans couvercle. Sers bien chaud avec du riz ou des pommes de terre." }
+      ],
+      "astuce": "Le piment d'Espelette parfume plus qu'il ne pique : on peut en remettre une pincée au moment de servir pour son arôme.",
+      "image": "images/nouvelle-aquitaine-poulet-basquaise.jpg"
+    }
+  ]
+}

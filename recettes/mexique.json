@@ -1,0 +1,44 @@
+{
+  "zone": "Mexique",
+  "recettes": [
+    {
+      "id": "mexique-tacos-carnitas",
+      "nom": "Tacos de carnitas",
+      "zone": "Mexique",
+      "type": "Plat",
+      "personnes": 4,
+      "tempsPreparation": 20,
+      "tempsCuisson": 150,
+      "difficulte": "Moyen",
+      "saisons": ["toute l'année"],
+      "prixParPersonne": 3.80,
+      "budget": "€€",
+      "ingredients": [
+        { "id": "epaule-porc", "quantite": 1000, "unite": "g" },
+        { "id": "orange", "quantite": 1, "unite": "pièce" },
+        { "id": "ail", "quantite": 4, "unite": "pièce" },
+        { "id": "laurier", "quantite": 2, "unite": "pièce" },
+        { "id": "cumin", "quantite": 1, "unite": "c. à café" },
+        { "id": "origan", "quantite": 1, "unite": "c. à café" },
+        { "id": "huile-neutre", "quantite": 2, "unite": "c. à soupe" },
+        { "id": "eau", "quantite": 500, "unite": "ml" },
+        { "id": "tortilla-mais", "quantite": 12, "unite": "pièce" },
+        { "id": "oignon", "quantite": 1, "unite": "pièce" },
+        { "id": "coriandre", "quantite": 0.5, "unite": "pièce" },
+        { "id": "citron-vert", "quantite": 2, "unite": "pièce" },
+        { "id": "sel", "quantite": 2, "unite": "c. à café" }
+      ],
+      "etapes": [
+        { "texte": "Coupe l'épaule de porc en gros cubes de 5 cm et frotte-les avec le sel, le cumin et l'origan." },
+        { "texte": "Mets la viande dans une cocotte avec l'huile, l'eau, le jus de l'orange (et l'orange pressée elle-même), l'ail écrasé et le laurier. La viande doit être à peine couverte." },
+        { "texte": "Porte à frémissement, puis laisse cuire à feu doux, à moitié couvert, jusqu'à ce que la viande soit très tendre.", "duree": 120 },
+        { "texte": "Retire le couvercle, monte un peu le feu et laisse l'eau s'évaporer. Quand il ne reste que le gras, la viande commence à frire : laisse-la dorer en la retournant de temps en temps.", "duree": 25 },
+        { "texte": "Effiloche la viande avec deux fourchettes en gardant des morceaux croustillants. Retire l'orange, l'ail et le laurier." },
+        { "texte": "Pendant ce temps, hache finement l'oignon et la coriandre, et coupe les citrons verts en quartiers." },
+        { "texte": "Réchauffe les tortillas une par une dans une poêle sèche, 30 secondes de chaque côté. Garnis-les de carnitas, d'oignon et de coriandre, et presse un quartier de citron vert dessus." }
+      ],
+      "astuce": "À Michoacán, d'où viennent les carnitas, on les cuit dans le saindoux. Ici, c'est le gras de l'épaule qui fait ce travail : ne choisis surtout pas une viande trop maigre.",
+      "image": "images/mexique-tacos-carnitas.jpg"
+    }
+  ]
+}

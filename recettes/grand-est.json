@@ -1,0 +1,42 @@
+{
+  "zone": "Grand Est",
+  "recettes": [
+    {
+      "id": "grand-est-tarte-flambee",
+      "nom": "Tarte flambée alsacienne",
+      "zone": "Grand Est",
+      "type": "Plat",
+      "personnes": 4,
+      "tempsPreparation": 40,
+      "tempsCuisson": 25,
+      "difficulte": "Facile",
+      "saisons": ["toute l'année"],
+      "prixParPersonne": 1.80,
+      "budget": "€",
+      "ingredients": [
+        { "id": "farine", "quantite": 400, "unite": "g" },
+        { "id": "eau", "quantite": 220, "unite": "ml" },
+        { "id": "huile-neutre", "quantite": 3, "unite": "c. à soupe" },
+        { "id": "sel", "quantite": 1, "unite": "c. à café" },
+        { "id": "fromage-blanc", "quantite": 400, "unite": "g" },
+        { "id": "creme-fraiche-epaisse", "quantite": 200, "unite": "g" },
+        { "id": "oignon", "quantite": 3, "unite": "pièce" },
+        { "id": "lardons-fumes", "quantite": 300, "unite": "g" },
+        { "id": "muscade", "quantite": 1, "unite": "pincée" },
+        { "id": "poivre", "quantite": null, "unite": "au goût" }
+      ],
+      "etapes": [
+        { "texte": "Mélange la farine et le sel, puis ajoute l'huile et l'eau tiède. Pétris 5 minutes à la main jusqu'à obtenir une boule lisse qui ne colle plus aux doigts." },
+        { "texte": "Couvre la pâte d'un torchon et laisse-la reposer à température ambiante : elle se détend et s'étalera plus facilement.", "duree": 20 },
+        { "texte": "Pendant ce temps, préchauffe le four au maximum (250 °C ou plus), avec la plaque à l'intérieur pour qu'elle soit brûlante." },
+        { "texte": "Émince les oignons en rondelles très fines. Dans un bol, mélange le fromage blanc, la crème, la muscade, une pincée de sel et du poivre." },
+        { "texte": "Coupe la pâte en 4 morceaux. Étale chacun le plus finement possible sur une feuille de papier cuisson : il faut presque voir à travers." },
+        { "texte": "Tartine la pâte de crème en laissant 1 cm de bord, puis parsème d'oignons et de lardons." },
+        { "texte": "Glisse la feuille sur la plaque brûlante et enfourne jusqu'à ce que les bords soient dorés et un peu noircis. Recommence pour les 3 autres tartes.", "duree": 7 },
+        { "texte": "Sers aussitôt, coupée en parts carrées, et mange-la avec les doigts comme en Alsace." }
+      ],
+      "astuce": "Le secret, c'est un four le plus chaud possible et une pâte très fine : la tarte doit être croustillante, pas moelleuse comme une pizza.",
+      "image": "images/grand-est-tarte-flambee.jpg"
+    }
+  ]
+}

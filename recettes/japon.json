@@ -1,0 +1,44 @@
+{
+  "zone": "Japon",
+  "recettes": [
+    {
+      "id": "japon-gyozas-porc-chou",
+      "nom": "Gyozas au porc et au chou",
+      "zone": "Japon",
+      "type": "Entrée",
+      "personnes": 4,
+      "tempsPreparation": 40,
+      "tempsCuisson": 15,
+      "difficulte": "Moyen",
+      "saisons": ["toute l'année"],
+      "prixParPersonne": 2.00,
+      "budget": "€€",
+      "ingredients": [
+        { "id": "feuille-gyoza", "quantite": 24, "unite": "pièce" },
+        { "id": "porc-hache", "quantite": 250, "unite": "g" },
+        { "id": "chou-chinois", "quantite": 0.25, "unite": "pièce" },
+        { "id": "oignon-nouveau", "quantite": 2, "unite": "pièce" },
+        { "id": "gingembre-frais", "quantite": 15, "unite": "g" },
+        { "id": "ail", "quantite": 2, "unite": "pièce" },
+        { "id": "sauce-soja", "quantite": 6, "unite": "c. à soupe" },
+        { "id": "huile-sesame", "quantite": 2, "unite": "c. à soupe" },
+        { "id": "vinaigre-riz", "quantite": 2, "unite": "c. à soupe" },
+        { "id": "huile-neutre", "quantite": 2, "unite": "c. à soupe" },
+        { "id": "eau", "quantite": 100, "unite": "ml" },
+        { "id": "sel", "quantite": 1, "unite": "c. à café" }
+      ],
+      "etapes": [
+        { "texte": "Hache le chou très finement, mélange-le avec le sel et laisse-le dégorger : il va rendre son eau.", "duree": 15 },
+        { "texte": "Presse le chou à pleines mains pour l'essorer au maximum. C'est important : une farce trop mouillée fait déchirer les gyozas." },
+        { "texte": "Dans un saladier, mélange le porc, le chou, les oignons nouveaux ciselés, le gingembre et l'ail râpés, 2 cuillères de sauce soja et 1 cuillère d'huile de sésame. Malaxe jusqu'à ce que la farce devienne collante." },
+        { "texte": "Pose une cuillère à café de farce au centre d'une feuille, mouille le bord avec un doigt trempé dans l'eau, plie en demi-lune et pince le bord en faisant 5 ou 6 petits plis. Recommence pour toutes les feuilles." },
+        { "texte": "Chauffe l'huile neutre dans une grande poêle avec couvercle. Pose les gyozas à plat, côté plissé en haut, et laisse dorer le dessous.", "duree": 3 },
+        { "texte": "Verse 100 ml d'eau d'un coup (attention, ça crépite !), couvre aussitôt et laisse cuire à la vapeur.", "duree": 6 },
+        { "texte": "Retire le couvercle et laisse l'eau s'évaporer complètement, pour que le dessous redevienne croustillant.", "duree": 2 },
+        { "texte": "Prépare la sauce en mélangeant le reste de sauce soja, le vinaigre de riz et le reste d'huile de sésame. Sers les gyozas dorés vers le haut, avec la sauce à part." }
+      ],
+      "astuce": "Les gyozas crus se congèlent très bien, posés à plat sur une plaque : tu les cuis ensuite sans les décongeler, en ajoutant 2 minutes de vapeur.",
+      "image": "images/japon-gyozas-porc-chou.jpg"
+    }
+  ]
+}

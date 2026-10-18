@@ -1,0 +1,323 @@
+{
+  "zones": [
+    {
+      "nom": "Auvergne-Rhône-Alpes",
+      "fichier": "auvergne-rhone-alpes.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Bretagne",
+      "fichier": "bretagne.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Grand Est",
+      "fichier": "grand-est.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Inde",
+      "fichier": "inde.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Italie",
+      "fichier": "italie.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Japon",
+      "fichier": "japon.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Maroc",
+      "fichier": "maroc.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Mexique",
+      "fichier": "mexique.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Nouvelle-Aquitaine",
+      "fichier": "nouvelle-aquitaine.json",
+      "nombre": 1
+    },
+    {
+      "nom": "Provence-Alpes-Côte d'Azur",
+      "fichier": "provence-alpes-cote-d-azur.json",
+      "nombre": 1
+    }
+  ],
+  "recettes": [
+    {
+      "id": "auvergne-rhone-alpes-salade-lyonnaise",
+      "nom": "Salade lyonnaise",
+      "zone": "Auvergne-Rhône-Alpes",
+      "type": "Entrée",
+      "tempsTotal": 35,
+      "budget": "€",
+      "prixParPersonne": 1.65,
+      "saisons": [
+        "automne",
+        "hiver"
+      ],
+      "ingredients": [
+        "frisee",
+        "lardons-fumes",
+        "oeuf",
+        "baguette",
+        "echalote",
+        "moutarde",
+        "vinaigre-vin-rouge",
+        "huile-neutre",
+        "sel",
+        "poivre"
+      ],
+      "image": "images/auvergne-rhone-alpes-salade-lyonnaise.jpg"
+    },
+    {
+      "id": "bretagne-crepes-froment",
+      "nom": "Crêpes de froment",
+      "zone": "Bretagne",
+      "type": "Dessert",
+      "tempsTotal": 30,
+      "budget": "€",
+      "prixParPersonne": 0.5,
+      "saisons": [
+        "toute l'année"
+      ],
+      "ingredients": [
+        "farine",
+        "oeuf",
+        "lait",
+        "sel",
+        "huile-neutre"
+      ],
+      "image": "images/bretagne-crepes-froment.jpg"
+    },
+    {
+      "id": "grand-est-tarte-flambee",
+      "nom": "Tarte flambée alsacienne",
+      "zone": "Grand Est",
+      "type": "Plat",
+      "tempsTotal": 65,
+      "budget": "€",
+      "prixParPersonne": 1.8,
+      "saisons": [
+        "toute l'année"
+      ],
+      "ingredients": [
+        "farine",
+        "eau",
+        "huile-neutre",
+        "sel",
+        "fromage-blanc",
+        "creme-fraiche-epaisse",
+        "oignon",
+        "lardons-fumes",
+        "muscade",
+        "poivre"
+      ],
+      "image": "images/grand-est-tarte-flambee.jpg"
+    },
+    {
+      "id": "inde-dal-lentilles-corail",
+      "nom": "Dal de lentilles corail",
+      "zone": "Inde",
+      "type": "Plat",
+      "tempsTotal": 45,
+      "budget": "€",
+      "prixParPersonne": 1.5,
+      "saisons": [
+        "toute l'année"
+      ],
+      "ingredients": [
+        "lentilles-corail",
+        "eau",
+        "curcuma",
+        "oignon",
+        "tomate",
+        "ail",
+        "gingembre-frais",
+        "cumin",
+        "garam-masala",
+        "piment-cayenne",
+        "beurre",
+        "coriandre",
+        "citron-vert",
+        "riz-basmati",
+        "sel"
+      ],
+      "image": "images/inde-dal-lentilles-corail.jpg"
+    },
+    {
+      "id": "italie-spaghetti-carbonara",
+      "nom": "Spaghetti alla carbonara",
+      "zone": "Italie",
+      "type": "Plat",
+      "tempsTotal": 25,
+      "budget": "€€",
+      "prixParPersonne": 2.45,
+      "saisons": [
+        "toute l'année"
+      ],
+      "ingredients": [
+        "spaghetti",
+        "guanciale",
+        "oeuf",
+        "pecorino",
+        "poivre",
+        "sel"
+      ],
+      "image": "images/italie-spaghetti-carbonara.jpg"
+    },
+    {
+      "id": "japon-gyozas-porc-chou",
+      "nom": "Gyozas au porc et au chou",
+      "zone": "Japon",
+      "type": "Entrée",
+      "tempsTotal": 55,
+      "budget": "€€",
+      "prixParPersonne": 2,
+      "saisons": [
+        "toute l'année"
+      ],
+      "ingredients": [
+        "feuille-gyoza",
+        "porc-hache",
+        "chou-chinois",
+        "oignon-nouveau",
+        "gingembre-frais",
+        "ail",
+        "sauce-soja",
+        "huile-sesame",
+        "vinaigre-riz",
+        "huile-neutre",
+        "eau",
+        "sel"
+      ],
+      "image": "images/japon-gyozas-porc-chou.jpg"
+    },
+    {
+      "id": "maroc-couscous-poulet-legumes",
+      "nom": "Couscous au poulet et aux légumes",
+      "zone": "Maroc",
+      "type": "Plat",
+      "tempsTotal": 105,
+      "budget": "€€",
+      "prixParPersonne": 4.55,
+      "saisons": [
+        "automne",
+        "hiver"
+      ],
+      "ingredients": [
+        "cuisse-poulet",
+        "oignon",
+        "tomate",
+        "carotte",
+        "navet",
+        "courgette",
+        "potiron",
+        "chou-vert",
+        "pois-chiches",
+        "coriandre",
+        "persil",
+        "gingembre-moulu",
+        "curcuma",
+        "ras-el-hanout",
+        "huile-olive",
+        "eau",
+        "semoule",
+        "beurre",
+        "sel",
+        "poivre"
+      ],
+      "image": "images/maroc-couscous-poulet-legumes.jpg"
+    },
+    {
+      "id": "mexique-tacos-carnitas",
+      "nom": "Tacos de carnitas",
+      "zone": "Mexique",
+      "type": "Plat",
+      "tempsTotal": 170,
+      "budget": "€€",
+      "prixParPersonne": 3.8,
+      "saisons": [
+        "toute l'année"
+      ],
+      "ingredients": [
+        "epaule-porc",
+        "orange",
+        "ail",
+        "laurier",
+        "cumin",
+        "origan",
+        "huile-neutre",
+        "eau",
+        "tortilla-mais",
+        "oignon",
+        "coriandre",
+        "citron-vert",
+        "sel"
+      ],
+      "image": "images/mexique-tacos-carnitas.jpg"
+    },
+    {
+      "id": "nouvelle-aquitaine-poulet-basquaise",
+      "nom": "Poulet basquaise",
+      "zone": "Nouvelle-Aquitaine",
+      "type": "Plat",
+      "tempsTotal": 75,
+      "budget": "€€",
+      "prixParPersonne": 3.95,
+      "saisons": [
+        "été",
+        "automne"
+      ],
+      "ingredients": [
+        "cuisse-poulet",
+        "poivron",
+        "oignon",
+        "ail",
+        "tomate",
+        "piment-espelette",
+        "vin-blanc",
+        "thym",
+        "laurier",
+        "huile-olive",
+        "sel"
+      ],
+      "image": "images/nouvelle-aquitaine-poulet-basquaise.jpg"
+    },
+    {
+      "id": "provence-alpes-cote-d-azur-ratatouille",
+      "nom": "Ratatouille provençale",
+      "zone": "Provence-Alpes-Côte d'Azur",
+      "type": "Plat",
+      "tempsTotal": 90,
+      "budget": "€€",
+      "prixParPersonne": 3.3,
+      "saisons": [
+        "été"
+      ],
+      "ingredients": [
+        "aubergine",
+        "courgette",
+        "poivron",
+        "tomate",
+        "oignon",
+        "ail",
+        "thym",
+        "laurier",
+        "basilic",
+        "huile-olive",
+        "sel",
+        "poivre"
+      ],
+      "image": "images/provence-alpes-cote-d-azur-ratatouille.jpg"
+    }
+  ]
+}
