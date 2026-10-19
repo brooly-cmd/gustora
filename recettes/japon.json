@@ -40,7 +40,10 @@
       "astuce": "Les gyozas crus se congèlent très bien, posés à plat sur une plaque : tu les cuis ensuite sans les décongeler, en ajoutant 2 minutes de vapeur.",
       "image": "images/japon-gyozas-porc-chou.jpg",
       "calories": 410,
-      "regimes": { "sansGluten": "non", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "non", "vegan": "non" },
+      "regimes": {
+        "souple": { "sansGluten": "non", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "non", "vegan": "non" },
+        "strict": { "sansGluten": "non", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "non", "vegan": "non" }
+      },
       "notesAdaptation": {  }
     }
   ]

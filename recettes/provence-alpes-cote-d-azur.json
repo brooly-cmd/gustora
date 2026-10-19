@@ -39,7 +39,10 @@
       "astuce": "La ratatouille est encore meilleure le lendemain, réchauffée doucement : les saveurs ont eu le temps de se marier.",
       "image": "images/provence-alpes-cote-d-azur-ratatouille.jpg",
       "calories": 430,
-      "regimes": { "sansGluten": "oui", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "oui", "vegan": "oui" },
+      "regimes": {
+        "souple": { "sansGluten": "oui", "sansLactose": "oui", "pauvreFodmap": "adaptable", "vegetarien": "oui", "vegan": "oui" },
+        "strict": { "sansGluten": "oui", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "oui", "vegan": "oui" }
+      },
       "notesAdaptation": {  }
     }
   ]

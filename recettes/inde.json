@@ -42,7 +42,10 @@
       "astuce": "En Inde, on utilise du ghee (beurre clarifié) pour le tadka. Pour une version végane, remplace simplement le beurre par de l'huile.",
       "image": "images/inde-dal-lentilles-corail.jpg",
       "calories": 630,
-      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "non", "vegetarien": "oui", "vegan": "non" },
+      "regimes": {
+        "souple": { "sansGluten": "oui", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "oui", "vegan": "non" },
+        "strict": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "non", "vegetarien": "oui", "vegan": "non" }
+      },
       "notesAdaptation": {  }
     }
   ]

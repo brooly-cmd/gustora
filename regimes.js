@@ -25,9 +25,12 @@ const DESSINS = {
 function logoRegime(cle, etat){   // etat : 'oui' (plein) ou 'adaptable' (contour)
   return `<svg class="lg ${etat==='oui'?'plein':''}" viewBox="0 0 24 24" aria-hidden="true">${DESSINS[cle]}</svg>`;
 }
+// Le niveau des régimes : "souple" (ingrédients évidents) ou "strict" (cachés et traces comptés aussi).
+// La jauge pour le choisir arrive à la mission 8 ; d'ici là, tout le monde voit le niveau souple.
+const NIVEAU_REGIMES = 'souple';
 // Les régimes qu'une recette respecte déjà, puis ceux où elle est adaptable.
 function regimesRespectes(r){
-  const g = r.regimes || {};
+  const g = (r.regimes || {})[NIVEAU_REGIMES] || {};
   return [...REGIMES.filter(k=>g[k]==='oui'), ...REGIMES.filter(k=>g[k]==='adaptable')].map(k=>[k, g[k]]);
 }
 // La petite rangée de logos sous une carte recette.

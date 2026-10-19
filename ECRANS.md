@@ -38,8 +38,12 @@ des dessins à nous qui y ressemblent, lisibles en tout petit (16 px) et en jour
 - Pour sans gluten, sans lactose et pauvre en FODMAP, une recette est :
   « oui » (déjà compatible), « adaptable » (tous les ingrédients gênants ont un remplaçant) ou « non ».
 - Végétarien et vegan : seulement « oui » ou « non » (pas de version adaptée).
-- Être strict : un ingrédient caché compte (sauce soja = gluten → remplaçant tamari ; bouillon cube = souvent gluten).
-  Dans le doute, l'ingrédient est considéré comme gênant.
+- 3 niveaux, réglés régime par régime avec une jauge (mission 8) : « Désactivé » (on n'en tient pas compte),
+  « Souple » (seuls les ingrédients évidents comptent : farine, lait, viande, sauce soja…) et
+  « Strict » (les ingrédients cachés et les traces comptent aussi : beurre et fromages affinés pour le lactose,
+  lardons, tortillas « de maïs » mélangées au blé, mélanges d'épices, présure des fromages, vin collé à la gélatine,
+  courgette ou chou en grande quantité pour les FODMAP…). Sans réglage, les logos suivent le niveau « Souple ».
+  Claude décide, ingrédient par ingrédient, ce qui est évident ou caché. Dans le doute, l'ingrédient est au moins « caché ».
 - Un remplacement qui change la façon de cuisiner a une note (« La farine sans gluten colle moins : ajoute 1 œuf. »).
   Si le plat n'a plus de sens une fois adapté, la recette reste « non » pour ce régime.
 - Exemples de remplaçants : mozzarella → mozzarella sans lactose ; crème → crème sans lactose ;
@@ -57,11 +61,13 @@ Chaque recette a :
 - étapes : pour chacune, le texte, et une durée en minutes si un minuteur est utile
 - astuce (une phrase), image (images/<id>.jpg)
 - calories (kcal par personne, estimées)
-- régimes : sansGluten, sansLactose, pauvreFodmap (« oui » / « adaptable » / « non ») ; vegetarien, vegan (oui / non)
-- notesAdaptation : pour chaque régime adaptable, les notes de cuisine à afficher (souvent aucune)
+- régimes, pour le niveau souple et pour le niveau strict : sansGluten, sansLactose, pauvreFodmap
+  (« oui » / « adaptable » / « non ») ; vegetarien, vegan (oui / non)
+- notesAdaptation : pour chaque régime, les notes de cuisine (souvent aucune), chacune liée à l'ingrédient remplacé
+  qui la déclenche (elle s'affiche seulement si cet ingrédient est vraiment remplacé)
 ingredients.json : pour chaque ingrédient : id, nom (singulier et pluriel), rayon
 (Fruits et légumes, Crèmerie, Boucherie-Poissonnerie, Épicerie, Épices, Surgelés, Boissons), prix estimé par unité,
-kcal par unité, contient (gluten, lactose, fodmap, viande-poisson, origine animale : oui / non),
+kcal par unité, contient (gluten, lactose, fodmap, viande-poisson, origine animale : oui / caché / non),
 remplacants (pour sansGluten, sansLactose, pauvreFodmap : l'id de l'ingrédient qui le remplace, s'il existe).
 Les remplaçants sont eux-mêmes des ingrédients de la liste (avec leur prix et leurs kcal).
 recettes/index.json : le sommaire léger (id, nom, zone, type, temps total, budget, saisons, calories, régimes,
@@ -91,7 +97,7 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Titre : selon d'où on vient (« Résultats pour « crêpe » », « Petit budget », « Toutes les recettes »).
 - Puces de filtre : « Saison ▾ » · « Temps ▾ » · « Budget ▾ » · « Type ▾ » · « Régime ▾ » (plusieurs à la fois).
   Une puce active montre son choix (« Hiver ✕ »), le ✕ l'enlève.
-- « Régime ▾ » : 5 cases à cocher avec leur logo (on peut en cocher plusieurs : la recette doit les respecter TOUS),
+- « Régime ▾ » : les 5 régimes avec leur logo et leur jauge « Désactivé · Souple · Strict » (on peut en activer plusieurs : la recette doit les respecter TOUS),
   + la case « Garder mes régimes sur ce téléphone » (cochée par défaut).
   Avec un régime actif, les résultats sont en 2 groupes : « Déjà compatibles » puis « Adaptables »
   (sous la carte : « Version adaptée : 2 ingrédients remplacés »).

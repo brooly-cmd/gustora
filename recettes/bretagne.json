@@ -32,8 +32,18 @@
       "astuce": "La première crêpe est souvent ratée : c'est normal, elle sert à « régler » la poêle. Ne la jette pas, c'est la part du cuisinier !",
       "image": "images/bretagne-crepes-froment.jpg",
       "calories": 420,
-      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "oui", "vegan": "non" },
-      "notesAdaptation": { "sansGluten": ["La pâte sans gluten est plus fragile : laisse-la reposer 1 h et fais des crêpes un peu plus épaisses."], "pauvreFodmap": ["La pâte sans gluten est plus fragile : laisse-la reposer 1 h et fais des crêpes un peu plus épaisses."] }
+      "regimes": {
+        "souple": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "oui", "vegan": "non" },
+        "strict": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "oui", "vegan": "non" }
+      },
+      "notesAdaptation": {
+        "sansGluten": [
+          { "texte": "La pâte sans gluten est plus fragile : laisse-la reposer 1 h et fais des crêpes un peu plus épaisses.", "si": "farine" }
+        ],
+        "pauvreFodmap": [
+          { "texte": "La pâte sans gluten est plus fragile : laisse-la reposer 1 h et fais des crêpes un peu plus épaisses.", "si": "farine" }
+        ]
+      }
     }
   ]
 }

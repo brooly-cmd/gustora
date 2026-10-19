@@ -33,8 +33,21 @@
       "astuce": "Jamais de crème dans une vraie carbonara : le crémeux vient des jaunes d'œufs et de l'eau de cuisson. Pas de guanciale ? De la pancetta ou de la poitrine fumée feront l'affaire.",
       "image": "images/italie-spaghetti-carbonara.jpg",
       "calories": 770,
-      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
-      "notesAdaptation": { "sansGluten": ["Les spaghetti sans gluten collent vite : remue-les souvent et garde un peu plus d'eau de cuisson."], "sansLactose": ["Le parmesan est plus doux que le pecorino : goûte et ajoute une pincée de sel si besoin."], "pauvreFodmap": ["Les spaghetti sans gluten collent vite : remue-les souvent et garde un peu plus d'eau de cuisson."] }
+      "regimes": {
+        "souple": { "sansGluten": "adaptable", "sansLactose": "oui", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
+        "strict": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" }
+      },
+      "notesAdaptation": {
+        "sansGluten": [
+          { "texte": "Les spaghetti sans gluten collent vite : remue-les souvent et garde un peu plus d'eau de cuisson.", "si": "spaghetti" }
+        ],
+        "sansLactose": [
+          { "texte": "Le parmesan est plus doux que le pecorino : goûte et ajoute une pincée de sel si besoin.", "si": "pecorino" }
+        ],
+        "pauvreFodmap": [
+          { "texte": "Les spaghetti sans gluten collent vite : remue-les souvent et garde un peu plus d'eau de cuisson.", "si": "spaghetti" }
+        ]
+      }
     }
   ]
 }

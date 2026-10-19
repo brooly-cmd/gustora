@@ -47,8 +47,15 @@
       "astuce": "Au Maroc, le couscous se partage le vendredi en famille, dans un grand plat au milieu de la table. Pour une semoule encore plus légère, fais-la gonfler une deuxième fois à la vapeur au-dessus du bouillon.",
       "image": "images/maroc-couscous-poulet-legumes.jpg",
       "calories": 1110,
-      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "non", "vegetarien": "non", "vegan": "non" },
-      "notesAdaptation": { "sansGluten": ["La semoule de maïs boit moins : verse un peu moins de bouillon (environ 350 ml) pour la faire gonfler."] }
+      "regimes": {
+        "souple": { "sansGluten": "adaptable", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "non", "vegan": "non" },
+        "strict": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "non", "vegetarien": "non", "vegan": "non" }
+      },
+      "notesAdaptation": {
+        "sansGluten": [
+          { "texte": "La semoule de maïs boit moins : verse un peu moins de bouillon (environ 350 ml) pour la faire gonfler.", "si": "semoule" }
+        ]
+      }
     }
   ]
 }

@@ -40,8 +40,20 @@
       "astuce": "À Michoacán, d'où viennent les carnitas, on les cuit dans le saindoux. Ici, c'est le gras de l'épaule qui fait ce travail : ne choisis surtout pas une viande trop maigre.",
       "image": "images/mexique-tacos-carnitas.jpg",
       "calories": 860,
-      "regimes": { "sansGluten": "adaptable", "sansLactose": "oui", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
-      "notesAdaptation": { "sansGluten": ["Les tortillas 100 % maïs cassent à froid : réchauffe-les 30 secondes à la poêle avant de les garnir."], "pauvreFodmap": ["Les tortillas 100 % maïs cassent à froid : réchauffe-les 30 secondes à la poêle avant de les garnir.", "L'huile à l'ail remplace l'ail : ajoute-la dans la cocotte avec l'orange.", "Le vert de poireau remplace l'oignon cru : émince-le très finement."] }
+      "regimes": {
+        "souple": { "sansGluten": "oui", "sansLactose": "oui", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
+        "strict": { "sansGluten": "adaptable", "sansLactose": "oui", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" }
+      },
+      "notesAdaptation": {
+        "sansGluten": [
+          { "texte": "Les tortillas 100 % maïs cassent à froid : réchauffe-les 30 secondes à la poêle avant de les garnir.", "si": "tortilla-mais" }
+        ],
+        "pauvreFodmap": [
+          { "texte": "Les tortillas 100 % maïs cassent à froid : réchauffe-les 30 secondes à la poêle avant de les garnir.", "si": "tortilla-mais" },
+          { "texte": "L'huile à l'ail remplace l'ail : ajoute-la dans la cocotte avec l'orange.", "si": "ail" },
+          { "texte": "Le vert de poireau remplace l'oignon cru : émince-le très finement.", "si": "oignon" }
+        ]
+      }
     }
   ]
 }

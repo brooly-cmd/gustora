@@ -36,8 +36,19 @@
       "astuce": "Pour réussir l'œuf poché, il faut un œuf très frais : son blanc reste groupé autour du jaune au lieu de s'éparpiller.",
       "image": "images/auvergne-rhone-alpes-salade-lyonnaise.jpg",
       "calories": 480,
-      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
-      "notesAdaptation": { "sansGluten": ["Le pain sans gluten dore plus vite : surveille les croûtons."], "pauvreFodmap": ["Le pain sans gluten dore plus vite : surveille les croûtons.", "La ciboulette remplace l'échalote : cisèle-la dans la vinaigrette au dernier moment."] }
+      "regimes": {
+        "souple": { "sansGluten": "adaptable", "sansLactose": "oui", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
+        "strict": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" }
+      },
+      "notesAdaptation": {
+        "sansGluten": [
+          { "texte": "Le pain sans gluten dore plus vite : surveille les croûtons.", "si": "baguette" }
+        ],
+        "pauvreFodmap": [
+          { "texte": "Le pain sans gluten dore plus vite : surveille les croûtons.", "si": "baguette" },
+          { "texte": "La ciboulette remplace l'échalote : cisèle-la dans la vinaigrette au dernier moment.", "si": "echalote" }
+        ]
+      }
     }
   ]
 }

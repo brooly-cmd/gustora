@@ -38,8 +38,22 @@
       "astuce": "Le secret, c'est un four le plus chaud possible et une pâte très fine : la tarte doit être croustillante, pas moelleuse comme une pizza.",
       "image": "images/grand-est-tarte-flambee.jpg",
       "calories": 910,
-      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
-      "notesAdaptation": { "sansGluten": ["La pâte sans gluten se déchire facilement : étale-la entre deux feuilles de papier cuisson."], "sansLactose": ["La crème sans lactose est plus liquide : mélange-la bien avec le fromage frais pour garder une garniture épaisse."], "pauvreFodmap": ["La pâte sans gluten se déchire facilement : étale-la entre deux feuilles de papier cuisson.", "Le vert de poireau remplace l'oignon : émince-le très finement, il cuit aussi vite."] }
+      "regimes": {
+        "souple": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
+        "strict": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" }
+      },
+      "notesAdaptation": {
+        "sansGluten": [
+          { "texte": "La pâte sans gluten se déchire facilement : étale-la entre deux feuilles de papier cuisson.", "si": "farine" }
+        ],
+        "sansLactose": [
+          { "texte": "La crème sans lactose est plus liquide : mélange-la bien avec le fromage frais pour garder une garniture épaisse.", "si": "creme-fraiche-epaisse" }
+        ],
+        "pauvreFodmap": [
+          { "texte": "La pâte sans gluten se déchire facilement : étale-la entre deux feuilles de papier cuisson.", "si": "farine" },
+          { "texte": "Le vert de poireau remplace l'oignon : émince-le très finement, il cuit aussi vite.", "si": "oignon" }
+        ]
+      }
     }
   ]
 }

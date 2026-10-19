@@ -71,7 +71,8 @@ Coche chaque case quand la mission est réussie.
 - [ ] 8. Les filtres saison, temps, budget et régime — CONSTRUIT
   - **Quoi :** les puces de filtre de l'écran 2 (Saison, Temps, Budget, Type, Régime), qui se combinent,
     + le bloc « De saison en ce moment » de l'accueil, qui suit la date du jour.
-    « Régime ▾ » : plusieurs régimes à la fois, résultats en 2 groupes « Déjà compatibles » / « Adaptables »,
+    « Régime ▾ » : plusieurs régimes à la fois, chacun avec sa jauge « Désactivé · Souple · Strict »,
+    résultats en 2 groupes « Déjà compatibles » / « Adaptables »,
     et « Mes régimes » gardés sur le téléphone, avec le bandeau de l'accueil.
   - **Pourquoi :** comme les rayons d'une bibliothèque : on trouve vite ce qu'on cherche.
   - **C'est réussi quand :** je choisis « € » + « 30 min ou moins » et je ne vois que des recettes pas chères et rapides ;

@@ -1,5 +1,7 @@
 # Outil facultatif : recalcule les fiches à partir de ingredients.json (rien à installer, Python suffit).
-# Pour chaque recette : prix par personne, budget, calories et régimes ; puis le sommaire recettes/index.json.
+# Pour chaque recette : prix par personne, budget, calories et régimes (niveau souple et niveau strict) ;
+# puis le sommaire recettes/index.json.
+# Dans « contient » : "oui" = évident (compte toujours), "cache" = caché ou traces (compte seulement en strict), "non".
 # Vérifie aussi : ingrédient inconnu, remplaçant manquant, recette en double dans une zone.
 # Lancer depuis le dossier Gustora :  python outils/calculer.py
 import json, glob, sys
@@ -17,13 +19,15 @@ for i in PAR.values():
 def base(l):  # quantité en g, ml ou pièces (cuillères et pincées converties)
     return 0 if l['quantite'] is None else l['quantite'] * CONV.get(l['unite'], 1)
 
-def regimes(r):
-    out, ids = {}, [l['id'] for l in r['ingredients']]
+NIVEAUX = {'souple': ('oui',), 'strict': ('oui', 'cache')}
+def regimes(r, niveau):
+    out, ids, compte = {}, [l['id'] for l in r['ingredients']], NIVEAUX[niveau]
+    gene = lambda g, k: PAR[g]['contient'][k] in compte
     for reg, k in CLE.items():
-        genants = [g for g in ids if PAR[g]['contient'][k]]
+        genants = [g for g in ids if gene(g, k)]
         out[reg] = 'oui' if not genants else 'adaptable' if all(reg in PAR[g]['remplacants'] for g in genants) else 'non'
-    out['vegetarien'] = 'non' if any(PAR[g]['contient']['viandePoisson'] for g in ids) else 'oui'
-    out['vegan'] = 'non' if any(PAR[g]['contient']['origineAnimale'] for g in ids) else 'oui'
+    out['vegetarien'] = 'non' if any(gene(g, 'viandePoisson') for g in ids) else 'oui'
+    out['vegan'] = 'non' if any(gene(g, 'origineAnimale') for g in ids) else 'oui'
     return out
 
 # Même mise en page que les fichiers existants : les petits objets tiennent sur une ligne.
@@ -55,9 +59,12 @@ for f in sorted(glob.glob('recettes/*.json')):
         r['prixParPersonne'] = int(p) if p == int(p) else p
         r['budget'] = '€' if r['prixParPersonne'] < 2 else '€€' if r['prixParPersonne'] <= 5 else '€€€'
         r['calories'] = int(round(kcal / 10) * 10)                                     # à 10 kcal
-        r['regimes'] = regimes(r)
-        for reg in r.get('notesAdaptation', {}):
-            if r['regimes'][reg] != 'adaptable': soucis.append(f"{r['id']} : note pour {reg}, qui n'est plus adaptable")
+        r['regimes'] = {niv: regimes(r, niv) for niv in NIVEAUX}
+        # Chaque note s'affiche quand son ingrédient « si » est remplacé : il doit être dans la recette, avec un remplaçant.
+        for reg, notes in r.get('notesAdaptation', {}).items():
+            for n in notes:
+                if n['si'] not in [l['id'] for l in r['ingredients']] or reg not in PAR[n['si']]['remplacants']:
+                    soucis.append(f"{r['id']} : la note « {n['texte'][:30]}… » ne correspond à aucun remplacement")
         sommaire.append({'id': r['id'], 'nom': r['nom'], 'zone': r['zone'], 'type': r['type'],
           'tempsTotal': r['tempsPreparation'] + r['tempsCuisson'], 'budget': r['budget'], 'prixParPersonne': r['prixParPersonne'],
           'saisons': r['saisons'], 'ingredients': [l['id'] for l in r['ingredients']], 'image': r['image'],

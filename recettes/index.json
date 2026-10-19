@@ -79,11 +79,20 @@
       "image": "images/auvergne-rhone-alpes-salade-lyonnaise.jpg",
       "calories": 480,
       "regimes": {
-        "sansGluten": "adaptable",
-        "sansLactose": "adaptable",
-        "pauvreFodmap": "adaptable",
-        "vegetarien": "non",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "adaptable",
+          "sansLactose": "oui",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "adaptable",
+          "sansLactose": "adaptable",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -107,11 +116,20 @@
       "image": "images/bretagne-crepes-froment.jpg",
       "calories": 420,
       "regimes": {
-        "sansGluten": "adaptable",
-        "sansLactose": "adaptable",
-        "pauvreFodmap": "adaptable",
-        "vegetarien": "oui",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "adaptable",
+          "sansLactose": "adaptable",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "oui",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "adaptable",
+          "sansLactose": "adaptable",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "oui",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -140,11 +158,20 @@
       "image": "images/grand-est-tarte-flambee.jpg",
       "calories": 910,
       "regimes": {
-        "sansGluten": "adaptable",
-        "sansLactose": "adaptable",
-        "pauvreFodmap": "adaptable",
-        "vegetarien": "non",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "adaptable",
+          "sansLactose": "adaptable",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "adaptable",
+          "sansLactose": "adaptable",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -178,11 +205,20 @@
       "image": "images/inde-dal-lentilles-corail.jpg",
       "calories": 630,
       "regimes": {
-        "sansGluten": "adaptable",
-        "sansLactose": "adaptable",
-        "pauvreFodmap": "non",
-        "vegetarien": "oui",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "oui",
+          "sansLactose": "oui",
+          "pauvreFodmap": "non",
+          "vegetarien": "oui",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "adaptable",
+          "sansLactose": "adaptable",
+          "pauvreFodmap": "non",
+          "vegetarien": "oui",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -207,11 +243,20 @@
       "image": "images/italie-spaghetti-carbonara.jpg",
       "calories": 770,
       "regimes": {
-        "sansGluten": "adaptable",
-        "sansLactose": "adaptable",
-        "pauvreFodmap": "adaptable",
-        "vegetarien": "non",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "adaptable",
+          "sansLactose": "oui",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "adaptable",
+          "sansLactose": "adaptable",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -242,11 +287,20 @@
       "image": "images/japon-gyozas-porc-chou.jpg",
       "calories": 410,
       "regimes": {
-        "sansGluten": "non",
-        "sansLactose": "oui",
-        "pauvreFodmap": "non",
-        "vegetarien": "non",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "non",
+          "sansLactose": "oui",
+          "pauvreFodmap": "non",
+          "vegetarien": "non",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "non",
+          "sansLactose": "oui",
+          "pauvreFodmap": "non",
+          "vegetarien": "non",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -286,11 +340,20 @@
       "image": "images/maroc-couscous-poulet-legumes.jpg",
       "calories": 1110,
       "regimes": {
-        "sansGluten": "adaptable",
-        "sansLactose": "adaptable",
-        "pauvreFodmap": "non",
-        "vegetarien": "non",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "adaptable",
+          "sansLactose": "oui",
+          "pauvreFodmap": "non",
+          "vegetarien": "non",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "adaptable",
+          "sansLactose": "adaptable",
+          "pauvreFodmap": "non",
+          "vegetarien": "non",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -322,11 +385,20 @@
       "image": "images/mexique-tacos-carnitas.jpg",
       "calories": 860,
       "regimes": {
-        "sansGluten": "adaptable",
-        "sansLactose": "oui",
-        "pauvreFodmap": "adaptable",
-        "vegetarien": "non",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "oui",
+          "sansLactose": "oui",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "adaptable",
+          "sansLactose": "oui",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -357,11 +429,20 @@
       "image": "images/nouvelle-aquitaine-poulet-basquaise.jpg",
       "calories": 590,
       "regimes": {
-        "sansGluten": "oui",
-        "sansLactose": "oui",
-        "pauvreFodmap": "adaptable",
-        "vegetarien": "non",
-        "vegan": "non"
+        "souple": {
+          "sansGluten": "oui",
+          "sansLactose": "oui",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        },
+        "strict": {
+          "sansGluten": "oui",
+          "sansLactose": "oui",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "non",
+          "vegan": "non"
+        }
       }
     },
     {
@@ -392,11 +473,20 @@
       "image": "images/provence-alpes-cote-d-azur-ratatouille.jpg",
       "calories": 430,
       "regimes": {
-        "sansGluten": "oui",
-        "sansLactose": "oui",
-        "pauvreFodmap": "non",
-        "vegetarien": "oui",
-        "vegan": "oui"
+        "souple": {
+          "sansGluten": "oui",
+          "sansLactose": "oui",
+          "pauvreFodmap": "adaptable",
+          "vegetarien": "oui",
+          "vegan": "oui"
+        },
+        "strict": {
+          "sansGluten": "oui",
+          "sansLactose": "oui",
+          "pauvreFodmap": "non",
+          "vegetarien": "oui",
+          "vegan": "oui"
+        }
       }
     }
   ]
