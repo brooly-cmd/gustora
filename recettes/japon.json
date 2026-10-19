@@ -11,7 +11,7 @@
       "tempsCuisson": 15,
       "difficulte": "Moyen",
       "saisons": ["toute l'année"],
-      "prixParPersonne": 2.0,
+      "prixParPersonne": 2,
       "budget": "€€",
       "ingredients": [
         { "id": "feuille-gyoza", "quantite": 24, "unite": "pièce" },

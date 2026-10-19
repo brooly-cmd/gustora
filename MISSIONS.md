@@ -182,3 +182,16 @@ C'est réussi quand : sur Explorer, les zones ont toutes grossi, et 3 recettes a
 - Versions adaptées végétarienne et vegan (remplacer la viande par du tofu, etc.).
 - Le menu de la semaine.
 - Marcher sans internet (hors ligne).
+
+## Boîte à outils et bilan de fin de projet
+Des outils rangés en chemin. Ils sont facultatifs : une mission peut s'en servir si ça l'aide, rien ne l'y oblige.
+À la fin du projet, on relit cette liste pour décider ce qu'on garde, et ce qui peut servir à d'autres projets
+(comme vider sa caisse à outils après un chantier : ce qui a servi va dans la boîte du prochain).
+
+| Outil | Où | À quoi il sert | Pour d'autres projets ? (à décider à la fin) |
+|---|---|---|---|
+| Le calculateur des fiches (mission 6) | outils/calculer.py | Recalcule prix, budget, calories, régimes et le sommaire à partir de ingredients.json ; signale les ingrédients inconnus et les recettes en double. Lancer : `python outils/calculer.py` | Idée réutilisable : « des données bien rangées → un programme calcule le reste » |
+| Les logos des régimes (mission 6) | regimes.js | 5 petits dessins SVG, plein = compatible, contour = adaptable | Le principe plein / contour peut servir ailleurs |
+| Les effets du site (missions 3 à 6) | effets.js | Effets 78, 3, 2, 8, 14, 42 et 6, réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
+
+Bilan final (à remplir après la dernière mission) : ce qui a bien marché, ce qui était de trop, ce que je garde pour le prochain projet.
