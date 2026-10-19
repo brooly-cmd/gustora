@@ -11,7 +11,7 @@
       "tempsCuisson": 25,
       "difficulte": "Facile",
       "saisons": ["toute l'année"],
-      "prixParPersonne": 1.80,
+      "prixParPersonne": 1.8,
       "budget": "€",
       "ingredients": [
         { "id": "farine", "quantite": 400, "unite": "g" },
@@ -36,7 +36,10 @@
         { "texte": "Sers aussitôt, coupée en parts carrées, et mange-la avec les doigts comme en Alsace." }
       ],
       "astuce": "Le secret, c'est un four le plus chaud possible et une pâte très fine : la tarte doit être croustillante, pas moelleuse comme une pizza.",
-      "image": "images/grand-est-tarte-flambee.jpg"
+      "image": "images/grand-est-tarte-flambee.jpg",
+      "calories": 910,
+      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
+      "notesAdaptation": { "sansGluten": ["La pâte sans gluten se déchire facilement : étale-la entre deux feuilles de papier cuisson."], "sansLactose": ["La crème sans lactose est plus liquide : mélange-la bien avec le fromage frais pour garder une garniture épaisse."], "pauvreFodmap": ["La pâte sans gluten se déchire facilement : étale-la entre deux feuilles de papier cuisson.", "Le vert de poireau remplace l'oignon : émince-le très finement, il cuit aussi vite."] }
     }
   ]
 }

@@ -11,7 +11,7 @@
       "tempsCuisson": 150,
       "difficulte": "Moyen",
       "saisons": ["toute l'année"],
-      "prixParPersonne": 3.80,
+      "prixParPersonne": 3.8,
       "budget": "€€",
       "ingredients": [
         { "id": "epaule-porc", "quantite": 1000, "unite": "g" },
@@ -38,7 +38,10 @@
         { "texte": "Réchauffe les tortillas une par une dans une poêle sèche, 30 secondes de chaque côté. Garnis-les de carnitas, d'oignon et de coriandre, et presse un quartier de citron vert dessus." }
       ],
       "astuce": "À Michoacán, d'où viennent les carnitas, on les cuit dans le saindoux. Ici, c'est le gras de l'épaule qui fait ce travail : ne choisis surtout pas une viande trop maigre.",
-      "image": "images/mexique-tacos-carnitas.jpg"
+      "image": "images/mexique-tacos-carnitas.jpg",
+      "calories": 860,
+      "regimes": { "sansGluten": "adaptable", "sansLactose": "oui", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
+      "notesAdaptation": { "sansGluten": ["Les tortillas 100 % maïs cassent à froid : réchauffe-les 30 secondes à la poêle avant de les garnir."], "pauvreFodmap": ["Les tortillas 100 % maïs cassent à froid : réchauffe-les 30 secondes à la poêle avant de les garnir.", "L'huile à l'ail remplace l'ail : ajoute-la dans la cocotte avec l'orange.", "Le vert de poireau remplace l'oignon cru : émince-le très finement."] }
     }
   ]
 }

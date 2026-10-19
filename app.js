@@ -1,4 +1,5 @@
 // Les écrans de l'app : l'accueil (écran 1) et la liste des recettes (écran 2), plus la barre d'onglets.
+// La page d'une recette (écran 3) est dans recette.js.
 const T = TEXTES, A = T.accueil, L = T.liste;
 
 /* ---------- Petites icônes (trait fin, couleur du texte) ---------- */
@@ -56,11 +57,11 @@ $('onglet-accueil').addEventListener('click', ()=>{ location.hash = ''; });
 new ResizeObserver(()=>choisirOnglet(0)).observe($('onglets'));
 
 /* ---------- Les morceaux de page ---------- */
-// La carte recette est un lien vers sa future page (mission 6).
-function carte(r){ return `<div class="tilt js-tilt" data-max="8"><a class="rc" href="#recette/${r.id}" data-bientot>
+// La carte recette est un lien vers sa page.
+function carte(r){ return `<div class="tilt js-tilt" data-max="8"><a class="rc" href="#recette/${r.id}">
   <span class="img" aria-hidden="true">${emoji(r)}</span>
   <span class="body"><h3>${r.nom}</h3><span class="z">${r.zone}</span>
-    <span class="meta"><span>⏱ ${duree(r.tempsTotal)}</span><span>${prix(r.prixParPersonne)}</span><span class="bdg">${r.budget}</span></span></span>
+    <span class="meta"><span>⏱ ${duree(r.tempsTotal)}</span><span>${prix(r.prixParPersonne)}</span><span class="bdg">${r.budget}</span></span>${logosCarte(r)}</span>
   </a></div>`; }
 
 function vedette(r, saison){ return `<div class="vedette js-tilt" data-max="9">
@@ -70,7 +71,7 @@ function vedette(r, saison){ return `<div class="vedette js-tilt" data-max="9">
     <span class="kick">${A.vedette} · ${T.saisons[saison]}</span>
     <h2>${r.nom}</h2>
     <span class="badges"><span class="bdg">${r.budget}</span><span class="tm">⏱ ${duree(r.tempsTotal)}</span>${saisons(r)}</span>
-    <button class="see" type="button" data-bientot>${A.voirRecette}</button>
+    <a class="see" href="#recette/${r.id}">${A.voirRecette}</a>
   </div></div>`; }
 
 // Raccourcis : les 3 premiers mènent à des écrans à venir, les 2 derniers ouvrent la liste déjà triée.
@@ -78,6 +79,13 @@ const RACCOURCIS = [['france','data-bientot'], ['monde','data-bientot'], ['frigo
   ['budget','data-lien="#recettes?budget=€"'], ['temps','data-lien="#recettes?temps=30"']];
 const raccourcis = () => `<ul class="raccourcis">` + A.raccourcis.map((t,i)=>
   `<li><button class="rac" type="button" ${RACCOURCIS[i][1]}><span class="voile"></span><span class="ic">${svg(RACCOURCIS[i][0])}</span>${t}</button></li>`).join('') + `</ul>`;
+
+// En bas de l'accueil : la légende des 5 petits logos.
+function legendeLogos(){ const G = T.regimes, P = T.logos;
+  return `<section class="bloc logos-bloc"><h2>${P.titre}</h2><ul class="legendes">${REGIMES.map(k=>
+    `<li>${logoRegime(k,'oui')}<span><b>${G[k].nom}</b>${G[k].legende}</span></li>`).join('')}</ul>
+    <p class="plein-contour"><span>${logoRegime('vegetarien','oui')}${P.plein}</span><span>${logoRegime('vegetarien','adaptable')}${P.contour}</span></p>
+    <p class="note">${P.attention}</p></section>`; }
 
 /* ---------- Écran 1 : l'accueil (fabriqué une seule fois) ---------- */
 function construireAccueil(recettes){
@@ -91,7 +99,7 @@ function construireAccueil(recettes){
   const dernieres = recettes.slice().reverse().filter(r=>r!==star).slice(0,6);
   $('accueil').innerHTML = `<div class="duo">${vedette(star, saison)}${raccourcis()}</div>
     <section class="bloc"><h2>${A.dernieres}</h2><div class="cartes">${dernieres.map(carte).join('')}</div>
-    <p class="note">${T.prixEstime}</p></section>`;
+    <p class="note">${T.prixEstime}</p></section>${legendeLogos()}`;
   $('accueil').querySelectorAll('[data-lien]').forEach(b=>b.addEventListener('click',()=>{ location.hash = b.dataset.lien; }));
   brancherEffets($('accueil'));
   ecrireIdees(recettes);
@@ -138,20 +146,22 @@ $('recherche').addEventListener('input', ()=>{
 /* ---------- Quel écran montrer ? On lit l'adresse (#recettes?q=crêpe), comme l'intercalaire d'un classeur ---------- */
 function router(){
   const [nom, reste] = location.hash.slice(1).split('?');
-  const ecran = nom === 'recettes' ? 'liste' : 'accueil';
+  const ecran = nom === 'recettes' ? 'liste' : nom.startsWith('recette/') ? 'recette' : 'accueil';
   const avant = document.body.dataset.ecran;
   document.body.dataset.ecran = ecran;
   $('accueil').hidden = ecran !== 'accueil';
   $('liste').hidden = ecran !== 'liste';
+  $('recette').hidden = ecran !== 'recette';
   if (ecran === 'liste'){
     const params = new URLSearchParams(reste);
     $('recherche').value = params.get('q') || '';
     afficherListe(params);
   } else {
-    document.title = T.titrePage;
     $('recherche').value = '';
+    if (ecran === 'recette') afficherRecette(decodeURIComponent(nom.slice(8)));
+    else document.title = T.titrePage;
   }
-  if (avant !== ecran) scrollTo(0, 0);
+  if (avant !== ecran || ecran === 'recette') scrollTo(0, 0);
   choisirOnglet(0); demarrer(); relancerIdees();
 }
 
@@ -159,7 +169,7 @@ function router(){
 function lancer(){
   chargerRecettes().then(d=>{ construireAccueil(d.recettes); router(); }).catch(()=>{
     document.body.dataset.ecran = 'erreur';
-    $('liste').hidden = true; $('accueil').hidden = false;
+    $('liste').hidden = $('recette').hidden = true; $('accueil').hidden = false;
     $('accueil').innerHTML = `<div class="encadre" role="alert"><p>${T.erreurChargement}</p><button class="btn" type="button" id="retry">${T.reessayer}</button></div>`;
     $('retry').addEventListener('click', lancer);
   });

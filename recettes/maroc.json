@@ -45,7 +45,10 @@
         { "texte": "Sers la semoule en dôme, avec le poulet et les légumes par-dessus, et le bouillon à part dans un bol pour arroser à son goût. Retire le bouquet d'herbes avant de servir." }
       ],
       "astuce": "Au Maroc, le couscous se partage le vendredi en famille, dans un grand plat au milieu de la table. Pour une semoule encore plus légère, fais-la gonfler une deuxième fois à la vapeur au-dessus du bouillon.",
-      "image": "images/maroc-couscous-poulet-legumes.jpg"
+      "image": "images/maroc-couscous-poulet-legumes.jpg",
+      "calories": 1110,
+      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "non", "vegetarien": "non", "vegan": "non" },
+      "notesAdaptation": { "sansGluten": ["La semoule de maïs boit moins : verse un peu moins de bouillon (environ 350 ml) pour la faire gonfler."] }
     }
   ]
 }

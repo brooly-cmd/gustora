@@ -2,6 +2,8 @@
 
 Un carnet de cuisine du monde, gratuit et public, qu'on installe sur l'iPhone.
 Fabriqué par la machine à kits de l'Atelier le 2026-10-18.
+Mis à jour le 2026-10-19 : régimes (sans gluten, sans lactose, pauvre en FODMAP, végétarien, vegan) avec logos,
+calories, filtre multiple et versions adaptées (nouvelle mission 12) → 28 missions.
 
 ## 1. FICHE PROJET (= CLAUDE.md)
 
@@ -80,7 +82,7 @@ Coche chaque case quand la mission est réussie.
 
 ### Préparer
 
-- [ ] 1. La fiche recette type et 10 premières recettes — CONSTRUIT
+- [x] 1. La fiche recette type et 10 premières recettes — CONSTRUIT
   - **Quoi :** créer le format des recettes (voir ECRANS.md, « La fiche recette »), la liste des
     ingrédients (ingredients.json, avec rayon et prix estimé) et 10 recettes : 5 de France
     (Bretagne, Alsace, Provence, Lyon/Auvergne-Rhône-Alpes, Nouvelle-Aquitaine) et 5 du monde
@@ -92,14 +94,14 @@ Coche chaque case quand la mission est réussie.
     bien : prix par personne, saison, temps, ingrédients avec quantités, étapes. Elle me donne envie.
   - **Produit pour la suite :** recettes/, ingredients.json, recettes/index.json.
 
-- [ ] 2. Le look : couleurs, logo et effets — MONTRE
+- [x] 2. Le look : couleurs, logo et effets — MONTRE
   - **Quoi :** une page choix-design.html où je choisis UNE palette, UN logo et mes effets « J'aime ».
     Ça crée DESIGN.md, logo.svg et l'icône iPhone. (Prompt dans kit-gustora.md, partie 3.)
   - **Pourquoi :** comme un essayage chez le tailleur : je montre du doigt, Claude coud.
   - **C'est réussi quand :** j'ai collé mon choix et DESIGN.md existe dans le dossier.
   - **Produit pour la suite :** DESIGN.md, logo.svg, l'icône.
 
-- [ ] 3. La maquette de l'accueil — MONTRE
+- [x] 3. La maquette de l'accueil — MONTRE
   - **Quoi :** l'écran d'accueil (ECRANS.md, écran 1) dessiné dans maquette.html avec mes couleurs,
     mon logo et mes effets déjà posés, et les vraies recettes de la mission 1. Rien n'est encore cliquable.
   - **Pourquoi :** comme le plan d'une maison avant de poser les briques : on change facilement.
@@ -108,25 +110,32 @@ Coche chaque case quand la mission est réussie.
 
 ### La base
 
-- [ ] 4. L'accueil et la liste des recettes — CONSTRUIT
+- [x] 4. L'accueil et la liste des recettes — CONSTRUIT
   - **Quoi :** index.html (écran 1) + l'écran 2 « Liste des recettes », qui lit les vraies recettes,
     + la barre d'onglets en bas, + textes.js. La recherche par nom marche.
   - **Pourquoi :** c'est la plus petite version utile : on voit les recettes et on les cherche.
   - **C'est réussi quand :** je tape « crêpe » dans la recherche et la recette bretonne apparaît.
   - **Produit pour la suite :** index.html, style.css, recettes.js (le chargement des recettes), textes.js.
 
-- [ ] 5. La mise en ligne — EXÉCUTE
+- [x] 5. La mise en ligne — EXÉCUTE
   - **Quoi :** mettre Gustora sur GitHub Pages (dépôt « gustora », compte brooly-cmd).
   - **Pourquoi :** c'est comme ouvrir le restaurant au public : l'app a une adresse que tout le monde peut ouvrir.
   - **C'est réussi quand :** j'ouvre https://brooly-cmd.github.io/gustora/ sur mon iPhone et je vois les 10 recettes.
   - **Produit pour la suite :** le lien en ligne (les missions suivantes le mettent à jour).
 
-- [ ] 6. La page d'une recette — CONSTRUIT
-  - **Quoi :** l'écran 3 : image (ou image de remplacement), badges, portions − / +, prix estimé,
-    ingrédients, étapes, astuce. Chaque recette a sa propre adresse (lien direct).
-  - **Pourquoi :** c'est la fiche qu'on lit en cuisinant ; le lien direct servira au partage.
-  - **C'est réussi quand :** je passe le couscous de 4 à 8 personnes : les quantités et le prix doublent.
-  - **Produit pour la suite :** recette.js.
+- [ ] 6. La page d'une recette, les calories et les régimes — CONSTRUIT
+  - **Quoi :** d'abord les données : ajouter aux 10 recettes et à ingredients.json les calories, les régimes,
+    ce que contient chaque ingrédient et ses remplaçants (voir ECRANS.md, « Les régimes » et « La fiche recette »).
+    Puis dessiner les 5 petits logos de régime.
+    Puis l'écran 3 : image (ou image de remplacement), badges avec les calories, ligne des régimes avec leurs logos,
+    portions − / +, prix estimé, ingrédients, étapes, astuce. Chaque recette a sa propre adresse (lien direct).
+    Enfin, les petits logos sur les cartes recette et le bloc « Les petits logos » en bas de l'accueil.
+    (Le bloc « Version adaptée » attend la mission 12.)
+  - **Pourquoi :** c'est la fiche qu'on lit en cuisinant ; le lien direct servira au partage. Les logos, c'est
+    comme les pictogrammes sur un emballage : on comprend d'un coup d'œil.
+  - **C'est réussi quand :** je passe le couscous de 4 à 8 personnes : les quantités et le prix doublent ;
+    les crêpes affichent leurs calories et le logo « Végétarien » ; en bas de l'accueil, je lis la légende des 5 logos.
+  - **Produit pour la suite :** recette.js, les logos de régime, les données de régimes et de remplaçants.
 
 ### Chercher
 
@@ -137,16 +146,19 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** je touche la Bretagne sur la carte (sur iPhone) et je vois ses recettes.
   - **Produit pour la suite :** explorer.js, carte-france.svg.
 
-- [ ] 8. Les filtres saison, temps et budget — CONSTRUIT
-  - **Quoi :** les puces de filtre de l'écran 2 (Saison, Temps, Budget, Type), qui se combinent,
+- [ ] 8. Les filtres saison, temps, budget et régime — CONSTRUIT
+  - **Quoi :** les puces de filtre de l'écran 2 (Saison, Temps, Budget, Type, Régime), qui se combinent,
     + le bloc « De saison en ce moment » de l'accueil, qui suit la date du jour.
+    « Régime ▾ » : plusieurs régimes à la fois, résultats en 2 groupes « Déjà compatibles » / « Adaptables »,
+    et « Mes régimes » gardés sur le téléphone, avec le bandeau de l'accueil.
   - **Pourquoi :** comme les rayons d'une bibliothèque : on trouve vite ce qu'on cherche.
-  - **C'est réussi quand :** je choisis « € » + « 30 min ou moins » et je ne vois que des recettes pas chères et rapides.
-  - **Produit pour la suite :** filtres.js.
+  - **C'est réussi quand :** je choisis « € » + « 30 min ou moins » et je ne vois que des recettes pas chères et rapides ;
+    je coche sans gluten + sans lactose, je ferme Safari, je reviens : le bandeau « Mes régimes » est toujours là.
+  - **Produit pour la suite :** filtres.js, stockage.js (le carnet du téléphone, réutilisé ensuite).
 
 - [ ] 9. Dans mon frigo — CONSTRUIT
   - **Quoi :** l'écran 6 : je coche mes ingrédients, l'app classe les recettes : « Tu peux cuisiner »,
-    « Il te manque 1 ingrédient », « Il te manque 2 ingrédients ».
+    « Il te manque 1 ingrédient », « Il te manque 2 ingrédients ». Si « Mes régimes » est actif, il est respecté.
   - **Pourquoi :** c'est le chef qui ouvre ton frigo et te dit quoi faire avec.
   - **C'est réussi quand :** je mets « œufs, farine, lait » et les crêpes sont dans « Tu peux cuisiner ».
   - **Produit pour la suite :** frigo.js.
@@ -158,7 +170,7 @@ Coche chaque case quand la mission est réussie.
   - **Pourquoi :** le stockage du navigateur, c'est comme un carnet rangé dans l'iPhone :
     on le retrouve en revenant, même après avoir fermé Safari.
   - **C'est réussi quand :** je mets 2 favoris, je ferme Safari, je reviens : ils sont toujours là.
-  - **Produit pour la suite :** stockage.js (le carnet), réutilisé à la mission 11.
+  - **Produit pour la suite :** les favoris dans stockage.js.
 
 - [ ] 11. La liste de courses — CONSTRUIT
   - **Quoi :** le bouton « Ajouter à ma liste de courses » + l'écran 8 : ingrédients regroupés
@@ -168,15 +180,26 @@ Coche chaque case quand la mission est réussie.
     et le total estimé s'affiche.
   - **Produit pour la suite :** courses.js.
 
-- [ ] 12. Le mode cuisine — CONSTRUIT
+- [ ] 12. Les versions adaptées — CONSTRUIT
+  - **Quoi :** le bloc « Version adaptée » de l'écran 3 : interrupteurs Sans gluten / Sans lactose / Pauvre en FODMAP
+    (plusieurs à la fois), ingrédients remplacés en couleur, notes d'adaptation, prix et calories recalculés,
+    ouverture directe dans la version adaptée si « Mes régimes » est actif, et la liste de courses qui reçoit les remplaçants.
+  - **Pourquoi :** une personne intolérante peut cuisiner le plat qu'elle veut, pas seulement ceux qui sont déjà « sans ».
+    C'est comme un tailleur qui retouche un costume au lieu d'en chercher un autre.
+  - **C'est réussi quand :** sur une recette avec du fromage, j'allume « Sans lactose » : le fromage devient sa version
+    sans lactose et le prix change ; je l'ajoute aux courses : la liste contient bien le remplaçant.
+  - **Produit pour la suite :** adaptation.js.
+
+- [ ] 13. Le mode cuisine — CONSTRUIT
   - **Quoi :** l'écran 9 : une étape à la fois en grand, l'écran reste allumé, et un minuteur quand l'étape a une durée.
+    Il suit la version adaptée choisie.
   - **Pourquoi :** les mains pleines de farine, on veut juste lire en grand et toucher « Suivant ».
   - **C'est réussi quand :** sur iPhone, je lance un minuteur d'1 minute : il sonne à la fin, et l'écran ne s'est pas éteint.
   - **Produit pour la suite :** cuisine.js.
 
 ### Remplir le carnet (10 recettes par région et par pays)
 
-- [ ] 13. Les images des plats — EXÉCUTE
+- [ ] 14. Les images des plats — EXÉCUTE
   - **Quoi :** créer avec Pollinations une image IA pour chacune des 10 recettes, la ranger dans images/,
     et écrire la méthode dans IMAGES.md (pour la refaire à chaque remplissage).
     Si Pollinations ne marche pas : le dire, et garder l'image de remplacement.
@@ -184,20 +207,21 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** sur mon iPhone, chaque recette a une jolie image, et la page reste rapide.
   - **Produit pour la suite :** images/, IMAGES.md (la méthode).
 
-- [ ] 14. Remplir (1/3) : environ 75 recettes et leurs images — CONSTRUIT
-- [ ] 15. Remplir (2/3) : environ 75 recettes et leurs images — CONSTRUIT
-- [ ] 16. Remplir (3/3) : environ 70 recettes et leurs images — CONSTRUIT
+- [ ] 15. Remplir (1/3) : environ 75 recettes et leurs images — CONSTRUIT
+- [ ] 16. Remplir (2/3) : environ 75 recettes et leurs images — CONSTRUIT
+- [ ] 17. Remplir (3/3) : environ 70 recettes et leurs images — CONSTRUIT
   - **Quoi (pour les 3) :** ajouter des recettes jusqu'à 10 par région et 10 par pays (230 en tout),
     en commençant par les zones les moins remplies. Les plats les plus connus de chaque zone d'abord.
-    Chaque recette s'inspire des versions les mieux notées sur internet, écrite avec mes mots. Plus leur image.
+    Chaque recette s'inspire des versions les mieux notées sur internet, écrite avec mes mots.
+    Avec ses calories, ses régimes, ses notes d'adaptation, les remplaçants des nouveaux ingrédients, et son image.
   - **Pourquoi :** comme remplir les étagères d'une épicerie qui vient d'ouvrir.
   - **C'est réussi quand :** sur l'écran Explorer, chaque zone remplie affiche le bon nombre de recettes,
-    et 3 recettes prises au hasard ont tout (image, prix, saison, étapes).
-  - **Produit pour la suite :** un carnet plus gros (à la mission 16 : 230 recettes).
+    et 3 recettes prises au hasard ont tout (image, prix, calories, régimes, saison, étapes).
+  - **Produit pour la suite :** un carnet plus gros (à la mission 17 : 230 recettes).
 
 ### Ouvrir au public
 
-- [ ] 17. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
+- [ ] 18. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
   - **Quoi :** le bouton « Partager » d'une recette, l'installation sur l'écran d'accueil iPhone
     (icône, nom, plein écran) et l'écran 10 « À propos ».
   - **Pourquoi :** l'app devient publique : il faut pouvoir l'envoyer et dire honnêtement d'où viennent les recettes.
@@ -205,34 +229,35 @@ Coche chaque case quand la mission est réussie.
     et Gustora s'ajoute à mon écran d'accueil avec son icône.
   - **Produit pour la suite :** manifest.webmanifest, l'app complète.
 
-- [ ] 18. Un vrai test avec quelqu'un d'autre — EXÉCUTE
+- [ ] 19. Un vrai test avec quelqu'un d'autre — EXÉCUTE
   - **Quoi :** une personne essaie Gustora sur son téléphone sans aide : trouver une recette d'hiver,
-    l'ajouter à ses courses, puis utiliser « Dans mon frigo ». Je note ce qui la bloque, Claude corrige les 3 plus gros soucis.
+    l'ajouter à ses courses, utiliser « Dans mon frigo », puis ouvrir une recette en version sans lactose.
+    Je note ce qui la bloque, Claude corrige les 3 plus gros soucis.
   - **Pourquoi :** le cuisinier ne goûte jamais son plat comme un client : un regard neuf voit ce qu'on ne voit plus.
-  - **C'est réussi quand :** la personne a réussi les 3 tâches seule.
+  - **C'est réussi quand :** la personne a réussi les 4 tâches seule.
   - **Produit pour la suite :** Gustora 1.0 🎉
 
 ### Le grand remplissage (jusqu'à 50 recettes par région et par pays)
 
 Pour ces 9 missions : environ 100 recettes de plus (et leurs images) à chaque fois, zones les moins remplies d'abord,
-même méthode que les missions 14 à 16. À la fin : environ 1 150 recettes.
+même méthode que les missions 15 à 17 (calories, régimes et remplaçants compris). À la fin : environ 1 150 recettes.
 C'est réussi quand : sur Explorer, les zones ont toutes grossi, et 3 recettes au hasard sont complètes.
 
-- [ ] 19. Grand remplissage (1/9) — CONSTRUIT
-- [ ] 20. Grand remplissage (2/9) — CONSTRUIT
-- [ ] 21. Grand remplissage (3/9) — CONSTRUIT
-- [ ] 22. Grand remplissage (4/9) — CONSTRUIT
-- [ ] 23. Grand remplissage (5/9) — CONSTRUIT
-- [ ] 24. Grand remplissage (6/9) — CONSTRUIT
-- [ ] 25. Grand remplissage (7/9) — CONSTRUIT
-- [ ] 26. Grand remplissage (8/9) — CONSTRUIT
-- [ ] 27. Grand remplissage (9/9) — CONSTRUIT
+- [ ] 20. Grand remplissage (1/9) — CONSTRUIT
+- [ ] 21. Grand remplissage (2/9) — CONSTRUIT
+- [ ] 22. Grand remplissage (3/9) — CONSTRUIT
+- [ ] 23. Grand remplissage (4/9) — CONSTRUIT
+- [ ] 24. Grand remplissage (5/9) — CONSTRUIT
+- [ ] 25. Grand remplissage (6/9) — CONSTRUIT
+- [ ] 26. Grand remplissage (7/9) — CONSTRUIT
+- [ ] 27. Grand remplissage (8/9) — CONSTRUIT
+- [ ] 28. Grand remplissage (9/9) — CONSTRUIT
 
 ## Plus tard (seulement si je le demande)
 - Plusieurs langues (anglais, espagnol…) : les textes sont déjà rangés dans textes.js pour ça.
 - Plus de pays, et l'Outre-mer.
 - Remplacer une image IA par ma vraie photo du plat.
-- Filtres végétarien / sans gluten.
+- Versions adaptées végétarienne et vegan (remplacer la viande par du tofu, etc.).
 - Le menu de la semaine.
 - Marcher sans internet (hors ligne).
 ```
@@ -284,7 +309,7 @@ Pose-moi tes questions, fais un plan d'abord, puis montre-moi que ça marche.
 Explique-moi simplement ce que tu fais, je suis débutant.
 ```
 
-### CONSTRUIT (missions 1, 3, 4, 6 à 12 et 17 — remplace N par le numéro)
+### CONSTRUIT (missions 1, 3, 4, 6 à 13 et 18 — remplace N par le numéro)
 ```
 Lis CLAUDE.md, MISSIONS.md et ECRANS.md. Fais uniquement la mission N, rien d'autre,
 puis fais la fin de mission prévue dans CLAUDE.md.
@@ -297,7 +322,7 @@ Explique-moi simplement ce que tu fais, je suis débutant.
 ```
 (Pour la mission 1, il n'y a pas encore d'interface ni de DESIGN.md : les 4 lignes du milieu ne s'appliquent pas.)
 
-### REMPLIR (missions 14 à 16 et 19 à 27 — remplace N par le numéro)
+### REMPLIR (missions 15 à 17 et 20 à 28 — remplace N par le numéro)
 ```
 Lis CLAUDE.md, MISSIONS.md, ECRANS.md (partie « La fiche recette ») et IMAGES.md.
 Fais uniquement la mission N, rien d'autre, puis fais la fin de mission prévue dans CLAUDE.md.
@@ -307,14 +332,16 @@ Fais uniquement la mission N, rien d'autre, puis fais la fin de mission prévue 
    (Marmiton, 750g, Cuisine AZ, Allrecipes…), garde ce qu'elles ont en commun, puis écris
    TA recette en français, avec tes mots (jamais de copier-coller), au format de la fiche recette.
    Prix estimés en euros, dans un supermarché français.
-4. Ajoute les nouveaux ingrédients dans ingredients.json, mets à jour le sommaire, et fais les images (méthode IMAGES.md).
+4. Donne à chaque recette ses calories, ses régimes et ses notes d'adaptation (ECRANS.md, « Les régimes »).
+   Ajoute les nouveaux ingrédients dans ingredients.json (avec kcal, ce qu'ils contiennent et leurs remplaçants),
+   mets à jour le sommaire, et fais les images (méthode IMAGES.md).
 5. Vérifie : chaque fichier JSON s'ouvre sans erreur, aucune recette en double, aucune image manquante.
 Travaille par paquets de 10 recettes, et dis-moi où tu en es entre chaque paquet.
 Pose-moi tes questions, fais un plan d'abord, puis montre-moi que ça marche.
 Explique-moi simplement ce que tu fais, je suis débutant.
 ```
 
-### EXÉCUTE (missions 5, 13 et 18)
+### EXÉCUTE (missions 5, 14 et 19)
 ```
 Lis CLAUDE.md, MISSIONS.md et ECRANS.md. Fais uniquement la mission N, rien d'autre,
 puis fais la fin de mission prévue dans CLAUDE.md.
@@ -340,7 +367,7 @@ Explique-moi simplement ce que tu fais, je suis débutant.
   Corse, Grand Est, Hauts-de-France, Île-de-France, Normandie, Nouvelle-Aquitaine, Occitanie,
   Pays de la Loire, Provence-Alpes-Côte d'Azur) et 10 pays (Italie, Espagne, Maroc, Japon, Mexique,
   Inde, Liban, Grèce, Thaïlande, États-Unis).
-- Objectif : 10 recettes par zone (mission 16), puis 50 par zone (mission 27).
+- Objectif : 10 recettes par zone (mission 17), puis 50 par zone (mission 28).
 - Une recette est prévue pour 4 personnes par défaut. On peut choisir de 1 à 12 personnes :
   quantités et prix sont recalculés (arrondis : « 1,5 œuf » → « 2 œufs », grammes à 5 g près).
 - Budget par personne : € = moins de 2 € ; €€ = de 2 à 5 € ; €€€ = plus de 5 €. Prix toujours avec « ~ ».
@@ -354,6 +381,34 @@ Explique-moi simplement ce que tu fais, je suis débutant.
   Rien n'est envoyé ailleurs.
 - « Réduire les animations » activé sur l'iPhone : pas d'animation décorative.
 - Jour / nuit : suit le réglage du téléphone, avec un interrupteur dans l'en-tête.
+- Calories : estimées par personne, toujours avec « ~ » (« ~450 kcal / pers. »), recalculées
+  avec les portions et avec la version adaptée.
+
+## Les régimes
+5 régimes, chacun avec son petit logo dessiné par Claude (SVG, aux couleurs de DESIGN.md).
+Jamais de copie des logos officiels (l'épi barré officiel, les logos FODMAP certifiés sont des marques déposées) :
+des dessins à nous qui y ressemblent, lisibles en tout petit (16 px) et en jour / nuit.
+
+| Régime | Logo | Légende (en bas de l'accueil) |
+|---|---|---|
+| Sans gluten | épi de blé barré | « Sans blé, orge, seigle ni avoine non certifiée. » |
+| Sans lactose | bouteille de lait barrée | « Sans lait de vache ni produit laitier contenant du lactose. » |
+| Pauvre en FODMAP | pastille « FODMAP » | « Pauvre en sucres qui fermentent dans l'intestin (ail, oignon, blé…). Indicatif. » |
+| Végétarien | feuille | « Sans viande ni poisson. » |
+| Vegan | feuille dans un rond | « Sans aucun produit d'origine animale. » |
+
+- Pour sans gluten, sans lactose et pauvre en FODMAP, une recette est :
+  « oui » (déjà compatible), « adaptable » (tous les ingrédients gênants ont un remplaçant) ou « non ».
+- Végétarien et vegan : seulement « oui » ou « non » (pas de version adaptée).
+- Être strict : un ingrédient caché compte (sauce soja = gluten → remplaçant tamari ; bouillon cube = souvent gluten).
+  Dans le doute, l'ingrédient est considéré comme gênant.
+- Un remplacement qui change la façon de cuisiner a une note (« La farine sans gluten colle moins : ajoute 1 œuf. »).
+  Si le plat n'a plus de sens une fois adapté, la recette reste « non » pour ce régime.
+- Exemples de remplaçants : mozzarella → mozzarella sans lactose ; crème → crème sans lactose ;
+  spaghetti → spaghetti sans gluten ; farine de blé → mélange de farines sans gluten ;
+  sauce soja → tamari ; ail → huile infusée à l'ail ; oignon → vert de poireau ou ciboulette.
+- « Mes régimes » : les régimes cochés dans le filtre sont gardés sur le téléphone. Tant qu'ils sont actifs,
+  les listes ne montrent que les recettes compatibles ou adaptables, et chaque recette s'ouvre dans sa version adaptée.
 
 ## La fiche recette (format des fichiers)
 Chaque recette a :
@@ -363,9 +418,16 @@ Chaque recette a :
 - ingrédients : pour chacun, l'id de l'ingrédient (dans ingredients.json), la quantité et l'unité
 - étapes : pour chacune, le texte, et une durée en minutes si un minuteur est utile
 - astuce (une phrase), image (images/<id>.jpg)
+- calories (kcal par personne, estimées)
+- régimes : sansGluten, sansLactose, pauvreFodmap (« oui » / « adaptable » / « non ») ; vegetarien, vegan (oui / non)
+- notesAdaptation : pour chaque régime adaptable, les notes de cuisine à afficher (souvent aucune)
 ingredients.json : pour chaque ingrédient : id, nom (singulier et pluriel), rayon
-(Fruits et légumes, Crèmerie, Boucherie-Poissonnerie, Épicerie, Épices, Surgelés, Boissons), prix estimé par unité.
-recettes/index.json : le sommaire léger (id, nom, zone, type, temps total, budget, saisons, ids des ingrédients, image).
+(Fruits et légumes, Crèmerie, Boucherie-Poissonnerie, Épicerie, Épices, Surgelés, Boissons), prix estimé par unité,
+kcal par unité, contient (gluten, lactose, fodmap, viande-poisson, origine animale : oui / non),
+remplacants (pour sansGluten, sansLactose, pauvreFodmap : l'id de l'ingrédient qui le remplace, s'il existe).
+Les remplaçants sont eux-mêmes des ingrédients de la liste (avec leur prix et leurs kcal).
+recettes/index.json : le sommaire léger (id, nom, zone, type, temps total, budget, saisons, calories, régimes,
+ids des ingrédients, image).
 
 ## Partout : la barre d'onglets (en bas)
 Accueil · Explorer · Mon frigo · Favoris · Courses
@@ -381,14 +443,23 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
   (change chaque jour) + bouton « Voir la recette ».
 - Raccourcis : « Explorer la France » · « Le tour du monde » · « Dans mon frigo » · « Petit budget (€) » · « Moins de 30 min »
 - Bloc « Les dernières recettes ajoutées » : 6 cartes recette.
+- Si « Mes régimes » est actif : un bandeau sous la recherche « Mes régimes : sans gluten · sans lactose ✕ »
+  (le ✕ les enlève), et la carte vedette est choisie parmi les recettes compatibles ou adaptables.
+- En bas de page, bloc « Les petits logos » : les 5 logos avec leur nom et leur légende (tableau « Les régimes »),
+  + « Ces informations sont indicatives : en cas d'allergie, vérifie toujours les étiquettes. »
 
 ## Écran 2 — Liste des recettes
 Éléments visuels : titre, puces de filtre, compteur, cartes recette.
 - Titre : selon d'où on vient (« Résultats pour « crêpe » », « Petit budget », « Toutes les recettes »).
-- Puces de filtre : « Saison ▾ » · « Temps ▾ » · « Budget ▾ » · « Type ▾ » (plusieurs à la fois).
+- Puces de filtre : « Saison ▾ » · « Temps ▾ » · « Budget ▾ » · « Type ▾ » · « Régime ▾ » (plusieurs à la fois).
   Une puce active montre son choix (« Hiver ✕ »), le ✕ l'enlève.
+- « Régime ▾ » : 5 cases à cocher avec leur logo (on peut en cocher plusieurs : la recette doit les respecter TOUS),
+  + la case « Garder mes régimes sur ce téléphone » (cochée par défaut).
+  Avec un régime actif, les résultats sont en 2 groupes : « Déjà compatibles » puis « Adaptables »
+  (sous la carte : « Version adaptée : 2 ingrédients remplacés »).
 - Compteur : « 42 recettes » (« 1 recette »).
-- Carte recette : image, nom, zone, « ⏱ 35 min », « ~2 € / pers. », le ♥.
+- Carte recette : image, nom, zone, « ⏱ 35 min », « ~2 € / pers. », les petits logos des régimes respectés
+  (un logo « adaptable » est en contour, un logo « oui » est plein), le ♥.
 - Vide : « Aucune recette ne correspond. Essaie d'enlever un filtre. » + bouton « Enlever les filtres ».
 - Plus de 30 recettes : les suivantes arrivent quand on descend (pas de page qui rame).
 
@@ -397,17 +468,26 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 étapes numérotées, encadré astuce, bouton principal, ♥, bouton partager.
 - Image du plat (ou image de remplacement : un pictogramme de plat sur la couleur douce).
 - Titre + zone touchable (« Bretagne › » ouvre l'écran 5).
-- Badges : « ⏱ 35 min » · « Facile » · « € » · « Hiver, Printemps »
+- Badges : « ⏱ 35 min » · « Facile » · « € » · « Hiver, Printemps » · « ~450 kcal / pers. »
+- Ligne des régimes : chaque logo avec son nom (« Sans lactose », « Végétarien »…) ; touchable → sa légende.
+- Bloc « Version adaptée » (mission 12) : des interrupteurs « Sans gluten » · « Sans lactose » · « Pauvre en FODMAP »,
+  seulement pour les régimes « adaptable » (plusieurs à la fois). Un régime « oui » affiche « ✓ Déjà sans gluten ».
+  Un régime « non » affiche « Pas de version sans gluten pour ce plat. ».
+  Si « Mes régimes » est actif, les bons interrupteurs sont déjà allumés.
 - Portions : « − 4 personnes + » (de 1 à 12).
 - Prix : « ~9 € au total · ~2,25 € / pers. » + petite mention « Prix estimé en supermarché. »
-- « Ingrédients » : la liste, recalculée selon les portions.
+  Prix et calories suivent la version adaptée.
+- « Ingrédients » : la liste, recalculée selon les portions. En version adaptée, un ingrédient remplacé
+  s'affiche « ~~mozzarella~~ → mozzarella sans lactose » (couleur d'accent), et les notes d'adaptation
+  apparaissent au-dessus des étapes : « 🔄 Version sans gluten : … ».
+  Petite mention : « Un remplaçant peut changer un peu le goût ou la texture. »
 - Bouton principal : « Ajouter à ma liste de courses » → message « 8 ingrédients ajoutés à ta liste ».
   Si déjà ajoutée : « Déjà dans ta liste · Mettre à jour les quantités ».
 - « Préparation » : étapes numérotées.
 - Astuce : « 💡 L'astuce : … »
 - Bouton : « Lancer le mode cuisine »
 - ♥ : « Ajoutée à tes favoris » / « Retirée de tes favoris ».
-- Partager (mission 17) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
+- Partager (mission 18) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
 - Avertissement en bas : « Allergies : vérifie toujours la liste des ingrédients. »
 - Recette introuvable (lien cassé) : « Cette recette n'existe pas (ou plus). » + bouton « Retour à l'accueil ».
 
@@ -447,7 +527,9 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Encadré : « Total estimé : ~23 € » (seulement les articles non cochés).
 - Groupes par rayon (« Fruits et légumes », « Crèmerie »…), lignes à cocher : « ☐ 6 œufs · ~1,80 € ».
   Un même ingrédient de 2 recettes = une seule ligne additionnée.
-- « Pour : Crêpes de froment (4 pers.), Tajine de poulet (6 pers.) » — chaque recette a un ✕ pour la retirer.
+- « Pour : Crêpes de froment (4 pers., sans gluten), Tajine de poulet (6 pers.) » — chaque recette a un ✕ pour la retirer.
+- Une recette ajoutée en version adaptée met directement les remplaçants dans la liste
+  (« ☐ 250 g de mozzarella sans lactose · ~3,20 € »), et le total estimé en tient compte.
 - Boutons : « Retirer les articles cochés » · « Vider la liste »
   → confirmation « Vider toute la liste ? » · « Oui, vider » · « Annuler »
 - Vide : « Ta liste est vide. Sur une recette, touche « Ajouter à ma liste de courses ». » + bouton « Trouver une recette ».
@@ -467,6 +549,8 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - « Les recettes sont écrites par Gustora, inspirées des versions les plus appréciées de chaque plat. »
 - « Les images des plats sont des illustrations créées par intelligence artificielle. »
 - « Les prix sont des estimations en supermarché : ils changent selon le magasin et la saison. »
+- « Les calories et les régimes sont indicatifs. En cas d'allergie ou de régime médical, vérifie toujours les étiquettes,
+  et demande conseil à un professionnel de santé. »
 - « Tes favoris et ta liste de courses restent sur ton téléphone. Rien n'est envoyé ailleurs. »
 - « Installer Gustora sur ton iPhone : touche Partager, puis « Sur l'écran d'accueil ». »
 
@@ -483,4 +567,8 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
    (en changeant les portions) → Courses → total estimé → au supermarché, coche au fur et à mesure → « Retirer les articles cochés ».
 4. Le voyageur : Explorer → Monde → Japon → une recette → zone « Japon › » → une autre recette.
 5. Celui qui revient : rouvre Gustora depuis l'icône de l'iPhone → ses favoris, sa liste et son frigo sont toujours là.
+6. La personne intolérante : liste des recettes → « Régime ▾ » → coche sans gluten + sans lactose (gardés sur le téléphone)
+   → « Adaptables » → lasagnes → la recette s'ouvre en version adaptée, ingrédients remplacés en couleur
+   → « Ajouter à ma liste de courses » → Courses : « pâtes à lasagnes sans gluten », « mozzarella sans lactose ».
+   Le lendemain, elle rouvre Gustora : le bandeau « Mes régimes : sans gluten · sans lactose ✕ » est toujours là.
 ```

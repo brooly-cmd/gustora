@@ -35,7 +35,10 @@
         { "texte": "Goûte la sauce : si elle est trop liquide, laisse cuire quelques minutes sans couvercle. Sers bien chaud avec du riz ou des pommes de terre." }
       ],
       "astuce": "Le piment d'Espelette parfume plus qu'il ne pique : on peut en remettre une pincée au moment de servir pour son arôme.",
-      "image": "images/nouvelle-aquitaine-poulet-basquaise.jpg"
+      "image": "images/nouvelle-aquitaine-poulet-basquaise.jpg",
+      "calories": 590,
+      "regimes": { "sansGluten": "oui", "sansLactose": "oui", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
+      "notesAdaptation": { "pauvreFodmap": ["L'huile à l'ail remplace l'ail : ajoute-la avec les tomates.", "Le vert de poireau remplace l'oignon : fais-le revenir avec les poivrons."] }
     }
   ]
 }

@@ -5,7 +5,7 @@
   Corse, Grand Est, Hauts-de-France, Île-de-France, Normandie, Nouvelle-Aquitaine, Occitanie,
   Pays de la Loire, Provence-Alpes-Côte d'Azur) et 10 pays (Italie, Espagne, Maroc, Japon, Mexique,
   Inde, Liban, Grèce, Thaïlande, États-Unis).
-- Objectif : 10 recettes par zone (mission 16), puis 50 par zone (mission 27).
+- Objectif : 10 recettes par zone (mission 17), puis 50 par zone (mission 28).
 - Une recette est prévue pour 4 personnes par défaut. On peut choisir de 1 à 12 personnes :
   quantités et prix sont recalculés (arrondis : « 1,5 œuf » → « 2 œufs », grammes à 5 g près).
 - Budget par personne : € = moins de 2 € ; €€ = de 2 à 5 € ; €€€ = plus de 5 €. Prix toujours avec « ~ ».
@@ -19,6 +19,34 @@
   Rien n'est envoyé ailleurs.
 - « Réduire les animations » activé sur l'iPhone : pas d'animation décorative.
 - Jour / nuit : suit le réglage du téléphone, avec un interrupteur dans l'en-tête.
+- Calories : estimées par personne, toujours avec « ~ » (« ~450 kcal / pers. »), recalculées
+  avec les portions et avec la version adaptée.
+
+## Les régimes
+5 régimes, chacun avec son petit logo dessiné par Claude (SVG, aux couleurs de DESIGN.md).
+Jamais de copie des logos officiels (l'épi barré officiel, les logos FODMAP certifiés sont des marques déposées) :
+des dessins à nous qui y ressemblent, lisibles en tout petit (16 px) et en jour / nuit.
+
+| Régime | Logo | Légende (en bas de l'accueil) |
+|---|---|---|
+| Sans gluten | épi de blé barré | « Sans blé, orge, seigle ni avoine non certifiée. » |
+| Sans lactose | bouteille de lait barrée | « Sans lait de vache ni produit laitier contenant du lactose. » |
+| Pauvre en FODMAP | pastille « FODMAP » | « Pauvre en sucres qui fermentent dans l'intestin (ail, oignon, blé…). Indicatif. » |
+| Végétarien | feuille | « Sans viande ni poisson. » |
+| Vegan | feuille dans un rond | « Sans aucun produit d'origine animale. » |
+
+- Pour sans gluten, sans lactose et pauvre en FODMAP, une recette est :
+  « oui » (déjà compatible), « adaptable » (tous les ingrédients gênants ont un remplaçant) ou « non ».
+- Végétarien et vegan : seulement « oui » ou « non » (pas de version adaptée).
+- Être strict : un ingrédient caché compte (sauce soja = gluten → remplaçant tamari ; bouillon cube = souvent gluten).
+  Dans le doute, l'ingrédient est considéré comme gênant.
+- Un remplacement qui change la façon de cuisiner a une note (« La farine sans gluten colle moins : ajoute 1 œuf. »).
+  Si le plat n'a plus de sens une fois adapté, la recette reste « non » pour ce régime.
+- Exemples de remplaçants : mozzarella → mozzarella sans lactose ; crème → crème sans lactose ;
+  spaghetti → spaghetti sans gluten ; farine de blé → mélange de farines sans gluten ;
+  sauce soja → tamari ; ail → huile infusée à l'ail ; oignon → vert de poireau ou ciboulette.
+- « Mes régimes » : les régimes cochés dans le filtre sont gardés sur le téléphone. Tant qu'ils sont actifs,
+  les listes ne montrent que les recettes compatibles ou adaptables, et chaque recette s'ouvre dans sa version adaptée.
 
 ## La fiche recette (format des fichiers)
 Chaque recette a :
@@ -28,9 +56,16 @@ Chaque recette a :
 - ingrédients : pour chacun, l'id de l'ingrédient (dans ingredients.json), la quantité et l'unité
 - étapes : pour chacune, le texte, et une durée en minutes si un minuteur est utile
 - astuce (une phrase), image (images/<id>.jpg)
+- calories (kcal par personne, estimées)
+- régimes : sansGluten, sansLactose, pauvreFodmap (« oui » / « adaptable » / « non ») ; vegetarien, vegan (oui / non)
+- notesAdaptation : pour chaque régime adaptable, les notes de cuisine à afficher (souvent aucune)
 ingredients.json : pour chaque ingrédient : id, nom (singulier et pluriel), rayon
-(Fruits et légumes, Crèmerie, Boucherie-Poissonnerie, Épicerie, Épices, Surgelés, Boissons), prix estimé par unité.
-recettes/index.json : le sommaire léger (id, nom, zone, type, temps total, budget, saisons, ids des ingrédients, image).
+(Fruits et légumes, Crèmerie, Boucherie-Poissonnerie, Épicerie, Épices, Surgelés, Boissons), prix estimé par unité,
+kcal par unité, contient (gluten, lactose, fodmap, viande-poisson, origine animale : oui / non),
+remplacants (pour sansGluten, sansLactose, pauvreFodmap : l'id de l'ingrédient qui le remplace, s'il existe).
+Les remplaçants sont eux-mêmes des ingrédients de la liste (avec leur prix et leurs kcal).
+recettes/index.json : le sommaire léger (id, nom, zone, type, temps total, budget, saisons, calories, régimes,
+ids des ingrédients, image).
 
 ## Partout : la barre d'onglets (en bas)
 Accueil · Explorer · Mon frigo · Favoris · Courses
@@ -46,14 +81,23 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
   (change chaque jour) + bouton « Voir la recette ».
 - Raccourcis : « Explorer la France » · « Le tour du monde » · « Dans mon frigo » · « Petit budget (€) » · « Moins de 30 min »
 - Bloc « Les dernières recettes ajoutées » : 6 cartes recette.
+- Si « Mes régimes » est actif : un bandeau sous la recherche « Mes régimes : sans gluten · sans lactose ✕ »
+  (le ✕ les enlève), et la carte vedette est choisie parmi les recettes compatibles ou adaptables.
+- En bas de page, bloc « Les petits logos » : les 5 logos avec leur nom et leur légende (tableau « Les régimes »),
+  + « Ces informations sont indicatives : en cas d'allergie, vérifie toujours les étiquettes. »
 
 ## Écran 2 — Liste des recettes
 Éléments visuels : titre, puces de filtre, compteur, cartes recette.
 - Titre : selon d'où on vient (« Résultats pour « crêpe » », « Petit budget », « Toutes les recettes »).
-- Puces de filtre : « Saison ▾ » · « Temps ▾ » · « Budget ▾ » · « Type ▾ » (plusieurs à la fois).
+- Puces de filtre : « Saison ▾ » · « Temps ▾ » · « Budget ▾ » · « Type ▾ » · « Régime ▾ » (plusieurs à la fois).
   Une puce active montre son choix (« Hiver ✕ »), le ✕ l'enlève.
+- « Régime ▾ » : 5 cases à cocher avec leur logo (on peut en cocher plusieurs : la recette doit les respecter TOUS),
+  + la case « Garder mes régimes sur ce téléphone » (cochée par défaut).
+  Avec un régime actif, les résultats sont en 2 groupes : « Déjà compatibles » puis « Adaptables »
+  (sous la carte : « Version adaptée : 2 ingrédients remplacés »).
 - Compteur : « 42 recettes » (« 1 recette »).
-- Carte recette : image, nom, zone, « ⏱ 35 min », « ~2 € / pers. », le ♥.
+- Carte recette : image, nom, zone, « ⏱ 35 min », « ~2 € / pers. », les petits logos des régimes respectés
+  (un logo « adaptable » est en contour, un logo « oui » est plein), le ♥.
 - Vide : « Aucune recette ne correspond. Essaie d'enlever un filtre. » + bouton « Enlever les filtres ».
 - Plus de 30 recettes : les suivantes arrivent quand on descend (pas de page qui rame).
 
@@ -62,17 +106,26 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 étapes numérotées, encadré astuce, bouton principal, ♥, bouton partager.
 - Image du plat (ou image de remplacement : un pictogramme de plat sur la couleur douce).
 - Titre + zone touchable (« Bretagne › » ouvre l'écran 5).
-- Badges : « ⏱ 35 min » · « Facile » · « € » · « Hiver, Printemps »
+- Badges : « ⏱ 35 min » · « Facile » · « € » · « Hiver, Printemps » · « ~450 kcal / pers. »
+- Ligne des régimes : chaque logo avec son nom (« Sans lactose », « Végétarien »…) ; touchable → sa légende.
+- Bloc « Version adaptée » (mission 12) : des interrupteurs « Sans gluten » · « Sans lactose » · « Pauvre en FODMAP »,
+  seulement pour les régimes « adaptable » (plusieurs à la fois). Un régime « oui » affiche « ✓ Déjà sans gluten ».
+  Un régime « non » affiche « Pas de version sans gluten pour ce plat. ».
+  Si « Mes régimes » est actif, les bons interrupteurs sont déjà allumés.
 - Portions : « − 4 personnes + » (de 1 à 12).
 - Prix : « ~9 € au total · ~2,25 € / pers. » + petite mention « Prix estimé en supermarché. »
-- « Ingrédients » : la liste, recalculée selon les portions.
+  Prix et calories suivent la version adaptée.
+- « Ingrédients » : la liste, recalculée selon les portions. En version adaptée, un ingrédient remplacé
+  s'affiche « ~~mozzarella~~ → mozzarella sans lactose » (couleur d'accent), et les notes d'adaptation
+  apparaissent au-dessus des étapes : « 🔄 Version sans gluten : … ».
+  Petite mention : « Un remplaçant peut changer un peu le goût ou la texture. »
 - Bouton principal : « Ajouter à ma liste de courses » → message « 8 ingrédients ajoutés à ta liste ».
   Si déjà ajoutée : « Déjà dans ta liste · Mettre à jour les quantités ».
 - « Préparation » : étapes numérotées.
 - Astuce : « 💡 L'astuce : … »
 - Bouton : « Lancer le mode cuisine »
 - ♥ : « Ajoutée à tes favoris » / « Retirée de tes favoris ».
-- Partager (mission 17) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
+- Partager (mission 18) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
 - Avertissement en bas : « Allergies : vérifie toujours la liste des ingrédients. »
 - Recette introuvable (lien cassé) : « Cette recette n'existe pas (ou plus). » + bouton « Retour à l'accueil ».
 
@@ -112,7 +165,9 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Encadré : « Total estimé : ~23 € » (seulement les articles non cochés).
 - Groupes par rayon (« Fruits et légumes », « Crèmerie »…), lignes à cocher : « ☐ 6 œufs · ~1,80 € ».
   Un même ingrédient de 2 recettes = une seule ligne additionnée.
-- « Pour : Crêpes de froment (4 pers.), Tajine de poulet (6 pers.) » — chaque recette a un ✕ pour la retirer.
+- « Pour : Crêpes de froment (4 pers., sans gluten), Tajine de poulet (6 pers.) » — chaque recette a un ✕ pour la retirer.
+- Une recette ajoutée en version adaptée met directement les remplaçants dans la liste
+  (« ☐ 250 g de mozzarella sans lactose · ~3,20 € »), et le total estimé en tient compte.
 - Boutons : « Retirer les articles cochés » · « Vider la liste »
   → confirmation « Vider toute la liste ? » · « Oui, vider » · « Annuler »
 - Vide : « Ta liste est vide. Sur une recette, touche « Ajouter à ma liste de courses ». » + bouton « Trouver une recette ».
@@ -132,6 +187,8 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - « Les recettes sont écrites par Gustora, inspirées des versions les plus appréciées de chaque plat. »
 - « Les images des plats sont des illustrations créées par intelligence artificielle. »
 - « Les prix sont des estimations en supermarché : ils changent selon le magasin et la saison. »
+- « Les calories et les régimes sont indicatifs. En cas d'allergie ou de régime médical, vérifie toujours les étiquettes,
+  et demande conseil à un professionnel de santé. »
 - « Tes favoris et ta liste de courses restent sur ton téléphone. Rien n'est envoyé ailleurs. »
 - « Installer Gustora sur ton iPhone : touche Partager, puis « Sur l'écran d'accueil ». »
 
@@ -148,3 +205,7 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
    (en changeant les portions) → Courses → total estimé → au supermarché, coche au fur et à mesure → « Retirer les articles cochés ».
 4. Le voyageur : Explorer → Monde → Japon → une recette → zone « Japon › » → une autre recette.
 5. Celui qui revient : rouvre Gustora depuis l'icône de l'iPhone → ses favoris, sa liste et son frigo sont toujours là.
+6. La personne intolérante : liste des recettes → « Régime ▾ » → coche sans gluten + sans lactose (gardés sur le téléphone)
+   → « Adaptables » → lasagnes → la recette s'ouvre en version adaptée, ingrédients remplacés en couleur
+   → « Ajouter à ma liste de courses » → Courses : « pâtes à lasagnes sans gluten », « mozzarella sans lactose ».
+   Le lendemain, elle rouvre Gustora : le bandeau « Mes régimes : sans gluten · sans lactose ✕ » est toujours là.

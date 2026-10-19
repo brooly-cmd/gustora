@@ -16,6 +16,16 @@ function brancherEffets(zone){
     el.addEventListener('pointermove',move); el.addEventListener('pointerleave',reset); el.addEventListener('pointercancel',reset);
     el.addEventListener('pointerup',e=>{ if(e.pointerType!=='mouse') reset(); });
   });
+  // Effet 6 : le bouton aimanté suit un peu la souris ; au doigt, il s'enfonce puis rebondit
+  if (!reduce) zone.querySelectorAll('.js-aimant').forEach(b=>{
+    const lacher=()=>{ b.style.transition=''; b.style.transform=''; };
+    b.addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse') return; const r=b.getBoundingClientRect();
+      b.style.transition='transform .15s linear';
+      b.style.transform=`translate(${((e.clientX-r.left-r.width/2)*.14).toFixed(1)}px,${((e.clientY-r.top-r.height/2)*.2).toFixed(1)}px)`; });
+    b.addEventListener('pointerleave',lacher);
+    b.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'){ b.style.transition='transform .12s'; b.style.transform='scale(.94)'; } });
+    ['pointerup','pointercancel'].forEach(n=>b.addEventListener(n,e=>{ if(e.pointerType!=='mouse') lacher(); }));
+  });
   // Effet 8 : voile qui suit la direction (souris) ; au doigt, il monte pendant l'appui
   zone.querySelectorAll('.rac').forEach(b=>{
     const voile=b.querySelector('.voile');

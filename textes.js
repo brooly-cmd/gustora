@@ -19,6 +19,38 @@ const TEXTES = {
     vide: "Aucune recette ne correspond. Essaie d'enlever un filtre.",
     enleverFiltres: "Enlever les filtres"
   },
+  logos: {
+    titre: "Les petits logos",
+    plein: "Logo plein : la recette est déjà compatible.",
+    contour: "Logo en contour : elle a une version adaptée.",
+    attention: "Ces informations sont indicatives : en cas d'allergie, vérifie toujours les étiquettes."
+  },
+  regimes: {
+    adaptable: "adaptable",
+    sansGluten: { nom: "Sans gluten", legende: "Sans blé, orge, seigle ni avoine non certifiée." },
+    sansLactose: { nom: "Sans lactose", legende: "Sans lait de vache ni produit laitier contenant du lactose." },
+    pauvreFodmap: { nom: "Pauvre en FODMAP", legende: "Pauvre en sucres qui fermentent dans l'intestin (ail, oignon, blé…). Indicatif." },
+    vegetarien: { nom: "Végétarien", legende: "Sans viande ni poisson." },
+    vegan: { nom: "Vegan", legende: "Sans aucun produit d'origine animale." }
+  },
+  recette: {
+    personnes: n => n <= 1 ? `${n} personne` : `${n} personnes`,
+    moins: "Une personne de moins",
+    plus: "Une personne de plus",
+    total: "au total",
+    prixEstime: "Prix estimé en supermarché.",
+    kcal: "kcal / pers.",
+    difficulte: "Difficulté",
+    ingredients: "Ingrédients",
+    auGout: "au goût",
+    preparation: "Préparation",
+    astuce: "L'astuce",
+    courses: "Ajouter à ma liste de courses",
+    cuisine: "Lancer le mode cuisine",
+    allergies: "Allergies : vérifie toujours la liste des ingrédients.",
+    introuvable: "Cette recette n'existe pas (ou plus).",
+    retourAccueil: "Retour à l'accueil"
+  },
   bientot: "Cet écran arrive bientôt !",
   onglets: ["Accueil", "Explorer", "Mon frigo", "Favoris", "Courses"],
   saisons: { printemps: "Printemps", "été": "Été", automne: "Automne", hiver: "Hiver", "toute l'année": "Toute l'année" },

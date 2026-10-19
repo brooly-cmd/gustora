@@ -45,12 +45,19 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** j'ouvre https://brooly-cmd.github.io/gustora/ sur mon iPhone et je vois les 10 recettes.
   - **Produit pour la suite :** le lien en ligne (les missions suivantes le mettent à jour).
 
-- [ ] 6. La page d'une recette — CONSTRUIT
-  - **Quoi :** l'écran 3 : image (ou image de remplacement), badges, portions − / +, prix estimé,
-    ingrédients, étapes, astuce. Chaque recette a sa propre adresse (lien direct).
-  - **Pourquoi :** c'est la fiche qu'on lit en cuisinant ; le lien direct servira au partage.
-  - **C'est réussi quand :** je passe le couscous de 4 à 8 personnes : les quantités et le prix doublent.
-  - **Produit pour la suite :** recette.js.
+- [x] 6. La page d'une recette, les calories et les régimes — CONSTRUIT
+  - **Quoi :** d'abord les données : ajouter aux 10 recettes et à ingredients.json les calories, les régimes,
+    ce que contient chaque ingrédient et ses remplaçants (voir ECRANS.md, « Les régimes » et « La fiche recette »).
+    Puis dessiner les 5 petits logos de régime.
+    Puis l'écran 3 : image (ou image de remplacement), badges avec les calories, ligne des régimes avec leurs logos,
+    portions − / +, prix estimé, ingrédients, étapes, astuce. Chaque recette a sa propre adresse (lien direct).
+    Enfin, les petits logos sur les cartes recette et le bloc « Les petits logos » en bas de l'accueil.
+    (Le bloc « Version adaptée » attend la mission 12.)
+  - **Pourquoi :** c'est la fiche qu'on lit en cuisinant ; le lien direct servira au partage. Les logos, c'est
+    comme les pictogrammes sur un emballage : on comprend d'un coup d'œil.
+  - **C'est réussi quand :** je passe le couscous de 4 à 8 personnes : les quantités et le prix doublent ;
+    les crêpes affichent leurs calories et le logo « Végétarien » ; en bas de l'accueil, je lis la légende des 5 logos.
+  - **Produit pour la suite :** recette.js, les logos de régime, les données de régimes et de remplaçants.
 
 ### Chercher
 
@@ -61,16 +68,19 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** je touche la Bretagne sur la carte (sur iPhone) et je vois ses recettes.
   - **Produit pour la suite :** explorer.js, carte-france.svg.
 
-- [ ] 8. Les filtres saison, temps et budget — CONSTRUIT
-  - **Quoi :** les puces de filtre de l'écran 2 (Saison, Temps, Budget, Type), qui se combinent,
+- [ ] 8. Les filtres saison, temps, budget et régime — CONSTRUIT
+  - **Quoi :** les puces de filtre de l'écran 2 (Saison, Temps, Budget, Type, Régime), qui se combinent,
     + le bloc « De saison en ce moment » de l'accueil, qui suit la date du jour.
+    « Régime ▾ » : plusieurs régimes à la fois, résultats en 2 groupes « Déjà compatibles » / « Adaptables »,
+    et « Mes régimes » gardés sur le téléphone, avec le bandeau de l'accueil.
   - **Pourquoi :** comme les rayons d'une bibliothèque : on trouve vite ce qu'on cherche.
-  - **C'est réussi quand :** je choisis « € » + « 30 min ou moins » et je ne vois que des recettes pas chères et rapides.
-  - **Produit pour la suite :** filtres.js.
+  - **C'est réussi quand :** je choisis « € » + « 30 min ou moins » et je ne vois que des recettes pas chères et rapides ;
+    je coche sans gluten + sans lactose, je ferme Safari, je reviens : le bandeau « Mes régimes » est toujours là.
+  - **Produit pour la suite :** filtres.js, stockage.js (le carnet du téléphone, réutilisé ensuite).
 
 - [ ] 9. Dans mon frigo — CONSTRUIT
   - **Quoi :** l'écran 6 : je coche mes ingrédients, l'app classe les recettes : « Tu peux cuisiner »,
-    « Il te manque 1 ingrédient », « Il te manque 2 ingrédients ».
+    « Il te manque 1 ingrédient », « Il te manque 2 ingrédients ». Si « Mes régimes » est actif, il est respecté.
   - **Pourquoi :** c'est le chef qui ouvre ton frigo et te dit quoi faire avec.
   - **C'est réussi quand :** je mets « œufs, farine, lait » et les crêpes sont dans « Tu peux cuisiner ».
   - **Produit pour la suite :** frigo.js.
@@ -82,7 +92,7 @@ Coche chaque case quand la mission est réussie.
   - **Pourquoi :** le stockage du navigateur, c'est comme un carnet rangé dans l'iPhone :
     on le retrouve en revenant, même après avoir fermé Safari.
   - **C'est réussi quand :** je mets 2 favoris, je ferme Safari, je reviens : ils sont toujours là.
-  - **Produit pour la suite :** stockage.js (le carnet), réutilisé à la mission 11.
+  - **Produit pour la suite :** les favoris dans stockage.js.
 
 - [ ] 11. La liste de courses — CONSTRUIT
   - **Quoi :** le bouton « Ajouter à ma liste de courses » + l'écran 8 : ingrédients regroupés
@@ -92,15 +102,26 @@ Coche chaque case quand la mission est réussie.
     et le total estimé s'affiche.
   - **Produit pour la suite :** courses.js.
 
-- [ ] 12. Le mode cuisine — CONSTRUIT
+- [ ] 12. Les versions adaptées — CONSTRUIT
+  - **Quoi :** le bloc « Version adaptée » de l'écran 3 : interrupteurs Sans gluten / Sans lactose / Pauvre en FODMAP
+    (plusieurs à la fois), ingrédients remplacés en couleur, notes d'adaptation, prix et calories recalculés,
+    ouverture directe dans la version adaptée si « Mes régimes » est actif, et la liste de courses qui reçoit les remplaçants.
+  - **Pourquoi :** une personne intolérante peut cuisiner le plat qu'elle veut, pas seulement ceux qui sont déjà « sans ».
+    C'est comme un tailleur qui retouche un costume au lieu d'en chercher un autre.
+  - **C'est réussi quand :** sur une recette avec du fromage, j'allume « Sans lactose » : le fromage devient sa version
+    sans lactose et le prix change ; je l'ajoute aux courses : la liste contient bien le remplaçant.
+  - **Produit pour la suite :** adaptation.js.
+
+- [ ] 13. Le mode cuisine — CONSTRUIT
   - **Quoi :** l'écran 9 : une étape à la fois en grand, l'écran reste allumé, et un minuteur quand l'étape a une durée.
+    Il suit la version adaptée choisie.
   - **Pourquoi :** les mains pleines de farine, on veut juste lire en grand et toucher « Suivant ».
   - **C'est réussi quand :** sur iPhone, je lance un minuteur d'1 minute : il sonne à la fin, et l'écran ne s'est pas éteint.
   - **Produit pour la suite :** cuisine.js.
 
 ### Remplir le carnet (10 recettes par région et par pays)
 
-- [ ] 13. Les images des plats — EXÉCUTE
+- [ ] 14. Les images des plats — EXÉCUTE
   - **Quoi :** créer avec Pollinations une image IA pour chacune des 10 recettes, la ranger dans images/,
     et écrire la méthode dans IMAGES.md (pour la refaire à chaque remplissage).
     Si Pollinations ne marche pas : le dire, et garder l'image de remplacement.
@@ -108,20 +129,21 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** sur mon iPhone, chaque recette a une jolie image, et la page reste rapide.
   - **Produit pour la suite :** images/, IMAGES.md (la méthode).
 
-- [ ] 14. Remplir (1/3) : environ 75 recettes et leurs images — CONSTRUIT
-- [ ] 15. Remplir (2/3) : environ 75 recettes et leurs images — CONSTRUIT
-- [ ] 16. Remplir (3/3) : environ 70 recettes et leurs images — CONSTRUIT
+- [ ] 15. Remplir (1/3) : environ 75 recettes et leurs images — CONSTRUIT
+- [ ] 16. Remplir (2/3) : environ 75 recettes et leurs images — CONSTRUIT
+- [ ] 17. Remplir (3/3) : environ 70 recettes et leurs images — CONSTRUIT
   - **Quoi (pour les 3) :** ajouter des recettes jusqu'à 10 par région et 10 par pays (230 en tout),
     en commençant par les zones les moins remplies. Les plats les plus connus de chaque zone d'abord.
-    Chaque recette s'inspire des versions les mieux notées sur internet, écrite avec mes mots. Plus leur image.
+    Chaque recette s'inspire des versions les mieux notées sur internet, écrite avec mes mots.
+    Avec ses calories, ses régimes, ses notes d'adaptation, les remplaçants des nouveaux ingrédients, et son image.
   - **Pourquoi :** comme remplir les étagères d'une épicerie qui vient d'ouvrir.
   - **C'est réussi quand :** sur l'écran Explorer, chaque zone remplie affiche le bon nombre de recettes,
-    et 3 recettes prises au hasard ont tout (image, prix, saison, étapes).
-  - **Produit pour la suite :** un carnet plus gros (à la mission 16 : 230 recettes).
+    et 3 recettes prises au hasard ont tout (image, prix, calories, régimes, saison, étapes).
+  - **Produit pour la suite :** un carnet plus gros (à la mission 17 : 230 recettes).
 
 ### Ouvrir au public
 
-- [ ] 17. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
+- [ ] 18. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
   - **Quoi :** le bouton « Partager » d'une recette, l'installation sur l'écran d'accueil iPhone
     (icône, nom, plein écran) et l'écran 10 « À propos ».
   - **Pourquoi :** l'app devient publique : il faut pouvoir l'envoyer et dire honnêtement d'où viennent les recettes.
@@ -129,33 +151,34 @@ Coche chaque case quand la mission est réussie.
     et Gustora s'ajoute à mon écran d'accueil avec son icône.
   - **Produit pour la suite :** manifest.webmanifest, l'app complète.
 
-- [ ] 18. Un vrai test avec quelqu'un d'autre — EXÉCUTE
+- [ ] 19. Un vrai test avec quelqu'un d'autre — EXÉCUTE
   - **Quoi :** une personne essaie Gustora sur son téléphone sans aide : trouver une recette d'hiver,
-    l'ajouter à ses courses, puis utiliser « Dans mon frigo ». Je note ce qui la bloque, Claude corrige les 3 plus gros soucis.
+    l'ajouter à ses courses, utiliser « Dans mon frigo », puis ouvrir une recette en version sans lactose.
+    Je note ce qui la bloque, Claude corrige les 3 plus gros soucis.
   - **Pourquoi :** le cuisinier ne goûte jamais son plat comme un client : un regard neuf voit ce qu'on ne voit plus.
-  - **C'est réussi quand :** la personne a réussi les 3 tâches seule.
+  - **C'est réussi quand :** la personne a réussi les 4 tâches seule.
   - **Produit pour la suite :** Gustora 1.0 🎉
 
 ### Le grand remplissage (jusqu'à 50 recettes par région et par pays)
 
 Pour ces 9 missions : environ 100 recettes de plus (et leurs images) à chaque fois, zones les moins remplies d'abord,
-même méthode que les missions 14 à 16. À la fin : environ 1 150 recettes.
+même méthode que les missions 15 à 17 (calories, régimes et remplaçants compris). À la fin : environ 1 150 recettes.
 C'est réussi quand : sur Explorer, les zones ont toutes grossi, et 3 recettes au hasard sont complètes.
 
-- [ ] 19. Grand remplissage (1/9) — CONSTRUIT
-- [ ] 20. Grand remplissage (2/9) — CONSTRUIT
-- [ ] 21. Grand remplissage (3/9) — CONSTRUIT
-- [ ] 22. Grand remplissage (4/9) — CONSTRUIT
-- [ ] 23. Grand remplissage (5/9) — CONSTRUIT
-- [ ] 24. Grand remplissage (6/9) — CONSTRUIT
-- [ ] 25. Grand remplissage (7/9) — CONSTRUIT
-- [ ] 26. Grand remplissage (8/9) — CONSTRUIT
-- [ ] 27. Grand remplissage (9/9) — CONSTRUIT
+- [ ] 20. Grand remplissage (1/9) — CONSTRUIT
+- [ ] 21. Grand remplissage (2/9) — CONSTRUIT
+- [ ] 22. Grand remplissage (3/9) — CONSTRUIT
+- [ ] 23. Grand remplissage (4/9) — CONSTRUIT
+- [ ] 24. Grand remplissage (5/9) — CONSTRUIT
+- [ ] 25. Grand remplissage (6/9) — CONSTRUIT
+- [ ] 26. Grand remplissage (7/9) — CONSTRUIT
+- [ ] 27. Grand remplissage (8/9) — CONSTRUIT
+- [ ] 28. Grand remplissage (9/9) — CONSTRUIT
 
 ## Plus tard (seulement si je le demande)
 - Plusieurs langues (anglais, espagnol…) : les textes sont déjà rangés dans textes.js pour ça.
 - Plus de pays, et l'Outre-mer.
 - Remplacer une image IA par ma vraie photo du plat.
-- Filtres végétarien / sans gluten.
+- Versions adaptées végétarienne et vegan (remplacer la viande par du tofu, etc.).
 - Le menu de la semaine.
 - Marcher sans internet (hors ligne).

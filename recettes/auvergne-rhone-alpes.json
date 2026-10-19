@@ -34,7 +34,10 @@
         { "texte": "Mélange la frisée avec la vinaigrette, ajoute les lardons chauds et les croûtons, puis pose un œuf poché sur chaque assiette. Le jaune qui coule fait office de seconde sauce !" }
       ],
       "astuce": "Pour réussir l'œuf poché, il faut un œuf très frais : son blanc reste groupé autour du jaune au lieu de s'éparpiller.",
-      "image": "images/auvergne-rhone-alpes-salade-lyonnaise.jpg"
+      "image": "images/auvergne-rhone-alpes-salade-lyonnaise.jpg",
+      "calories": 480,
+      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "adaptable", "vegetarien": "non", "vegan": "non" },
+      "notesAdaptation": { "sansGluten": ["Le pain sans gluten dore plus vite : surveille les croûtons."], "pauvreFodmap": ["Le pain sans gluten dore plus vite : surveille les croûtons.", "La ciboulette remplace l'échalote : cisèle-la dans la vinaigrette au dernier moment."] }
     }
   ]
 }

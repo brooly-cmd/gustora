@@ -76,7 +76,15 @@
         "sel",
         "poivre"
       ],
-      "image": "images/auvergne-rhone-alpes-salade-lyonnaise.jpg"
+      "image": "images/auvergne-rhone-alpes-salade-lyonnaise.jpg",
+      "calories": 480,
+      "regimes": {
+        "sansGluten": "adaptable",
+        "sansLactose": "adaptable",
+        "pauvreFodmap": "adaptable",
+        "vegetarien": "non",
+        "vegan": "non"
+      }
     },
     {
       "id": "bretagne-crepes-froment",
@@ -96,7 +104,15 @@
         "sel",
         "huile-neutre"
       ],
-      "image": "images/bretagne-crepes-froment.jpg"
+      "image": "images/bretagne-crepes-froment.jpg",
+      "calories": 420,
+      "regimes": {
+        "sansGluten": "adaptable",
+        "sansLactose": "adaptable",
+        "pauvreFodmap": "adaptable",
+        "vegetarien": "oui",
+        "vegan": "non"
+      }
     },
     {
       "id": "grand-est-tarte-flambee",
@@ -121,7 +137,15 @@
         "muscade",
         "poivre"
       ],
-      "image": "images/grand-est-tarte-flambee.jpg"
+      "image": "images/grand-est-tarte-flambee.jpg",
+      "calories": 910,
+      "regimes": {
+        "sansGluten": "adaptable",
+        "sansLactose": "adaptable",
+        "pauvreFodmap": "adaptable",
+        "vegetarien": "non",
+        "vegan": "non"
+      }
     },
     {
       "id": "inde-dal-lentilles-corail",
@@ -151,7 +175,15 @@
         "riz-basmati",
         "sel"
       ],
-      "image": "images/inde-dal-lentilles-corail.jpg"
+      "image": "images/inde-dal-lentilles-corail.jpg",
+      "calories": 630,
+      "regimes": {
+        "sansGluten": "adaptable",
+        "sansLactose": "adaptable",
+        "pauvreFodmap": "non",
+        "vegetarien": "oui",
+        "vegan": "non"
+      }
     },
     {
       "id": "italie-spaghetti-carbonara",
@@ -172,7 +204,15 @@
         "poivre",
         "sel"
       ],
-      "image": "images/italie-spaghetti-carbonara.jpg"
+      "image": "images/italie-spaghetti-carbonara.jpg",
+      "calories": 770,
+      "regimes": {
+        "sansGluten": "adaptable",
+        "sansLactose": "adaptable",
+        "pauvreFodmap": "adaptable",
+        "vegetarien": "non",
+        "vegan": "non"
+      }
     },
     {
       "id": "japon-gyozas-porc-chou",
@@ -199,7 +239,15 @@
         "eau",
         "sel"
       ],
-      "image": "images/japon-gyozas-porc-chou.jpg"
+      "image": "images/japon-gyozas-porc-chou.jpg",
+      "calories": 410,
+      "regimes": {
+        "sansGluten": "non",
+        "sansLactose": "oui",
+        "pauvreFodmap": "non",
+        "vegetarien": "non",
+        "vegan": "non"
+      }
     },
     {
       "id": "maroc-couscous-poulet-legumes",
@@ -235,7 +283,15 @@
         "sel",
         "poivre"
       ],
-      "image": "images/maroc-couscous-poulet-legumes.jpg"
+      "image": "images/maroc-couscous-poulet-legumes.jpg",
+      "calories": 1110,
+      "regimes": {
+        "sansGluten": "adaptable",
+        "sansLactose": "adaptable",
+        "pauvreFodmap": "non",
+        "vegetarien": "non",
+        "vegan": "non"
+      }
     },
     {
       "id": "mexique-tacos-carnitas",
@@ -263,7 +319,15 @@
         "citron-vert",
         "sel"
       ],
-      "image": "images/mexique-tacos-carnitas.jpg"
+      "image": "images/mexique-tacos-carnitas.jpg",
+      "calories": 860,
+      "regimes": {
+        "sansGluten": "adaptable",
+        "sansLactose": "oui",
+        "pauvreFodmap": "adaptable",
+        "vegetarien": "non",
+        "vegan": "non"
+      }
     },
     {
       "id": "nouvelle-aquitaine-poulet-basquaise",
@@ -290,7 +354,15 @@
         "huile-olive",
         "sel"
       ],
-      "image": "images/nouvelle-aquitaine-poulet-basquaise.jpg"
+      "image": "images/nouvelle-aquitaine-poulet-basquaise.jpg",
+      "calories": 590,
+      "regimes": {
+        "sansGluten": "oui",
+        "sansLactose": "oui",
+        "pauvreFodmap": "adaptable",
+        "vegetarien": "non",
+        "vegan": "non"
+      }
     },
     {
       "id": "provence-alpes-cote-d-azur-ratatouille",
@@ -317,7 +389,15 @@
         "sel",
         "poivre"
       ],
-      "image": "images/provence-alpes-cote-d-azur-ratatouille.jpg"
+      "image": "images/provence-alpes-cote-d-azur-ratatouille.jpg",
+      "calories": 430,
+      "regimes": {
+        "sansGluten": "oui",
+        "sansLactose": "oui",
+        "pauvreFodmap": "non",
+        "vegetarien": "oui",
+        "vegan": "oui"
+      }
     }
   ]
 }

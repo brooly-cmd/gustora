@@ -11,7 +11,7 @@
       "tempsCuisson": 30,
       "difficulte": "Facile",
       "saisons": ["toute l'année"],
-      "prixParPersonne": 1.50,
+      "prixParPersonne": 1.5,
       "budget": "€",
       "ingredients": [
         { "id": "lentilles-corail", "quantite": 300, "unite": "g" },
@@ -40,7 +40,10 @@
         { "texte": "Termine avec le jus du citron vert et la coriandre ciselée, et sers avec le riz." }
       ],
       "astuce": "En Inde, on utilise du ghee (beurre clarifié) pour le tadka. Pour une version végane, remplace simplement le beurre par de l'huile.",
-      "image": "images/inde-dal-lentilles-corail.jpg"
+      "image": "images/inde-dal-lentilles-corail.jpg",
+      "calories": 630,
+      "regimes": { "sansGluten": "adaptable", "sansLactose": "adaptable", "pauvreFodmap": "non", "vegetarien": "oui", "vegan": "non" },
+      "notesAdaptation": {  }
     }
   ]
 }

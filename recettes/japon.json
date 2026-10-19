@@ -11,7 +11,7 @@
       "tempsCuisson": 15,
       "difficulte": "Moyen",
       "saisons": ["toute l'année"],
-      "prixParPersonne": 2.00,
+      "prixParPersonne": 2.0,
       "budget": "€€",
       "ingredients": [
         { "id": "feuille-gyoza", "quantite": 24, "unite": "pièce" },
@@ -38,7 +38,10 @@
         { "texte": "Prépare la sauce en mélangeant le reste de sauce soja, le vinaigre de riz et le reste d'huile de sésame. Sers les gyozas dorés vers le haut, avec la sauce à part." }
       ],
       "astuce": "Les gyozas crus se congèlent très bien, posés à plat sur une plaque : tu les cuis ensuite sans les décongeler, en ajoutant 2 minutes de vapeur.",
-      "image": "images/japon-gyozas-porc-chou.jpg"
+      "image": "images/japon-gyozas-porc-chou.jpg",
+      "calories": 410,
+      "regimes": { "sansGluten": "non", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "non", "vegan": "non" },
+      "notesAdaptation": {  }
     }
   ]
 }

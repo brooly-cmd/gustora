@@ -144,6 +144,84 @@ body:not([data-ecran="accueil"]) .hello{padding-top:8px}
 .encadre p{margin:0;font-size:1.05rem}
 .suite{height:1px}
 
+/* ---------- Les petits logos des régimes (plein = compatible, contour = adaptable) ---------- */
+.lg{width:18px;height:18px;flex:none;color:var(--pr);--lgfond:var(--card);overflow:visible}
+.lg .f,.lg .i{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}
+.lg .d,.lg .v{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.lg .x{fill:none;stroke:var(--lgfond);stroke-width:5;stroke-linecap:round}
+.lg.plein .f{fill:currentColor}
+.lg.plein .d{stroke:var(--lgfond)}
+.lg.plein .i{fill:var(--lgfond);stroke:none}
+.rc .logos{display:flex;gap:7px;margin-top:5px}
+.rc .logos .lg{width:16px;height:16px;display:block}
+
+/* Bas de l'accueil : la légende des logos */
+.logos-bloc{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,28px)}
+.legendes{list-style:none;margin:0;padding:0;display:grid;gap:14px 26px}
+@media (min-width:620px){ .legendes{grid-template-columns:1fr 1fr} }
+@media (min-width:980px){ .legendes{grid-template-columns:repeat(3,1fr)} }
+.legendes li{display:flex;gap:12px;align-items:flex-start}
+.legendes .lg{width:30px;height:30px;margin-top:2px}
+.legendes b{display:block;font:400 1.08rem/1.25 var(--display)}
+.legendes li span{font-size:.92rem;line-height:1.4}
+.plein-contour{display:flex;flex-wrap:wrap;gap:8px 22px;margin:18px 0 0;font-size:.9rem}
+.plein-contour span{display:flex;align-items:center;gap:8px}
+
+/* ---------- Écran 3 : la recette ---------- */
+body[data-ecran="recette"] .hello{display:none}
+.see{text-decoration:none}
+.fiche{padding-top:14px}
+.fiche-tete{display:grid;gap:20px;align-items:center}
+@media (min-width:760px){ .fiche-tete{grid-template-columns:auto 1fr;gap:clamp(24px,4vw,48px)} }
+/* L'assiette : un bord de couleur douce, un liseré en pointillés, et le plat au centre */
+.plat{position:relative;width:clamp(190px,52vw,300px);aspect-ratio:1;border-radius:50%;justify-self:center;
+  background:var(--card);border:clamp(10px,2.4vw,16px) solid var(--dx);box-shadow:var(--shadow);display:grid;place-items:center;overflow:hidden}
+.plat::before{content:"";position:absolute;inset:7%;border-radius:50%;border:2px dashed color-mix(in srgb,var(--pr) 45%,transparent)}
+.plat .emo{font-size:clamp(5rem,15vw,8.6rem);line-height:1;filter:drop-shadow(0 10px 10px color-mix(in srgb,var(--tx) 22%,transparent))}
+.plat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (min-width:760px){ .plat{justify-self:start} }
+.fiche-titre{display:grid;gap:12px;justify-items:start;min-width:0}
+.zone-lien{color:var(--tx);font-weight:700;text-decoration:none;border-bottom:2px solid var(--ac);padding-bottom:1px}
+.fiche-titre h1{font-size:clamp(2.2rem,6vw,3.7rem);max-width:15ch;overflow-wrap:anywhere}
+.fiche .badges{margin:0}
+.fiche .tm{background:var(--card);border:1px solid var(--line);font-weight:700;font-size:.8rem;border-radius:99px;padding:1px 10px}
+.regimes{display:flex;flex-wrap:wrap;gap:8px}
+.rg{display:inline-flex;align-items:center;gap:7px;padding:6px 12px 6px 9px;border-radius:99px;cursor:pointer;
+  background:var(--card);border:1.5px solid var(--line);font-weight:700;font-size:.88rem;transition:border-color .3s}
+.rg .lg{width:20px;height:20px}
+.rg small{font-weight:600;color:var(--soft)}
+.rg[aria-expanded="true"]{border-color:var(--pr)}
+.legende{margin:0;max-width:52ch;background:var(--dx);border-radius:14px;padding:10px 14px;font-size:.93rem}
+.legende[hidden]{display:none}
+
+.fiche-corps{display:grid;gap:22px;margin-top:clamp(26px,4vw,40px);align-items:start}
+@media (min-width:900px){ .fiche-corps{grid-template-columns:5fr 7fr;gap:36px} }
+.fiche h2{font-size:clamp(1.45rem,2.6vw,1.8rem);margin-bottom:12px}
+.panier{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(16px,2.6vw,24px)}
+.portions{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--dx);border-radius:99px;padding:5px}
+.portions button{width:44px;height:44px;flex:none;border:0;border-radius:50%;background:var(--pr);color:var(--on);font-size:1.5rem;line-height:1;cursor:pointer}
+.portions button:disabled{opacity:.35;cursor:default}
+.portions output{font:400 1.2rem var(--display);text-align:center}
+.prix-total{margin:14px 0 22px;font-size:1rem}
+.prix-total b{font-weight:800}
+.prix-total small{display:block;font-size:.82rem;color:var(--soft)}
+.ings{list-style:none;margin:0;padding:0}
+.ings li{display:grid;grid-template-columns:6.6em 1fr;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.ings li:last-child{border-bottom:0}
+.ings b{font-weight:800;font-variant-numeric:tabular-nums}
+.btn.principal{width:100%;margin-top:18px;padding:14px 20px;font-size:1rem}
+.js-aimant{transition:transform .9s cubic-bezier(.3,1.6,.5,1)}
+.btn.second{background:var(--dx);color:var(--tx);margin-top:22px;padding:12px 22px}
+/* Les étapes : de grands chiffres, parce qu'on les lit de loin, les mains dans la farine */
+.etapes{list-style:none;margin:0;padding:0;counter-reset:e}
+.etapes li{counter-increment:e;display:grid;grid-template-columns:2.6rem 1fr;column-gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.etapes li::before{content:counter(e);grid-row:span 2;font:400 2.1rem/1 var(--display);color:var(--pr)}
+.etapes p{margin:0;max-width:62ch;font-size:1.04rem}
+.minute{justify-self:start;margin-top:6px;font-size:.82rem;font-weight:700;color:var(--soft)}
+.astuce{margin-top:22px;padding:16px 18px;border-radius:18px;background:color-mix(in srgb,var(--ac) 24%,var(--bg))}
+.astuce p{margin:4px 0 0;max-width:62ch}
+.fiche > .note{margin-top:26px}
+
 /* « Réduire les animations » : rien ne bouge pour décorer */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}

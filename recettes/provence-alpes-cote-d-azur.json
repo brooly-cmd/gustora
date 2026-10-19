@@ -11,7 +11,7 @@
       "tempsCuisson": 60,
       "difficulte": "Facile",
       "saisons": ["été"],
-      "prixParPersonne": 3.30,
+      "prixParPersonne": 3.3,
       "budget": "€€",
       "ingredients": [
         { "id": "aubergine", "quantite": 2, "unite": "pièce" },
@@ -37,7 +37,10 @@
         { "texte": "Retire le thym et le laurier, goûte, rectifie le sel et parsème de basilic ciselé juste avant de servir." }
       ],
       "astuce": "La ratatouille est encore meilleure le lendemain, réchauffée doucement : les saveurs ont eu le temps de se marier.",
-      "image": "images/provence-alpes-cote-d-azur-ratatouille.jpg"
+      "image": "images/provence-alpes-cote-d-azur-ratatouille.jpg",
+      "calories": 430,
+      "regimes": { "sansGluten": "oui", "sansLactose": "oui", "pauvreFodmap": "non", "vegetarien": "oui", "vegan": "oui" },
+      "notesAdaptation": {  }
     }
   ]
 }
