@@ -52,7 +52,7 @@ function choisirOnglet(i){
 const cv=$('graines'), ctx=cv.getContext('2d'), P={x:-999,y:-999};
 let grains=[], W=0, H=0, raf=0, C={};
 function couleurs(){ const s=getComputedStyle(document.documentElement);
-  C={pr:s.getPropertyValue('--pr').trim(), ac:s.getPropertyValue('--ac').trim()}; ctx.clearRect(0,0,W,H); if(reduce) immobile(); }
+  C={pr:s.getPropertyValue('--pr').trim(), ac:s.getPropertyValue('--ac').trim(), tx:s.getPropertyValue('--tx').trim()}; ctx.clearRect(0,0,W,H); if(reduce) immobile(); }
 function taille(){ const d=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight; cv.width=W*d; cv.height=H*d; ctx.setTransform(d,0,0,d,0,0);
   const n=Math.min(650, Math.round(W*H/1700));
   grains=Array.from({length:n},(_,i)=>({x:Math.random()*W, y:Math.random()*H, safran:i%3===0}));

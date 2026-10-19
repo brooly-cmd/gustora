@@ -29,8 +29,8 @@ button,input{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--ac);outline-offset:3px}
 
 /* ---------- Effet 78 : le courant d'épices du fond ---------- */
-#graines,#boussoles{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-body:not([data-ecran="explorer"]) #boussoles{display:none}   /* effet 57 : seulement sur l'écran Explorer */
+#graines,#herbes{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+body:not([data-ecran="explorer"]) #herbes{display:none}   /* effet 152 : seulement sur l'écran Explorer */
 .page{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 16px}
 
 /* ---------- En-tête ---------- */
@@ -271,26 +271,43 @@ body[data-ecran="explorer"] .hello, body[data-ecran="zone"] .hello{display:none}
 .vide .nb{background:none;color:var(--soft);font-weight:600;padding-right:0}
 @media (hover:hover){ .zones a:hover b{color:var(--pr)} }
 
-/* Les pays (effet 274 : petites cartes en 3D) : une fenêtre colorée avec son soleil, le plat qui flotte devant */
-.pays{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media (min-width:620px){ .pays{grid-template-columns:repeat(3,1fr)} }
-@media (min-width:980px){ .pays{grid-template-columns:repeat(5,1fr);gap:16px} }
-.pc{display:grid;color:inherit;text-decoration:none;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--line);
-  box-shadow:0 8px 18px color-mix(in srgb,var(--tx) 10%,transparent)}
+/* Les pays (effet 66 : tuiles bento) : des cases de tailles différentes qui s'emboîtent, chacune en couches */
+.pays{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:clamp(92px,27vw,150px);gap:10px;grid-auto-flow:dense}
+@media (min-width:900px){ .pays{grid-template-columns:repeat(6,1fr);grid-auto-rows:150px;gap:14px}
+  /* sur PC : la Grèce se range en bas au milieu, la Thaïlande s'élargit, pour 3 rangées pleines */
+  .pays li.h[data-k="grece"]{grid-row:3;grid-column:4} .pays li[data-k="thailande"]{grid-column:span 2} }
+.pays li.g{grid-column:span 2;grid-row:span 2}
+.pays li.h{grid-row:span 2}
+.pays li.l{grid-column:span 2}
+.pays .tilt{height:100%;border-radius:20px}
+.bt{position:relative;display:block;height:100%;border-radius:20px;overflow:hidden;isolation:isolate;color:var(--on);text-decoration:none;
+  box-shadow:0 10px 20px color-mix(in srgb,var(--tx) 14%,transparent);transition:transform .3s}
+.bt:active{transform:scale(.97)}
 .pays [data-depth]{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-.fen{position:relative;aspect-ratio:5/4;overflow:hidden;isolation:isolate;display:grid;place-items:center}
-.fen .fond{position:absolute;inset:-14px;background:var(--pr);z-index:-1}
-.fen .sun{position:absolute;right:-18%;top:-22%;width:78%;aspect-ratio:1;border-radius:50%;background:var(--ac)}
+.bt .fond{position:absolute;inset:-14px;z-index:-1;background:var(--pr)}
+.bt .sun{position:absolute;right:-12%;top:-18%;width:min(70%,190px);aspect-ratio:1;border-radius:50%;background:color-mix(in srgb,var(--ac) 85%,var(--pr))}
+.bt .emo{position:absolute;right:8%;bottom:8%;font-size:clamp(2rem,9vw,3rem);line-height:1;filter:drop-shadow(0 10px 8px color-mix(in srgb,#000 30%,transparent))}
+.pays li.g .emo{font-size:clamp(4rem,19vw,6.4rem);right:10%;bottom:12%}
+.pays li.h .emo{font-size:clamp(2.6rem,11vw,4rem)}
+.pays li.l .emo{font-size:clamp(2.6rem,11vw,3.6rem)}
+.bt .txt{position:absolute;left:12px;top:10px;right:10px;display:grid;justify-items:start;gap:4px}
+.bt b{font:400 clamp(1rem,3.6vw,1.2rem)/1.15 var(--display)}
+.pays li.g b{font-size:clamp(1.5rem,5.6vw,2rem)}
+.bt .nb{font-size:.72rem;padding:1px 8px}
+/* Trois couleurs à tour de rôle ; le soleil change de place pour que les tuiles ne se ressemblent pas */
 .pays li:nth-child(3n+2) .fond{background:var(--ac)}
-.pays li:nth-child(3n+2) .sun{background:var(--pr);left:-24%;right:auto;top:auto;bottom:-30%}
+.pays li:nth-child(3n+2) .bt{color:#2E1D14}
+.pays li:nth-child(3n+2) .sun{background:color-mix(in srgb,var(--pr) 80%,var(--ac));left:-20%;right:auto;top:auto;bottom:-30%}
+.pays li:nth-child(3n+2) .nb{background:var(--card);color:var(--tx)}
 .pays li:nth-child(3n) .fond{background:var(--dx)}
-.pays li:nth-child(3n) .sun{background:color-mix(in srgb,var(--pr) 75%,var(--dx));top:auto;bottom:-34%;right:-10%}
-.fen .emo{font-size:clamp(3rem,11vw,4rem);line-height:1;filter:drop-shadow(0 12px 10px color-mix(in srgb,#000 30%,transparent))}
-.pc .txt{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap;padding:10px 12px 12px}
-.pc b{font:400 1.12rem/1.2 var(--display)}
-.pc.vide .fond,.pc.vide .sun{background:color-mix(in srgb,var(--tx) 9%,var(--bg))}
-.pc.vide .emo{filter:grayscale(1);opacity:.5}
-.pc.vide b{color:var(--soft)}
+.pays li:nth-child(3n) .bt{color:var(--tx)}
+.pays li:nth-child(3n) .sun{background:color-mix(in srgb,var(--ac) 70%,var(--dx));top:auto;bottom:-34%;right:-14%}
+/* Un pays sans recette : la tuile est grise, le plat en noir et blanc */
+.pays li .bt.vide{color:var(--soft)}
+.pays .bt.vide .fond{background:color-mix(in srgb,var(--tx) 8%,var(--bg))}
+.pays .bt.vide .sun{background:color-mix(in srgb,var(--tx) 6%,var(--bg))}
+.pays .bt.vide .emo{filter:grayscale(1);opacity:.45}
+.pays .bt.vide .nb{background:none;color:var(--soft);padding:0}
 
 /* « Réduire les animations » : rien ne bouge pour décorer */
 @media (prefers-reduced-motion: reduce){
