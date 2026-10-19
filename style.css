@@ -82,6 +82,8 @@ body:not([data-ecran="explorer"]) #herbes{display:none}   /* effet 152 : seuleme
 .vedette .tm{background:color-mix(in srgb,var(--on) 18%,transparent);color:var(--on);font-weight:700;font-size:.8rem;border-radius:99px;padding:2px 10px}
 .see{justify-self:start;margin-top:6px;border:2px solid var(--on);background:transparent;color:var(--on);border-radius:99px;
   padding:10px 20px;font-weight:700;cursor:pointer}
+.toute-saison{justify-self:start;color:var(--on);font-weight:700;font-size:.92rem;text-decoration:underline;
+  text-decoration-color:var(--ac);text-decoration-thickness:2px;text-underline-offset:4px;padding:4px 0}
 
 .raccourcis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0;padding:0;list-style:none}
 .raccourcis li:last-child{grid-column:1/-1}
@@ -144,6 +146,67 @@ body:not([data-ecran="accueil"]) .hello{padding-top:8px}
 .compteur{background:var(--dx);border-radius:99px;padding:3px 12px;font-weight:700;font-size:.9rem;white-space:nowrap}
 .encadre p{margin:0;font-size:1.05rem}
 .suite{height:1px}
+
+/* ---------- Les puces de filtre (mission 8) : une rangée qui glisse au doigt sur iPhone, qui passe à la ligne sur PC ---------- */
+.filtres{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 18px;padding:2px 16px 6px}
+.filtres::-webkit-scrollbar{display:none}
+@media (min-width:700px){ .filtres{flex-wrap:wrap;overflow:visible;margin:0 0 20px;padding:0} }
+.puce{position:relative;overflow:hidden;isolation:isolate;flex:none;display:inline-flex;align-items:center;border-radius:99px;
+  background:var(--card);border:1.5px solid color-mix(in srgb,var(--tx) 22%,transparent);transition:background-color .3s,border-color .3s,color .3s}
+.puce button{border:0;background:none;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:.94rem;color:inherit}
+.puce .ouvrir{padding:9px 14px 9px 12px;min-height:42px}
+.puce svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.puce .fl{font-size:.75rem;opacity:.7}
+@media (hover:hover){ .puce:not(.place):hover{border-color:var(--pr)} }
+/* Une puce choisie : remplie de terracotta, avec son choix et un ✕ pour l'enlever */
+.puce.on{background:var(--pr);border-color:var(--pr);color:var(--on)}
+.puce.on .fl{display:none}
+.puce.on .ouvrir{padding-right:4px}
+.puce .x{width:30px;height:30px;margin-right:6px;justify-content:center;border-radius:50%;font-size:.8rem;
+  background:color-mix(in srgb,var(--on) 22%,transparent)}
+.puce .x[hidden]{display:none}
+/* La place de « Régime ▾ » : en pointillés, elle arrive à la mission 9 */
+.puce.place{background:transparent;border-style:dashed;color:var(--soft)}
+.puce.place .lg{width:18px;height:18px;color:currentColor}
+/* Effet 16 : l'onde safran sous le doigt */
+.onde{position:absolute;z-index:-1;border-radius:50%;pointer-events:none;background:color-mix(in srgb,var(--ac) 70%,transparent);
+  transform:scale(0);opacity:.75;animation:onde .6s ease-out forwards}
+@keyframes onde{to{transform:scale(1);opacity:0}}
+
+/* Le tiroir des choix : il monte du bas sur iPhone ; sur PC, c'est une bulle posée sous la puce */
+.voile-filtre{position:fixed;inset:0;z-index:7;background:color-mix(in srgb,var(--tx) 38%,transparent);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.tiroir{position:fixed;z-index:8;left:0;right:0;bottom:0;max-height:85vh;overflow:auto;background:var(--card);border-radius:24px 24px 0 0;
+  padding:18px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:var(--shadow);
+  transform:translateY(100%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility .35s}
+.tiroir-ouvert .voile-filtre{opacity:1;visibility:visible}
+.tiroir-ouvert .tiroir{transform:none;visibility:visible}
+@media (min-width:700px){
+  .voile-filtre{background:transparent}
+  .tiroir{position:absolute;right:auto;bottom:auto;width:320px;max-height:none;border-radius:20px;border:1px solid var(--line);padding:16px;
+    transform:translateY(-6px);opacity:0;transition:transform .25s,opacity .25s,visibility .25s}
+  .tiroir-ouvert .tiroir{opacity:1}
+}
+.tiroir-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.tiroir-tete h2{font-size:1.4rem}
+.tiroir-x{width:38px;height:38px;flex:none;border:0;border-radius:50%;background:var(--dx);cursor:pointer;font-size:.9rem}
+.tiroir .note{margin-top:10px}
+.tiroir .note:empty{display:none}
+.choix{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.choix button{width:100%;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;min-height:52px;
+  border:1.5px solid var(--line);background:var(--bg);border-radius:16px;padding:9px 12px 9px 14px;transition:border-color .3s}
+.choix .ct{flex:1;display:grid}
+.choix b{font-weight:700;font-size:1.02rem}
+.choix small{font-size:.84rem;color:var(--soft)}
+.choix .n{font-size:.82rem;font-weight:600;color:var(--soft);white-space:nowrap}
+.choix .zero b{color:var(--soft)}
+.choix button[aria-pressed="true"]{border-color:var(--pr)}
+@media (hover:hover){ .choix button:hover{border-color:color-mix(in srgb,var(--pr) 55%,transparent)} }
+/* Effet 46 : la coche se dessine dans son rond quand on choisit */
+.coche{width:26px;height:26px;flex:none;border-radius:50%;background:var(--dx);display:grid;place-items:center;transition:background-color .3s}
+.coche svg{width:16px;height:16px;fill:none;stroke:var(--on);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .4s .1s ease-out}
+[aria-pressed="true"] .coche{background:var(--pr)}
+[aria-pressed="true"] .coche svg{stroke-dashoffset:0}
 
 /* ---------- Les petits logos des régimes (plein = compatible, contour = adaptable) ---------- */
 .lg{width:18px;height:18px;flex:none;color:var(--pr);--lgfond:var(--card);overflow:visible}

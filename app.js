@@ -12,7 +12,9 @@ const ICONES = {
   france:'<path d="M9 3l5 1.5 4.5 3.5-1 4.5 2 4-3.5 4-5-1.5-4 2-3-3.5 1-5L3 8.5 6 4.5z"/>',
   monde:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/>',
   budget:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5a4.5 4.5 0 1 0 0 7M7 11h6.5M7 13.5h6.5"/>',
-  temps:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M10 2.5h4"/>'
+  temps:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M10 2.5h4"/>',
+  saison:'<path d="M5 19C5 10 10 5 19 5c0 9-5 14-14 14zM5 19l8-8"/>',
+  type:'<circle cx="14.5" cy="12" r="6.5"/><circle cx="14.5" cy="12" r="3"/><path d="M3.5 4v5a1.5 1.5 0 0 0 3 0V4M5 10v10"/>'
 };
 const svg = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONES[k]}</svg>`;
 const saisons = r => r.saisons.map(s=>`<span class="sea">${T.saisons[s]}</span>`).join('');
@@ -60,7 +62,7 @@ new ResizeObserver(()=>choisirOnglet(ongletActif())).observe($('onglets'));
 
 /* ---------- Les morceaux de page ---------- */
 // La carte recette est un lien vers sa page.
-function carte(r){ return `<div class="tilt js-tilt" data-max="8"><a class="rc" href="#recette/${r.id}">
+function carte(r){ return `<div class="tilt js-tilt" data-max="8" data-id="${r.id}"><a class="rc" href="#recette/${r.id}">
   <span class="img" aria-hidden="true">${emoji(r)}</span>
   <span class="body"><h3>${r.nom}</h3><span class="z">${r.zone}</span>
     <span class="meta"><span>⏱ ${duree(r.tempsTotal)}</span><span>${prix(r.prixParPersonne)}</span><span class="bdg">${r.budget}</span></span>${logosCarte(r)}</span>
@@ -74,6 +76,7 @@ function vedette(r, saison){ return `<div class="vedette js-tilt" data-max="9">
     <h2>${r.nom}</h2>
     <span class="badges"><span class="bdg">${r.budget}</span><span class="tm">⏱ ${duree(r.tempsTotal)}</span>${saisons(r)}</span>
     <a class="see" href="#recette/${r.id}">${A.voirRecette}</a>
+    <a class="toute-saison" href="#recettes?saison=${encodeURIComponent(saison)}">${A.toutesSaison(saison)}</a>
   </div></div>`; }
 
 // Raccourcis : la France et le monde ouvrent Explorer, « Dans mon frigo » arrive plus tard, les 2 derniers ouvrent la liste déjà triée.
@@ -110,41 +113,80 @@ function construireAccueil(recettes){
 /* ---------- Écran 2 : la liste des recettes (et l'écran 5 : les recettes d'une zone, avec son intro) ---------- */
 const PAR_PAQUET = 30;   // au-delà de 30 recettes, les suivantes arrivent quand on descend
 let observeur = null;
-function afficherListe(params, zone){
+const etatListe = { params: new URLSearchParams(), zone: null, base: [] };   // ce que la liste montre en ce moment
+// Le titre dit d'où l'on vient : une recherche, une zone, un raccourci de l'accueil, la saison de la carte vedette.
+function titreListe(q, Z, params){
+  if (q) return L.resultatsPour(q);
+  if (Z) return Z.nom;
+  const actifs = CLES_FILTRES.filter(k=>valeurFiltre(params, k)), v = actifs.length === 1 && params.get(actifs[0]);
+  if (actifs[0] === 'budget' && v === '€') return L.petitBudget;
+  if (actifs[0] === 'temps' && v === '30') return L.moins30;
+  if (actifs[0] === 'saison' && v) return L.saison(v);
+  return L.toutes;
+}
+// animer = un filtre vient de changer : on garde l'en-tête et les puces, seules les cartes bougent (effet 232).
+function afficherListe(params, zone, animer){
   const q = (params.get('q')||'').trim(), Z = zone && (T.regions[zone] || T.pays[zone]);
-  let recettes = q ? chercher(q) : DONNEES.recettes, titre = q ? L.resultatsPour(q) : L.toutes;
-  if (Z){ recettes = recettes.filter(r=>r.zone===Z.nom); titre = Z.nom; }
-  if (params.get('budget')){ recettes = recettes.filter(r=>r.budget===params.get('budget')); titre = L.petitBudget; }
-  if (params.get('temps')){ recettes = recettes.filter(r=>r.tempsTotal<=+params.get('temps')); titre = L.moins30; }
+  let base = q ? chercher(q) : DONNEES.recettes;
+  if (Z) base = base.filter(r=>r.zone===Z.nom);
+  const recettes = filtrer(base, params), titre = titreListe(q, Z, params), liste = $('liste');
+  Object.assign(etatListe, { params, zone: zone || null, base });
   document.title = `${titre} · ${T.appNom}`;
-  const liste = $('liste');
-  liste.innerHTML = `<div class="liste-tete"><h1></h1><span class="compteur">${L.compteur(recettes.length)}</span>${Z ? `<p class="intro">${Z.intro}</p>` : ''}</div>`
-    + (recettes.length ? `<div class="cartes" id="cartes"></div><div class="suite" id="suite"></div><p class="note">${T.prixEstime}</p>`
-      : Z ? `<div class="encadre"><p>${T.regions[zone] ? T.explorer.videRegion : T.explorer.videPays}</p></div>`
-      : `<div class="encadre"><p>${L.vide}</p><button class="btn" type="button" id="enlever">${L.enleverFiltres}</button></div>`);
+  if (!animer){
+    const zoneVide = Z && !DONNEES.recettes.some(r=>r.zone===Z.nom);
+    liste.innerHTML = `<div class="liste-tete"><h1></h1><span class="compteur" id="compteur"></span>${Z ? `<p class="intro">${Z.intro}</p>` : ''}</div>`
+      + (zoneVide ? `<div class="encadre"><p>${T.regions[zone] ? T.explorer.videRegion : T.explorer.videPays}</p></div>`
+        : `<div class="filtres" id="filtres"></div><div id="resultats"></div>`);
+    if (!zoneVide) poserFiltres($('filtres'), etatListe, changerFiltres);
+  }
   liste.querySelector('h1').textContent = titre;   // textContent : ce que tape le visiteur reste du texte
+  $('compteur').textContent = L.compteur(recettes.length);
   if (observeur) observeur.disconnect();
-  if (!recettes.length){ if (!Z) $('enlever').addEventListener('click',()=>{ $('recherche').value=''; location.hash='recettes'; }); return; }
+  if (!$('resultats')) return;
+  majFiltres($('filtres'), params);
+  const montrer = () => montrerCartes(recettes, params);
+  animer ? glisserCartes($('resultats'), new Set(recettes.map(r=>r.id)), montrer) : montrer();
+}
+function montrerCartes(recettes, params){
+  const boite = $('resultats');
+  if (observeur) observeur.disconnect();
+  if (!recettes.length){
+    boite.innerHTML = `<div class="encadre"><p>${L.vide}</p><button class="btn" type="button" id="enlever">${L.enleverFiltres}</button></div>`;
+    $('enlever').addEventListener('click',()=>{
+      if (aDesFiltres(params)) return changerFiltres(sansFiltres(params));
+      $('recherche').value=''; location.hash='recettes';
+    });
+    return;
+  }
+  boite.innerHTML = `<div class="cartes" id="cartes"></div><div class="suite" id="suite"></div><p class="note">${T.prixEstime}</p>`;
   let montrees = 0;
   function paquet(){
-    const zone = document.createElement('div');
-    zone.innerHTML = recettes.slice(montrees, montrees += PAR_PAQUET).map(carte).join('');
-    brancherEffets(zone);
-    $('cartes').append(...zone.children);
+    const lot = document.createElement('div');
+    lot.innerHTML = recettes.slice(montrees, montrees += PAR_PAQUET).map(carte).join('');
+    brancherEffets(lot);
+    $('cartes').append(...lot.children);
     if (montrees >= recettes.length) observeur.disconnect();
   }
   observeur = new IntersectionObserver(es=>{ if (es[0].isIntersecting) paquet(); }, {rootMargin:'600px'});
   paquet();
   if (montrees < recettes.length) observeur.observe($('suite'));
 }
+// Un filtre change : on met à jour l'adresse (sans créer de nouvelle page dans l'historique) et les cartes.
+const adresseListe = (zone, p) => '#' + (zone ? 'zone/' + zone : 'recettes') + (p.toString() ? '?' + p : '');
+function changerFiltres(p){
+  history.replaceState(null, '', adresseListe(etatListe.zone, p));
+  afficherListe(p, etatListe.zone, true);
+}
 
-/* ---------- Recherche : Entrée ouvre la liste ; sur la liste, les résultats suivent la frappe ---------- */
+/* ---------- Recherche : Entrée ouvre la liste ; sur la liste, les résultats suivent la frappe (les filtres restent) ---------- */
 const versListe = v => 'recettes' + (v.trim() ? '?q=' + encodeURIComponent(v.trim()) : '');
 $('form-recherche').addEventListener('submit', e=>{ e.preventDefault(); location.hash = versListe($('recherche').value); $('recherche').blur(); });
 $('recherche').addEventListener('input', ()=>{
   if (document.body.dataset.ecran !== 'liste') return;
-  history.replaceState(null, '', '#' + versListe($('recherche').value));
-  afficherListe(new URLSearchParams(versListe($('recherche').value).split('?')[1]));
+  const p = new URLSearchParams(etatListe.params), v = $('recherche').value.trim();
+  v ? p.set('q', v) : p.delete('q');
+  history.replaceState(null, '', adresseListe(null, p));
+  afficherListe(p);
 });
 
 /* ---------- Quel écran montrer ? On lit l'adresse (#recettes?q=crêpe), comme l'intercalaire d'un classeur ---------- */
@@ -166,7 +208,7 @@ function router(){
   } else {
     $('recherche').value = '';
     if (ecran === 'recette') afficherRecette(decodeURIComponent(nom.slice(8)));
-    else if (ecran === 'zone') afficherListe(new URLSearchParams(), zone);
+    else if (ecran === 'zone') afficherListe(new URLSearchParams(reste), zone);
     else if (ecran === 'explorer') afficherExplorer(reste === 'monde' ? 'monde' : 'france', avant !== ecran);
     else document.title = T.titrePage;
   }

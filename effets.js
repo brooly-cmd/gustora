@@ -113,3 +113,33 @@ function ecrireIdees(recettes){
   relancerIdees = pas;
   pas();
 }
+
+/* ---------- Effet 16 : une onde safran part de l'endroit où le doigt touche la puce ---------- */
+function brancherOnde(zone){
+  if (reduce) return;
+  zone.querySelectorAll('.puce').forEach(p=>p.addEventListener('pointerdown',e=>{
+    const r=p.getBoundingClientRect(), s=Math.max(r.width,r.height)*2.2, o=document.createElement('span');
+    o.className='onde'; o.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`;
+    p.append(o); setTimeout(()=>o.remove(),650);
+  }));
+}
+
+/* ---------- Effet 232 : quand on filtre, les cartes qui partent s'effacent, les autres glissent à leur nouvelle place ---------- */
+// On note où chaque carte était, on refait la liste, puis chaque carte part de son ancienne place (comme des bocaux qu'on resserre sur l'étagère).
+let tmGlisse=0;
+function glisserCartes(boite, garder, refaire){
+  clearTimeout(tmGlisse);
+  if (reduce) return refaire();
+  const avant={}, cartes=[...boite.querySelectorAll('[data-id]')];
+  cartes.forEach(c=>avant[c.dataset.id]=c.getBoundingClientRect());
+  const partent=cartes.filter(c=>!garder.has(c.dataset.id));
+  function suite(){
+    refaire();
+    boite.querySelectorAll('[data-id]').forEach(c=>{ const a=avant[c.dataset.id], b=c.getBoundingClientRect();
+      if (a) c.animate([{transform:`translate(${a.left-b.left}px,${a.top-b.top}px)`},{transform:'none'}],{duration:500,easing:'cubic-bezier(.2,.8,.2,1)'});
+      else c.animate([{opacity:0,transform:'scale(.9)'},{opacity:1,transform:'none'}],{duration:350,delay:120,easing:'ease-out',fill:'backwards'}); });
+  }
+  if (!partent.length) return suite();
+  partent.forEach(c=>c.animate([{opacity:1},{opacity:0,transform:'scale(.9)'}],{duration:250,fill:'forwards'}));
+  tmGlisse=setTimeout(suite,240);
+}

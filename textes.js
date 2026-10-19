@@ -8,16 +8,32 @@ const TEXTES = {
     vedette: "De saison en ce moment",
     voirRecette: "Voir la recette",
     raccourcis: ["Explorer la France", "Le tour du monde", "Dans mon frigo", "Petit budget (€)", "Moins de 30 min"],
-    dernieres: "Les dernières recettes ajoutées"
+    dernieres: "Les dernières recettes ajoutées",
+    toutesSaison: s => `Toutes les recettes ${TEXTES.deSaison[s]}`
   },
   liste: {
     resultatsPour: q => `Résultats pour « ${q} »`,
     toutes: "Toutes les recettes",
     petitBudget: "Petit budget",
     moins30: "Moins de 30 min",
+    saison: s => `Recettes ${TEXTES.deSaison[s]}`,
     compteur: n => n <= 1 ? `${n} recette` : `${n} recettes`,
     vide: "Aucune recette ne correspond. Essaie d'enlever un filtre.",
     enleverFiltres: "Enlever les filtres"
+  },
+  filtres: {
+    saison: { puce: "Saison", question: "Quelle saison ?" },
+    temps: { puce: "Temps", question: "Combien de temps as-tu ?",
+      choix: { "15": "15 min ou moins", "30": "30 min ou moins", "60": "1 h ou moins", "plus": "Plus d'1 h" } },
+    budget: { puce: "Budget", question: "Quel budget par personne ?",
+      choix: { "€": "€", "€€": "€€", "€€€": "€€€" },
+      aide: { "€": "Moins de ~2 € / pers.", "€€": "De ~2 à ~5 € / pers.", "€€€": "Plus de ~5 € / pers." } },
+    type: { puce: "Type", question: "Quel moment du repas ?",
+      choix: { "Entrée": "Entrée", "Plat": "Plat", "Dessert": "Dessert" } },
+    regime: "Régime",
+    regimeBientot: "Le filtre régime arrive bientôt !",
+    enlever: nom => `Enlever le filtre ${nom}`,
+    fermer: "Fermer"
   },
   logos: {
     titre: "Les petits logos",
@@ -92,6 +108,7 @@ const TEXTES = {
   bientot: "Cet écran arrive bientôt !",
   onglets: ["Accueil", "Explorer", "Mon frigo", "Favoris", "Courses"],
   saisons: { printemps: "Printemps", "été": "Été", automne: "Automne", hiver: "Hiver", "toute l'année": "Toute l'année" },
+  deSaison: { printemps: "de printemps", "été": "d'été", automne: "d'automne", hiver: "d'hiver", "toute l'année": "de toute l'année" },
   parPersonne: "/ pers.",
   prixEstime: "Prix estimés en supermarché.",
   modeNuit: "Passer en mode nuit",

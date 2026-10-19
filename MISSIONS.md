@@ -68,7 +68,7 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** je touche la Bretagne sur la carte (sur iPhone) et je vois ses recettes.
   - **Produit pour la suite :** explorer.js, carte-france.svg.
 
-- [ ] 8. Les filtres saison, temps et budget — CONSTRUIT
+- [x] 8. Les filtres saison, temps et budget — CONSTRUIT
   - **Quoi :** les puces de filtre de l'écran 2 (Saison, Temps, Budget, Type), qui se combinent,
     + le bloc « De saison en ce moment » de l'accueil, qui suit la date du jour.
     Prévoir la place de la puce « Régime ▾ » (elle arrive à la mission 9).
@@ -200,6 +200,6 @@ Des outils rangés en chemin. Ils sont facultatifs : une mission peut s'en servi
 |---|---|---|---|
 | Le calculateur des fiches (mission 6) | outils/calculer.py | Recalcule prix, budget, calories, régimes et le sommaire à partir de ingredients.json ; signale les ingrédients inconnus et les recettes en double. Lancer : `python outils/calculer.py` | Idée réutilisable : « des données bien rangées → un programme calcule le reste » |
 | Les logos des régimes (mission 6) | regimes.js | 5 petits dessins SVG, plein = compatible, contour = adaptable | Le principe plein / contour peut servir ailleurs |
-| Les effets du site (missions 3 à 7) | effets.js, explorer.js | Effets 78, 3, 2, 8, 14, 42, 6, 36 (la carte qui se dessine), 152 (les herbes qui poussent) et 66 (les pays en tuiles bento), réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
+| Les effets du site (missions 3 à 8) | effets.js, explorer.js, filtres.js | Effets 78, 3, 2, 8, 14, 42, 6, 36 (la carte qui se dessine), 152 (les herbes qui poussent), 66 (les pays en tuiles bento), et pour les filtres 16 (onde au toucher), 46 (coche qui se dessine) et 232 (cartes qui glissent à leur place), réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
 
 Bilan final (à remplir après la dernière mission) : ce qui a bien marché, ce qui était de trop, ce que je garde pour le prochain projet.
