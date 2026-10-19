@@ -49,12 +49,14 @@ $('sw').addEventListener('click',()=>{
 });
 sombre.addEventListener('change', appliquerTheme);
 
-/* ---------- Barre d'onglets (seul « Accueil » est construit pour l'instant) ---------- */
+/* ---------- Barre d'onglets (« Accueil » et « Explorer » sont construits pour l'instant) ---------- */
 const CLES = ['accueil','explorer','frigo','favoris','courses'];
 $('onglets').insertAdjacentHTML('beforeend', T.onglets.map((t,i)=>
-  `<button type="button" role="tab" aria-selected="${i===0}" ${i ? 'data-bientot' : 'id="onglet-accueil"'}>${svg(CLES[i])}${t}</button>`).join(''));
+  `<button type="button" role="tab" aria-selected="${i===0}" ${i > 1 ? 'data-bientot' : `id="onglet-${CLES[i]}"`}>${svg(CLES[i])}${t}</button>`).join(''));
 $('onglet-accueil').addEventListener('click', ()=>{ location.hash = ''; });
-new ResizeObserver(()=>choisirOnglet(0)).observe($('onglets'));
+$('onglet-explorer').addEventListener('click', ()=>{ location.hash = 'explorer'; });
+const ongletActif = () => ['explorer','zone'].includes(document.body.dataset.ecran) ? 1 : 0;
+new ResizeObserver(()=>choisirOnglet(ongletActif())).observe($('onglets'));
 
 /* ---------- Les morceaux de page ---------- */
 // La carte recette est un lien vers sa page.
@@ -74,8 +76,8 @@ function vedette(r, saison){ return `<div class="vedette js-tilt" data-max="9">
     <a class="see" href="#recette/${r.id}">${A.voirRecette}</a>
   </div></div>`; }
 
-// Raccourcis : les 3 premiers mènent à des écrans à venir, les 2 derniers ouvrent la liste déjà triée.
-const RACCOURCIS = [['france','data-bientot'], ['monde','data-bientot'], ['frigo','data-bientot'],
+// Raccourcis : la France et le monde ouvrent Explorer, « Dans mon frigo » arrive plus tard, les 2 derniers ouvrent la liste déjà triée.
+const RACCOURCIS = [['france','data-lien="#explorer"'], ['monde','data-lien="#explorer?monde"'], ['frigo','data-bientot'],
   ['budget','data-lien="#recettes?budget=€"'], ['temps','data-lien="#recettes?temps=30"']];
 const raccourcis = () => `<ul class="raccourcis">` + A.raccourcis.map((t,i)=>
   `<li><button class="rac" type="button" ${RACCOURCIS[i][1]}><span class="voile"></span><span class="ic">${svg(RACCOURCIS[i][0])}</span>${t}</button></li>`).join('') + `</ul>`;
@@ -105,22 +107,24 @@ function construireAccueil(recettes){
   ecrireIdees(recettes);
 }
 
-/* ---------- Écran 2 : la liste des recettes ---------- */
+/* ---------- Écran 2 : la liste des recettes (et l'écran 5 : les recettes d'une zone, avec son intro) ---------- */
 const PAR_PAQUET = 30;   // au-delà de 30 recettes, les suivantes arrivent quand on descend
 let observeur = null;
-function afficherListe(params){
-  const q = (params.get('q')||'').trim();
+function afficherListe(params, zone){
+  const q = (params.get('q')||'').trim(), Z = zone && (T.regions[zone] || T.pays[zone]);
   let recettes = q ? chercher(q) : DONNEES.recettes, titre = q ? L.resultatsPour(q) : L.toutes;
+  if (Z){ recettes = recettes.filter(r=>r.zone===Z.nom); titre = Z.nom; }
   if (params.get('budget')){ recettes = recettes.filter(r=>r.budget===params.get('budget')); titre = L.petitBudget; }
   if (params.get('temps')){ recettes = recettes.filter(r=>r.tempsTotal<=+params.get('temps')); titre = L.moins30; }
   document.title = `${titre} · ${T.appNom}`;
   const liste = $('liste');
-  liste.innerHTML = `<div class="liste-tete"><h1></h1><span class="compteur">${L.compteur(recettes.length)}</span></div>`
+  liste.innerHTML = `<div class="liste-tete"><h1></h1><span class="compteur">${L.compteur(recettes.length)}</span>${Z ? `<p class="intro">${Z.intro}</p>` : ''}</div>`
     + (recettes.length ? `<div class="cartes" id="cartes"></div><div class="suite" id="suite"></div><p class="note">${T.prixEstime}</p>`
+      : Z ? `<div class="encadre"><p>${T.regions[zone] ? T.explorer.videRegion : T.explorer.videPays}</p></div>`
       : `<div class="encadre"><p>${L.vide}</p><button class="btn" type="button" id="enlever">${L.enleverFiltres}</button></div>`);
   liste.querySelector('h1').textContent = titre;   // textContent : ce que tape le visiteur reste du texte
   if (observeur) observeur.disconnect();
-  if (!recettes.length){ $('enlever').addEventListener('click',()=>{ $('recherche').value=''; location.hash='recettes'; }); return; }
+  if (!recettes.length){ if (!Z) $('enlever').addEventListener('click',()=>{ $('recherche').value=''; location.hash='recettes'; }); return; }
   let montrees = 0;
   function paquet(){
     const zone = document.createElement('div');
@@ -146,12 +150,15 @@ $('recherche').addEventListener('input', ()=>{
 /* ---------- Quel écran montrer ? On lit l'adresse (#recettes?q=crêpe), comme l'intercalaire d'un classeur ---------- */
 function router(){
   const [nom, reste] = location.hash.slice(1).split('?');
-  const ecran = nom === 'recettes' ? 'liste' : nom.startsWith('recette/') ? 'recette' : 'accueil';
-  const avant = document.body.dataset.ecran;
+  const ecran = nom === 'recettes' ? 'liste' : nom.startsWith('recette/') ? 'recette'
+    : nom === 'explorer' ? 'explorer' : nom.startsWith('zone/') ? 'zone' : 'accueil';
+  const avant = document.body.dataset.ecran, zone = ecran === 'zone' && nom.slice(5);
+  if (zone && !T.regions[zone] && !T.pays[zone]) return location.replace('#explorer');   // zone inconnue : retour à la carte
   document.body.dataset.ecran = ecran;
   $('accueil').hidden = ecran !== 'accueil';
-  $('liste').hidden = ecran !== 'liste';
+  $('liste').hidden = ecran !== 'liste' && ecran !== 'zone';   // l'écran 5 est une liste filtrée par zone
   $('recette').hidden = ecran !== 'recette';
+  $('explorer').hidden = ecran !== 'explorer';
   if (ecran === 'liste'){
     const params = new URLSearchParams(reste);
     $('recherche').value = params.get('q') || '';
@@ -159,17 +166,19 @@ function router(){
   } else {
     $('recherche').value = '';
     if (ecran === 'recette') afficherRecette(decodeURIComponent(nom.slice(8)));
+    else if (ecran === 'zone') afficherListe(new URLSearchParams(), zone);
+    else if (ecran === 'explorer') afficherExplorer(reste === 'monde' ? 'monde' : 'france', avant !== ecran);
     else document.title = T.titrePage;
   }
-  if (avant !== ecran || ecran === 'recette') scrollTo(0, 0);
-  choisirOnglet(0); demarrer(); relancerIdees();
+  if (avant !== ecran || ecran === 'recette' || ecran === 'zone') scrollTo(0, 0);
+  choisirOnglet(ongletActif()); demarrer(); relancerIdees();
 }
 
 /* ---------- Démarrage ---------- */
 function lancer(){
   chargerRecettes().then(d=>{ construireAccueil(d.recettes); router(); }).catch(()=>{
     document.body.dataset.ecran = 'erreur';
-    $('liste').hidden = $('recette').hidden = true; $('accueil').hidden = false;
+    $('liste').hidden = $('recette').hidden = $('explorer').hidden = true; $('accueil').hidden = false;
     $('accueil').innerHTML = `<div class="encadre" role="alert"><p>${T.erreurChargement}</p><button class="btn" type="button" id="retry">${T.reessayer}</button></div>`;
     $('retry').addEventListener('click', lancer);
   });

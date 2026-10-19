@@ -51,6 +51,44 @@ const TEXTES = {
     introuvable: "Cette recette n'existe pas (ou plus).",
     retourAccueil: "Retour à l'accueil"
   },
+  explorer: {
+    titre: "Explorer",
+    france: "France",
+    monde: "Monde",
+    carte: "Carte de France : touche une région pour voir ses recettes",
+    regions: "Les 13 régions",
+    bientot: "Bientôt",
+    videRegion: "Les recettes de cette région arrivent bientôt !",
+    videPays: "Les recettes de ce pays arrivent bientôt !"
+  },
+  // Les 23 zones : leur nom (le même que dans les recettes) et 2 lignes sur leur cuisine.
+  regions: {
+    "auvergne-rhone-alpes": { nom: "Auvergne-Rhône-Alpes", intro: "Des bouchons lyonnais aux chalets de Savoie, une cuisine généreuse de montagne et de terroir. Fromages fondants, charcuteries et lentilles vertes du Puy." },
+    "bourgogne-franche-comte": { nom: "Bourgogne-Franche-Comté", intro: "Le pays du bœuf mijoté au vin rouge, des escargots au beurre persillé et de la moutarde. Côté Jura, le comté et les saucisses fumées." },
+    "bretagne": { nom: "Bretagne", intro: "Crêpes de froment, galettes de sarrasin et beurre demi-sel : la cuisine bretonne sent la mer et le blé noir. Huîtres, homard et far pour finir." },
+    "centre-val-de-loire": { nom: "Centre-Val de Loire", intro: "Le jardin de la France, entre châteaux et rivières : rillettes de Tours, fromages de chèvre et gibier de Sologne. Et la tarte Tatin, née ici par accident." },
+    "corse": { nom: "Corse", intro: "L'île de beauté cuisine le maquis : brocciu frais, charcuterie de montagne, châtaignes et herbes sauvages. Une cuisine de berger, simple et parfumée." },
+    "grand-est": { nom: "Grand Est", intro: "De l'Alsace à la Lorraine : tarte flambée, choucroute garnie et quiche lorraine. Les fêtes y sentent la cannelle et le pain d'épices." },
+    "hauts-de-france": { nom: "Hauts-de-France", intro: "Une cuisine du Nord qui réchauffe : carbonade à la bière, welsh fondant et moules-frites. Le maroilles et la chicorée ne sont jamais loin." },
+    "ile-de-france": { nom: "Île-de-France", intro: "Paris et ses alentours : le pays du bistrot, de la soupe à l'oignon et du croque-monsieur. Le brie de Meaux et le Paris-Brest y sont nés." },
+    "normandie": { nom: "Normandie", intro: "Crème, beurre et pommes : la Normandie cuisine avec ce que donnent ses vaches et ses vergers. Camembert, cidre et poissons de la Manche." },
+    "nouvelle-aquitaine": { nom: "Nouvelle-Aquitaine", intro: "Du Pays basque au Périgord : piment d'Espelette, confit de canard et cannelés de Bordeaux. Une cuisine du sud-ouest qui prend son temps." },
+    "occitanie": { nom: "Occitanie", intro: "Le cassoulet de Castelnaudary, l'aligot de l'Aubrac et le roquefort : une cuisine qui tient au corps. Côté Méditerranée, tielles et huîtres de Bouzigues." },
+    "pays-de-la-loire": { nom: "Pays de la Loire", intro: "Beurre blanc nantais, rillettes du Mans et sel de Guérande. Une cuisine douce de fleuve et d'océan, avec la brioche vendéenne au goûter." },
+    "provence-alpes-cote-d-azur": { nom: "Provence-Alpes-Côte d'Azur", intro: "Huile d'olive, tomates gorgées de soleil et herbes de Provence. Ratatouille, bouillabaisse et pissaladière, à l'heure de l'apéritif." }
+  },
+  pays: {
+    "italie": { nom: "Italie", intro: "Des pâtes de Rome aux pizzas de Naples, une cuisine de produits simples et parfaits. Huile d'olive, parmesan et basilic suffisent souvent." },
+    "espagne": { nom: "Espagne", intro: "Paella de Valence, tortilla et tapas à partager : l'Espagne cuisine pour la tablée. Safran, paprika fumé et jambon séché." },
+    "maroc": { nom: "Maroc", intro: "Tajines mijotés, couscous du vendredi et pâtisseries au miel. Le cumin, la cannelle et le citron confit parfument tout." },
+    "japon": { nom: "Japon", intro: "Une cuisine de précision et de saison : gyozas, ramen, sushis et bouillons dashi. Le goût umami, venu de la sauce soja et des algues." },
+    "mexique": { nom: "Mexique", intro: "Tacos, guacamole et sauces au piment : le Mexique cuisine le maïs sous toutes ses formes. Coriandre et citron vert pour réveiller chaque bouchée." },
+    "inde": { nom: "Inde", intro: "Dal, currys et pains naan : une cuisine d'épices grillées et de légumineuses. Chaque région a ses mélanges, du doux au très piquant." },
+    "liban": { nom: "Liban", intro: "Houmous, taboulé et falafels : le Liban se mange en mezze, beaucoup de petits plats au centre de la table. Persil, citron et sésame." },
+    "grece": { nom: "Grèce", intro: "Moussaka, salade grecque et brochettes souvlaki : une cuisine de soleil et d'huile d'olive. Feta, origan et yaourt épais." },
+    "thailande": { nom: "Thaïlande", intro: "Le pad thaï et les currys au lait de coco jouent l'équilibre : sucré, salé, acide et piquant. Citronnelle, basilic thaï et citron vert." },
+    "etats-unis": { nom: "États-Unis", intro: "Burgers, barbecue fumé et pancakes : la cuisine américaine mélange les cuisines du monde entier. Et des cookies pour finir." }
+  },
   bientot: "Cet écran arrive bientôt !",
   onglets: ["Accueil", "Explorer", "Mon frigo", "Favoris", "Courses"],
   saisons: { printemps: "Printemps", "été": "Été", automne: "Automne", hiver: "Hiver", "toute l'année": "Toute l'année" },

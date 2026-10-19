@@ -222,6 +222,68 @@ body[data-ecran="recette"] .hello{display:none}
 .astuce p{margin:4px 0 0;max-width:62ch}
 .fiche > .note{margin-top:26px}
 
+/* ---------- Écran 4 : Explorer, et écran 5 : une zone ---------- */
+body[data-ecran="explorer"] .hello, body[data-ecran="zone"] .hello{display:none}
+.liste-tete .intro{flex-basis:100%;margin:4px 0 0;max-width:60ch;font-size:1.05rem}
+/* Les onglets France / Monde */
+.bascule{display:inline-flex;gap:4px;padding:4px;border-radius:99px;background:var(--dx);margin-bottom:18px}
+.bascule button{border:0;border-radius:99px;background:none;padding:8px 22px;font-weight:700;cursor:pointer;transition:background-color .3s,color .3s}
+.bascule button[aria-selected="true"]{background:var(--pr);color:var(--on)}
+#explorer[data-vue="france"] .vue-monde, #explorer[data-vue="monde"] .vue-france{display:none}
+.vue-france{display:grid;gap:22px;align-items:center}
+@media (min-width:900px){ .vue-france{grid-template-columns:3fr 2fr;gap:40px} }
+.vue-france h2{font-size:clamp(1.45rem,2.6vw,1.8rem);margin-bottom:8px}
+
+/* La carte de France, façon carnet de voyage : chaque région est un morceau de papier */
+.carte{margin:0;min-height:200px}
+.carte svg{display:block;width:100%;max-width:620px;height:auto;max-height:74vh;margin:0 auto;overflow:visible;
+  filter:drop-shadow(0 10px 14px color-mix(in srgb,var(--tx) 14%,transparent))}
+.carte a{cursor:pointer;outline:none}
+.carte path{fill:var(--dx);stroke:var(--tx);stroke-width:2.6;stroke-linejoin:round;stroke-dasharray:100;transition:fill .5s}
+.carte a.vide path{fill:color-mix(in srgb,var(--tx) 5%,var(--bg));stroke:color-mix(in srgb,var(--tx) 50%,var(--bg))}
+@media (hover:hover){ .carte a:hover path{fill:color-mix(in srgb,var(--pr) 35%,var(--dx))} }
+.carte a:focus-visible path{fill:color-mix(in srgb,var(--pr) 35%,var(--dx));stroke:var(--pr);stroke-width:4}
+.carte a.choisie path{fill:var(--pr)}
+/* Le tampon safran : le nombre de recettes de la région */
+.tampon circle{fill:var(--ac);stroke:var(--card);stroke-width:3}
+.tampon text{fill:var(--onac);font:800 17px var(--body);text-anchor:middle}
+/* Effet 36 : le contour se trace (2,2 s), la Bretagne et la Corse ensuite, puis les tampons se posent */
+.carte.attend path{stroke-dashoffset:100;fill-opacity:0}
+.carte.attend .tampon{opacity:0}
+.carte.trace path{animation:trace 2.2s cubic-bezier(.45,.05,.3,1) both}
+.carte.trace [data-zone="bretagne"] path{animation-delay:1s}
+.carte.trace [data-zone="corse"] path{animation-delay:1.6s}
+.carte.trace .tampon{animation:pose .4s 2.4s both}
+.carte.trace [data-zone="bretagne"] .tampon{animation-delay:3.2s}
+@keyframes trace{0%{stroke-dashoffset:100;fill-opacity:0} 65%{fill-opacity:0} 100%{stroke-dashoffset:0;fill-opacity:1}}
+@keyframes pose{from{opacity:0}}
+
+/* La liste des régions, sous la carte (ou à côté sur PC) */
+.zones{list-style:none;margin:0;padding:0;display:grid;column-gap:22px}
+@media (min-width:560px) and (max-width:899px){ .zones{grid-template-columns:1fr 1fr} }
+.zones a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 2px;color:inherit;text-decoration:none;
+  border-bottom:1px dashed var(--line)}
+.zones b{font:400 1.06rem/1.25 var(--display)}
+.zones a.vide b{color:var(--soft)}
+.nb{flex:none;font-size:.8rem;font-weight:800;border-radius:99px;padding:2px 10px;background:var(--ac);color:var(--onac)}
+.vide .nb{background:none;color:var(--soft);font-weight:600;padding-right:0}
+@media (hover:hover){ .zones a:hover b{color:var(--pr)} }
+
+/* Les pays : des tampons de passeport, posés un peu de travers */
+.pays{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (min-width:620px){ .pays{grid-template-columns:repeat(3,1fr)} }
+@media (min-width:980px){ .pays{grid-template-columns:repeat(5,1fr);gap:16px} }
+.pays a{display:grid;justify-items:center;gap:6px;padding:18px 10px 16px;border-radius:22px;text-align:center;color:inherit;text-decoration:none;
+  background:var(--card);border:1px solid var(--line);transition:border-color .3s}
+@media (hover:hover){ .pays a:hover{border-color:var(--pr)} }
+.cachet{position:relative;width:86px;height:86px;border-radius:50%;background:var(--dx);display:grid;place-items:center;font-size:2.6rem;line-height:1;
+  transform:rotate(-6deg);margin-bottom:4px}
+.cachet::before{content:"";position:absolute;inset:5px;border-radius:50%;border:2px dashed color-mix(in srgb,var(--pr) 50%,transparent)}
+.pays li:nth-child(even) .cachet{transform:rotate(5deg)}
+.pays b{font:400 1.15rem/1.2 var(--display)}
+.pays .vide .cachet{filter:grayscale(1);opacity:.55}
+.pays .vide b{color:var(--soft)}
+
 /* « Réduire les animations » : rien ne bouge pour décorer */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}

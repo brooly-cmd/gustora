@@ -5,7 +5,7 @@
   Corse, Grand Est, Hauts-de-France, Île-de-France, Normandie, Nouvelle-Aquitaine, Occitanie,
   Pays de la Loire, Provence-Alpes-Côte d'Azur) et 10 pays (Italie, Espagne, Maroc, Japon, Mexique,
   Inde, Liban, Grèce, Thaïlande, États-Unis).
-- Objectif : 10 recettes par zone (mission 17), puis 50 par zone (mission 28).
+- Objectif : 10 recettes par zone (mission 18), puis 50 par zone (mission 29).
 - Une recette est prévue pour 4 personnes par défaut. On peut choisir de 1 à 12 personnes :
   quantités et prix sont recalculés (arrondis : « 1,5 œuf » → « 2 œufs », grammes à 5 g près).
 - Budget par personne : € = moins de 2 € ; €€ = de 2 à 5 € ; €€€ = plus de 5 €. Prix toujours avec « ~ ».
@@ -38,11 +38,13 @@ des dessins à nous qui y ressemblent, lisibles en tout petit (16 px) et en jour
 - Pour sans gluten, sans lactose et pauvre en FODMAP, une recette est :
   « oui » (déjà compatible), « adaptable » (tous les ingrédients gênants ont un remplaçant) ou « non ».
 - Végétarien et vegan : seulement « oui » ou « non » (pas de version adaptée).
-- 3 niveaux, réglés régime par régime avec une jauge (mission 8) : « Désactivé » (on n'en tient pas compte),
-  « Souple » (seuls les ingrédients évidents comptent : farine, lait, viande, sauce soja…) et
+- 2 niveaux dans les données : « Souple » (seuls les ingrédients évidents comptent : farine, lait, viande, sauce soja…) et
   « Strict » (les ingrédients cachés et les traces comptent aussi : beurre et fromages affinés pour le lactose,
   lardons, tortillas « de maïs » mélangées au blé, mélanges d'épices, présure des fromages, vin collé à la gélatine,
-  courgette ou chou en grande quantité pour les FODMAP…). Sans réglage, les logos suivent le niveau « Souple ».
+  courgette ou chou en grande quantité pour les FODMAP…).
+  À l'écran, UN SEUL interrupteur pour tous les régimes cochés (mission 9) : « Mode strict (allergie, maladie cœliaque) ».
+  Éteint (par défaut) : niveau « Souple ». Allumé : niveau « Strict » pour tous les régimes cochés.
+  Un régime non coché n'est pas pris en compte. Sans réglage, les logos suivent le niveau « Souple ».
   Claude décide, ingrédient par ingrédient, ce qui est évident ou caché. Dans le doute, l'ingrédient est au moins « caché ».
 - Un remplacement qui change la façon de cuisiner a une note (« La farine sans gluten colle moins : ajoute 1 œuf. »).
   Si le plat n'a plus de sens une fois adapté, la recette reste « non » pour ce régime.
@@ -97,8 +99,11 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Titre : selon d'où on vient (« Résultats pour « crêpe » », « Petit budget », « Toutes les recettes »).
 - Puces de filtre : « Saison ▾ » · « Temps ▾ » · « Budget ▾ » · « Type ▾ » · « Régime ▾ » (plusieurs à la fois).
   Une puce active montre son choix (« Hiver ✕ »), le ✕ l'enlève.
-- « Régime ▾ » : les 5 régimes avec leur logo et leur jauge « Désactivé · Souple · Strict » (on peut en activer plusieurs : la recette doit les respecter TOUS),
+- « Régime ▾ » : 5 cases à cocher avec leur logo (on peut en cocher plusieurs : la recette doit les respecter TOUS),
+  + l'interrupteur « Mode strict (allergie, maladie cœliaque) » sous les cases, avec une phrase :
+  « Compte aussi les ingrédients cachés et les traces. »,
   + la case « Garder mes régimes sur ce téléphone » (cochée par défaut).
+  Le bandeau de l'accueil l'indique : « Mes régimes : sans gluten · sans lactose · strict ✕ ».
   Avec un régime actif, les résultats sont en 2 groupes : « Déjà compatibles » puis « Adaptables »
   (sous la carte : « Version adaptée : 2 ingrédients remplacés »).
 - Compteur : « 42 recettes » (« 1 recette »).
@@ -114,7 +119,7 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Titre + zone touchable (« Bretagne › » ouvre l'écran 5).
 - Badges : « ⏱ 35 min » · « Facile » · « € » · « Hiver, Printemps » · « ~450 kcal / pers. »
 - Ligne des régimes : chaque logo avec son nom (« Sans lactose », « Végétarien »…) ; touchable → sa légende.
-- Bloc « Version adaptée » (mission 12) : des interrupteurs « Sans gluten » · « Sans lactose » · « Pauvre en FODMAP »,
+- Bloc « Version adaptée » (mission 13) : des interrupteurs « Sans gluten » · « Sans lactose » · « Pauvre en FODMAP »,
   seulement pour les régimes « adaptable » (plusieurs à la fois). Un régime « oui » affiche « ✓ Déjà sans gluten ».
   Un régime « non » affiche « Pas de version sans gluten pour ce plat. ».
   Si « Mes régimes » est actif, les bons interrupteurs sont déjà allumés.
@@ -131,7 +136,7 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Astuce : « 💡 L'astuce : … »
 - Bouton : « Lancer le mode cuisine »
 - ♥ : « Ajoutée à tes favoris » / « Retirée de tes favoris ».
-- Partager (mission 18) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
+- Partager (mission 19) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
 - Avertissement en bas : « Allergies : vérifie toujours la liste des ingrédients. »
 - Recette introuvable (lien cassé) : « Cette recette n'existe pas (ou plus). » + bouton « Retour à l'accueil ».
 

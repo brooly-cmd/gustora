@@ -56,7 +56,7 @@ function dessinerRecette(r){
     <header class="fiche-tete">
       <div class="plat" aria-hidden="true"><span class="emo">${emoji(r)}</span><img src="${r.image}" alt="" onerror="this.remove()"></div>
       <div class="fiche-titre">
-        <a class="zone-lien" href="#zone" data-bientot>${r.zone} ›</a>
+        <a class="zone-lien" href="#zone/${slugZone(r.zone)}">${r.zone} ›</a>
         <h1>${r.nom}</h1>
         <p class="badges">
           <span class="tm">⏱ ${duree(r.tempsPreparation + r.tempsCuisson)}</span>
