@@ -6,6 +6,7 @@ Mis à jour le 2026-10-19 : régimes (sans gluten, sans lactose, pauvre en FODMA
 calories, filtre multiple et versions adaptées (nouvelle mission 12) → 28 missions.
 Mis à jour le 2026-10-19 (bis) : un seul interrupteur « Mode strict » au lieu d'une jauge par régime,
 et la mission 8 coupée en deux (8 : filtres saison, temps, budget ; 9 : filtre régime) → 29 missions.
+Mis à jour le 2026-10-19 (ter) : nouvelle mission 19 « Les transitions entre les pages » → 30 missions.
 
 ## 1. FICHE PROJET (= CLAUDE.md)
 
@@ -141,14 +142,14 @@ Coche chaque case quand la mission est réussie.
 
 ### Chercher
 
-- [ ] 7. Explorer par région et par pays — CONSTRUIT
+- [x] 7. Explorer par région et par pays — CONSTRUIT
   - **Quoi :** l'écran 4 (carte de France avec les 13 régions + les 10 pays) et l'écran 5 (une zone).
     Une zone sans recette affiche « Les recettes de cette région arrivent bientôt ! ».
   - **Pourquoi :** c'est le cœur du voyage : on se promène sur une carte comme dans un guide.
   - **C'est réussi quand :** je touche la Bretagne sur la carte (sur iPhone) et je vois ses recettes.
   - **Produit pour la suite :** explorer.js, carte-france.svg.
 
-- [ ] 8. Les filtres saison, temps et budget — CONSTRUIT
+- [x] 8. Les filtres saison, temps et budget — CONSTRUIT
   - **Quoi :** les puces de filtre de l'écran 2 (Saison, Temps, Budget, Type), qui se combinent,
     + le bloc « De saison en ce moment » de l'accueil, qui suit la date du jour.
     Prévoir la place de la puce « Régime ▾ » (elle arrive à la mission 9).
@@ -231,7 +232,17 @@ Coche chaque case quand la mission est réussie.
 
 ### Ouvrir au public
 
-- [ ] 19. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
+- [ ] 19. Les transitions entre les pages — CONSTRUIT
+  - **Quoi :** une transition douce quand on passe d'un écran à l'autre (accueil → liste → recette → Explorer…),
+    par exemple la carte recette qui s'agrandit pour devenir la page de la recette, et un fondu glissé entre les onglets.
+    Voir ECRANS.md, « Règles du projet ».
+  - **Pourquoi :** comme tourner les pages d'un beau livre de cuisine au lieu de sauter d'une feuille à l'autre :
+    on comprend d'où on vient et où on va.
+  - **C'est réussi quand :** sur iPhone, je touche une carte recette : elle s'agrandit en douceur jusqu'à la page ;
+    je reviens en arrière : elle reprend sa place ; avec « Réduire les animations » activé, ça change de page sans mouvement.
+  - **Produit pour la suite :** transitions.js (ou les transitions rangées dans app.js et style.css).
+
+- [ ] 20. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
   - **Quoi :** le bouton « Partager » d'une recette, l'installation sur l'écran d'accueil iPhone
     (icône, nom, plein écran) et l'écran 10 « À propos ».
   - **Pourquoi :** l'app devient publique : il faut pouvoir l'envoyer et dire honnêtement d'où viennent les recettes.
@@ -239,7 +250,7 @@ Coche chaque case quand la mission est réussie.
     et Gustora s'ajoute à mon écran d'accueil avec son icône.
   - **Produit pour la suite :** manifest.webmanifest, l'app complète.
 
-- [ ] 20. Un vrai test avec quelqu'un d'autre — EXÉCUTE
+- [ ] 21. Un vrai test avec quelqu'un d'autre — EXÉCUTE
   - **Quoi :** une personne essaie Gustora sur son téléphone sans aide : trouver une recette d'hiver,
     l'ajouter à ses courses, utiliser « Dans mon frigo », puis ouvrir une recette en version sans lactose.
     Je note ce qui la bloque, Claude corrige les 3 plus gros soucis.
@@ -253,15 +264,15 @@ Pour ces 9 missions : environ 100 recettes de plus (et leurs images) à chaque f
 même méthode que les missions 16 à 18 (calories, régimes et remplaçants compris). À la fin : environ 1 150 recettes.
 C'est réussi quand : sur Explorer, les zones ont toutes grossi, et 3 recettes au hasard sont complètes.
 
-- [ ] 21. Grand remplissage (1/9) — CONSTRUIT
-- [ ] 22. Grand remplissage (2/9) — CONSTRUIT
-- [ ] 23. Grand remplissage (3/9) — CONSTRUIT
-- [ ] 24. Grand remplissage (4/9) — CONSTRUIT
-- [ ] 25. Grand remplissage (5/9) — CONSTRUIT
-- [ ] 26. Grand remplissage (6/9) — CONSTRUIT
-- [ ] 27. Grand remplissage (7/9) — CONSTRUIT
-- [ ] 28. Grand remplissage (8/9) — CONSTRUIT
-- [ ] 29. Grand remplissage (9/9) — CONSTRUIT
+- [ ] 22. Grand remplissage (1/9) — CONSTRUIT
+- [ ] 23. Grand remplissage (2/9) — CONSTRUIT
+- [ ] 24. Grand remplissage (3/9) — CONSTRUIT
+- [ ] 25. Grand remplissage (4/9) — CONSTRUIT
+- [ ] 26. Grand remplissage (5/9) — CONSTRUIT
+- [ ] 27. Grand remplissage (6/9) — CONSTRUIT
+- [ ] 28. Grand remplissage (7/9) — CONSTRUIT
+- [ ] 29. Grand remplissage (8/9) — CONSTRUIT
+- [ ] 30. Grand remplissage (9/9) — CONSTRUIT
 
 ## Plus tard (seulement si je le demande)
 - Plusieurs langues (anglais, espagnol…) : les textes sont déjà rangés dans textes.js pour ça.
@@ -280,7 +291,7 @@ Des outils rangés en chemin. Ils sont facultatifs : une mission peut s'en servi
 |---|---|---|---|
 | Le calculateur des fiches (mission 6) | outils/calculer.py | Recalcule prix, budget, calories, régimes et le sommaire à partir de ingredients.json ; signale les ingrédients inconnus et les recettes en double. Lancer : `python outils/calculer.py` | Idée réutilisable : « des données bien rangées → un programme calcule le reste » |
 | Les logos des régimes (mission 6) | regimes.js | 5 petits dessins SVG, plein = compatible, contour = adaptable | Le principe plein / contour peut servir ailleurs |
-| Les effets du site (missions 3 à 6) | effets.js | Effets 78, 3, 2, 8, 14, 42 et 6, réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
+| Les effets du site (missions 3 à 8) | effets.js, explorer.js, filtres.js | Effets 78, 3, 2, 8, 14, 42, 6, 36 (la carte qui se dessine), 152 (les herbes qui poussent), 66 (les pays en tuiles bento), et pour les filtres 16 (onde au toucher), 46 (coche qui se dessine) et 232 (cartes qui glissent à leur place), réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
 
 Bilan final (à remplir après la dernière mission) : ce qui a bien marché, ce qui était de trop, ce que je garde pour le prochain projet.
 ```
@@ -332,7 +343,7 @@ Pose-moi tes questions, fais un plan d'abord, puis montre-moi que ça marche.
 Explique-moi simplement ce que tu fais, je suis débutant.
 ```
 
-### CONSTRUIT (missions 1, 3, 4, 6 à 14 et 19 — remplace N par le numéro)
+### CONSTRUIT (missions 1, 3, 4, 6 à 14, 19 et 20 — remplace N par le numéro)
 ```
 Lis CLAUDE.md, MISSIONS.md et ECRANS.md. Fais uniquement la mission N, rien d'autre,
 puis fais la fin de mission prévue dans CLAUDE.md.
@@ -345,7 +356,7 @@ Explique-moi simplement ce que tu fais, je suis débutant.
 ```
 (Pour la mission 1, il n'y a pas encore d'interface ni de DESIGN.md : les 4 lignes du milieu ne s'appliquent pas.)
 
-### REMPLIR (missions 16 à 18 et 21 à 29 — remplace N par le numéro)
+### REMPLIR (missions 16 à 18 et 22 à 30 — remplace N par le numéro)
 ```
 Lis CLAUDE.md, MISSIONS.md, ECRANS.md (partie « La fiche recette ») et IMAGES.md.
 Fais uniquement la mission N, rien d'autre, puis fais la fin de mission prévue dans CLAUDE.md.
@@ -364,7 +375,7 @@ Pose-moi tes questions, fais un plan d'abord, puis montre-moi que ça marche.
 Explique-moi simplement ce que tu fais, je suis débutant.
 ```
 
-### EXÉCUTE (missions 5, 15 et 20)
+### EXÉCUTE (missions 5, 15 et 21)
 ```
 Lis CLAUDE.md, MISSIONS.md et ECRANS.md. Fais uniquement la mission N, rien d'autre,
 puis fais la fin de mission prévue dans CLAUDE.md.
@@ -390,7 +401,7 @@ Explique-moi simplement ce que tu fais, je suis débutant.
   Corse, Grand Est, Hauts-de-France, Île-de-France, Normandie, Nouvelle-Aquitaine, Occitanie,
   Pays de la Loire, Provence-Alpes-Côte d'Azur) et 10 pays (Italie, Espagne, Maroc, Japon, Mexique,
   Inde, Liban, Grèce, Thaïlande, États-Unis).
-- Objectif : 10 recettes par zone (mission 18), puis 50 par zone (mission 29).
+- Objectif : 10 recettes par zone (mission 18), puis 50 par zone (mission 30).
 - Une recette est prévue pour 4 personnes par défaut. On peut choisir de 1 à 12 personnes :
   quantités et prix sont recalculés (arrondis : « 1,5 œuf » → « 2 œufs », grammes à 5 g près).
 - Budget par personne : € = moins de 2 € ; €€ = de 2 à 5 € ; €€€ = plus de 5 €. Prix toujours avec « ~ ».
@@ -403,6 +414,10 @@ Explique-moi simplement ce que tu fais, je suis débutant.
 - Tout ce que le visiteur garde (favoris, liste de courses, portions choisies) reste sur SON téléphone.
   Rien n'est envoyé ailleurs.
 - « Réduire les animations » activé sur l'iPhone : pas d'animation décorative.
+- Transitions entre les pages (mission 19) : courtes (0,3 à 0,4 s), jamais bloquantes (on peut toucher pendant),
+  la carte recette s'agrandit vers sa page et y retourne au retour, fondu glissé entre les onglets.
+  Si le téléphone ne sait pas faire la transition (vieux Safari), la page change simplement, sans erreur.
+  Avec « Réduire les animations » : pas de mouvement, juste le changement de page.
 - Jour / nuit : suit le réglage du téléphone, avec un interrupteur dans l'en-tête.
 - Calories : estimées par personne, toujours avec « ~ » (« ~450 kcal / pers. »), recalculées
   avec les portions et avec la version adaptée.
@@ -484,6 +499,8 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Titre : selon d'où on vient (« Résultats pour « crêpe » », « Petit budget », « Toutes les recettes »).
 - Puces de filtre : « Saison ▾ » · « Temps ▾ » · « Budget ▾ » · « Type ▾ » · « Régime ▾ » (plusieurs à la fois).
   Une puce active montre son choix (« Hiver ✕ »), le ✕ l'enlève.
+  Dans une même puce, on peut cocher plusieurs choix (« Été, Hiver ✕ », « Été +2 ✕ ») : la recette doit en respecter au moins un.
+  Le tiroir reste ouvert et se ferme avec « Voir les 4 recettes » (ou en le tirant vers le bas sur iPhone).
 - « Régime ▾ » : 5 cases à cocher avec leur logo (on peut en cocher plusieurs : la recette doit les respecter TOUS),
   + l'interrupteur « Mode strict (allergie, maladie cœliaque) » sous les cases, avec une phrase :
   « Compte aussi les ingrédients cachés et les traces. »,
@@ -521,7 +538,7 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Astuce : « 💡 L'astuce : … »
 - Bouton : « Lancer le mode cuisine »
 - ♥ : « Ajoutée à tes favoris » / « Retirée de tes favoris ».
-- Partager (mission 19) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
+- Partager (mission 20) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
 - Avertissement en bas : « Allergies : vérifie toujours la liste des ingrédients. »
 - Recette introuvable (lien cassé) : « Cette recette n'existe pas (ou plus). » + bouton « Retour à l'accueil ».
 

@@ -9,7 +9,9 @@ const TEXTES = {
     voirRecette: "Voir la recette",
     raccourcis: ["Explorer la France", "Le tour du monde", "Dans mon frigo", "Petit budget (€)", "Moins de 30 min"],
     dernieres: "Les dernières recettes ajoutées",
-    toutesSaison: s => `Toutes les recettes ${TEXTES.deSaison[s]}`
+    toutesSaison: s => `Toutes les recettes ${TEXTES.deSaison[s]}`,
+    mesRegimes: "Mes régimes :",
+    enleverRegimes: "Enlever mes régimes"
   },
   liste: {
     resultatsPour: q => `Résultats pour « ${q} »`,
@@ -19,7 +21,10 @@ const TEXTES = {
     saison: s => `Recettes ${TEXTES.deSaison[s]}`,
     compteur: n => n <= 1 ? `${n} recette` : `${n} recettes`,
     vide: "Aucune recette ne correspond. Essaie d'enlever un filtre.",
-    enleverFiltres: "Enlever les filtres"
+    enleverFiltres: "Enlever les filtres",
+    compatibles: "Déjà compatibles",
+    adaptables: "Adaptables",
+    versionAdaptee: n => `Version adaptée : ${n} ${n > 1 ? "ingrédients remplacés" : "ingrédient remplacé"}`
   },
   filtres: {
     saison: { puce: "Saison", question: "Quelle saison ?" },
@@ -30,8 +35,11 @@ const TEXTES = {
       aide: { "€": "Moins de ~2 € / pers.", "€€": "De ~2 à ~5 € / pers.", "€€€": "Plus de ~5 € / pers." } },
     type: { puce: "Type", question: "Quel moment du repas ?",
       choix: { "Entrée": "Entrée", "Plat": "Plat", "Dessert": "Dessert" } },
-    regime: "Régime",
-    regimeBientot: "Le filtre régime arrive bientôt !",
+    regime: { puce: "Régime", question: "Quels régimes ?",
+      strict: "Mode strict (allergie, maladie cœliaque)",
+      strictAide: "Compte aussi les ingrédients cachés et les traces.",
+      strictCourt: "strict",
+      garder: "Garder mes régimes sur ce téléphone" },
     enlever: nom => `Enlever le filtre ${nom}`,
     fermer: "Fermer",
     voir: n => n === 0 ? "Aucune recette" : n === 1 ? "Voir la recette" : `Voir les ${n} recettes`

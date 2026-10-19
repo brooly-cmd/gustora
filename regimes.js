@@ -25,13 +25,34 @@ const DESSINS = {
 function logoRegime(cle, etat){   // etat : 'oui' (plein) ou 'adaptable' (contour)
   return `<svg class="lg ${etat==='oui'?'plein':''}" viewBox="0 0 24 24" aria-hidden="true">${DESSINS[cle]}</svg>`;
 }
-// Le niveau des régimes : "souple" (ingrédients évidents) ou "strict" (cachés et traces comptés aussi).
-// La jauge pour le choisir arrive à la mission 8 ; d'ici là, tout le monde voit le niveau souple.
-const NIVEAU_REGIMES = 'souple';
+// « Mes régimes » : les régimes cochés dans le filtre, le mode strict, et si on les garde sur ce téléphone.
+// Mode strict éteint : niveau « souple » (ingrédients évidents) ; allumé : niveau « strict » (cachés et traces aussi)
+// pour les régimes cochés. Un régime non coché reste au niveau souple.
+const MES_REGIMES = Object.assign({ regimes: [], strict: false, garder: true }, STOCKAGE.lire('regimes', {}));
+MES_REGIMES.regimes = REGIMES.filter(k => MES_REGIMES.regimes.includes(k));
+function changerMesRegimes(modif){
+  Object.assign(MES_REGIMES, modif);
+  MES_REGIMES.garder ? STOCKAGE.ecrire('regimes', MES_REGIMES) : STOCKAGE.effacer('regimes');
+}
+const niveauChoisi = () => MES_REGIMES.strict ? 'strict' : 'souple';
+const niveau = k => MES_REGIMES.regimes.includes(k) ? niveauChoisi() : 'souple';
+// Ce qu'une recette est pour un régime : "oui", "adaptable" ou "non".
+const etatRegime = (r, k, niv = niveau(k)) => ((r.regimes || {})[niv] || {})[k];
+// Une recette respecte « Mes régimes » si elle est compatible ou adaptable pour TOUS les régimes cochés.
+const passeRegimes = (r, liste = MES_REGIMES.regimes) => liste.every(k => etatRegime(r, k) !== 'non');
+const dejaCompatible = r => MES_REGIMES.regimes.every(k => etatRegime(r, k) === 'oui');
+// Combien d'ingrédients la version adaptée remplace (pour les régimes cochés où la recette est « adaptable »).
+const GENE = { sansGluten: 'gluten', sansLactose: 'lactose', pauvreFodmap: 'fodmap' };
+function ingredientsRemplaces(r){
+  const compte = niveauChoisi() === 'strict' ? ['oui', 'cache'] : ['oui'];
+  const regimes = MES_REGIMES.regimes.filter(k => GENE[k] && etatRegime(r, k) === 'adaptable');
+  return r.ingredients.filter(id => { const I = DONNEES.ingredients[id];
+    return I && regimes.some(k => compte.includes(I.contient[GENE[k]])); }).length;
+}
 // Les régimes qu'une recette respecte déjà, puis ceux où elle est adaptable.
 function regimesRespectes(r){
-  const g = (r.regimes || {})[NIVEAU_REGIMES] || {};
-  return [...REGIMES.filter(k=>g[k]==='oui'), ...REGIMES.filter(k=>g[k]==='adaptable')].map(k=>[k, g[k]]);
+  const e = k => etatRegime(r, k);
+  return [...REGIMES.filter(k=>e(k)==='oui'), ...REGIMES.filter(k=>e(k)==='adaptable')].map(k=>[k, e(k)]);
 }
 // La petite rangée de logos sous une carte recette.
 function logosCarte(r){

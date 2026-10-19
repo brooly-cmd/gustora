@@ -5,7 +5,7 @@
   Corse, Grand Est, Hauts-de-France, Île-de-France, Normandie, Nouvelle-Aquitaine, Occitanie,
   Pays de la Loire, Provence-Alpes-Côte d'Azur) et 10 pays (Italie, Espagne, Maroc, Japon, Mexique,
   Inde, Liban, Grèce, Thaïlande, États-Unis).
-- Objectif : 10 recettes par zone (mission 18), puis 50 par zone (mission 29).
+- Objectif : 10 recettes par zone (mission 18), puis 50 par zone (mission 30).
 - Une recette est prévue pour 4 personnes par défaut. On peut choisir de 1 à 12 personnes :
   quantités et prix sont recalculés (arrondis : « 1,5 œuf » → « 2 œufs », grammes à 5 g près).
 - Budget par personne : € = moins de 2 € ; €€ = de 2 à 5 € ; €€€ = plus de 5 €. Prix toujours avec « ~ ».
@@ -18,6 +18,10 @@
 - Tout ce que le visiteur garde (favoris, liste de courses, portions choisies) reste sur SON téléphone.
   Rien n'est envoyé ailleurs.
 - « Réduire les animations » activé sur l'iPhone : pas d'animation décorative.
+- Transitions entre les pages (mission 19) : courtes (0,3 à 0,4 s), jamais bloquantes (on peut toucher pendant),
+  la carte recette s'agrandit vers sa page et y retourne au retour, fondu glissé entre les onglets.
+  Si le téléphone ne sait pas faire la transition (vieux Safari), la page change simplement, sans erreur.
+  Avec « Réduire les animations » : pas de mouvement, juste le changement de page.
 - Jour / nuit : suit le réglage du téléphone, avec un interrupteur dans l'en-tête.
 - Calories : estimées par personne, toujours avec « ~ » (« ~450 kcal / pers. »), recalculées
   avec les portions et avec la version adaptée.
@@ -138,7 +142,7 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Astuce : « 💡 L'astuce : … »
 - Bouton : « Lancer le mode cuisine »
 - ♥ : « Ajoutée à tes favoris » / « Retirée de tes favoris ».
-- Partager (mission 19) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
+- Partager (mission 20) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
 - Avertissement en bas : « Allergies : vérifie toujours la liste des ingrédients. »
 - Recette introuvable (lien cassé) : « Cette recette n'existe pas (ou plus). » + bouton « Retour à l'accueil ».
 

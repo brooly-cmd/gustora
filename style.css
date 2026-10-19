@@ -157,7 +157,7 @@ body:not([data-ecran="accueil"]) .hello{padding-top:8px}
 .puce .ouvrir{padding:9px 14px 9px 12px;min-height:42px}
 .puce svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .puce .fl{font-size:.75rem;opacity:.7}
-@media (hover:hover){ .puce:not(.place):hover{border-color:var(--pr)} }
+@media (hover:hover){ .puce:hover{border-color:var(--pr)} }
 /* Une puce choisie : remplie de terracotta, avec son choix et un ✕ pour l'enlever */
 .puce.on{background:var(--pr);border-color:var(--pr);color:var(--on)}
 .puce.on .fl{display:none}
@@ -165,9 +165,8 @@ body:not([data-ecran="accueil"]) .hello{padding-top:8px}
 .puce .x{width:30px;height:30px;margin-right:6px;justify-content:center;border-radius:50%;font-size:.8rem;
   background:color-mix(in srgb,var(--on) 22%,transparent)}
 .puce .x[hidden]{display:none}
-/* La place de « Régime ▾ » : en pointillés, elle arrive à la mission 9 */
-.puce.place{background:transparent;border-style:dashed;color:var(--soft)}
-.puce.place .lg{width:18px;height:18px;color:currentColor}
+/* La puce « Régime ▾ » : son logo prend la couleur du texte de la puce */
+.puce .lg{color:currentColor}
 /* Effet 16 : l'onde safran sous le doigt */
 .onde{position:absolute;z-index:-1;border-radius:50%;pointer-events:none;background:color-mix(in srgb,var(--ac) 70%,transparent);
   transform:scale(0);opacity:.75;animation:onde .6s ease-out forwards}
@@ -212,6 +211,39 @@ body:not([data-ecran="accueil"]) .hello{padding-top:8px}
   stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .4s .1s ease-out}
 [aria-pressed="true"] .coche{background:var(--pr)}
 [aria-pressed="true"] .coche svg{stroke-dashoffset:0}
+
+/* ---------- Le tiroir « Régime » (mission 9) : les logos, le mode strict, « Garder mes régimes » ---------- */
+.choix .lg{width:26px;height:26px;--lgfond:var(--bg)}
+#tiroir-plus:not(:empty){display:grid;gap:4px;margin-top:12px;padding-top:12px;border-top:1px dashed color-mix(in srgb,var(--tx) 25%,transparent)}
+.strict,.garder{width:100%;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;border:0;background:none;
+  color:inherit;font:inherit;padding:8px 2px;min-height:48px}
+.strict .ct{flex:1;display:grid}
+.strict b{font-weight:700;font-size:1rem;line-height:1.3}
+.strict small{font-size:.84rem;color:var(--soft)}
+.garder{font-weight:600;font-size:.95rem}
+/* L'interrupteur : le rond safran qui glisse (comme jour / nuit), le fond passe en terracotta quand il est allumé */
+.bascule{position:relative;width:54px;height:32px;flex:none;border-radius:99px;background:var(--dx);
+  border:2px solid color-mix(in srgb,var(--tx) 25%,transparent);transition:background-color .3s,border-color .3s}
+.bascule i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--ac);
+  transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
+[aria-checked="true"] .bascule{background:var(--pr);border-color:var(--pr)}
+[aria-checked="true"] .bascule i{transform:translateX(22px)}
+
+/* Les 2 groupes de la liste : le logo plein pour « Déjà compatibles », en contour pour « Adaptables » */
+.groupe{grid-column:1/-1;display:flex;align-items:center;gap:10px;font-size:1.45rem;margin-top:10px}
+.groupe ~ .groupe{margin-top:22px}
+.groupe .lg{width:28px;height:28px;--lgfond:var(--bg)}
+.groupe .compteur{font:700 .85rem var(--body)}
+/* Sous une carte adaptable : un petit cadre en pointillés, comme le logo en contour */
+.rc .adaptee{justify-self:start;margin-top:6px;font-size:.8rem;line-height:1.3;font-weight:700;border:1.5px dashed var(--pr);border-radius:10px;padding:3px 9px}
+
+/* Le bandeau « Mes régimes » de l'accueil, sous la recherche */
+.mes-regimes{display:flex;align-items:center;gap:6px;margin:0 0 18px;max-width:max-content;border-radius:99px;
+  background:var(--card);border:1.5px solid var(--pr);padding:4px 5px 4px 6px}
+.mes-regimes a{display:flex;align-items:center;gap:10px;color:inherit;text-decoration:none;padding:5px 6px;font-size:.95rem;line-height:1.3}
+.mes-regimes .logos{display:flex;gap:4px;flex:none}
+.mes-regimes .lg{width:20px;height:20px}
+.mes-regimes .x{width:32px;height:32px;flex:none;border:0;border-radius:50%;background:var(--dx);color:var(--tx);cursor:pointer;font-size:.8rem}
 
 /* ---------- Les petits logos des régimes (plein = compatible, contour = adaptable) ---------- */
 .lg{width:18px;height:18px;flex:none;color:var(--pr);--lgfond:var(--card);overflow:visible}

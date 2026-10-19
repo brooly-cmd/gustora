@@ -82,6 +82,9 @@ Code de départ : `choix-design.html` (repris de la Salle des effets, déjà aux
 - Accueil : 5 effets décoratifs (78, 3, 2, 14, 8), choisis exprès après la mission 3 (au lieu de 3). Écran recette : 6 (+ 2 si des cartes sont montrées).
   Écran Explorer : 36, 152 et 66 (choisis exprès après la mission 7, comme pour l'accueil). Le ♥ (13), les onglets (42) et le minuteur (48) sont des réactions au geste et ne comptent pas.
   Liste des recettes (mission 8) : 2 (cartes), 16 (puces), 46 et 192 (tiroir) et 232 (cartes qui glissent), choisis exprès sur une page d'essai. Après la mission 8, le tiroir de l'iPhone a reçu l'effet 192 (feuille qu'on tire).
+  Filtre régime (mission 9) : aucun effet nouveau. La puce Régime reprend 16, ses cases 46, son tiroir 192 ; l'interrupteur « Mode strict » reprend le rond safran de l'interrupteur jour / nuit ;
+  « Garder mes régimes » reprend la coche 46. Groupe « Déjà compatibles » = logo plein, « Adaptables » = logo en contour, et sous la carte un cadre en pointillés « Version adaptée : N ingrédients remplacés ».
+  Bandeau « Mes régimes » de l'accueil : pilule crème bordée de Principale, sans effet.
 - Sur tout le site, ça fait 9 types décoratifs. Après la mission 3, j'ai voulu un accueil plus vivant, et après la mission 7 un écran Explorer plus vivant :
   la règle « 3 par page » ne s'applique plus à ces deux écrans. Ne pas en ajouter d'autres sans me demander.
 

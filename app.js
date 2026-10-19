@@ -61,11 +61,11 @@ const ongletActif = () => ['explorer','zone'].includes(document.body.dataset.ecr
 new ResizeObserver(()=>choisirOnglet(ongletActif())).observe($('onglets'));
 
 /* ---------- Les morceaux de page ---------- */
-// La carte recette est un lien vers sa page.
-function carte(r){ return `<div class="tilt js-tilt" data-max="8" data-id="${r.id}"><a class="rc" href="#recette/${r.id}">
+// La carte recette est un lien vers sa page (avec, dans le groupe « Adaptables », combien d'ingrédients la version adaptée remplace).
+function carte(r, adaptee){ return `<div class="tilt js-tilt" data-max="8" data-id="${r.id}"><a class="rc" href="#recette/${r.id}">
   <span class="img" aria-hidden="true">${emoji(r)}</span>
   <span class="body"><h3>${r.nom}</h3><span class="z">${r.zone}</span>
-    <span class="meta"><span>⏱ ${duree(r.tempsTotal)}</span><span>${prix(r.prixParPersonne)}</span><span class="bdg">${r.budget}</span></span>${logosCarte(r)}</span>
+    <span class="meta"><span>⏱ ${duree(r.tempsTotal)}</span><span>${prix(r.prixParPersonne)}</span><span class="bdg">${r.budget}</span></span>${logosCarte(r)}${adaptee ? `<span class="adaptee">${L.versionAdaptee(ingredientsRemplaces(r))}</span>` : ''}</span>
   </a></div>`; }
 
 function vedette(r, saison){ return `<div class="vedette js-tilt" data-max="9">
@@ -92,22 +92,34 @@ function legendeLogos(){ const G = T.regimes, P = T.logos;
     <p class="plein-contour"><span>${logoRegime('vegetarien','oui')}${P.plein}</span><span>${logoRegime('vegetarien','adaptable')}${P.contour}</span></p>
     <p class="note">${P.attention}</p></section>`; }
 
-/* ---------- Écran 1 : l'accueil (fabriqué une seule fois) ---------- */
-function construireAccueil(recettes){
+// Sous la recherche, si « Mes régimes » est actif : « Mes régimes : sans gluten · sans lactose · strict ✕ ».
+const minuscule = t => t[0].toLowerCase() + t.slice(1);
+const cleRegimes = () => MES_REGIMES.regimes.join(',') + (MES_REGIMES.strict ? '+strict' : '');
+function bandeauRegimes(){ const M = MES_REGIMES;
+  if (!M.regimes.length) return '';
+  const noms = [...M.regimes.map(k=>minuscule(T.regimes[k].nom)), ...(M.strict ? [T.filtres.regime.strictCourt] : [])].join(' · ');
+  return `<div class="mes-regimes"><a href="#recettes"><span class="logos">${M.regimes.map(k=>logoRegime(k,'oui')).join('')}</span>
+    <span><b>${A.mesRegimes}</b> ${noms}</span></a><button type="button" class="x" id="enlever-regimes" aria-label="${A.enleverRegimes}">✕</button></div>`; }
+
+/* ---------- Écran 1 : l'accueil (refait seulement quand « Mes régimes » change) ---------- */
+function construireAccueil(tout){
   const auj = new Date(), saison = saisonDuJour(auj);
+  // Avec « Mes régimes », l'accueil ne montre que les recettes compatibles ou adaptables.
+  const recettes = tout.filter(r=>passeRegimes(r));
   // La recette vedette : tirée parmi celles de la saison, elle change chaque jour.
   let choix = recettes.filter(r=>r.saisons.includes(saison));
-  if (!choix.length) choix = recettes;
+  if (!choix.length) choix = recettes.length ? recettes : tout;
   const jour = Math.floor(new Date(auj.getFullYear(),auj.getMonth(),auj.getDate()) / 864e5);
   const star = choix[jour % choix.length];
   // Les dernières ajoutées : la fin du sommaire, sans répéter la vedette.
   const dernieres = recettes.slice().reverse().filter(r=>r!==star).slice(0,6);
-  $('accueil').innerHTML = `<div class="duo">${vedette(star, saison)}${raccourcis()}</div>
-    <section class="bloc"><h2>${A.dernieres}</h2><div class="cartes">${dernieres.map(carte).join('')}</div>
+  $('accueil').dataset.regimes = cleRegimes();
+  $('accueil').innerHTML = `${bandeauRegimes()}<div class="duo">${vedette(star, saison)}${raccourcis()}</div>
+    <section class="bloc"><h2>${A.dernieres}</h2><div class="cartes">${dernieres.map(r=>carte(r)).join('')}</div>
     <p class="note">${T.prixEstime}</p></section>${legendeLogos()}`;
   $('accueil').querySelectorAll('[data-lien]').forEach(b=>b.addEventListener('click',()=>{ location.hash = b.dataset.lien; }));
+  if ($('enlever-regimes')) $('enlever-regimes').addEventListener('click', ()=>{ changerMesRegimes({ regimes: [] }); construireAccueil(tout); });
   brancherEffets($('accueil'));
-  ecrireIdees(recettes);
 }
 
 /* ---------- Écran 2 : la liste des recettes (et l'écran 5 : les recettes d'une zone, avec son intro) ---------- */
@@ -155,15 +167,22 @@ function montrerCartes(recettes, params){
     boite.innerHTML = `<div class="encadre"><p>${L.vide}</p><button class="btn" type="button" id="enlever">${L.enleverFiltres}</button></div>`;
     $('enlever').addEventListener('click',()=>{
       if (aDesFiltres(params)) return changerFiltres(sansFiltres(params));
+      if (MES_REGIMES.regimes.length){ changerMesRegimes({ regimes: [] }); return changerFiltres(params); }
       $('recherche').value=''; location.hash='recettes';
     });
     return;
   }
   boite.innerHTML = `<div class="cartes" id="cartes"></div><div class="suite" id="suite"></div><p class="note">${T.prixEstime}</p>`;
+  // Avec « Mes régimes » : 2 groupes, « Déjà compatibles » (logo plein) puis « Adaptables » (logo en contour).
+  const M = MES_REGIMES.regimes, deja = M.length ? recettes.filter(dejaCompatible) : [];
+  if (M.length) recettes = [...deja, ...recettes.filter(r=>!deja.includes(r))];
+  const groupe = (titre, etat, n) => `<h2 class="groupe">${logoRegime(M[0], etat)}${titre}<span class="compteur">${n}</span></h2>`;
+  const tete = i => !M.length ? '' : i === 0 && deja.length ? groupe(L.compatibles, 'oui', deja.length)
+    : i === deja.length ? groupe(L.adaptables, 'adaptable', recettes.length - deja.length) : '';
   let montrees = 0;
   function paquet(){
-    const lot = document.createElement('div');
-    lot.innerHTML = recettes.slice(montrees, montrees += PAR_PAQUET).map(carte).join('');
+    const lot = document.createElement('div'), debut = montrees;
+    lot.innerHTML = recettes.slice(montrees, montrees += PAR_PAQUET).map((r,i)=>tete(debut+i) + carte(r, M.length && debut+i >= deja.length)).join('');
     brancherEffets(lot);
     $('cartes').append(...lot.children);
     if (montrees >= recettes.length) observeur.disconnect();
@@ -213,13 +232,14 @@ function router(){
     else if (ecran === 'explorer') afficherExplorer(reste === 'monde' ? 'monde' : 'france', avant !== ecran);
     else document.title = T.titrePage;
   }
+  if (ecran === 'accueil' && $('accueil').dataset.regimes !== cleRegimes()) construireAccueil(DONNEES.recettes);
   if (avant !== ecran || ecran === 'recette' || ecran === 'zone') scrollTo(0, 0);
   choisirOnglet(ongletActif()); demarrer(); relancerIdees();
 }
 
 /* ---------- Démarrage ---------- */
 function lancer(){
-  chargerRecettes().then(d=>{ construireAccueil(d.recettes); router(); }).catch(()=>{
+  chargerRecettes().then(d=>{ construireAccueil(d.recettes); ecrireIdees(d.recettes); router(); }).catch(()=>{
     document.body.dataset.ecran = 'erreur';
     $('liste').hidden = $('recette').hidden = $('explorer').hidden = true; $('accueil').hidden = false;
     $('accueil').innerHTML = `<div class="encadre" role="alert"><p>${T.erreurChargement}</p><button class="btn" type="button" id="retry">${T.reessayer}</button></div>`;

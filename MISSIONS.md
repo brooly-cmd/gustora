@@ -76,7 +76,7 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** je choisis « € » + « 30 min ou moins » et je ne vois que des recettes pas chères et rapides.
   - **Produit pour la suite :** filtres.js.
 
-- [ ] 9. Le filtre régime et « Mes régimes » — CONSTRUIT
+- [x] 9. Le filtre régime et « Mes régimes » — CONSTRUIT
   - **Quoi :** la puce « Régime ▾ » de l'écran 2 : 5 cases à cocher avec leur logo (plusieurs à la fois),
     l'interrupteur « Mode strict (allergie, maladie cœliaque) », résultats en 2 groupes « Déjà compatibles » / « Adaptables »,
     et « Mes régimes » gardés sur le téléphone, avec le bandeau de l'accueil (voir ECRANS.md, « Les régimes »).
@@ -151,7 +151,17 @@ Coche chaque case quand la mission est réussie.
 
 ### Ouvrir au public
 
-- [ ] 19. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
+- [ ] 19. Les transitions entre les pages — CONSTRUIT
+  - **Quoi :** une transition douce quand on passe d'un écran à l'autre (accueil → liste → recette → Explorer…),
+    par exemple la carte recette qui s'agrandit pour devenir la page de la recette, et un fondu glissé entre les onglets.
+    Voir ECRANS.md, « Règles du projet ».
+  - **Pourquoi :** comme tourner les pages d'un beau livre de cuisine au lieu de sauter d'une feuille à l'autre :
+    on comprend d'où on vient et où on va.
+  - **C'est réussi quand :** sur iPhone, je touche une carte recette : elle s'agrandit en douceur jusqu'à la page ;
+    je reviens en arrière : elle reprend sa place ; avec « Réduire les animations » activé, ça change de page sans mouvement.
+  - **Produit pour la suite :** transitions.js (ou les transitions rangées dans app.js et style.css).
+
+- [ ] 20. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
   - **Quoi :** le bouton « Partager » d'une recette, l'installation sur l'écran d'accueil iPhone
     (icône, nom, plein écran) et l'écran 10 « À propos ».
   - **Pourquoi :** l'app devient publique : il faut pouvoir l'envoyer et dire honnêtement d'où viennent les recettes.
@@ -159,7 +169,7 @@ Coche chaque case quand la mission est réussie.
     et Gustora s'ajoute à mon écran d'accueil avec son icône.
   - **Produit pour la suite :** manifest.webmanifest, l'app complète.
 
-- [ ] 20. Un vrai test avec quelqu'un d'autre — EXÉCUTE
+- [ ] 21. Un vrai test avec quelqu'un d'autre — EXÉCUTE
   - **Quoi :** une personne essaie Gustora sur son téléphone sans aide : trouver une recette d'hiver,
     l'ajouter à ses courses, utiliser « Dans mon frigo », puis ouvrir une recette en version sans lactose.
     Je note ce qui la bloque, Claude corrige les 3 plus gros soucis.
@@ -173,15 +183,15 @@ Pour ces 9 missions : environ 100 recettes de plus (et leurs images) à chaque f
 même méthode que les missions 16 à 18 (calories, régimes et remplaçants compris). À la fin : environ 1 150 recettes.
 C'est réussi quand : sur Explorer, les zones ont toutes grossi, et 3 recettes au hasard sont complètes.
 
-- [ ] 21. Grand remplissage (1/9) — CONSTRUIT
-- [ ] 22. Grand remplissage (2/9) — CONSTRUIT
-- [ ] 23. Grand remplissage (3/9) — CONSTRUIT
-- [ ] 24. Grand remplissage (4/9) — CONSTRUIT
-- [ ] 25. Grand remplissage (5/9) — CONSTRUIT
-- [ ] 26. Grand remplissage (6/9) — CONSTRUIT
-- [ ] 27. Grand remplissage (7/9) — CONSTRUIT
-- [ ] 28. Grand remplissage (8/9) — CONSTRUIT
-- [ ] 29. Grand remplissage (9/9) — CONSTRUIT
+- [ ] 22. Grand remplissage (1/9) — CONSTRUIT
+- [ ] 23. Grand remplissage (2/9) — CONSTRUIT
+- [ ] 24. Grand remplissage (3/9) — CONSTRUIT
+- [ ] 25. Grand remplissage (4/9) — CONSTRUIT
+- [ ] 26. Grand remplissage (5/9) — CONSTRUIT
+- [ ] 27. Grand remplissage (6/9) — CONSTRUIT
+- [ ] 28. Grand remplissage (7/9) — CONSTRUIT
+- [ ] 29. Grand remplissage (8/9) — CONSTRUIT
+- [ ] 30. Grand remplissage (9/9) — CONSTRUIT
 
 ## Plus tard (seulement si je le demande)
 - Plusieurs langues (anglais, espagnol…) : les textes sont déjà rangés dans textes.js pour ça.
@@ -200,6 +210,7 @@ Des outils rangés en chemin. Ils sont facultatifs : une mission peut s'en servi
 |---|---|---|---|
 | Le calculateur des fiches (mission 6) | outils/calculer.py | Recalcule prix, budget, calories, régimes et le sommaire à partir de ingredients.json ; signale les ingrédients inconnus et les recettes en double. Lancer : `python outils/calculer.py` | Idée réutilisable : « des données bien rangées → un programme calcule le reste » |
 | Les logos des régimes (mission 6) | regimes.js | 5 petits dessins SVG, plein = compatible, contour = adaptable | Le principe plein / contour peut servir ailleurs |
+| Le carnet du téléphone (mission 9) | stockage.js | Lire, écrire, effacer ce que le visiteur garde dans son navigateur (« Mes régimes », puis favoris, courses, frigo) ; ne casse rien en navigation privée | Idée réutilisable : un seul petit fichier pour tout ce qu'on garde sur le téléphone |
 | Les effets du site (missions 3 à 8) | effets.js, explorer.js, filtres.js | Effets 78, 3, 2, 8, 14, 42, 6, 36 (la carte qui se dessine), 152 (les herbes qui poussent), 66 (les pays en tuiles bento), et pour les filtres 16 (onde au toucher), 46 (coche qui se dessine) et 232 (cartes qui glissent à leur place), réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
 
 Bilan final (à remplir après la dernière mission) : ce qui a bien marché, ce qui était de trop, ce que je garde pour le prochain projet.
