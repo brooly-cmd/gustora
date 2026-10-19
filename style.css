@@ -177,7 +177,11 @@ body:not([data-ecran="accueil"]) .hello{padding-top:8px}
 .voile-filtre{position:fixed;inset:0;z-index:7;background:color-mix(in srgb,var(--tx) 38%,transparent);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
 .tiroir{position:fixed;z-index:8;left:0;right:0;bottom:0;max-height:85vh;overflow:auto;background:var(--card);border-radius:24px 24px 0 0;
   padding:18px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:var(--shadow);
-  transform:translateY(100%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility .35s}
+  transform:translateY(105%);visibility:hidden;transition:transform .45s cubic-bezier(.3,1.25,.5,1),visibility .45s}
+/* Effet 192 : la poignée et le haut de la feuille s'attrapent au doigt pour la tirer vers le bas */
+.tiroir-prise{touch-action:none;cursor:grab;margin:-10px -16px 0;padding:10px 16px 0}
+.poignee{display:block;width:44px;height:5px;margin:0 auto 12px;border-radius:9px;background:color-mix(in srgb,var(--tx) 28%,transparent)}
+#tiroir-ok{margin-top:14px}
 .tiroir-ouvert .voile-filtre{opacity:1;visibility:visible}
 .tiroir-ouvert .tiroir{transform:none;visibility:visible}
 @media (min-width:700px){
@@ -185,6 +189,7 @@ body:not([data-ecran="accueil"]) .hello{padding-top:8px}
   .tiroir{position:absolute;right:auto;bottom:auto;width:320px;max-height:none;border-radius:20px;border:1px solid var(--line);padding:16px;
     transform:translateY(-6px);opacity:0;transition:transform .25s,opacity .25s,visibility .25s}
   .tiroir-ouvert .tiroir{opacity:1}
+  .tiroir-prise{touch-action:auto;cursor:auto;margin:0;padding:0} .poignee{display:none}
 }
 .tiroir-tete{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
 .tiroir-tete h2{font-size:1.4rem}

@@ -118,7 +118,8 @@ const etatListe = { params: new URLSearchParams(), zone: null, base: [] };   // 
 function titreListe(q, Z, params){
   if (q) return L.resultatsPour(q);
   if (Z) return Z.nom;
-  const actifs = CLES_FILTRES.filter(k=>valeurFiltre(params, k)), v = actifs.length === 1 && params.get(actifs[0]);
+  // Un seul filtre avec un seul choix : le titre le dit ; sinon, « Toutes les recettes » (les puces montrent le reste).
+  const actifs = CLES_FILTRES.filter(k=>valeurs(params, k).length), v = actifs.length === 1 && valeurs(params, actifs[0]).length === 1 && valeurs(params, actifs[0])[0];
   if (actifs[0] === 'budget' && v === '€') return L.petitBudget;
   if (actifs[0] === 'temps' && v === '30') return L.moins30;
   if (actifs[0] === 'saison' && v) return L.saison(v);

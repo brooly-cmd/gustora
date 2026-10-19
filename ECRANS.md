@@ -99,6 +99,8 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Titre : selon d'où on vient (« Résultats pour « crêpe » », « Petit budget », « Toutes les recettes »).
 - Puces de filtre : « Saison ▾ » · « Temps ▾ » · « Budget ▾ » · « Type ▾ » · « Régime ▾ » (plusieurs à la fois).
   Une puce active montre son choix (« Hiver ✕ »), le ✕ l'enlève.
+  Dans une même puce, on peut cocher plusieurs choix (« Été, Hiver ✕ », « Été +2 ✕ ») : la recette doit en respecter au moins un.
+  Le tiroir reste ouvert et se ferme avec « Voir les 4 recettes » (ou en le tirant vers le bas sur iPhone).
 - « Régime ▾ » : 5 cases à cocher avec leur logo (on peut en cocher plusieurs : la recette doit les respecter TOUS),
   + l'interrupteur « Mode strict (allergie, maladie cœliaque) » sous les cases, avec une phrase :
   « Compte aussi les ingrédients cachés et les traces. »,

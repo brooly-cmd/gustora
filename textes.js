@@ -33,7 +33,8 @@ const TEXTES = {
     regime: "Régime",
     regimeBientot: "Le filtre régime arrive bientôt !",
     enlever: nom => `Enlever le filtre ${nom}`,
-    fermer: "Fermer"
+    fermer: "Fermer",
+    voir: n => n === 0 ? "Aucune recette" : n === 1 ? "Voir la recette" : `Voir les ${n} recettes`
   },
   logos: {
     titre: "Les petits logos",
