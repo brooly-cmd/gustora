@@ -200,6 +200,6 @@ Des outils rangés en chemin. Ils sont facultatifs : une mission peut s'en servi
 |---|---|---|---|
 | Le calculateur des fiches (mission 6) | outils/calculer.py | Recalcule prix, budget, calories, régimes et le sommaire à partir de ingredients.json ; signale les ingrédients inconnus et les recettes en double. Lancer : `python outils/calculer.py` | Idée réutilisable : « des données bien rangées → un programme calcule le reste » |
 | Les logos des régimes (mission 6) | regimes.js | 5 petits dessins SVG, plein = compatible, contour = adaptable | Le principe plein / contour peut servir ailleurs |
-| Les effets du site (missions 3 à 7) | effets.js, explorer.js | Effets 78, 3, 2, 8, 14, 42, 6, 36 (la carte qui se dessine), 73 (la nappe de points) et 274 (les cartes pays en 3D), réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
+| Les effets du site (missions 3 à 7) | effets.js, explorer.js | Effets 78, 3, 2, 8, 14, 42, 6, 36 (la carte qui se dessine), 57 (les aiguilles de boussole du fond) et 274 (les cartes pays en 3D), réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
 
 Bilan final (à remplir après la dernière mission) : ce qui a bien marché, ce qui était de trop, ce que je garde pour le prochain projet.

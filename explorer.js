@@ -29,21 +29,20 @@ function construireExplorer(){
       <button type="button" role="tab" data-vue="monde">${E.monde}</button>
     </div>
     <div class="vue-france">
-      <figure class="carte" id="carte" role="group" aria-label="${E.carte}"><canvas id="nappe" aria-hidden="true"></canvas><div id="dessin"></div></figure>
+      <figure class="carte" id="carte" role="group" aria-label="${E.carte}"></figure>
       <section><h2>${E.regions}</h2><ul class="zones">${Object.entries(TEXTES.regions).map(([k,z])=>`<li>${lienRegion(k, z.nom)}</li>`).join('')}</ul></section>
     </div>
     <ul class="vue-monde pays">${Object.entries(TEXTES.pays).map(([k,z])=>`<li>${cartePays(k, z.nom)}</li>`).join('')}</ul>`;
   brancherEffets(boite.querySelector('.pays'));
-  brancherNappe();
   boite.querySelectorAll('[data-vue]').forEach(b=>b.addEventListener('click', ()=>{
     history.replaceState(null, '', b.dataset.vue==='monde' ? '#explorer?monde' : '#explorer'); router(); }));
   // La carte (un fichier à part) arrive par internet ; si elle manque, la liste des régions suffit.
-  carteChargee = fetch('carte-france.svg?v=5').then(r=>r.ok ? r.text() : '').then(dessinerCarte).catch(()=>{});
+  carteChargee = fetch('carte-france.svg?v=6').then(r=>r.ok ? r.text() : '').then(dessinerCarte).catch(()=>{});
 }
 
 function dessinerCarte(svg){
   const carte = $('carte');
-  $('dessin').innerHTML = svg;
+  carte.innerHTML = svg;
   carte.querySelectorAll('a').forEach(a=>{
     const z = TEXTES.regions[a.dataset.zone], n = nbRecettes(z.nom);
     a.setAttribute('aria-label', `${z.nom} · ${n ? TEXTES.liste.compteur(n) : TEXTES.explorer.bientot}`);
@@ -64,9 +63,8 @@ function afficherExplorer(vue, nouvelleVisite){
   const boite = $('explorer');
   boite.dataset.vue = vue;
   boite.querySelectorAll('[data-vue]').forEach(b=>b.setAttribute('aria-selected', String(b.dataset.vue===vue)));
-  if (vue !== 'france') return;
-  lancerNappe();
-  if (reduce) return;
+  lancerBoussoles();
+  if (vue !== 'france' || reduce) return;
   carteChargee.then(()=>{
     const carte = $('carte');
     carte.querySelectorAll('.choisie').forEach(a=>a.classList.remove('choisie'));
@@ -76,46 +74,46 @@ function afficherExplorer(vue, nouvelleVisite){
   });
 }
 
-/* ---------- Effet 73 : une nappe de points qui ondule autour de la carte ; le doigt ou la souris y fait une bosse ---------- */
-let nappe = null;
-function brancherNappe(){
-  const cv = $('nappe'), fig = $('carte'), ctx = cv.getContext('2d'), doigt = {x:-999, y:-999};
-  let W = 0, H = 0, raf = 0;
-  function taille(){ const d = Math.min(devicePixelRatio||1, 2); W = cv.clientWidth; H = cv.clientHeight;
-    cv.width = W*d; cv.height = H*d; ctx.setTransform(d,0,0,d,0,0); }
-  function image(t){
-    ctx.clearRect(0,0,W,H);
-    const cols = Math.round(W/13), rangs = Math.round(H/15);
-    for (let j=0; j<rangs; j++){
-      const z = j/(rangs-1), sc = .5 + z*.75, y0 = H*(.03 + z*.94);   // les rangs du fond sont plus petits : la profondeur
-      ctx.fillStyle = z < .5 ? C.ac : C.pr; ctx.globalAlpha = .22 + z*.5;
-      ctx.beginPath();
-      for (let i=0; i<cols; i++){
-        const u = i/(cols-1) - .5, x = W/2 + u*W*sc*1.3;
-        // Trois vagues lentes qui se croisent : c'est ce qui rend la nappe hypnotique.
-        let h = Math.sin(i*.42 + t*.0014)*7 + Math.cos(j*.55 + t*.001)*7 + Math.sin((i+j)*.22 - t*.0009)*4;
-        const d = Math.hypot(x - doigt.x, y0 - doigt.y); if (d < 90) h -= (90-d)*.55;   // la bosse sous le doigt
-        const r = .7 + z*1.5, y = y0 + h*sc;
-        ctx.moveTo(x + r, y); ctx.arc(x, y, r, 0, 7);
-      }
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-  }
-  function boucle(t){
-    image(t);
-    // En pause dès qu'on ne voit plus la carte (autre écran, onglet Monde, Safari en arrière-plan).
-    const visible = !document.hidden && document.body.dataset.ecran === 'explorer' && $('explorer').dataset.vue === 'france';
-    raf = visible ? requestAnimationFrame(boucle) : 0;
-  }
-  const suivre = e=>{ const r = cv.getBoundingClientRect(); doigt.x = e.clientX - r.left; doigt.y = e.clientY - r.top; };
-  const lacher = ()=>{ doigt.x = doigt.y = -999; };
-  fig.addEventListener('pointermove', suivre, {passive:true}); fig.addEventListener('pointerdown', suivre, {passive:true});
-  ['pointerleave','pointercancel'].forEach(n=>fig.addEventListener(n, lacher));
-  fig.addEventListener('pointerup', e=>{ if (e.pointerType !== 'mouse') lacher(); });
-  addEventListener('resize', ()=>{ if (W && Math.abs(cv.clientWidth - W) > 20){ taille(); if (reduce) image(0); } });
-  document.addEventListener('visibilitychange', ()=>nappe());
-  // « Réduire les animations » : la nappe est dessinée une fois, immobile.
-  nappe = ()=>{ if (!W) taille(); if (reduce) image(0); else if (!raf) raf = requestAnimationFrame(boucle); };
+/* ---------- Effet 57 : un champ d'aiguilles de boussole derrière tout l'écran Explorer ---------- */
+// Au repos, le « nord » se balade en vagues lentes ; le doigt ou la souris attire toutes les aiguilles,
+// les plus proches d'abord : une onde part du doigt.
+const cvB = $('boussoles'), ctxB = cvB.getContext('2d'), viseur = {x:0, y:0, on:false};
+let aiguilles = [], WB = 0, HB = 0, rafB = 0;
+const surExplorer = () => !document.hidden && document.body.dataset.ecran === 'explorer';
+function tailleBoussoles(){
+  const d = Math.min(devicePixelRatio||1, 2), pas = innerWidth < 600 ? 34 : 40;
+  WB = innerWidth; HB = innerHeight; cvB.width = WB*d; cvB.height = HB*d; ctxB.setTransform(d,0,0,d,0,0);
+  aiguilles = [];
+  for (let y = pas/2; y < HB; y += pas) for (let x = pas/2; x < WB; x += pas) aiguilles.push({x, y, a:-Math.PI/2});
 }
-function lancerNappe(){ if (nappe) nappe(); }
+function dessinerBoussoles(t){
+  ctxB.clearRect(0,0,WB,HB);
+  const pointe = new Path2D(), queue = new Path2D();
+  for (const g of aiguilles){
+    const repos = -Math.PI/2 + .9*Math.sin(g.x*.011 + t*.0005) + .9*Math.cos(g.y*.009 - t*.0004);
+    let but = repos, k = .05;
+    if (viseur.on){ const dx = viseur.x-g.x, dy = viseur.y-g.y, d = Math.hypot(dx,dy);
+      but = Math.atan2(dy,dx); k = .16 * Math.max(.08, 1 - d/700); }   // plus l'aiguille est loin, plus elle tarde à tourner
+    let e = but - g.a; e = Math.atan2(Math.sin(e), Math.cos(e));   // tourner par le plus court chemin
+    g.a = t ? g.a + e*k : repos;
+    const c = Math.cos(g.a), s = Math.sin(g.a), L = 8, l = 2.6;
+    pointe.moveTo(g.x + c*L, g.y + s*L); pointe.lineTo(g.x - s*l, g.y + c*l); pointe.lineTo(g.x + s*l, g.y - c*l); pointe.closePath();
+    queue.moveTo(g.x - c*L, g.y - s*L); queue.lineTo(g.x - s*l, g.y + c*l); queue.lineTo(g.x + s*l, g.y - c*l); queue.closePath();
+  }
+  ctxB.globalAlpha = .42; ctxB.fillStyle = C.pr; ctxB.fill(pointe);
+  ctxB.globalAlpha = .5; ctxB.fillStyle = C.ac; ctxB.fill(queue); ctxB.globalAlpha = 1;
+}
+function boucleBoussoles(t){ dessinerBoussoles(t); rafB = surExplorer() ? requestAnimationFrame(boucleBoussoles) : 0; }
+// « Réduire les animations » : les aiguilles sont dessinées une fois, immobiles.
+function lancerBoussoles(){
+  if (WB !== innerWidth) tailleBoussoles();
+  if (reduce) dessinerBoussoles(0); else if (!rafB && surExplorer()) rafB = requestAnimationFrame(boucleBoussoles);
+}
+const viser = e=>{ viseur.x = e.clientX; viseur.y = e.clientY; viseur.on = true; };
+addEventListener('pointermove', viser, {passive:true}); addEventListener('pointerdown', viser, {passive:true});
+addEventListener('pointerup', e=>{ if (e.pointerType !== 'mouse') viseur.on = false; });
+['pointercancel','blur'].forEach(n=>addEventListener(n, ()=>{ viseur.on = false; }));
+document.addEventListener('pointerleave', ()=>{ viseur.on = false; });
+document.addEventListener('visibilitychange', lancerBoussoles);
+// Sur iPhone, la barre d'adresse qui se cache change un peu la hauteur : on ne recommence que si l'écran change vraiment.
+addEventListener('resize', ()=>{ if (Math.abs(innerWidth-WB) > 40 || Math.abs(innerHeight-HB) > 160){ tailleBoussoles(); if (reduce && surExplorer()) dessinerBoussoles(0); } });

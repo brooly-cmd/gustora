@@ -29,7 +29,8 @@ button,input{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--ac);outline-offset:3px}
 
 /* ---------- Effet 78 : le courant d'épices du fond ---------- */
-#graines{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#graines,#boussoles{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+body:not([data-ecran="explorer"]) #boussoles{display:none}   /* effet 57 : seulement sur l'écran Explorer */
 .page{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 16px}
 
 /* ---------- En-tête ---------- */
@@ -224,7 +225,6 @@ body[data-ecran="recette"] .hello{display:none}
 
 /* ---------- Écran 4 : Explorer, et écran 5 : une zone ---------- */
 body[data-ecran="explorer"] .hello, body[data-ecran="zone"] .hello{display:none}
-#explorer{overflow-x:clip}   /* la nappe de points ne fait jamais glisser la page de côté */
 .liste-tete .intro{flex-basis:100%;margin:4px 0 0;max-width:60ch;font-size:1.05rem}
 /* Les onglets France / Monde */
 .bascule{display:inline-flex;gap:4px;padding:4px;border-radius:99px;background:var(--dx);margin-bottom:18px}
@@ -234,11 +234,10 @@ body[data-ecran="explorer"] .hello, body[data-ecran="zone"] .hello{display:none}
 .vue-france{display:grid;gap:22px;align-items:center}
 @media (min-width:900px){ .vue-france{grid-template-columns:3fr 2fr;gap:40px} }
 .vue-france h2{font-size:clamp(1.45rem,2.6vw,1.8rem);margin-bottom:8px}
+.vue-france section{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(16px,2.6vw,24px)}
 
 /* La carte de France, façon carnet de voyage : chaque région est un morceau de papier */
-.carte{margin:0;min-height:200px;position:relative;isolation:isolate}
-/* Effet 73 : la nappe de points, sous la carte, déborde un peu tout autour */
-#nappe{position:absolute;inset:-8% -6%;width:112%;height:116%;z-index:-1;pointer-events:none}
+.carte{margin:0;min-height:200px}
 .carte svg{display:block;width:100%;max-width:620px;height:auto;max-height:74vh;margin:0 auto;overflow:visible;
   filter:drop-shadow(0 10px 14px color-mix(in srgb,var(--tx) 14%,transparent))}
 .carte a{cursor:pointer;outline:none}
