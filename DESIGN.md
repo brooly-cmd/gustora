@@ -67,6 +67,8 @@ Code de départ : `choix-design.html` (repris de la Salle des effets, déjà aux
 | 2 | Carte qui penche en 3D | Cartes recette (accueil, listes, favoris) | Penche au plus 8°, retour lent en 0,7 s, ombre douce. Sur iPhone : glissement horizontal seulement. |
 | 6 | Bouton aimanté (ralenti) | Bouton « Ajouter à ma liste de courses » (écran recette) | Souris : suit à 14 % (horizontal) et 20 % (vertical), retour en 0,9 s (plus lent que dans la Salle). iPhone : s'enfonce à 94 % puis rebondit. Message « 8 ingrédients ajoutés à ta liste » qui monte en 0,35 s. |
 | 36 | Icônes qui se dessinent | Carte de France (écran Explorer) | Le contour se trace en 2,2 s quand la carte arrive à l'écran, la Bretagne et la Corse ensuite (décalées de 1 s et 1,6 s). Trait Texte de 2,2 px ; la région touchée se remplit en Principale (0,5 s). |
+| 73 | Vague de points 3D (ajouté après la mission 7, à ma demande) | Fond de la carte de France (écran Explorer) | Nappe de points qui ondule lentement (3 vagues croisées), rangs du fond en Accent, de devant en Principale, plus gros devant (profondeur). Le doigt ou la souris fait une bosse (rayon 90 px). En pause hors de l'écran Explorer. |
+| 274 | Petites photos en 3D (Atropos, ajouté après la mission 7, à ma demande) | Cartes pays (onglet Monde) | 3 couches : fenêtre colorée avec un soleil (0,4), le plat qui flotte (1,8), le nom (0,8). Penche au plus 10°, retour en 0,7 s. Fenêtres en Principale / Accent / Douce à tour de rôle. Remplace le rond en pointillés. |
 | 13 | Petit « pop » | Le ♥ favori | Grossit à 125 % puis revient, en 0,35 s. Vide = Texte à 35 % ; plein = Principale. |
 | 42 | Onglets qui glissent | Barre d'onglets (en bas, partout) | La pastille Principale glisse jusqu'à l'onglet touché en 0,45 s (léger rebond). Pastille du nombre sur « Courses » : Accent. |
 | 48 | Chiffres qui roulent | Minuteur du mode cuisine | Chaque chiffre de « 09:59 » roule en 0,7 s, police Figtree 800. |
@@ -74,13 +76,13 @@ Code de départ : `choix-design.html` (repris de la Salle des effets, déjà aux
 **Les règles d'or, page par page :**
 - 1 seul effet star : le 3, sur l'accueil.
 - Accueil : 5 effets décoratifs (78, 3, 2, 14, 8), choisis exprès après la mission 3 (au lieu de 3). Écran recette : 6 (+ 2 si des cartes sont montrées).
-  Écran Explorer : 36. Le ♥ (13), les onglets (42) et le minuteur (48) sont des réactions au geste et ne comptent pas.
-- Sur tout le site, ça fait 7 types décoratifs. Après la mission 3, j'ai voulu un accueil plus vivant :
-  la règle « 3 par page » ne s'applique plus à l'accueil. Ne pas en ajouter d'autres sans me demander.
+  Écran Explorer : 36, 73 et 274 (choisis exprès après la mission 7, comme pour l'accueil). Le ♥ (13), les onglets (42) et le minuteur (48) sont des réactions au geste et ne comptent pas.
+- Sur tout le site, ça fait 9 types décoratifs. Après la mission 3, j'ai voulu un accueil plus vivant, et après la mission 7 un écran Explorer plus vivant :
+  la règle « 3 par page » ne s'applique plus à ces deux écrans. Ne pas en ajouter d'autres sans me demander.
 
 **Pour tous les effets :**
 - Seulement `transform` et `opacity` (rapide, la batterie ne chauffe pas).
-- « Réduire les animations » activé sur l'iPhone : pas de penche, pas d'aimant, grains d'épices immobiles, pas de texte qui s'écrit, carte déjà dessinée ;
+- « Réduire les animations » activé sur l'iPhone : pas de penche, pas d'aimant, grains d'épices et nappe de points immobiles, pas de texte qui s'écrit, carte déjà dessinée ;
   le ♥ et les onglets changent sans bouger.
 - Le défilement de la page n'est jamais bloqué par un effet.
 - Proposés mais pas retenus : 64 Forme en particules (le logo en grains d'épices), 4 Reflet brillant,
