@@ -5,7 +5,7 @@
   Corse, Grand Est, Hauts-de-France, Île-de-France, Normandie, Nouvelle-Aquitaine, Occitanie,
   Pays de la Loire, Provence-Alpes-Côte d'Azur) et 10 pays (Italie, Espagne, Maroc, Japon, Mexique,
   Inde, Liban, Grèce, Thaïlande, États-Unis).
-- Objectif : 10 recettes par zone (mission 18), puis 50 par zone (mission 30).
+- Objectif : 10 recettes par zone (mission 20), puis 50 par zone (mission 32).
 - Une recette est prévue pour 4 personnes par défaut. On peut choisir de 1 à 12 personnes :
   quantités et prix sont recalculés (arrondis : « 1,5 œuf » → « 2 œufs », grammes à 5 g près).
 - Budget par personne : € = moins de 2 € ; €€ = de 2 à 5 € ; €€€ = plus de 5 €. Prix toujours avec « ~ ».
@@ -18,7 +18,7 @@
 - Tout ce que le visiteur garde (favoris, liste de courses, portions choisies) reste sur SON téléphone.
   Rien n'est envoyé ailleurs.
 - « Réduire les animations » activé sur l'iPhone : pas d'animation décorative.
-- Transitions entre les pages (mission 19) : courtes (0,3 à 0,4 s), jamais bloquantes (on peut toucher pendant),
+- Transitions entre les pages (mission 21) : courtes (0,3 à 0,4 s), jamais bloquantes (on peut toucher pendant),
   la carte recette s'agrandit vers sa page et y retourne au retour, fondu glissé entre les onglets.
   Si le téléphone ne sait pas faire la transition (vieux Safari), la page change simplement, sans erreur.
   Avec « Réduire les animations » : pas de mouvement, juste le changement de page.
@@ -125,7 +125,7 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Titre + zone touchable (« Bretagne › » ouvre l'écran 5).
 - Badges : « ⏱ 35 min » · « Facile » · « € » · « Hiver, Printemps » · « ~450 kcal / pers. »
 - Ligne des régimes : chaque logo avec son nom (« Sans lactose », « Végétarien »…) ; touchable → sa légende.
-- Bloc « Version adaptée » (mission 13) : des interrupteurs « Sans gluten » · « Sans lactose » · « Pauvre en FODMAP »,
+- Bloc « Version adaptée » (mission 15) : des interrupteurs « Sans gluten » · « Sans lactose » · « Pauvre en FODMAP »,
   seulement pour les régimes « adaptable » (plusieurs à la fois). Un régime « oui » affiche « ✓ Déjà sans gluten ».
   Un régime « non » affiche « Pas de version sans gluten pour ce plat. ».
   Si « Mes régimes » est actif, les bons interrupteurs sont déjà allumés.
@@ -142,7 +142,7 @@ barre de recherche, carte vedette « De saison en ce moment », raccourcis, cart
 - Astuce : « 💡 L'astuce : … »
 - Bouton : « Lancer le mode cuisine »
 - ♥ : « Ajoutée à tes favoris » / « Retirée de tes favoris ».
-- Partager (mission 20) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
+- Partager (mission 22) : ouvre le partage de l'iPhone ; sur PC : « Lien copié ! ».
 - Avertissement en bas : « Allergies : vérifie toujours la liste des ingrédients. »
 - Recette introuvable (lien cassé) : « Cette recette n'existe pas (ou plus). » + bouton « Retour à l'accueil ».
 
