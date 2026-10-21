@@ -54,7 +54,7 @@ function dessinerRecette(r){
   const sais = r.saisons.map(s=>TEXTES.saisons[s]).join(', ');
   boite.innerHTML = `<article class="fiche">
     <header class="fiche-tete">
-      <div class="plat" aria-hidden="true"><span class="emo">${emoji(r)}</span><img src="${r.image}" alt="" onerror="this.remove()"></div>
+      <div class="plat f-${champ(r)}" aria-hidden="true">${illustration(r)}<img src="${r.image}" alt="" onerror="this.remove()"></div>
       <div class="fiche-titre">
         <a class="zone-lien" href="#zone/${slugZone(r.zone)}">${r.zone} ›</a>
         <h1>${r.nom}</h1>

@@ -1,6 +1,6 @@
 // Le chargement des recettes, leur mise en forme et la recherche.
 
-/* ---------- Un emoji par plat (en attendant les images de la mission 13) ---------- */
+/* ---------- Un emoji par plat (en attendant les images de la mission 17) ---------- */
 const EMOJI = {
   "auvergne-rhone-alpes-salade-lyonnaise":"🥗", "bretagne-crepes-froment":"🥞", "grand-est-tarte-flambee":"🫓",
   "inde-dal-lentilles-corail":"🍛", "italie-spaghetti-carbonara":"🍝", "japon-gyozas-porc-chou":"🥟",
@@ -9,11 +9,24 @@ const EMOJI = {
 };
 const emoji = r => EMOJI[r.id] || "🍽️";
 
+/* ---------- Les petits dessins animés (dossier dessins/) : le plat dessiné, sur un champ de couleur ---------- */
+// Chaque dessin a sa couleur de champ (DESIGN.md). Les autres plats gardent leur emoji, sur Pistache ou Curcuma selon leur place.
+const DESSIN_PLAT = { "mexique-tacos-carnitas":"piment", "nouvelle-aquitaine-poulet-basquaise":"piment",
+  "italie-spaghetti-carbonara":"spaghetti", "inde-dal-lentilles-corail":"dal" };
+const CHAMP_DESSIN = { piment:"ac", spaghetti:"fx", dal:"fx" };
+const DESSINS_PLATS = {};   // le code de chaque dessin, une fois chargé
+function chargerDessins(){   // un dessin qui manque n'empêche rien : le plat garde son emoji
+  return Promise.all(Object.keys(CHAMP_DESSIN).map(n=>fetch(`dessins/${n}.svg?v=12`)
+    .then(r=>r.ok ? r.text() : '').then(t=>{ if (t) DESSINS_PLATS[n] = t; }).catch(()=>{})));
+}
+const illustration = r => DESSINS_PLATS[DESSIN_PLAT[r.id]] || `<span class="emo">${emoji(r)}</span>`;
+const champ = (r, place = 0) => DESSINS_PLATS[DESSIN_PLAT[r.id]] ? CHAMP_DESSIN[DESSIN_PLAT[r.id]] : place % 2 ? 'ac' : 'fx';
+
 /* ---------- Chargement : le sommaire léger + les noms des ingrédients (pour chercher « œuf ») ---------- */
 const DONNEES = { recettes: [], zones: [], nomsIngredients: {}, ingredients: {}, conversions: {} };
 const lire = url => fetch(url).then(r=>{ if(!r.ok) throw new Error(url); return r.json(); });
 function chargerRecettes(){
-  return Promise.all([lire('recettes/index.json'), lire('ingredients.json')]).then(([index, ing])=>{
+  return Promise.all([lire('recettes/index.json'), lire('ingredients.json'), chargerDessins()]).then(([index, ing])=>{
     DONNEES.recettes = index.recettes; DONNEES.zones = index.zones; DONNEES.conversions = ing.conversions;
     // sel, poivre, huile, eau : présents partout, on ne les cherche pas.
     ing.ingredients.forEach(i=>{ DONNEES.ingredients[i.id] = i; if(!i.deBase) DONNEES.nomsIngredients[i.id] = i.nom + ' ' + i.nomPluriel; });

@@ -2,7 +2,7 @@
 // La page d'une recette (écran 3) est dans recette.js.
 const T = TEXTES, A = T.accueil, L = T.liste;
 
-/* ---------- Petites icônes (trait fin, couleur du texte) ---------- */
+/* ---------- Petites icônes (trait, couleur du texte autour) ---------- */
 const ICONES = {
   accueil:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
   explorer:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
@@ -62,15 +62,15 @@ new ResizeObserver(()=>choisirOnglet(ongletActif())).observe($('onglets'));
 
 /* ---------- Les morceaux de page ---------- */
 // La carte recette est un lien vers sa page (avec, dans le groupe « Adaptables », combien d'ingrédients la version adaptée remplace).
-function carte(r, adaptee){ return `<div class="tilt js-tilt" data-max="8" data-id="${r.id}"><a class="rc" href="#recette/${r.id}">
-  <span class="img" aria-hidden="true">${emoji(r)}</span>
+function carte(r, adaptee, place){ return `<div class="tilt js-tilt" data-max="8" data-id="${r.id}"><a class="rc" href="#recette/${r.id}">
+  <span class="img f-${champ(r, place)}" aria-hidden="true">${illustration(r)}</span>
   <span class="body"><h3>${r.nom}</h3><span class="z">${r.zone}</span>
     <span class="meta"><span>⏱ ${duree(r.tempsTotal)}</span><span>${prix(r.prixParPersonne)}</span><span class="bdg">${r.budget}</span></span>${logosCarte(r)}${adaptee ? `<span class="adaptee">${L.versionAdaptee(ingredientsRemplaces(r))}</span>` : ''}</span>
   </a></div>`; }
 
 function vedette(r, saison){ return `<div class="vedette js-tilt" data-max="9">
-  <div class="ly-bg" data-depth="0.4"><span class="ring"></span><span class="sun"></span></div>
-  <div class="ly-mid" data-depth="1.3" aria-hidden="true">${emoji(r)}</div>
+  <div class="ly-bg" data-depth="0.4"></div>
+  <div class="ly-mid" data-depth="1.3" aria-hidden="true">${illustration(r)}</div>
   <div class="ly-top" data-depth="2.2">
     <span class="kick">${A.vedette} · ${T.saisons[saison]}</span>
     <h2>${r.nom}</h2>
@@ -83,7 +83,7 @@ function vedette(r, saison){ return `<div class="vedette js-tilt" data-max="9">
 const RACCOURCIS = [['france','data-lien="#explorer"'], ['monde','data-lien="#explorer?monde"'], ['frigo','data-bientot'],
   ['budget','data-lien="#recettes?budget=€"'], ['temps','data-lien="#recettes?temps=30"']];
 const raccourcis = () => `<ul class="raccourcis">` + A.raccourcis.map((t,i)=>
-  `<li><button class="rac" type="button" ${RACCOURCIS[i][1]}><span class="voile"></span><span class="ic">${svg(RACCOURCIS[i][0])}</span>${t}</button></li>`).join('') + `</ul>`;
+  `<li><button class="rac" type="button" ${RACCOURCIS[i][1]}>${svg(RACCOURCIS[i][0])}${t}</button></li>`).join('') + `</ul>`;
 
 // En bas de l'accueil : la légende des 5 petits logos.
 function legendeLogos(){ const G = T.regimes, P = T.logos;
@@ -115,7 +115,7 @@ function construireAccueil(tout){
   const dernieres = recettes.slice().reverse().filter(r=>r!==star).slice(0,6);
   $('accueil').dataset.regimes = cleRegimes();
   $('accueil').innerHTML = `${bandeauRegimes()}<div class="duo">${vedette(star, saison)}${raccourcis()}</div>
-    <section class="bloc"><h2>${A.dernieres}</h2><div class="cartes">${dernieres.map(r=>carte(r)).join('')}</div>
+    <section class="bloc"><h2>${A.dernieres}</h2><div class="cartes">${dernieres.map((r,i)=>carte(r, false, i)).join('')}</div>
     <p class="note">${T.prixEstime}</p></section>${legendeLogos()}`;
   $('accueil').querySelectorAll('[data-lien]').forEach(b=>b.addEventListener('click',()=>{ location.hash = b.dataset.lien; }));
   if ($('enlever-regimes')) $('enlever-regimes').addEventListener('click', ()=>{ changerMesRegimes({ regimes: [] }); construireAccueil(tout); });
@@ -182,7 +182,7 @@ function montrerCartes(recettes, params){
   let montrees = 0;
   function paquet(){
     const lot = document.createElement('div'), debut = montrees;
-    lot.innerHTML = recettes.slice(montrees, montrees += PAR_PAQUET).map((r,i)=>tete(debut+i) + carte(r, M.length && debut+i >= deja.length)).join('');
+    lot.innerHTML = recettes.slice(montrees, montrees += PAR_PAQUET).map((r,i)=>tete(debut+i) + carte(r, M.length && debut+i >= deja.length, debut+i)).join('');
     brancherEffets(lot);
     $('cartes').append(...lot.children);
     if (montrees >= recettes.length) observeur.disconnect();

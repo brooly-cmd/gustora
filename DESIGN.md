@@ -1,7 +1,8 @@
 # Gustora — le look (DESIGN.md)
 
 Choisi à la mission 10 dans `choix-style.html` (look 2). Il remplace « Argile & Safran » (mission 2).
-La mission 11 l'applique à toutes les pages.
+La mission 11 l'a appliqué à toutes les pages. Les pages d'essai (`choix-design.html`, `choix-style.html`) ont quitté le site :
+elles restent dans l'historique git (sauvegarde « Mission 10 »).
 
 ## L'idée : « Boîte à épices »
 *Les épices en tas sur l'étal du marché : piment, curcuma, pistache.*
@@ -54,7 +55,8 @@ rond Piment qui glisse en 0,45 s). Le choix est gardé dans le navigateur.
 - Raccourcis : blocs de couleur pleine en 2 colonnes (le dernier sur toute la largeur), texte en 800.
 - Cartes recette : fond Douce, en haut un champ de couleur (Pistache, Curcuma… à tour de rôle) qui porte l'image ou le dessin.
 - Barre d'onglets : pilule foncée (`--tx`) qui flotte en bas, texte `--bg`, onglet actif en pastille Curcuma.
-- Image de remplacement d'un plat (en attendant les images IA) : le dessin du plat s'il existe, sinon le logo, sur le champ de couleur de la carte.
+- Image de remplacement d'un plat (en attendant les images IA) : le dessin du plat s'il existe, sinon son emoji (choix de la mission 11),
+  sur le champ de couleur de la carte (Pistache et Curcuma en alternance).
 
 ## Le logo : « La boîte à épices »
 Le couvercle rond d'une boîte à épices, couleur Piment, avec un G dessus. Il se dévisse, et trois grains d'épices en sautent.
@@ -76,9 +78,11 @@ Rangés dans `dessins/`. Formes pleines et simples, aux couleurs du look ; chaqu
 |---|---|---|---|
 | `dessins/piment.svg` | Tacos de carnitas, Poulet basquaise | Le piment danse (se balance de ± 10° et saute de 8 px, 1,4 s) | Curcuma |
 | `dessins/spaghetti.svg` | Spaghetti alla carbonara | La fourchette se balance (± 9°, 2,4 s), les pâtes s'enroulent, les brins pendent et bougent | Pistache |
-| `dessins/dal.svg` | Dal de lentilles corail | Les lentilles sautent dans le bol, chacune à son tour (1,3 s) | Douce |
+| `dessins/dal.svg` | Dal de lentilles corail | Les lentilles sautent dans le bol, chacune à son tour (1,3 s) | Douce (Pistache sur les cartes, déjà Douce) |
 
 D'autres dessins viendront dans le même style (formes pleines, 2 ou 3 couleurs du look, un seul mouvement simple).
+Dans le code, chaque dessin a des noms de classe qui lui sont propres (`dal-`, `pim-`, `spa-`) : collé dans la page, il ne touche à rien d'autre.
+Pour en ajouter un : le ranger dans `dessins/`, puis l'inscrire dans `DESSIN_PLAT` et `CHAMP_DESSIN` (recettes.js).
 
 ## Les effets
 
@@ -129,4 +133,4 @@ Nouveaux avec ce look : le logo animé et les petits dessins animés (voir plus 
   le ♥ et les onglets changent sans bouger.
 - Le défilement de la page n'est jamais bloqué par un effet.
 - Proposés mais pas retenus : à la mission 2, 64 Forme en particules, 4 Reflet brillant, 81 Toile élastique, 202 Anneau du minuteur ;
-  à la mission 10, les looks « Carnet de voyage » et « Herbier du marché » (toujours visibles dans `choix-style.html`).
+  à la mission 10, les looks « Carnet de voyage » et « Herbier du marché » (dans l'historique git, sauvegarde « Mission 10 »).

@@ -99,7 +99,7 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** j'ai vu les 3 looks sur mon iPhone, j'en ai choisi un, et DESIGN.md le décrit.
   - **Produit pour la suite :** choix-style.html, le nouveau DESIGN.md.
 
-- [ ] 11. Appliquer le nouveau look partout — CONSTRUIT
+- [x] 11. Appliquer le nouveau look partout — CONSTRUIT
   - **Quoi :** toutes les pages déjà faites passent au look de DESIGN.md (accueil, liste, recette,
     explorer, filtres, régimes), avec le logo et les illustrations SVG animés.
     Retire les anciens effets de la Salle des effets qui ne vont plus avec le nouveau look.
@@ -236,6 +236,7 @@ Des outils rangés en chemin. Ils sont facultatifs : une mission peut s'en servi
 | Le calculateur des fiches (mission 6) | outils/calculer.py | Recalcule prix, budget, calories, régimes et le sommaire à partir de ingredients.json ; signale les ingrédients inconnus et les recettes en double. Lancer : `python outils/calculer.py` | Idée réutilisable : « des données bien rangées → un programme calcule le reste » |
 | Les logos des régimes (mission 6) | regimes.js | 5 petits dessins SVG, plein = compatible, contour = adaptable | Le principe plein / contour peut servir ailleurs |
 | Le carnet du téléphone (mission 9) | stockage.js | Lire, écrire, effacer ce que le visiteur garde dans son navigateur (« Mes régimes », puis favoris, courses, frigo) ; ne casse rien en navigation privée | Idée réutilisable : un seul petit fichier pour tout ce qu'on garde sur le téléphone |
-| Les effets du site (missions 3 à 8) | effets.js, explorer.js, filtres.js | Effets 78, 3, 2, 8, 14, 42, 6, 36 (la carte qui se dessine), 152 (les herbes qui poussent), 66 (les pays en tuiles bento), et pour les filtres 16 (onde au toucher), 46 (coche qui se dessine) et 232 (cartes qui glissent à leur place), réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
+| Les effets du site (missions 3 à 8, recolorés à la mission 11 ; le 8 est retiré) | effets.js, explorer.js, filtres.js | Effets 78, 3, 2, 14, 42, 6, 36 (la carte qui se dessine), 152 (les herbes qui poussent), 66 (les pays en tuiles bento), et pour les filtres 16 (onde au toucher), 46 (coche qui se dessine) et 232 (cartes qui glissent à leur place), réglés pour l'iPhone | Déjà rangés dans ..\00-Atelier |
+| Les petits dessins animés (missions 10 et 11) | dessins/, recettes.js | Un plat dessiné en code (SVG) qui suit les couleurs jour / nuit de la page ; chaque dessin a ses propres noms de classe pour ne rien déranger une fois collé | Idée réutilisable : des illustrations légères, sans image à télécharger |
 
 Bilan final (à remplir après la dernière mission) : ce qui a bien marché, ce qui était de trop, ce que je garde pour le prochain projet.

@@ -4,12 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gustora</title>
-<link rel="icon" href="favicon.svg?v=11" type="image/svg+xml">
-<link rel="icon" href="favicon-32.png?v=11" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=11">
+<meta name="theme-color" content="#FAF6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161210" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg?v=12" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png?v=12" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=12">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="style.css?v=11">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body data-ecran="accueil">
 <canvas id="graines" aria-hidden="true"></canvas>
@@ -17,11 +19,18 @@
 
 <div class="page">
   <header class="top">
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-      <path d="M47 17A21 21 0 1 0 53 32H38" fill="none" stroke="var(--pr)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="32" cy="32" r="6.5" fill="var(--ac)"/>
+    <!-- Le logo (le même dessin que logo.svg) : le couvercle de la boîte à épices se dévisse, trois grains sautent -->
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+      <g class="couv">
+        <circle cx="32" cy="34" r="25" fill="var(--pr)"/>
+        <circle cx="32" cy="34" r="19.5" fill="none" stroke="var(--on)" stroke-opacity=".35" stroke-width="2"/>
+        <path d="M40.5 25.5A12 12 0 1 0 44 34H33" fill="none" stroke="var(--on)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <circle class="grain" style="--x:22px;--y:20px" cx="9" cy="13" r="3.8" fill="var(--ac)"/>
+      <circle class="grain" style="--x:-23px;--y:25px;animation-delay:.08s" cx="56" cy="8" r="3.2" fill="var(--fx)"/>
+      <circle class="grain" style="--x:-25px;--y:-19px;animation-delay:.16s" cx="58" cy="54" r="2.8" fill="var(--tx)"/>
     </svg>
-    <b id="nom"></b>
+    <b id="nom" translate="no"></b>
     <button class="sw" id="sw" type="button"><i aria-hidden="true"></i></button>
   </header>
 
@@ -44,14 +53,14 @@
 <nav class="tabbar" id="onglets" role="tablist"><span class="pill"></span></nav>
 <span class="toast" id="toast" role="status"></span>
 
-<script src="textes.js?v=11"></script>
-<script src="recettes.js?v=11"></script>
-<script src="stockage.js?v=11"></script>
-<script src="regimes.js?v=11"></script>
-<script src="effets.js?v=11"></script>
-<script src="filtres.js?v=11"></script>
-<script src="recette.js?v=11"></script>
-<script src="explorer.js?v=11"></script>
-<script src="app.js?v=11"></script>
+<script src="textes.js?v=12"></script>
+<script src="recettes.js?v=12"></script>
+<script src="stockage.js?v=12"></script>
+<script src="regimes.js?v=12"></script>
+<script src="effets.js?v=12"></script>
+<script src="filtres.js?v=12"></script>
+<script src="recette.js?v=12"></script>
+<script src="explorer.js?v=12"></script>
+<script src="app.js?v=12"></script>
 </body>
 </html>

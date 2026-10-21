@@ -1,6 +1,6 @@
 // Écran 4 : Explorer (la carte de France et les pays). L'écran 5 (une zone) réutilise la liste, dans app.js.
 
-// Un plat emblématique par pays (en attendant les images de la mission 15).
+// Un plat emblématique par pays (en attendant les images de la mission 17).
 const PLAT_PAYS = { italie:"🍝", espagne:"🥘", maroc:"🍲", japon:"🍣", mexique:"🌮",
   inde:"🍛", liban:"🧆", grece:"🫒", thailande:"🍜", "etats-unis":"🍔" };
 
@@ -14,13 +14,13 @@ const combien = n => `<span class="nb">${n ? TEXTES.liste.compteur(n) : TEXTES.e
 const lienRegion = (k, nom) => { const n = nbRecettes(nom);
   return `<a href="#zone/${k}" class="${n ? '' : 'vide'}"><b>${nom}</b>${combien(n)}</a>`; };
 // Effet 66 (tuiles bento) : des cases de tailles différentes, comme un plateau-repas. Chaque tuile est en couches
-// (fond avec son soleil, plat qui flotte devant, nom) et penche sous le doigt.
+// (fond de couleur, plat qui flotte devant, nom) et penche sous le doigt.
 // Tailles : g = grande (2 × 2), h = haute, l = large ; choisies pour que les cases s'emboîtent sans trou
 // (sur iPhone 6 rangées de 3, sur PC 3 rangées de 6 : voir style.css).
 const TUILES = { italie:'g', maroc:'h', mexique:'l', liban:'h', grece:'h', 'etats-unis':'l' };
 const cartePays = (k, nom) => { const n = nbRecettes(nom);
   return `<li class="${TUILES[k] || ''}" data-k="${k}"><div class="tilt js-tilt" data-max="7"><a href="#zone/${k}" class="bt ${n ? '' : 'vide'}">
-    <span class="fond" data-depth="0.4" aria-hidden="true"><span class="sun"></span></span>
+    <span class="fond" data-depth="0.4" aria-hidden="true"></span>
     <span class="emo" data-depth="1.8" aria-hidden="true">${PLAT_PAYS[k]}</span>
     <span class="txt" data-depth="0.8"><b>${nom}</b>${combien(n)}</span></a></div></li>`; };
 
@@ -29,7 +29,7 @@ let carteChargee = null;
 function construireExplorer(){
   const E = TEXTES.explorer, boite = $('explorer');
   boite.innerHTML = `<div class="liste-tete"><h1>${E.titre}</h1></div>
-    <div class="bascule" role="tablist">
+    <div class="vues" role="tablist">
       <button type="button" role="tab" data-vue="france">${E.france}</button>
       <button type="button" role="tab" data-vue="monde">${E.monde}</button>
     </div>
@@ -42,7 +42,7 @@ function construireExplorer(){
   boite.querySelectorAll('[data-vue]').forEach(b=>b.addEventListener('click', ()=>{
     history.replaceState(null, '', b.dataset.vue==='monde' ? '#explorer?monde' : '#explorer'); router(); }));
   // La carte (un fichier à part) arrive par internet ; si elle manque, la liste des régions suffit.
-  carteChargee = fetch('carte-france.svg?v=11').then(r=>r.ok ? r.text() : '').then(dessinerCarte).catch(()=>{});
+  carteChargee = fetch('carte-france.svg?v=12').then(r=>r.ok ? r.text() : '').then(dessinerCarte).catch(()=>{});
 }
 
 function dessinerCarte(svg){
@@ -52,7 +52,7 @@ function dessinerCarte(svg){
     const z = TEXTES.regions[a.dataset.zone], n = nbRecettes(z.nom);
     a.setAttribute('aria-label', `${z.nom} · ${n ? TEXTES.liste.compteur(n) : TEXTES.explorer.bientot}`);
     if (n) a.querySelector('text').textContent = n; else { a.classList.add('vide'); a.querySelector('.tampon').remove(); }
-    // Toucher une région : elle se remplit de terracotta, puis on part vers sa page.
+    // Toucher une région : elle se remplit de piment, puis on part vers sa page.
     a.addEventListener('click', e=>{ e.preventDefault(); a.classList.add('choisie');
       setTimeout(()=>{ location.hash = a.getAttribute('href'); }, reduce ? 0 : 500); });
   });
@@ -147,8 +147,8 @@ function dessinerHerbes(t){
   ctxH.lineCap = 'round'; ctxH.lineJoin = 'round'; ctxH.strokeStyle = C.tx;
   [2.2, 1.5, 1].forEach((l, i)=>{ ctxH.globalAlpha = .38 - i*.06; ctxH.lineWidth = l; ctxH.stroke(tiges[i]); });
   ctxH.globalAlpha = .62; ctxH.strokeStyle = C.pr; ctxH.lineWidth = 1.6; ctxH.stroke(aiguilles);
-  ctxH.globalAlpha = .55; ctxH.fillStyle = C.ac; ctxH.fill(larges);
-  ctxH.globalAlpha = .6; ctxH.fillStyle = C.pr; ctxH.fill(petites);
+  ctxH.globalAlpha = .55; ctxH.fillStyle = C.fx; ctxH.fill(larges);
+  ctxH.globalAlpha = .75; ctxH.fillStyle = C.ac; ctxH.fill(petites);
   ctxH.globalAlpha = 1;
 }
 function boucleHerbes(t){ dessinerHerbes(t); rafH = surExplorer() ? requestAnimationFrame(boucleHerbes) : 0; }

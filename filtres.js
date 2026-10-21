@@ -81,7 +81,7 @@ function ouvrirTiroir(k, bouton, etat, changer){
     return `<li><button type="button" data-v="${v}" aria-pressed="${deja.includes(v)}" class="${n ? '' : 'zero'}">
       ${regime ? logoRegime(v, 'oui') : ''}<span class="ct"><b>${nomChoix(k, v)}</b>${aide}</span><span class="n">${TEXTES.liste.compteur(n)}</span>
       <span class="coche" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></button></li>`; }).join('');
-  // Sous les 5 régimes : l'interrupteur « Mode strict » (le rond safran, comme jour / nuit) et la case « Garder mes régimes ».
+  // Sous les 5 régimes : l'interrupteur « Mode strict » (le rond piment, comme jour / nuit) et la case « Garder mes régimes ».
   $('tiroir-plus').innerHTML = !regime ? '' : `<button type="button" class="strict" role="switch" aria-checked="${MES_REGIMES.strict}">
       <span class="ct"><b>${F.regime.strict}</b><small>${F.regime.strictAide}</small></span><span class="bascule" aria-hidden="true"><i></i></span></button>
     <button type="button" class="garder" aria-pressed="${MES_REGIMES.garder}"><span class="coche" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span>${F.regime.garder}</button>`;
