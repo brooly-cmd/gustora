@@ -1,4 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Gustora">
-  <path d="M47 17A21 21 0 1 0 53 32H38" fill="none" stroke="#B3472B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="32" cy="32" r="6.5" fill="#E2A325"/>
+  <style>
+    svg *{transform-box:fill-box;transform-origin:center}
+    .couv{animation:tourne 5s cubic-bezier(.22,1,.36,1) infinite}
+    .grain{animation:saute 5s cubic-bezier(.22,1,.36,1) infinite both}
+    @keyframes tourne{0%{transform:rotate(0)}18%{transform:rotate(-25deg)}44%{transform:rotate(385deg)}52%,100%{transform:rotate(360deg)}}
+    @keyframes saute{0%,40%{transform:translate(var(--x),var(--y)) scale(0)}54%{transform:translate(0,-6px) scale(1.25)}62%,88%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+    @media (prefers-reduced-motion:reduce){.couv,.grain{animation:none}}
+  </style>
+  <g class="couv">
+    <circle cx="32" cy="34" r="25" fill="var(--pr,#D62839)"/>
+    <circle cx="32" cy="34" r="19.5" fill="none" stroke="var(--on,#FFFFFF)" stroke-opacity=".35" stroke-width="2"/>
+    <path d="M40.5 25.5A12 12 0 1 0 44 34H33" fill="none" stroke="var(--on,#FFFFFF)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <circle class="grain" style="--x:22px;--y:20px" cx="9" cy="13" r="3.8" fill="var(--ac,#F2B705)"/>
+  <circle class="grain" style="--x:-23px;--y:25px;animation-delay:.08s" cx="56" cy="8" r="3.2" fill="var(--fx,#2A9D5C)"/>
+  <circle class="grain" style="--x:-25px;--y:-19px;animation-delay:.16s" cx="58" cy="54" r="2.8" fill="var(--tx,#1E1A17)"/>
 </svg>

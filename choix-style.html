@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Gustora · choisir le nouveau look</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Sans:wght@400;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700&display=swap">
+<script>
+  /* Jour / nuit : suit le téléphone, jusqu'à ce qu'on touche le bouton */
+  (function () {
+    var m = matchMedia('(prefers-color-scheme: dark)'), r = document.documentElement;
+    r.dataset.theme = m.matches ? 'dark' : 'light';
+    m.addEventListener('change', function (e) { if (!r.dataset.choisi) r.dataset.theme = e.matches ? 'dark' : 'light'; });
+  })();
+</script>
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--page:#F2F1EE;--ptx:#1C1C1C;--pdx:#E3E1DC;--ease:cubic-bezier(.22,1,.36,1)}
+:root[data-theme=dark]{--page:#101010;--ptx:#EDEDED;--pdx:#262626;color-scheme:dark}
+body{background:var(--page);color:var(--ptx);font:16px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+h1,h2{text-wrap:balance}
+@media (hover:hover){.barre button:hover,.theme:hover,.copier:hover{filter:brightness(.92)}.choisir:hover{transform:scale(1.02)}}
+:focus-visible{outline:3px solid var(--ptx);outline-offset:3px}
+
+/* ---------- Les 3 looks : leurs couleurs (jour puis nuit) ---------- */
+.l-voyage{--bg:#EEF0E8;--tx:#1B2840;--pr:#C0392B;--ac:#1E6F78;--mo:#C98B1E;--dx:#DCE2D3;--cd:#F8F9F4;--on:#FFFFFF;--onac:#FFFFFF;
+  --fh:"DM Serif Display",Georgia,serif;--fb:"Instrument Sans","Segoe UI",system-ui,sans-serif}
+[data-theme=dark] .l-voyage{--bg:#111A2A;--tx:#EDE8DC;--pr:#FF7B66;--ac:#6CC9CF;--mo:#E6B04A;--dx:#1E2A3F;--cd:#18233A;--on:#111A2A;--onac:#111A2A}
+.l-pop{--bg:#FAF6F1;--tx:#1E1A17;--pr:#D62839;--ac:#F2B705;--fx:#2A9D5C;--dx:#F0E6DA;--cd:#FFFFFF;--on:#FFFFFF;--onac:#1E1A17;--onfx:#1E1A17;
+  --fh:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--fb:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif}
+[data-theme=dark] .l-pop{--bg:#161210;--tx:#FBF3E7;--pr:#FF5A6A;--ac:#FFC83D;--fx:#4CC782;--dx:#2A221D;--cd:#211A16;--on:#161210;--onac:#161210;--onfx:#161210}
+.l-jardin{--bg:#EEF2EA;--tx:#18301F;--pr:#2E5E3E;--ac:#C4441F;--dx:#DCE6D4;--cd:#F8FAF5;--on:#FFFFFF;--onac:#FFFFFF;
+  --fh:"Fraunces",Georgia,serif;--fb:"Nunito Sans","Segoe UI",system-ui,sans-serif}
+[data-theme=dark] .l-jardin{--bg:#0E1611;--tx:#E6EEE1;--pr:#93CFA0;--ac:#FF8B61;--dx:#1B2A20;--cd:#142019;--on:#0E1611;--onac:#0E1611}
+
+/* ---------- La page de choix ---------- */
+.intro{max-width:760px;padding:28px max(16px,env(safe-area-inset-right)) 8px max(16px,env(safe-area-inset-left));margin:0 auto}
+.boutons{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.intro h1{font-size:clamp(28px,6vw,40px);line-height:1.1;letter-spacing:-.02em}
+.intro p{margin-top:12px;font-size:17px}
+.barre{position:sticky;top:0;z-index:5;background:var(--page);padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.barre button{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--pdx);font-weight:600;transition:transform .2s var(--ease)}
+.barre button:active{transform:scale(.95)}
+.barre .aller[aria-current=true]{background:var(--ptx);color:var(--page)}
+.theme{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--pdx);font-weight:600}
+.theme svg{width:20px;height:20px}
+[data-theme=dark] .theme .lune,[data-theme=light] .theme .soleil{display:none}
+
+.looks{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 16px 32px;scroll-padding:0 16px;scrollbar-width:none}
+.looks::-webkit-scrollbar{display:none}
+.look{flex:0 0 100%;min-width:0;scroll-snap-align:start;background:var(--bg);color:var(--tx);font-family:var(--fb);border-radius:28px;padding:24px 18px 20px;display:flex;flex-direction:column;gap:28px}
+@media (min-width:1180px){
+  .looks{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible;max-width:1500px;margin:0 auto}
+  .barre{display:none}
+}
+.look h2{font-family:var(--fh);font-size:34px;line-height:1.05;letter-spacing:-.02em}
+.l-pop h2{font-weight:800;letter-spacing:-.04em}
+.l-jardin h2{font-weight:400}
+.look .idee{margin-top:10px;font-size:17px}
+.look h3{font-family:var(--fb);font-size:15px;font-weight:700;margin-bottom:10px}
+
+.nuancier{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.nuancier div{font-size:13px;line-height:1.3}
+.nuancier i{display:block;aspect-ratio:1;border-radius:12px;margin-bottom:6px;border:2px solid color-mix(in srgb,var(--tx) 16%,transparent)}
+
+.polices p{line-height:1.35}
+.polices .grand{font-family:var(--fh);font-size:30px;letter-spacing:-.01em}
+.l-pop .polices .grand{font-weight:800;letter-spacing:-.03em}
+.polices small{display:block;font-size:14px;margin-bottom:12px}
+
+.marque{display:flex;align-items:center;gap:16px}
+.marque svg{width:104px;height:104px;flex:none;overflow:visible}
+.marque b{font-family:var(--fh);font-size:44px;line-height:1;letter-spacing:-.02em;font-weight:400}
+.l-pop .marque b{font-weight:800;letter-spacing:-.05em}
+
+.dessins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dessins figure{display:flex;flex-direction:column;gap:6px}
+.dessins figcaption{font-size:13px;line-height:1.3}
+.dessin{display:block;aspect-ratio:1;border-radius:16px;background:var(--dx);overflow:hidden}
+.dessin svg{width:100%;height:100%;display:block;overflow:visible}
+
+.choisir{min-height:52px;border:0;background:var(--pr);color:var(--on);font-family:var(--fb);font-size:17px;font-weight:700;border-radius:999px;padding:0 20px;transition:transform .2s var(--ease)}
+.choisir:active{transform:scale(.96)}
+.l-voyage .choisir{border-radius:6px}
+
+/* ---------- L'accueil dessiné (commun aux 3) ---------- */
+.tel{background:var(--bg);border:8px solid var(--tx);border-radius:40px;overflow:hidden;width:100%;max-width:400px;margin:0 auto}
+.tel-in{padding:16px 14px 20px;display:flex;flex-direction:column;gap:18px}
+.tel-top{display:flex;align-items:center;gap:10px;min-height:44px}
+.tel-top svg{width:38px;height:38px;flex:none;overflow:visible}
+.tel-top b{font-family:var(--fh);font-size:23px;flex:1;font-weight:400}
+.l-pop .tel-top b{font-weight:800;letter-spacing:-.04em}
+.tel-sw{width:48px;height:28px;border-radius:999px;background:var(--dx);position:relative}
+.tel-sw::after{content:"";position:absolute;top:4px;left:4px;width:20px;height:20px;border-radius:50%;background:var(--pr)}
+[data-theme=dark] .tel-sw::after{transform:translateX(20px)}
+.tel-h1{font-family:var(--fh);font-size:27px;line-height:1.12;letter-spacing:-.01em}
+.tel-search{display:flex;align-items:center;gap:10px;min-height:50px;padding:0 16px;font-size:16px}
+.tel-search svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.tel-search span{opacity:.75}
+.tel-ved{display:flex;flex-direction:column;gap:8px}
+.tel-ved .lbl{font-size:14px;font-weight:700}
+.tel-ved .nom{font-family:var(--fh);font-size:24px;line-height:1.1}
+.tel-ved .meta{font-size:15px}
+.tel-btn{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;font-weight:700;font-size:15px;margin-top:4px}
+.tel-h2{font-family:var(--fh);font-size:20px;line-height:1.2}
+.tel-racc{display:flex;flex-wrap:wrap;gap:8px}
+.tel-racc span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;font-size:15px;font-weight:600}
+.tel-cartes{display:grid;gap:12px}
+.carte .nom{font-weight:700;font-size:16px;line-height:1.2}
+.carte .meta{font-size:14px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.carte .meta svg,.mini-ic{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.tel-tabs{display:grid;grid-template-columns:repeat(5,1fr);padding:8px 6px 10px}
+.tel-tabs span{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;min-height:48px;justify-content:center;border-radius:14px}
+.tel-tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Look 1 : Carnet de voyage */
+.timbre{display:block;background:var(--cd);padding:5px;border:5px dotted var(--sous,var(--bg));border-radius:2px}
+.timbre .dessin{border-radius:0}
+.timbre small{display:flex;justify-content:space-between;font-size:12px;font-weight:700;padding:3px 2px 0}
+.l-voyage .dessins .timbre:nth-child(odd){transform:rotate(-2deg)}
+.l-voyage .dessins figure:nth-child(2) .timbre{transform:rotate(2deg)}
+.l-voyage .tel-search{border:2px solid var(--tx);border-radius:6px;background:var(--cd)}
+.l-voyage .tel-ved{background:var(--cd);border-radius:6px;padding:16px;display:block}
+.l-voyage .tel-ved > div > span{display:block;margin-bottom:6px}
+.l-voyage .tel-ved .timbre{--sous:var(--cd);transform:rotate(4deg);float:right;width:96px;margin:0 0 8px 12px}
+.l-voyage .tel-ved .lbl{color:var(--pr)}
+.l-voyage .tel-btn{background:var(--pr);color:var(--on);border-radius:6px;display:flex;width:max-content;clear:both;margin-top:8px}
+.l-voyage .tel-racc span{background:var(--dx);border-radius:4px 14px 14px 4px;padding-left:24px;position:relative}
+.l-voyage .tel-racc span::before{content:"";position:absolute;left:9px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--bg)}
+.l-voyage .carte{display:grid;grid-template-columns:80px 1fr;gap:14px;align-items:center}
+.l-voyage .carte .timbre{transform:rotate(-3deg)}
+.l-voyage .carte:nth-child(2) .timbre{transform:rotate(2deg)}
+.l-voyage .carte div{display:flex;flex-direction:column;gap:3px}
+.l-voyage .carte .zone{color:var(--ac);font-weight:700;font-size:14px}
+.l-voyage .tel-tabs{background:var(--cd)}
+.l-voyage .tel-tabs .on{color:var(--pr);font-weight:700}
+
+/* Look 2 : Boîte à épices */
+.l-pop .tel-h1{font-weight:800;font-size:29px;letter-spacing:-.04em;line-height:1.02}
+.l-pop .tel-h2{font-weight:800;letter-spacing:-.03em}
+.l-pop .tel-search{background:var(--dx);border-radius:999px;min-height:52px}
+.l-pop .tel-ved{background:var(--pr);color:var(--on);border-radius:28px;padding:20px;display:grid;grid-template-columns:1fr 96px;gap:6px 10px}
+.l-pop .tel-ved > div{display:flex;flex-direction:column;gap:6px}
+.l-pop .tel-ved .nom{font-weight:800;font-size:26px;letter-spacing:-.03em;line-height:1}
+.l-pop .tel-ved .dessin{background:var(--ac);border-radius:50%;align-self:start}
+.l-pop .tel-btn{background:var(--ac);color:var(--onac);border-radius:999px;grid-column:1/-1}
+.l-pop .tel-racc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.l-pop .tel-racc span{min-height:60px;border-radius:20px;font-weight:800;font-size:16px;letter-spacing:-.01em;line-height:1.15;padding:8px 14px}
+.l-pop .tel-racc span:nth-child(1){background:var(--ac);color:var(--onac)}
+.l-pop .tel-racc span:nth-child(2){background:var(--fx);color:var(--onfx)}
+.l-pop .tel-racc span:nth-child(3){background:var(--tx);color:var(--bg)}
+.l-pop .tel-racc span:nth-child(4){background:var(--dx)}
+.l-pop .tel-racc span:nth-child(5){background:var(--pr);color:var(--on);grid-column:1/-1}
+.l-pop .tel-cartes{grid-template-columns:repeat(2,minmax(0,1fr))}
+.l-pop .carte{background:var(--dx);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.l-pop .carte .dessin{border-radius:0;aspect-ratio:4/3}
+.l-pop .carte:nth-child(1) .dessin{background:var(--fx)}
+.l-pop .carte:nth-child(2) .dessin{background:var(--ac)}
+.l-pop .carte div{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px}
+.l-pop .carte .nom{font-weight:800;letter-spacing:-.02em}
+.l-pop .dessins figure:nth-child(1) .dessin{background:var(--ac)}
+.l-pop .dessins figure:nth-child(2) .dessin{background:var(--fx)}
+.l-pop .tel-tabs{background:var(--tx);color:var(--bg);margin:0 10px 10px;border-radius:24px;padding:6px}
+.l-pop .tel-tabs .on{background:var(--ac);color:var(--onac);font-weight:700}
+
+/* Look 3 : Herbier du marché */
+.l-jardin .tel-h1{font-weight:400;font-size:28px}
+.l-jardin .tel-search{background:var(--cd);border-radius:14px}
+.l-jardin .tel-ved{background:var(--cd);border-radius:20px;padding:0 0 16px;overflow:hidden}
+.l-jardin .tel-ved .dessin{border-radius:0;aspect-ratio:16/9;background:var(--dx)}
+.l-jardin .tel-ved .dessin svg{height:100%;width:auto;margin:0 auto}
+.l-jardin .tel-ved > :not(.dessin){margin:0 16px}
+.l-jardin .tel-ved .lbl{color:var(--pr);margin-top:6px}
+.l-jardin .tel-ved .nom{font-weight:400;font-size:26px}
+.l-jardin .tel-btn{background:var(--pr);color:var(--on);border-radius:999px}
+.l-jardin .tel-racc{flex-direction:column;gap:6px}
+.l-jardin .tel-racc span{background:var(--cd);border-radius:14px;gap:12px;font-weight:600}
+.l-jardin .tel-racc span::after{content:"";margin-left:auto;width:8px;height:8px;border:solid var(--pr);border-width:2.5px 2.5px 0 0;transform:rotate(45deg)}
+.l-jardin .tel-racc svg{width:20px;height:20px;fill:var(--pr)}
+.l-jardin .tel-cartes{grid-template-columns:repeat(2,minmax(0,1fr))}
+.l-jardin .carte{display:flex;flex-direction:column;gap:8px}
+.l-jardin .carte .nom{font-family:var(--fh);font-weight:400;font-size:18px}
+.l-jardin .carte .zone{color:var(--pr);font-weight:700;font-size:14px}
+.l-jardin .tel-tabs{background:var(--cd)}
+.l-jardin .tel-tabs .on{color:var(--pr);font-weight:700;background:var(--dx)}
+.l-jardin .tel-h2{font-weight:400}
+
+/* ---------- Le choix ---------- */
+.fin{max-width:760px;margin:0 auto;padding:8px 16px 48px}
+.fin h2{font-size:24px;line-height:1.2}
+.fin p{margin-top:8px}
+.fin .phrase{margin-top:14px;padding:16px;border-radius:16px;background:var(--pdx);font-weight:600;font-size:17px}
+.fin .copier{margin-top:12px;min-height:48px;padding:0 20px;border-radius:999px;border:0;background:var(--ptx);color:var(--page);font-weight:700}
+
+/* ---------- Les animations ---------- */
+svg *{transform-box:fill-box;transform-origin:center}
+.look.cache *,.pause .look *{animation-play-state:paused!important}
+
+/* Logo 1 : le tampon */
+.la-tampon{animation:la-coup 6s var(--ease) infinite}
+.la-anneau{transform-box:view-box;transform-origin:32px 32px;animation:tourne 26s linear infinite}
+@keyframes la-coup{0%{transform:scale(1.6) rotate(-30deg);opacity:0}9%{transform:scale(.92) rotate(-8deg);opacity:1}14%,90%{transform:scale(1) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-8deg);opacity:0}}
+@keyframes tourne{to{transform:rotate(360deg)}}
+/* Dessins 1 */
+.a-couv{animation:a-leve 4.5s ease-in-out infinite}
+@keyframes a-leve{0%,22%{transform:none}38%,64%{transform:translate(8px,-20px) rotate(12deg)}80%,100%{transform:none}}
+.a-vap{animation:a-vap 4.5s ease-out infinite both}
+.a-vap:nth-child(2){animation-delay:.25s}.a-vap:nth-child(3){animation-delay:.5s}
+@keyframes a-vap{0%,30%{opacity:0;transform:translateY(10px)}48%{opacity:1}78%,100%{opacity:0;transform:translateY(-16px)}}
+.a-vap2{animation:a-vap2 2.6s ease-out infinite both}
+.a-vap2:nth-child(2){animation-delay:.8s}
+@keyframes a-vap2{0%{opacity:0;transform:translateY(8px)}35%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+.a-bag{transform-origin:100% 0%;animation:a-pince 2.6s ease-in-out infinite}
+@keyframes a-pince{0%,100%{transform:none}50%{transform:translate(4px,-8px) rotate(-6deg)}}
+.a-poele{transform-origin:20% 50%;animation:a-poele 3.2s ease-in-out infinite}
+@keyframes a-poele{0%,50%,72%,100%{transform:none}56%{transform:rotate(-7deg)}}
+.a-crepe{animation:a-saute 3.2s ease-in-out infinite}
+@keyframes a-saute{0%,52%{transform:none}62%{transform:translateY(-38px) scaleY(.1)}70%{transform:translateY(-46px) scaleY(-1)}80%{transform:translateY(-22px) scaleY(.1)}90%,100%{transform:none}}
+
+/* Logo 2 : la boîte à épices */
+.lb-couv{animation:lb-tourne 5s var(--ease) infinite}
+@keyframes lb-tourne{0%{transform:rotate(0)}18%{transform:rotate(-25deg)}44%{transform:rotate(385deg)}52%,100%{transform:rotate(360deg)}}
+.lb-g{animation:lb-saute 5s var(--ease) infinite both}
+@keyframes lb-saute{0%,40%{transform:translate(var(--x),var(--y)) scale(0)}54%{transform:translate(0,-6px) scale(1.25)}62%,88%{transform:none;opacity:1}100%{transform:none;opacity:0}}
+/* Dessins 2 */
+.b-piment{transform-origin:50% 100%;animation:b-danse 1.4s ease-in-out infinite alternate}
+@keyframes b-danse{0%{transform:rotate(-10deg)}50%{transform:translateY(-8px) rotate(2deg) scaleY(1.05)}100%{transform:rotate(10deg)}}
+.b-four{transform-origin:50% 100%;animation:b-four 2.4s ease-in-out infinite alternate}
+@keyframes b-four{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
+.b-spirale{animation:b-spirale 1.2s linear infinite}
+@keyframes b-spirale{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.82)}}
+.b-brin{transform-origin:50% 0%;animation:b-brin 1.2s ease-in-out infinite alternate}
+@keyframes b-brin{from{transform:rotate(8deg)}to{transform:rotate(-8deg)}}
+.b-l{animation:b-hop 1.3s cubic-bezier(.3,0,.4,1) infinite both}
+.b-l:nth-child(2){animation-delay:.25s}.b-l:nth-child(3){animation-delay:.55s}.b-l:nth-child(4){animation-delay:.15s}.b-l:nth-child(5){animation-delay:.4s}
+@keyframes b-hop{0%,100%{transform:translateY(10px)}45%{transform:translateY(-22px)}}
+
+/* Logo 3 : la tige qui pousse */
+.lc{animation:lc-fond 7s infinite}
+@keyframes lc-fond{0%,92%{opacity:1}100%{opacity:0}}
+.lc-tige{stroke-dasharray:100;animation:trace-logo 7s var(--ease) infinite both}
+@keyframes trace-logo{0%{stroke-dashoffset:100}22%,100%{stroke-dashoffset:0}}
+.lc-f{transform-origin:0% 100%;animation:lc-feuille 7s var(--ease) infinite both}
+.lc-f2{animation-delay:.2s}
+@keyframes lc-feuille{0%,20%{transform:scale(0)}30%{transform:scale(1.12)}36%{transform:scale(1)}58%{transform:rotate(-8deg)}78%{transform:rotate(5deg)}92%,100%{transform:none}}
+.lc-fruit{animation:lc-fruit 7s var(--ease) infinite both}
+@keyframes lc-fruit{0%,28%{transform:scale(0)}36%{transform:scale(1.25)}42%,100%{transform:scale(1)}}
+/* Dessins 3 */
+.c-t{stroke-dasharray:100;animation:c-trace 7s ease-in-out infinite both;animation-delay:var(--d,0s)}
+@keyframes c-trace{0%{stroke-dashoffset:100}24%,84%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:100}}
+.c-pop{animation:c-pop 7s var(--ease) infinite both}
+@keyframes c-pop{0%,22%{transform:scale(0)}30%{transform:scale(1.12)}34%,84%{transform:scale(1)}94%,100%{transform:scale(0)}}
+.c-epi{transform-box:view-box;transform-origin:60px 116px;animation:c-vent 3.4s ease-in-out infinite alternate}
+@keyframes c-vent{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+.c-pousse{transform-origin:50% 100%;animation:c-vent 2.6s ease-in-out infinite alternate}
+
+@media (prefers-reduced-motion:reduce){
+  .look *,.look *::before,.look *::after{animation:none!important}
+  .lc-tige,.c-t{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+
+<header class="intro">
+  <h1>Choisis le nouveau look de Gustora</h1>
+  <p>Voici trois styles bien différents. Chacun a ses couleurs, ses polices, son logo, ses petits dessins et l'accueil de l'app. Les dessins bougent tout seuls. Touche « Voir la nuit » pour voir les couleurs du soir.</p>
+  <div class="boutons">
+  <button class="theme" type="button" id="theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="lune" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><g class="soleil"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg><span>Voir la nuit</span></button>
+  <button class="theme" type="button" id="pause" aria-pressed="false">Arrêter les animations</button>
+</div>
+</header>
+
+<nav class="barre" aria-label="Les 3 looks">
+  <button class="aller" type="button" data-cible="look-1" aria-current="true">1 · Voyage</button>
+  <button class="aller" type="button" data-cible="look-2">2 · Épices</button>
+  <button class="aller" type="button" data-cible="look-3">3 · Herbier</button>
+</nav>
+
+<main class="looks" id="looks">
+
+  <!-- ============ LOOK 1 ============ -->
+  <section class="look l-voyage" id="look-1" aria-labelledby="t1">
+    <div>
+      <h2 id="t1">1. Carnet de voyage</h2>
+      <p class="idee">Chaque recette est un timbre dans ton passeport de cuisine, à l'encre bleue et au tampon rouge. On collectionne les régions et les pays.</p>
+    </div>
+    <div>
+      <h3>Les couleurs</h3>
+      <div class="nuancier">
+        <div><i style="background:var(--bg)"></i>Fond</div>
+        <div><i style="background:var(--tx)"></i>Texte</div>
+        <div><i style="background:var(--pr)"></i>Tampon</div>
+        <div><i style="background:var(--ac)"></i>Douane</div>
+        <div><i style="background:var(--mo)"></i>Moutarde</div>
+      </div>
+    </div>
+    <div class="polices">
+      <h3>Les polices</h3>
+      <p class="grand">Couscous au poulet</p><small>Titres : DM Serif Display</small>
+      <p>Une semoule bien gonflée, des légumes fondants et un bouillon parfumé.</p><small>Texte : Instrument Sans</small>
+    </div>
+    <div>
+      <h3>Le logo</h3>
+      <div class="marque"><span data-svg="logoA"></span><b translate="no">Gustora</b></div>
+    </div>
+    <div>
+      <h3>Les petits dessins</h3>
+      <div class="dessins">
+        <figure><span class="timbre"><span class="dessin" data-svg="tajine"></span><small><span>Maroc</span><span>~4,55 €</span></small></span><figcaption>Le couvercle du tajine se soulève</figcaption></figure>
+        <figure><span class="timbre"><span class="dessin" data-svg="gyoza"></span><small><span>Japon</span><span>~2 €</span></small></span><figcaption>Les baguettes pincent un gyoza</figcaption></figure>
+        <figure><span class="timbre"><span class="dessin" data-svg="crepe"></span><small><span>Bretagne</span><span>~0,50 €</span></small></span><figcaption>La crêpe saute dans la poêle</figcaption></figure>
+      </div>
+    </div>
+    <div>
+      <h3>L'accueil</h3>
+      <div class="tel">
+        <div class="tel-in">
+          <div class="tel-top"><span data-svg="logoA"></span><b translate="no">Gustora</b><span class="tel-sw"></span></div>
+          <p class="tel-h1">Les cuisines de France et du monde, dans ta poche.</p>
+          <div class="tel-search"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg><span>Chercher une recette, un ingrédient…</span></div>
+          <div class="tel-ved">
+            <div>
+              <span class="timbre"><span class="dessin" data-svg="tajine"></span></span>
+              <span class="lbl">De saison en ce moment · Automne</span>
+              <span class="nom">Couscous au poulet et aux légumes</span>
+              <span class="meta">Maroc · 1 h 45 · ~4,55 € / pers.</span>
+            </div>
+            <span class="tel-btn">Voir la recette</span>
+          </div>
+          <div class="tel-racc"><span>Explorer la France</span><span>Le tour du monde</span><span>Dans mon frigo</span><span>Petit budget (€)</span><span>Moins de 30 min</span></div>
+          <p class="tel-h2">Les dernières recettes ajoutées</p>
+          <div class="tel-cartes">
+            <div class="carte"><span class="timbre"><span class="dessin" data-svg="gyoza"></span></span><div><span class="nom">Gyozas au porc et au chou</span><span class="zone">Japon</span><span class="meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>55 min · ~2 € / pers.</span></div></div>
+            <div class="carte"><span class="timbre"><span class="dessin" data-svg="crepe"></span></span><div><span class="nom">Crêpes de froment</span><span class="zone">Bretagne</span><span class="meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>30 min · ~0,50 € / pers.</span></div></div>
+          </div>
+        </div>
+        <div class="tel-tabs" data-svg="onglets"></div>
+      </div>
+    </div>
+    <button class="choisir" type="button" data-nom="1, « Carnet de voyage »">Je choisis « Carnet de voyage »</button>
+  </section>
+
+  <!-- ============ LOOK 2 ============ -->
+  <section class="look l-pop" id="look-2" aria-labelledby="t2">
+    <div>
+      <h2 id="t2">2. Boîte à épices</h2>
+      <p class="idee">Les couleurs des épices en tas sur l'étal (piment, curcuma, pistache), avec de gros titres et des blocs de couleur pleine.</p>
+    </div>
+    <div>
+      <h3>Les couleurs</h3>
+      <div class="nuancier">
+        <div><i style="background:var(--bg)"></i>Fond</div>
+        <div><i style="background:var(--tx)"></i>Texte</div>
+        <div><i style="background:var(--pr)"></i>Piment</div>
+        <div><i style="background:var(--ac)"></i>Curcuma</div>
+        <div><i style="background:var(--fx)"></i>Pistache</div>
+      </div>
+    </div>
+    <div class="polices">
+      <h3>Les polices</h3>
+      <p class="grand">Tacos de carnitas</p><small>Titres : Bricolage Grotesque, très gras</small>
+      <p>Du porc confit tout doucement, puis grillé pour être croustillant.</p><small>Texte : Bricolage Grotesque, normal</small>
+    </div>
+    <div>
+      <h3>Le logo</h3>
+      <div class="marque"><span data-svg="logoB"></span><b translate="no">Gustora</b></div>
+    </div>
+    <div>
+      <h3>Les petits dessins</h3>
+      <div class="dessins">
+        <figure><span class="dessin" data-svg="piment"></span><figcaption>Le piment danse (Mexique, Pays basque)</figcaption></figure>
+        <figure><span class="dessin" data-svg="spaghetti"></span><figcaption>Les spaghetti s'enroulent (Italie)</figcaption></figure>
+        <figure><span class="dessin" data-svg="dal"></span><figcaption>Les lentilles sautent dans le dal (Inde)</figcaption></figure>
+      </div>
+    </div>
+    <div>
+      <h3>L'accueil</h3>
+      <div class="tel">
+        <div class="tel-in">
+          <div class="tel-top"><span data-svg="logoB"></span><b translate="no">Gustora</b><span class="tel-sw"></span></div>
+          <p class="tel-h1">Les cuisines de France et du monde, dans ta poche.</p>
+          <div class="tel-search"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg><span>Chercher une recette, un ingrédient…</span></div>
+          <div class="tel-ved">
+            <div>
+              <span class="lbl">De saison en ce moment · Automne</span>
+              <span class="nom">Poulet basquaise</span>
+              <span class="meta">Nouvelle-Aquitaine · 1 h 15 · ~3,95 € / pers.</span>
+            </div>
+            <span class="dessin" data-svg="piment"></span>
+            <span class="tel-btn">Voir la recette</span>
+          </div>
+          <div class="tel-racc"><span>Explorer la France</span><span>Le tour du monde</span><span>Dans mon frigo</span><span>Petit budget (€)</span><span>Moins de 30 min</span></div>
+          <p class="tel-h2">Les dernières recettes ajoutées</p>
+          <div class="tel-cartes">
+            <div class="carte"><span class="dessin" data-svg="spaghetti"></span><div><span class="nom">Spaghetti alla carbonara</span><span class="meta">Italie</span><span class="meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>25 min · ~2,45 €</span></div></div>
+            <div class="carte"><span class="dessin" data-svg="dal"></span><div><span class="nom">Dal de lentilles corail</span><span class="meta">Inde</span><span class="meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>45 min · ~1,50 €</span></div></div>
+          </div>
+        </div>
+        <div class="tel-tabs" data-svg="onglets"></div>
+      </div>
+    </div>
+    <button class="choisir" type="button" data-nom="2, « Boîte à épices »">Je choisis « Boîte à épices »</button>
+  </section>
+
+  <!-- ============ LOOK 3 ============ -->
+  <section class="look l-jardin" id="look-3" aria-labelledby="t3">
+    <div>
+      <h2 id="t3">3. Herbier du marché</h2>
+      <p class="idee">La saison passe d'abord. Chaque plat se dessine trait par trait, comme une planche de botanique, en vert basilic et rouge tomate avec de larges marges.</p>
+    </div>
+    <div>
+      <h3>Les couleurs</h3>
+      <div class="nuancier">
+        <div><i style="background:var(--bg)"></i>Fond</div>
+        <div><i style="background:var(--tx)"></i>Texte</div>
+        <div><i style="background:var(--pr)"></i>Basilic</div>
+        <div><i style="background:var(--ac)"></i>Tomate</div>
+        <div><i style="background:var(--dx)"></i>Sauge</div>
+      </div>
+    </div>
+    <div class="polices">
+      <h3>Les polices</h3>
+      <p class="grand">Salade lyonnaise</p><small>Titres : Fraunces</small>
+      <p>De la frisée, des lardons bien dorés et un œuf poché qui coule.</p><small>Texte : Nunito Sans</small>
+    </div>
+    <div>
+      <h3>Le logo</h3>
+      <div class="marque"><span data-svg="logoC"></span><b translate="no">Gustora</b></div>
+    </div>
+    <div>
+      <h3>Les petits dessins</h3>
+      <div class="dessins">
+        <figure><span class="dessin" data-svg="frisee"></span><figcaption>La frisée se dessine, l'œuf arrive (Lyon)</figcaption></figure>
+        <figure><span class="dessin" data-svg="ble"></span><figcaption>L'épi de blé ondule (Bretagne)</figcaption></figure>
+        <figure><span class="dessin" data-svg="oignon"></span><figcaption>L'oignon germe (Alsace)</figcaption></figure>
+      </div>
+    </div>
+    <div>
+      <h3>L'accueil</h3>
+      <div class="tel">
+        <div class="tel-in">
+          <div class="tel-top"><span data-svg="logoC"></span><b translate="no">Gustora</b><span class="tel-sw"></span></div>
+          <p class="tel-h1">Les cuisines de France et du monde, dans ta poche.</p>
+          <div class="tel-search"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg><span>Chercher une recette, un ingrédient…</span></div>
+          <div class="tel-ved">
+            <span class="dessin" data-svg="frisee"></span>
+            <span class="lbl">De saison en ce moment · Automne</span>
+            <span class="nom">Salade lyonnaise</span>
+            <span class="meta">Auvergne-Rhône-Alpes · 35 min · ~1,65 € / pers.</span>
+            <span class="tel-btn">Voir la recette</span>
+          </div>
+          <div class="tel-racc" data-svg="raccFeuilles"></div>
+          <p class="tel-h2">Les dernières recettes ajoutées</p>
+          <div class="tel-cartes">
+            <div class="carte"><span class="dessin" data-svg="ble"></span><span class="nom">Crêpes de froment</span><span class="zone">Bretagne</span><span class="meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>30 min · ~0,50 €</span></div>
+            <div class="carte"><span class="dessin" data-svg="oignon"></span><span class="nom">Tarte flambée</span><span class="zone">Grand Est</span><span class="meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>1 h 05 · ~1,80 €</span></div>
+          </div>
+        </div>
+        <div class="tel-tabs" data-svg="onglets"></div>
+      </div>
+    </div>
+    <button class="choisir" type="button" data-nom="3, « Herbier du marché »">Je choisis « Herbier du marché »</button>
+  </section>
+
+</main>
+
+<section class="fin" id="fin" aria-live="polite">
+  <h2>Ton choix</h2>
+  <p id="consigne">Touche « Je choisis » sous le look qui te plaît. Une phrase apparaîtra ici : copie-la et colle-la dans le chat.</p>
+  <div id="resultat" hidden>
+    <p class="phrase" id="phrase"></p>
+    <button class="copier" type="button" id="copier">Copier la phrase</button>
+  </div>
+</section>
+
+<script>
+/* Les dessins en code (SVG). Chaque fonction rend un dessin ; u sert à donner un nom unique. */
+var u = 0;
+var SVG = {
+  logoA: function () { u++; return '<svg viewBox="0 0 64 64" aria-hidden="true"><g class="la-tampon">' +
+    '<circle cx="32" cy="32" r="30" fill="none" stroke="var(--pr)" stroke-width="2.5"/>' +
+    '<circle cx="32" cy="32" r="18.5" fill="none" stroke="var(--pr)" stroke-width="1.6"/>' +
+    '<g class="la-anneau"><path id="arc' + u + '" d="M32 9a23 23 0 1 1 0 46a23 23 0 1 1 0-46" fill="none"/>' +
+    '<text font-size="5.6" font-weight="700" fill="var(--pr)" style="font-family:var(--fb)"><textPath href="#arc' + u + '" textLength="140" lengthAdjust="spacing">GUSTORA · CUISINES DU MONDE ·</textPath></text></g>' +
+    '<text x="32" y="40" text-anchor="middle" font-size="23" fill="var(--pr)" style="font-family:var(--fh)">G</text></g></svg>'; },
+  tajine: function () { return '<svg viewBox="0 0 120 120" aria-hidden="true">' +
+    '<g fill="none" stroke="var(--tx)" stroke-width="2.5" stroke-linecap="round"><path class="a-vap" d="M46 70q-5-7 0-14q5-7 0-14"/><path class="a-vap" d="M60 66q-5-7 0-14q5-7 0-14"/><path class="a-vap" d="M74 70q-5-7 0-14q5-7 0-14"/></g>' +
+    '<path d="M14 88h92q-4 14-46 14q-42 0-46-14z" fill="var(--ac)"/>' +
+    '<g class="a-couv"><path d="M24 89q8-40 36-52q28 12 36 52z" fill="var(--pr)"/><circle cx="60" cy="34" r="6" fill="var(--pr)"/><path d="M38 77h44" stroke="var(--cd)" stroke-width="3" stroke-linecap="round" opacity=".7"/></g></svg>'; },
+  gyoza: function () { return '<svg viewBox="0 0 120 120" aria-hidden="true">' +
+    '<g fill="none" stroke="var(--tx)" stroke-width="2.5" stroke-linecap="round"><path class="a-vap2" d="M46 46q-5-6 0-12q5-6 0-12"/><path class="a-vap2" d="M64 46q-5-6 0-12q5-6 0-12"/></g>' +
+    '<rect x="12" y="86" width="96" height="12" rx="6" fill="var(--ac)"/>' +
+    '<path d="M18 87q42-60 84 0z" fill="var(--cd)" stroke="var(--tx)" stroke-width="2.5" stroke-linejoin="round"/>' +
+    '<path d="M40 70l4 9M53 62l2 10M67 62l-2 10M80 70l-4 9" stroke="var(--tx)" stroke-width="2.5" stroke-linecap="round"/>' +
+    '<g class="a-bag" stroke="var(--pr)" stroke-width="4" stroke-linecap="round"><path d="M106 12L74 58"/><path d="M114 20L79 61"/></g></svg>'; },
+  crepe: function () { return '<svg viewBox="0 0 120 120" aria-hidden="true">' +
+    '<g class="a-poele"><ellipse cx="54" cy="94" rx="38" ry="10" fill="var(--tx)"/><path d="M90 92l24-8" stroke="var(--tx)" stroke-width="6" stroke-linecap="round"/></g>' +
+    '<g class="a-crepe"><ellipse cx="54" cy="87" rx="31" ry="8" fill="var(--mo)"/><circle cx="44" cy="86" r="2" fill="var(--pr)"/><circle cx="62" cy="88" r="1.6" fill="var(--pr)"/></g></svg>'; },
+
+  logoB: function () { return '<svg viewBox="0 0 64 64" aria-hidden="true">' +
+    '<g class="lb-couv"><circle cx="32" cy="34" r="25" fill="var(--pr)"/><circle cx="32" cy="34" r="19.5" fill="none" stroke="var(--on)" stroke-opacity=".35" stroke-width="2"/>' +
+    '<path d="M40.5 25.5A12 12 0 1 0 44 34H33" fill="none" stroke="var(--on)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>' +
+    '<circle class="lb-g" style="--x:22px;--y:20px" cx="9" cy="13" r="3.8" fill="var(--ac)"/>' +
+    '<circle class="lb-g" style="--x:-23px;--y:25px;animation-delay:.08s" cx="56" cy="8" r="3.2" fill="var(--fx)"/>' +
+    '<circle class="lb-g" style="--x:-25px;--y:-19px;animation-delay:.16s" cx="58" cy="54" r="2.8" fill="var(--tx)"/></svg>'; },
+  piment: function () { return '<svg viewBox="0 0 120 120" aria-hidden="true"><g class="b-piment">' +
+    '<path d="M44 34c26-6 46 18 44 54c-1 14-9 22-14 20c-4-2-2-10-3-18c-3-22-14-36-30-40c-8-2-7-15 3-16z" fill="var(--pr)"/>' +
+    '<path d="M56 44c10 4 16 14 18 24" fill="none" stroke="var(--bg)" stroke-width="4" stroke-linecap="round" opacity=".55"/>' +
+    '<path d="M45 35c-4-8-2-16 6-22M37 39c6-6 14-6 18 0" fill="none" stroke="var(--fx)" stroke-width="7" stroke-linecap="round"/></g></svg>'; },
+  spaghetti: function () { return '<svg viewBox="0 0 120 120" aria-hidden="true"><g class="b-four">' +
+    '<g class="b-brin" fill="none" stroke="var(--ac)" stroke-width="5" stroke-linecap="round"><path d="M40 52q-8 18 2 36"/><path d="M80 52q8 16 0 34"/></g>' +
+    '<g class="b-spirale"><path d="M34 44a26 13 0 1 0 52 0a20 10 0 1 0-40 0a14 7 0 1 0 28 0" fill="none" stroke="var(--ac)" stroke-width="5" stroke-linecap="round"/></g>' +
+    '<g fill="var(--tx)"><rect x="56" y="62" width="8" height="52" rx="4"/><path d="M47 14h4v26h4V14h4v26h2V14h4v26h4V14h4v32q0 14-13 14q-13 0-13-14z"/></g></g></svg>'; },
+  dal: function () { return '<svg viewBox="0 0 120 120" aria-hidden="true">' +
+    '<g fill="var(--pr)"><circle class="b-l" cx="38" cy="60" r="5"/><circle class="b-l" cx="52" cy="56" r="5"/><circle class="b-l" cx="66" cy="59" r="5"/><circle class="b-l" cx="80" cy="56" r="5"/><circle class="b-l" cx="60" cy="62" r="4"/></g>' +
+    '<ellipse cx="60" cy="66" rx="40" ry="9" fill="var(--ac)"/>' +
+    '<path d="M18 66h84a42 38 0 0 1-84 0z" fill="var(--tx)"/></svg>'; },
+
+  logoC: function () { return '<svg viewBox="0 0 64 64" aria-hidden="true"><g class="lc">' +
+    '<path class="lc-tige" pathLength="100" d="M47 17A21 21 0 1 0 53 32H38" fill="none" stroke="var(--pr)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path class="lc-f" d="M47 17c1-8 7-13 15-13c0 8-6 13-15 13z" fill="var(--pr)"/>' +
+    '<path class="lc-f lc-f2" d="M45 32c-1-6 3-11 10-12c1 6-3 11-10 12z" fill="var(--pr)"/>' +
+    '<circle class="lc-fruit" cx="32" cy="32" r="5.5" fill="var(--ac)"/></g></svg>'; },
+  frisee: function () { return '<svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path class="c-t" pathLength="100" d="M18 94q2-22 18-26q-4-14 10-20q2-14 16-12q10-10 22 0q14 0 14 14q14 6 8 20q10 8 4 24" stroke="var(--pr)" stroke-width="2.4"/>' +
+    '<path class="c-t" pathLength="100" style="--d:.35s" d="M34 92q6-14 16-16q2-12 14-10q10-4 14 6q12 2 10 20" stroke="var(--pr)" stroke-width="2.4"/>' +
+    '<path class="c-t" pathLength="100" style="--d:.7s" d="M12 96h96" stroke="var(--tx)" stroke-width="2.4"/>' +
+    '<g class="c-pop" style="animation-delay:.6s"><ellipse cx="60" cy="86" rx="18" ry="10" fill="var(--cd)" stroke="var(--tx)" stroke-width="2.4"/><circle cx="60" cy="85" r="5.5" fill="var(--ac)"/></g></svg>'; },
+  ble: function () {
+    var g = '';
+    for (var i = 0; i < 4; i++) { var y = 56 + i * 13;
+      g += '<path class="c-t" pathLength="100" style="--d:' + (0.2 + i * 0.15) + 's" d="M60 ' + y + 'c-10 0-15-8-13-15c8 0 13 7 13 15zM60 ' + y + 'c10 0 15-8 13-15c-8 0-13 7-13 15z"/>'; }
+    return '<svg viewBox="0 0 120 120" aria-hidden="true" fill="var(--ac)" fill-opacity=".18" stroke="var(--tx)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><g class="c-epi">' +
+      '<path class="c-t" pathLength="100" fill="none" d="M60 116Q58 84 60 40"/>' + g +
+      '<path class="c-t" pathLength="100" style="--d:.8s" d="M60 42c-5-6-5-13 0-18c5 5 5 12 0 18z"/>' +
+      '<path class="c-t" pathLength="100" style="--d:1s" fill="none" d="M47 40l-8-14M73 40l8-14M60 22V8"/></g></svg>'; },
+  oignon: function () { return '<svg viewBox="0 0 120 120" aria-hidden="true" fill="none" stroke="var(--tx)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path class="c-t" pathLength="100" d="M60 36C84 54 96 78 84 96C76 108 44 108 36 96C24 78 36 54 60 36Z" fill="var(--ac)" fill-opacity=".16"/>' +
+    '<path class="c-t" pathLength="100" style="--d:.3s" d="M60 42C74 58 80 80 72 100"/>' +
+    '<path class="c-t" pathLength="100" style="--d:.45s" d="M60 42C46 58 40 80 48 100"/>' +
+    '<path class="c-t" pathLength="100" style="--d:.6s" d="M52 106l-4 8M60 107v9M68 106l4 8"/>' +
+    '<g class="c-pousse c-pop" style="animation-delay:.5s" stroke="var(--pr)" stroke-width="3"><path d="M60 36C58 24 54 16 46 10"/><path d="M60 36C62 22 68 14 76 12"/></g></svg>'; },
+
+  onglets: function () {
+    var ic = {
+      'Accueil': '<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>',
+      'Explorer': '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+      'Mon frigo': '<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M6 10h12M9 6v2M9 13v3"/>',
+      'Favoris': '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+      'Courses': '<path d="M4 9h16l-1.6 10H5.6zM8 9l3-5M16 9l-3-5"/>'
+    };
+    return Object.keys(ic).map(function (n, i) {
+      return '<span' + (i ? '' : ' class="on"') + '><svg viewBox="0 0 24 24" aria-hidden="true">' + ic[n] + '</svg>' + n + '</span>';
+    }).join('');
+  },
+  raccFeuilles: function () {
+    var f = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14c0 9-5 14-14 14z"/></svg>';
+    return ['Explorer la France', 'Le tour du monde', 'Dans mon frigo', 'Petit budget (€)', 'Moins de 30 min']
+      .map(function (t) { return '<span>' + f + t + '</span>'; }).join('');
+  }
+};
+document.querySelectorAll('[data-svg]').forEach(function (el) { el.innerHTML = SVG[el.dataset.svg](); });
+
+/* Les animations ne tournent que pour le look visible à l'écran (économise la batterie) */
+var boutons = document.querySelectorAll('.aller');
+var vu = new IntersectionObserver(function (entrees) {
+  entrees.forEach(function (e) {
+    e.target.classList.toggle('cache', !e.isIntersecting);
+    if (e.intersectionRatio > 0.6) boutons.forEach(function (b) { b.setAttribute('aria-current', b.dataset.cible === e.target.id); });
+  });
+}, { threshold: [0, 0.6] });
+document.querySelectorAll('.look').forEach(function (l) { vu.observe(l); });
+
+/* Boutons 1 / 2 / 3 : glisser jusqu'au look */
+boutons.forEach(function (b) {
+  b.addEventListener('click', function () {
+    var cible = document.getElementById(b.dataset.cible), boite = document.getElementById('looks');
+    boite.scrollLeft = cible.offsetLeft - boite.offsetLeft - 16;
+    boutons.forEach(function (x) { x.setAttribute('aria-current', x === b); });
+  });
+});
+
+/* Jour / nuit */
+var r = document.documentElement, bt = document.getElementById('theme');
+function etiquette() { bt.querySelector('span').textContent = r.dataset.theme === 'dark' ? 'Voir le jour' : 'Voir la nuit'; }
+etiquette();
+bt.addEventListener('click', function () { r.dataset.choisi = 1; r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark'; etiquette(); });
+
+/* Arrêter / relancer les animations */
+var bp = document.getElementById('pause');
+bp.addEventListener('click', function () {
+  var p = r.classList.toggle('pause');
+  bp.setAttribute('aria-pressed', p);
+  bp.textContent = p ? 'Relancer les animations' : 'Arrêter les animations';
+});
+
+/* Le choix */
+document.querySelectorAll('.choisir').forEach(function (b) {
+  b.addEventListener('click', function () {
+    document.getElementById('phrase').textContent = 'Mission 10 : je choisis le look ' + b.dataset.nom + '.';
+    document.getElementById('consigne').textContent = 'Copie cette phrase et colle-la dans le chat. Tu peux encore changer d\'avis.';
+    document.getElementById('resultat').hidden = false;
+    document.getElementById('fin').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+document.getElementById('copier').addEventListener('click', function () {
+  var t = document.getElementById('phrase').textContent, c = this;
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { c.textContent = 'Phrase copiée'; },
+    function () { c.textContent = 'Sélectionne la phrase pour la copier'; });
+});
+</script>
+</body>
+</html>

@@ -88,7 +88,7 @@ Coche chaque case quand la mission est réussie.
 
 ### Le nouveau look
 
-- [ ] 10. Le nouveau look : 3 styles au choix — MONTRE
+- [x] 10. Le nouveau look : 3 styles au choix — MONTRE
   - **Quoi :** avec les skills taste-skill et ui-ux-pro-max, propose 3 looks complets et vraiment
     différents pour Gustora, tirés de son sujet (cuisine du monde, marchés, épices, voyages).
     Chaque look : couleurs jour et nuit, polices, un logo SVG animé (dessiné en code),

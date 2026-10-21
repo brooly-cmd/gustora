@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" aria-hidden="true">
+  <style>
+    .l{transform-box:fill-box;animation:hop 1.3s cubic-bezier(.3,0,.4,1) infinite both}
+    .l:nth-child(2){animation-delay:.25s}.l:nth-child(3){animation-delay:.55s}.l:nth-child(4){animation-delay:.15s}.l:nth-child(5){animation-delay:.4s}
+    @keyframes hop{0%,100%{transform:translateY(10px)}45%{transform:translateY(-22px)}}
+    @media (prefers-reduced-motion:reduce){.l{animation:none}}
+  </style>
+  <g fill="var(--pr,#D62839)"><circle class="l" cx="38" cy="60" r="5"/><circle class="l" cx="52" cy="56" r="5"/><circle class="l" cx="66" cy="59" r="5"/><circle class="l" cx="80" cy="56" r="5"/><circle class="l" cx="60" cy="62" r="4"/></g>
+  <ellipse cx="60" cy="66" rx="40" ry="9" fill="var(--ac,#F2B705)"/>
+  <path d="M18 66h84a42 38 0 0 1-84 0z" fill="var(--tx,#1E1A17)"/>
+</svg>
