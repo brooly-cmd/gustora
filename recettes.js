@@ -16,7 +16,7 @@ const DESSIN_PLAT = { "mexique-tacos-carnitas":"piment", "nouvelle-aquitaine-pou
 const CHAMP_DESSIN = { piment:"ac", spaghetti:"fx", dal:"fx" };
 const DESSINS_PLATS = {};   // le code de chaque dessin, une fois chargé
 function chargerDessins(){   // un dessin qui manque n'empêche rien : le plat garde son emoji
-  return Promise.all(Object.keys(CHAMP_DESSIN).map(n=>fetch(`dessins/${n}.svg?v=12`)
+  return Promise.all(Object.keys(CHAMP_DESSIN).map(n=>fetch(`dessins/${n}.svg?v=13`)
     .then(r=>r.ok ? r.text() : '').then(t=>{ if (t) DESSINS_PLATS[n] = t; }).catch(()=>{})));
 }
 const illustration = r => DESSINS_PLATS[DESSIN_PLAT[r.id]] || `<span class="emo">${emoji(r)}</span>`;

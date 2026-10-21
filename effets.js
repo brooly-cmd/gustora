@@ -49,17 +49,17 @@ function immobile(){ // « Réduire les animations » : les grains restent posé
   for(const q of grains){ ctx.fillStyle=C[q.epice]; ctx.beginPath(); ctx.arc(q.x,q.y,1.4,0,7); ctx.fill(); }
   ctx.globalAlpha=1; }
 function boucle(t){
-  // On efface un peu l'image d'avant : les grains laissent une courte traînée, comme de la poudre dans l'air.
-  ctx.globalCompositeOperation='destination-out'; ctx.fillStyle='rgba(0,0,0,.12)'; ctx.fillRect(0,0,W,H);
-  ctx.globalCompositeOperation='source-over';
+  // On efface tout à chaque image, puis chaque grain dessine sa courte traînée derrière lui (comme de la poudre dans l'air) :
+  // rien ne reste collé à l'écran.
+  ctx.clearRect(0,0,W,H);
   const traits={pr:new Path2D(), ac:new Path2D(), fx:new Path2D()};
   for(const q of grains){
     let a=(Math.sin(q.x*.006+t*.00018)+Math.cos(q.y*.007-t*.00012))*Math.PI, v=.9;
     const dx=q.x-P.x, dy=q.y-P.y, d=Math.hypot(dx,dy);
     if (d<120){ a=Math.atan2(dy,dx)+Math.PI/2+.35; v=1.6+(120-d)/50; }   // le tourbillon
-    const ox=q.x, oy=q.y; q.x+=Math.cos(a)*v; q.y+=Math.sin(a)*v;
+    q.x+=Math.cos(a)*v; q.y+=Math.sin(a)*v;
     if (q.x<0||q.x>W||q.y<0||q.y>H){ q.x=Math.random()*W; q.y=Math.random()*H; continue; }
-    traits[q.epice].moveTo(ox,oy); traits[q.epice].lineTo(q.x,q.y);
+    traits[q.epice].moveTo(q.x-Math.cos(a)*v*7, q.y-Math.sin(a)*v*7); traits[q.epice].lineTo(q.x,q.y);
   }
   ctx.lineWidth=2; ctx.lineCap='round';
   for(const k in traits){ ctx.globalAlpha=k==='pr'?.6:.8; ctx.strokeStyle=C[k]; ctx.stroke(traits[k]); }

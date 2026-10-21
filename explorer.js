@@ -42,7 +42,7 @@ function construireExplorer(){
   boite.querySelectorAll('[data-vue]').forEach(b=>b.addEventListener('click', ()=>{
     history.replaceState(null, '', b.dataset.vue==='monde' ? '#explorer?monde' : '#explorer'); router(); }));
   // La carte (un fichier à part) arrive par internet ; si elle manque, la liste des régions suffit.
-  carteChargee = fetch('carte-france.svg?v=12').then(r=>r.ok ? r.text() : '').then(dessinerCarte).catch(()=>{});
+  carteChargee = fetch('carte-france.svg?v=13').then(r=>r.ok ? r.text() : '').then(dessinerCarte).catch(()=>{});
 }
 
 function dessinerCarte(svg){
