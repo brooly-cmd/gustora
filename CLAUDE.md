@@ -54,6 +54,12 @@ qui connaît les plats de France et du monde, et qui accompagne un débutant en 
    et teste ce que la mission a changé. Corrige ce qui ne va pas avant de me la donner.
    Pour vérifier, lis le texte de la page (pas de capture d'écran) ; prends au maximum
    2 captures en tout, seulement pour vérifier le look. Teste l'essentiel, sans répéter.
+   Si la mission a changé l'interface, relis aussi avant de me la donner :
+   - la page avec la skill web-design-guidelines (lisible, facile à utiliser, confortable sur iPhone) ;
+   - tous les textes visibles avec la skill humanizer (en français, sans tics d'IA).
+   Construis avec frontend-design et taste-skill, en respectant DESIGN.md et les règles de confort
+   de ui-ux-pro-max (boutons d'au moins 44 px, bon contraste).
+   Corrige ce qu'elles trouvent ; dis-moi en une ligne ce que tu as corrigé.
 2. Remets la page en ligne si elle l'est déjà.
 3. Coche la mission dans MISSIONS.md.
 4. Fais une sauvegarde git nommée "Mission N : <titre>" (une sauvegarde git = un point de

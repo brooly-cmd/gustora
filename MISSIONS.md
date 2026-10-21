@@ -52,7 +52,7 @@ Coche chaque case quand la mission est réussie.
     Puis l'écran 3 : image (ou image de remplacement), badges avec les calories, ligne des régimes avec leurs logos,
     portions − / +, prix estimé, ingrédients, étapes, astuce. Chaque recette a sa propre adresse (lien direct).
     Enfin, les petits logos sur les cartes recette et le bloc « Les petits logos » en bas de l'accueil.
-    (Le bloc « Version adaptée » attend la mission 13.)
+    (Le bloc « Version adaptée » attend la mission 15.)
   - **Pourquoi :** c'est la fiche qu'on lit en cuisinant ; le lien direct servira au partage. Les logos, c'est
     comme les pictogrammes sur un emballage : on comprend d'un coup d'œil.
   - **C'est réussi quand :** je passe le couscous de 4 à 8 personnes : les quantités et le prix doublent ;
@@ -86,7 +86,32 @@ Coche chaque case quand la mission est réussie.
     j'allume « Mode strict » : la liste rétrécit ; je ferme Safari, je reviens : le bandeau « Mes régimes » est toujours là.
   - **Produit pour la suite :** stockage.js (le carnet du téléphone, réutilisé ensuite).
 
-- [ ] 10. Dans mon frigo — CONSTRUIT
+### Le nouveau look
+
+- [ ] 10. Le nouveau look : 3 styles au choix — MONTRE
+  - **Quoi :** avec les skills taste-skill et ui-ux-pro-max, propose 3 looks complets et vraiment
+    différents pour Gustora, tirés de son sujet (cuisine du monde, marchés, épices, voyages).
+    Chaque look : couleurs jour et nuit, polices, un logo SVG animé (dessiné en code),
+    2 ou 3 petites illustrations SVG animées tirées des recettes, et l'accueil dessiné dans ce style.
+    Les 3 côte à côte sur choix-style.html, lisible sur iPhone. C'est moi qui choisis.
+    Ensuite, réécris DESIGN.md avec le look choisi (l'ancien « Argile & Safran » est remplacé).
+  - **Pourquoi :** comme goûter trois sauces avant de choisir celle du plat : on compare en vrai, pas sur le papier.
+  - **C'est réussi quand :** j'ai vu les 3 looks sur mon iPhone, j'en ai choisi un, et DESIGN.md le décrit.
+  - **Produit pour la suite :** choix-style.html, le nouveau DESIGN.md.
+
+- [ ] 11. Appliquer le nouveau look partout — CONSTRUIT
+  - **Quoi :** toutes les pages déjà faites passent au look de DESIGN.md (accueil, liste, recette,
+    explorer, filtres, régimes), avec le logo et les illustrations SVG animés.
+    Retire les anciens effets de la Salle des effets qui ne vont plus avec le nouveau look.
+    Rien ne doit casser : toutes les fonctions marchent comme avant.
+  - **Pourquoi :** comme repeindre la cuisine : on change les couleurs, pas la place du four ni des placards.
+  - **C'est réussi quand :** sur mon iPhone, toutes les pages ont le nouveau look, en jour et en nuit,
+    et tout marche comme avant.
+  - **Produit pour la suite :** style.css et les pages au nouveau look, le logo et les illustrations SVG.
+
+### Chercher (suite)
+
+- [ ] 12. Dans mon frigo — CONSTRUIT
   - **Quoi :** l'écran 6 : je coche mes ingrédients, l'app classe les recettes : « Tu peux cuisiner »,
     « Il te manque 1 ingrédient », « Il te manque 2 ingrédients ». Si « Mes régimes » est actif, il est respecté.
   - **Pourquoi :** c'est le chef qui ouvre ton frigo et te dit quoi faire avec.
@@ -95,14 +120,14 @@ Coche chaque case quand la mission est réussie.
 
 ### Mon carnet
 
-- [ ] 11. Les favoris — CONSTRUIT
+- [ ] 13. Les favoris — CONSTRUIT
   - **Quoi :** le ♥ sur chaque recette + l'écran 7 « Mes favoris », gardés dans le navigateur.
   - **Pourquoi :** le stockage du navigateur, c'est comme un carnet rangé dans l'iPhone :
     on le retrouve en revenant, même après avoir fermé Safari.
   - **C'est réussi quand :** je mets 2 favoris, je ferme Safari, je reviens : ils sont toujours là.
   - **Produit pour la suite :** les favoris dans stockage.js.
 
-- [ ] 12. La liste de courses — CONSTRUIT
+- [ ] 14. La liste de courses — CONSTRUIT
   - **Quoi :** le bouton « Ajouter à ma liste de courses » + l'écran 8 : ingrédients regroupés
     par rayon, additionnés entre recettes, à cocher, avec le total estimé.
   - **Pourquoi :** fini la liste sur un bout de papier : l'app additionne pour toi.
@@ -110,7 +135,7 @@ Coche chaque case quand la mission est réussie.
     et le total estimé s'affiche.
   - **Produit pour la suite :** courses.js.
 
-- [ ] 13. Les versions adaptées — CONSTRUIT
+- [ ] 15. Les versions adaptées — CONSTRUIT
   - **Quoi :** le bloc « Version adaptée » de l'écran 3 : interrupteurs Sans gluten / Sans lactose / Pauvre en FODMAP
     (plusieurs à la fois), ingrédients remplacés en couleur, notes d'adaptation, prix et calories recalculés,
     ouverture directe dans la version adaptée si « Mes régimes » est actif, et la liste de courses qui reçoit les remplaçants.
@@ -120,7 +145,7 @@ Coche chaque case quand la mission est réussie.
     sans lactose et le prix change ; je l'ajoute aux courses : la liste contient bien le remplaçant.
   - **Produit pour la suite :** adaptation.js.
 
-- [ ] 14. Le mode cuisine — CONSTRUIT
+- [ ] 16. Le mode cuisine — CONSTRUIT
   - **Quoi :** l'écran 9 : une étape à la fois en grand, l'écran reste allumé, et un minuteur quand l'étape a une durée.
     Il suit la version adaptée choisie.
   - **Pourquoi :** les mains pleines de farine, on veut juste lire en grand et toucher « Suivant ».
@@ -129,7 +154,7 @@ Coche chaque case quand la mission est réussie.
 
 ### Remplir le carnet (10 recettes par région et par pays)
 
-- [ ] 15. Les images des plats — EXÉCUTE
+- [ ] 17. Les images des plats — EXÉCUTE
   - **Quoi :** créer avec Pollinations une image IA pour chacune des 10 recettes, la ranger dans images/,
     et écrire la méthode dans IMAGES.md (pour la refaire à chaque remplissage).
     Si Pollinations ne marche pas : le dire, et garder l'image de remplacement.
@@ -137,9 +162,9 @@ Coche chaque case quand la mission est réussie.
   - **C'est réussi quand :** sur mon iPhone, chaque recette a une jolie image, et la page reste rapide.
   - **Produit pour la suite :** images/, IMAGES.md (la méthode).
 
-- [ ] 16. Remplir (1/3) : environ 75 recettes et leurs images — CONSTRUIT
-- [ ] 17. Remplir (2/3) : environ 75 recettes et leurs images — CONSTRUIT
-- [ ] 18. Remplir (3/3) : environ 70 recettes et leurs images — CONSTRUIT
+- [ ] 18. Remplir (1/3) : environ 75 recettes et leurs images — CONSTRUIT
+- [ ] 19. Remplir (2/3) : environ 75 recettes et leurs images — CONSTRUIT
+- [ ] 20. Remplir (3/3) : environ 70 recettes et leurs images — CONSTRUIT
   - **Quoi (pour les 3) :** ajouter des recettes jusqu'à 10 par région et 10 par pays (230 en tout),
     en commençant par les zones les moins remplies. Les plats les plus connus de chaque zone d'abord.
     Chaque recette s'inspire des versions les mieux notées sur internet, écrite avec mes mots.
@@ -147,11 +172,11 @@ Coche chaque case quand la mission est réussie.
   - **Pourquoi :** comme remplir les étagères d'une épicerie qui vient d'ouvrir.
   - **C'est réussi quand :** sur l'écran Explorer, chaque zone remplie affiche le bon nombre de recettes,
     et 3 recettes prises au hasard ont tout (image, prix, calories, régimes, saison, étapes).
-  - **Produit pour la suite :** un carnet plus gros (à la mission 18 : 230 recettes).
+  - **Produit pour la suite :** un carnet plus gros (à la mission 20 : 230 recettes).
 
 ### Ouvrir au public
 
-- [ ] 19. Les transitions entre les pages — CONSTRUIT
+- [ ] 21. Les transitions entre les pages — CONSTRUIT
   - **Quoi :** une transition douce quand on passe d'un écran à l'autre (accueil → liste → recette → Explorer…),
     par exemple la carte recette qui s'agrandit pour devenir la page de la recette, et un fondu glissé entre les onglets.
     Voir ECRANS.md, « Règles du projet ».
@@ -161,7 +186,7 @@ Coche chaque case quand la mission est réussie.
     je reviens en arrière : elle reprend sa place ; avec « Réduire les animations » activé, ça change de page sans mouvement.
   - **Produit pour la suite :** transitions.js (ou les transitions rangées dans app.js et style.css).
 
-- [ ] 20. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
+- [ ] 22. Partager, installer sur l'iPhone et « À propos » — CONSTRUIT
   - **Quoi :** le bouton « Partager » d'une recette, l'installation sur l'écran d'accueil iPhone
     (icône, nom, plein écran) et l'écran 10 « À propos ».
   - **Pourquoi :** l'app devient publique : il faut pouvoir l'envoyer et dire honnêtement d'où viennent les recettes.
@@ -169,7 +194,7 @@ Coche chaque case quand la mission est réussie.
     et Gustora s'ajoute à mon écran d'accueil avec son icône.
   - **Produit pour la suite :** manifest.webmanifest, l'app complète.
 
-- [ ] 21. Un vrai test avec quelqu'un d'autre — EXÉCUTE
+- [ ] 23. Un vrai test avec quelqu'un d'autre — EXÉCUTE
   - **Quoi :** une personne essaie Gustora sur son téléphone sans aide : trouver une recette d'hiver,
     l'ajouter à ses courses, utiliser « Dans mon frigo », puis ouvrir une recette en version sans lactose.
     Je note ce qui la bloque, Claude corrige les 3 plus gros soucis.
@@ -180,18 +205,18 @@ Coche chaque case quand la mission est réussie.
 ### Le grand remplissage (jusqu'à 50 recettes par région et par pays)
 
 Pour ces 9 missions : environ 100 recettes de plus (et leurs images) à chaque fois, zones les moins remplies d'abord,
-même méthode que les missions 16 à 18 (calories, régimes et remplaçants compris). À la fin : environ 1 150 recettes.
+même méthode que les missions 18 à 20 (calories, régimes et remplaçants compris). À la fin : environ 1 150 recettes.
 C'est réussi quand : sur Explorer, les zones ont toutes grossi, et 3 recettes au hasard sont complètes.
 
-- [ ] 22. Grand remplissage (1/9) — CONSTRUIT
-- [ ] 23. Grand remplissage (2/9) — CONSTRUIT
-- [ ] 24. Grand remplissage (3/9) — CONSTRUIT
-- [ ] 25. Grand remplissage (4/9) — CONSTRUIT
-- [ ] 26. Grand remplissage (5/9) — CONSTRUIT
-- [ ] 27. Grand remplissage (6/9) — CONSTRUIT
-- [ ] 28. Grand remplissage (7/9) — CONSTRUIT
-- [ ] 29. Grand remplissage (8/9) — CONSTRUIT
-- [ ] 30. Grand remplissage (9/9) — CONSTRUIT
+- [ ] 24. Grand remplissage (1/9) — CONSTRUIT
+- [ ] 25. Grand remplissage (2/9) — CONSTRUIT
+- [ ] 26. Grand remplissage (3/9) — CONSTRUIT
+- [ ] 27. Grand remplissage (4/9) — CONSTRUIT
+- [ ] 28. Grand remplissage (5/9) — CONSTRUIT
+- [ ] 29. Grand remplissage (6/9) — CONSTRUIT
+- [ ] 30. Grand remplissage (7/9) — CONSTRUIT
+- [ ] 31. Grand remplissage (8/9) — CONSTRUIT
+- [ ] 32. Grand remplissage (9/9) — CONSTRUIT
 
 ## Plus tard (seulement si je le demande)
 - Plusieurs langues (anglais, espagnol…) : les textes sont déjà rangés dans textes.js pour ça.
